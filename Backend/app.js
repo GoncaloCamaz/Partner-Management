@@ -6,9 +6,9 @@ var cors = require('cors')
 var mongoose = require('mongoose');
 
 app.use(cors());
-mongoose.connect('mongodb://mongo:27017/database', {useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://mongo:27017/database', { useNewUrlParser: true, useUnifiedTopology: true })
 
-var routes = require("./api/Routes/routes")
+var routes = require("./Routes/routes")
 
 app.listen(port);
 
