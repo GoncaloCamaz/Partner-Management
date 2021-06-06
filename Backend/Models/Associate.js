@@ -5,13 +5,12 @@ const AssociateSchema = new Schema({
 id: Number,
 associate_number: Number,
 name: String,
-nickname: String,
 phone_number: Number,
 email: String,
 joined_in: Date,
-groups: [{name: String, joined_in: Date}],
-paid_year: Number,
-
+groups: [{group_name: String, group_associate_nickname: String}],
+paid_until_year: Number,
+user_role: String
 });
 
-module.exports = mongoose.model('Partner', AssociateSchema, 'partners');
+module.exports = mongoose.model('Associate', AssociateSchema, 'associates');

@@ -1,17 +1,14 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema
 
-const PartnerSchema = new Schema({
+const PartnershipSchema = new Schema({
 id: Number,
-partner_number: Number,
 name: String,
-nickname: String,
 phone_number: Number,
 email: String,
-joined_in: Date,
-groups: [{name: String, joined_in: Date}],
-paid_year: Number,
-
+start_date: Date,
+end_date: Date,
+advantages: [String]
 });
 
-module.exports = mongoose.model('Partner', PartnerSchema, 'partners');
+module.exports = mongoose.model('Partnership', PartnershipSchema, 'partnerships');
