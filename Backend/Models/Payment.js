@@ -3,10 +3,10 @@ const Schema = mongoose.Schema
 
 const PaymentSchema = new Schema({
 id: Number,
-associate_number: Number,
-payment_date: Date,
-value_received: Number,
-years_paid: Number
+associate_number: {type: Number, required: true},
+payment_date: {type: Date, required: true},
+value_received: {type: Number, required: true},
+years_paid: {type: Number, required: true},
 });
 
 module.exports = mongoose.model('Payment', PaymentSchema, 'payments');

@@ -3,11 +3,11 @@ const Schema = mongoose.Schema
 
 const PartnershipSchema = new Schema({
 id: Number,
-name: String,
+name: {type: String, required: true, max : [127, "Max Length is 127 characters"]},
 phone_number: Number,
 email: String,
-start_date: Date,
-end_date: Date,
+start_date: {type: Date, required: true},
+end_date: {type: Date, required: true},
 advantages: [String]
 });
 
