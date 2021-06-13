@@ -2,22 +2,26 @@
 var express = require('express');
 var router = express.Router();
 const jwt = require('jsonwebtoken');
-const { authenticateToken } = require('../AuthenticationUtils');
+const { checkAuthorization } = require('../AuthUtils');
 
-router.get('/posts', authenticateToken, (req, res) => {
-    res.json([{hello: "test"}])
+/**
+ * Test route
+ */
+router.get('/checkaccess', checkAuthorization, (req, res) => {
+    res.json([{hello: "Done"}])
 })
 
+/**
+ * Authentication process
+ */
 router.post('/login', function (req, res) {
     // authenticate user
     const email = req.body.email
     const password = req.body.password
     const user = {email: email, userrole: "user"}
-    console.log(process.env.ACCESS_TOKEN_SECRET)
-    const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
-    console.log(email)
-    console.log(password)
+    const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET,{expiresIn: '2h'})
     res.json({token: accessToken})
 })
+
 
 module.exports = router;

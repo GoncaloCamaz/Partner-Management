@@ -27,7 +27,7 @@ app.use(express.json())
  * Routes
  */
 
-app.use('/', require('./Routes/AccountRoute'));
+app.use('/', require('./Routes/AuthenticationRoute'));
 app.use('/associates', require('./Routes/AssociatesRoute'));
 app.use('/payments', require('./Routes/PaymentsRoute'));
 app.use('/groups', require('./Routes/GroupsRoute'));
