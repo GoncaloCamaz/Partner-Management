@@ -7,4 +7,4 @@ name: {type: String, required: true},
 steps: [{step: Number, description: String}],
 });
 
-module.exports = mongoose.model('PaymentMethod', PaymentSchema, 'paymentmethods');
+module.exports = mongoose.model('PaymentMethod', PaymentMethodSchema, 'paymentmethods');

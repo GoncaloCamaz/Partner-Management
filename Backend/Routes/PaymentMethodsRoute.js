@@ -1,8 +1,8 @@
 let router = require('express').Router();
-var controller = require('../Controllers/DefinitionsController')
+var controller = require('../Controllers/PaymentMethodController')
 
 /**
- * Get all definitions
+ * Get all Payment methods
  */
 router.get('/', function (_req, res) {
     return controller.listAll()

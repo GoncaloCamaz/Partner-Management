@@ -30,8 +30,9 @@ app.use(express.json())
 app.use('/', require('./Routes/AuthenticationRoute'));
 app.use('/associates', require('./Routes/AssociatesRoute'));
 app.use('/payments', require('./Routes/PaymentsRoute'));
+app.use('/paymentmethods', require('./Routes/PaymentMethodsRoute'));
 app.use('/groups', require('./Routes/GroupsRoute'));
-app.use('/partnerships', require('./Routes/PartnersRoute'));
+app.use('/partners', require('./Routes/PartnersRoute'));
 app.use('/definitions', require('./Routes/DefinitionsRoute'));
 
 module.exports = app;
