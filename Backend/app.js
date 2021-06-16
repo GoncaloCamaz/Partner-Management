@@ -12,7 +12,7 @@ mongoose.connect('mongodb://mongo:27017/database', { useNewUrlParser: true, useU
   .then(()=> console.log('Mongo running... status: ' + mongoose.connection.readyState))
   .catch(()=> console.log('Mongo: connection error!'))
 */
-app.use(function (req, res, next) {
+app.use(function (_req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE, PATCH,OPTIONS');
@@ -26,7 +26,6 @@ app.use(express.json())
 /**
  * Routes
  */
-
 app.use('/', require('./Routes/AuthenticationRoute'));
 app.use('/associates', require('./Routes/AssociatesRoute'));
 app.use('/payments', require('./Routes/PaymentsRoute'));

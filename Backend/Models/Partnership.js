@@ -6,7 +6,7 @@ id: Number,
 name: {type: String, required: true, max : [127, "Max Length is 127 characters"]},
 phone_number: Number,
 email: String,
-active: Boolean,
+active: {type: Boolean, required: true},
 start_date: {type: Date, required: true},
 end_date: {type: Date, required: true},
 advantages: [String]
