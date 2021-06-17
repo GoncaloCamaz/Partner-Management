@@ -9,6 +9,27 @@ Associates.createAssociate = (associate) => {
 }
 
 /**
+ * Updates associate's information
+ */
+Associates.updateAssociate = (associate) => {
+    //TODO
+}
+
+/**
+ * Updates associate password
+ */
+Associates.updateAssociateCredentials = (newCredentials) => {
+    //TODO
+}
+
+/**
+ * Deletes an associate
+ */
+Associates.deleteAssociate = (associate_number) => {
+    //TODO 
+}
+
+/**
  * Finds all associates
  */
 Associates.listAll = () => {
@@ -21,6 +42,14 @@ Associates.listAll = () => {
  * Finds an associate by its email
  */
 Associates.findAssociateByEmail = (email) => {
-    return Associate.find({email: email})
+    return Associate.findOne({email: email})
+                    .exec()
+}
+
+/**
+ * Gets all associated with shares paid
+ */
+Associates.listAllWithPaidShares = (year) => {
+    return Associate.find({paid_until_year: {$gte: year}})
                     .exec()
 }

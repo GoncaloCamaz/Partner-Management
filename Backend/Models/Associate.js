@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema
 
 const AssociateSchema = new Schema({
-id: Number,
 associate_number: { type: Number, required: true},
 name: {type: String, required: true,  max : [127, "Max Length is 127 characters"]},
 phone_number: Number,
+address: String,
 active: {type: Boolean, required: true},
 email: {type: String, required: true,  max : [127, "Max Length is 127 characters"]},
 password: {type: String, required: true},

@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema
 
 const PaymentSchema = new Schema({
-id: Number,
 associate_number: {type: Number, required: true},
 payment_date: {type: Date, required: true},
 value_received: {type: Number, required: true},

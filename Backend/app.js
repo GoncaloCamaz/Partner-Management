@@ -33,5 +33,7 @@ app.use('/paymentmethods', require('./Routes/PaymentMethodsRoute'));
 app.use('/groups', require('./Routes/GroupsRoute'));
 app.use('/partners', require('./Routes/PartnersRoute'));
 app.use('/definitions', require('./Routes/DefinitionsRoute'));
+app.use('/recypts', require('./Routes/EmailRoute'))
+app.use('/ecards', require('./Routes/EcardRoute'))
 
 module.exports = app;
