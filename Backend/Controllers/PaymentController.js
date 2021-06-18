@@ -10,3 +10,9 @@ Payments.listAll = () => {
                   .sort({payment_date: 1})
                   .exec()
 }
+
+Payments.listAllByAssociate = (associate_number) => {
+    return Payment.find({associate_number: associate_number})
+                  .sort({payment_date: 1})
+                  .exec()
+}

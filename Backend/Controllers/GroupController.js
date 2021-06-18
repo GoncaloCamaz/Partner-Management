@@ -20,6 +20,8 @@ Groups.updateGroup = (group) => {
  */
 Groups.deleteGroup = group => {
     //TODO
+    return Group.findOneAndUpdate({name: group.name}, {active: false})
+                .exec()
 }
 
 /**

@@ -1,10 +1,11 @@
 let router = require('express').Router();
 var controller = require('../Controllers/PaymentMethodController')
+const { checkAdminAuthorization, checkAuthorization } = require('../AuthUtils');
 
 /**
  * Create new Payment Method
  */
-router.post('/create', function(req, res){
+router.post('/create', checkAdminAuthorization, function(req, res){
     return controller.create(req.body)
                      .then(data => res.jsonp(data))
                      .catch(error => res.status(500).jsonp(error))
@@ -13,7 +14,7 @@ router.post('/create', function(req, res){
 /**
  * Get all Payment methods
  */
-router.get('/', function (_req, res) {
+router.get('/', checkAuthorization,function (_req, res) {
     return controller.listAll()
                      .then(data => res.jsonp(data))
                      .catch(error => res.status(500).jsonp(error))

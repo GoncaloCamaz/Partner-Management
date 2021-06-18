@@ -12,21 +12,39 @@ Associates.createAssociate = (associate) => {
  * Updates associate's information
  */
 Associates.updateAssociate = (associate) => {
-    //TODO
+    const updated = {
+        name: associate.name,
+        phone_number: associate.phone_number,
+        address: associate.address,
+        email: associate.email,
+        user_role: associate.user_role,
+        joined_in: associate.joined_in,
+        groups: associate.groups,
+        paid_until_year: associate.paid_until_year
+    }
+
+    return Associate.findOneAndUpdate(
+        {associate_number: associate.associate_number},
+        {updated}
+    ).exec()
 }
 
 /**
  * Updates associate password
  */
 Associates.updateAssociateCredentials = (newCredentials) => {
-    //TODO
+    return Associate.findOneAndUpdate(
+        {email: newCredentials.email}, {password: newCredentials.password}
+    ).exec()
 }
 
 /**
  * Deletes an associate
  */
 Associates.deleteAssociate = (associate_number) => {
-    //TODO 
+    return Associate.findOneAndUpdate(
+        {associate_number: associate_number}, {active: false}
+    ).exec()
 }
 
 /**
