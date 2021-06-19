@@ -20,7 +20,7 @@ Groups.updateGroup = (group) => {
  */
 Groups.deleteGroup = group => {
     //TODO
-    return Group.findOneAndUpdate({name: group.name}, {active: false})
+    return Group.findOneAndDelete({name: group.name})
                 .exec()
 }
 
@@ -28,6 +28,6 @@ Groups.deleteGroup = group => {
  * Lists all groups
  */
 Groups.listAll = () => {
-    return Group.find({active: true})
+    return Group.find()
                 .exec()
 }

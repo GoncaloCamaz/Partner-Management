@@ -1,6 +1,6 @@
 let router = require('express').Router();
 var controller = require('../Controllers/GroupController')
-const { checkAdminAuthorization } = require('../AuthUtils');
+const { checkAdminAuthorization, checkAuthorization } = require('../AuthUtils');
 
 /**
  * Create new group
@@ -14,7 +14,7 @@ router.post('/create', checkAdminAuthorization, function(req, res) {
 /**
  * List all groups
  */
-router.get('/', checkAdminAuthorization, function (_req, res) {
+router.get('/', checkAuthorization, function (_req, res) {
     return controller.listAll()
                      .then(data => res.jsonp(data))
                      .catch(error => res.status(500).jsonp(error))

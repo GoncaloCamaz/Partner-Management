@@ -9,6 +9,14 @@ PaymentMethods.create = (paymentmethod) => {
 }
 
 /**
+ * Delete payment method
+ */
+PaymentMethods.delete = (name) => {
+    return PaymentMethod.findOneAndDelete({name: name})
+                        .exec()
+}
+
+/**
  * Lists all payment methods
  */
 PaymentMethods.listAll = () => {

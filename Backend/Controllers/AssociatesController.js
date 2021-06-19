@@ -40,6 +40,7 @@ Associates.updateAssociateCredentials = (newCredentials) => {
 
 /**
  * Deletes an associate
+ * This method does not delete the user from 
  */
 Associates.deleteAssociate = (associate_number) => {
     return Associate.findOneAndUpdate(
@@ -51,7 +52,7 @@ Associates.deleteAssociate = (associate_number) => {
  * Finds all associates
  */
 Associates.listAll = () => {
-    return Associate.find()
+    return Associate.find({active: true})
                     .sort({associate_number: 1})
                     .exec()
 }

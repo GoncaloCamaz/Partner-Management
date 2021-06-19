@@ -12,6 +12,15 @@ const { checkAdminAuthorization, checkAuthorization } = require('../AuthUtils');
 });
 
 /**
+ * Remove partner
+ */
+router.delete('/delete/:name', function(req,res) {
+    return controller.deletePartnership(req.params.name)
+                     .then(data => res.jsonp(data))
+                     .catch(error => res.status(500).jsonp(error))
+})
+
+/**
  * Get all Partners
  */
 router.get('/', checkAuthorization, function (_req, res) {

@@ -1,6 +1,6 @@
 let router = require('express').Router();
 var controller = require('../Controllers/DefinitionsController')
-const { checkAdminAuthorization } = require('../AuthUtils');
+const { checkAdminAuthorization, checkAuthorization } = require('../AuthUtils');
 
 /**
  * Create definitions
@@ -14,7 +14,7 @@ router.post('/create', checkAdminAuthorization, function(req, res) {
 /**
  * Get all definitions
  */
-router.get('/', checkAdminAuthorization, function (_req, res) {
+router.get('/', checkAuthorization, function (_req, res) {
     return controller.listAll()
                      .then(data => res.jsonp(data))
                      .catch(error => res.status(500).jsonp(error))

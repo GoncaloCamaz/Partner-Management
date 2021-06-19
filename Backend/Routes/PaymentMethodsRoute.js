@@ -12,6 +12,15 @@ router.post('/create', checkAdminAuthorization, function(req, res){
 })
 
 /**
+ * Delete payment method
+ */
+router.delete('/delete/:name', checkAdminAuthorization, function(req,res){
+    return controller.delete(req.params.name)
+                     .then(data => res.jsonp(data))
+                     .catch(error => res.status(500).jsonp(error))
+})
+
+/**
  * Get all Payment methods
  */
 router.get('/', checkAuthorization,function (_req, res) {

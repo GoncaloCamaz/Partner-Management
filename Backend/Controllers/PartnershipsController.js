@@ -5,6 +5,11 @@ Partnerships.createPartnership = partnership => {
     return Partnership.create(partnership)
 }
 
+Partnerships.deletePartnership = name => {
+    return Partnership.findOneAndDelete({name: name})
+                      .exec()
+}
+
 Partnerships.listAll = () => {
     return Partnership.find()
                       .sort({name: 1})
