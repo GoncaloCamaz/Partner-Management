@@ -5,8 +5,9 @@ const { checkAdminAuthorization, checkAuthorization } = require('../AuthUtils');
 
 /**
  * Create new Associate
+ * //TODO add checkAdminAuthorization
  */
- router.post('/create', checkAdminAuthorization, async (req, res) => {
+ router.post('/create', async (req, res) => {
     try{
         const { password } = req.body.password 
         const hash = await bcrypt.hash(password, 10)

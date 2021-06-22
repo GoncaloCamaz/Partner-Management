@@ -4,7 +4,6 @@ const uniqueValidator = require('mongoose-unique-validator')
 
 const PaymentMethodSchema = new Schema({
 name: {type: String, required: true, unique: true},
-active: {type: Boolean, required: true},
 steps: [{step: Number, description: String}]
 });
 

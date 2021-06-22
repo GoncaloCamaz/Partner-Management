@@ -1,0 +1,46 @@
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import Card from '../cards/Card'
+import FeeCard from '../cards/FeeCard'
+import ProfileCard from '../cards/ProfileCard'
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  gridcontainer: {
+    textAlign: 'center',
+  },
+  paper: {
+    backgroundColor: '#060b26',
+    color: theme.palette.text.secondary,
+  },
+}));
+
+export default function FullWidthGrid() {
+  const classes = useStyles();
+
+  return (
+    <div className={classes.root}>
+      <Grid container spacing={3} className={classes.gridcontainer}>
+        <Grid item lg={6} md={6} sm={12} xs={12}>
+          <Paper className={classes.paper}>
+              <ProfileCard />
+          </Paper>
+        </Grid>
+        <Grid item lg={3} md={3} sm={12} xs={12}>
+          <Paper className={classes.paper}>
+              <FeeCard />
+          </Paper>
+        </Grid>
+        <Grid item lg={3} md={3} sm={12} xs={12}>
+          <Paper className={classes.paper}>
+              <Card />
+          </Paper>
+        </Grid>
+      </Grid>
+    </div>
+  );
+}
