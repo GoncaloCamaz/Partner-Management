@@ -5,6 +5,8 @@ import Grid from '@material-ui/core/Grid';
 import Card from '../cards/Card'
 import FeeCard from '../cards/FeeCard'
 import ProfileCard from '../cards/ProfileCard'
+import EcardDownloadCard from '../cards/EcardDownloadCard'
+import ParthershipsCard from '../cards/PartnershipsCard'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,15 +31,18 @@ export default function FullWidthGrid() {
           <Paper className={classes.paper}>
               <ProfileCard />
           </Paper>
+          <br/>
+          <Paper className={classes.paper}>
+              <EcardDownloadCard />
+          </Paper>
         </Grid>
-        <Grid item lg={3} md={3} sm={12} xs={12}>
+        <Grid item lg={6} md={6} sm={12} xs={12}>
           <Paper className={classes.paper}>
               <FeeCard />
           </Paper>
-        </Grid>
-        <Grid item lg={3} md={3} sm={12} xs={12}>
+          <br/>
           <Paper className={classes.paper}>
-              <Card />
+              <ParthershipsCard />
           </Paper>
         </Grid>
       </Grid>

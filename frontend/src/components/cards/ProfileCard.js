@@ -3,10 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import PersonIcon from '@material-ui/icons/Person';
-import SwipeableTextMobileStepper from './GroupImageStep'
+import GroupImageStep from '../steps/GroupImageStep'
 
 const useStyles = makeStyles({
   root: {
@@ -16,6 +15,10 @@ const useStyles = makeStyles({
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
+      '&:hover': {
+        cursor: 'pointer',
+        background: "#060b26"
+      }
   },
   content: {
       display: 'flex',
@@ -44,13 +47,17 @@ export default function OutlinedCard(props) {
   const email = "gcamaz@sapo.pt"
   const groups = "TUM"
 
+  const handleSeeProfile = () => {
+    console.log("Button pressed")
+  }
+
   return (
-    <Card className={classes.root} variant="outlined" >
+    <Card className={classes.root} variant="outlined" onClick={handleSeeProfile}>
       <CardContent className={classes.content}>
         <Typography >
             <PersonIcon className={classes.icon} fontSize="inherit"/>
         </Typography>
-        <Typography variant="h3" component="h2">
+        <Typography variant="h4" component="h2">
             {name}
         </Typography>
         <br/>
@@ -58,10 +65,12 @@ export default function OutlinedCard(props) {
           {email}
         </Typography>
         <br/>
-        <SwipeableTextMobileStepper/>
+        <GroupImageStep/>
       </CardContent>
       <CardActions>
-        <Button className={classes.button} size="small">See Details</Button>
+        <Typography variant="h5" component="h2">
+                Click to See Details
+        </Typography>      
       </CardActions>
     </Card>
   );

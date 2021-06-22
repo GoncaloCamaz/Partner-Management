@@ -7,38 +7,20 @@ import Button from '@material-ui/core/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
-import TUM from '../../static/tum.png'
-import TUNAOMINHO from '../../static/tunaominho.png'
-import GMP from '../../static/gmp.png'
-import GFUM from '../../static/gfum.png'
-import GPUM from '../../static/gpum.png'
-import BOMBOEMIA from '../../static/bomb.png'
 
 const tutorialSteps = [
   {
-    label: 'Tuna Universitária do Minho',
-    imgPath: TUM
+    label: 'VideoNorte',
+    advantages: ["Desconto em Fotocópias","Impressão a cores","informação"] 
   },
   {
-    label: 'TunaoMinho',
-    imgPath: TUNAOMINHO,
+    label: 'Tasquinha Bracarense',
+    advantages: ["Desconto de 50 centimos no prato do dia","Oferta da sopa e ou sobremesa"],
   },
   {
-    label: 'Bomboémia',
-    imgPath: BOMBOEMIA,
+    label: 'Mozart',
+    advantages: ["Penduricalhos à borla"],
   },
-  {
-    label: 'Grupo de Poesia da Universidade do Minho',
-    imgPath: GPUM
-  },
-  {
-    label: 'Grupo de Música Popular',
-    imgPath: GMP  
-},
-{
-    label: 'Grupo Folclórico da Universidade do Minho',
-    imgPath: GFUM  
-},
 ];
 
 const useStyles = makeStyles((theme) => ({
@@ -54,11 +36,14 @@ const useStyles = makeStyles((theme) => ({
   button: {
     color:"#fff"
   },
+  content: {
+    backgroundColor: '#1a83ff',
+    color: '#fff',
+    textAlign: 'left'
+  },
   header: {
-    display: 'flex',
-    alignItems: 'center',
+
     height: 50,
-    paddingLeft: theme.spacing(4),
     backgroundColor: '#060b26',
     color: '#fff'
   },
@@ -69,13 +54,17 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'hidden',
     width: '100%',
   },
+  textHeader: {
+    paddingTop: 10,
+  }
 }));
 
-function SwipeableTextMobileStepper() {
+function PartnershipsStep() {
   const classes = useStyles();
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
   const maxSteps = tutorialSteps.length;
+  const bull = <span className={classes.bullet}>•</span>;
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -92,7 +81,7 @@ function SwipeableTextMobileStepper() {
   return (
     <div className={classes.root}>
       <Paper square elevation={0} className={classes.header}>
-        <Typography>{tutorialSteps[activeStep].label}</Typography>
+        <Typography className={classes.textHeader}>{tutorialSteps[activeStep].label}</Typography>
       </Paper>
       <SwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
@@ -103,7 +92,15 @@ function SwipeableTextMobileStepper() {
         {tutorialSteps.map((step, index) => (
           <div key={step.label}>
             {Math.abs(activeStep - index) <= 2 ? (
-              <img className={classes.img} src={step.imgPath} alt={step.label} />
+                step.advantages.map((item, index) => {
+                    return (
+                        <Paper square elevation={0} className={classes.content}>
+                            <Typography key={index} >
+                                {bull} {item}
+                            </Typography>
+                        </Paper>
+                    )
+                })
             ) : null}
           </div>
         ))}
@@ -131,4 +128,4 @@ function SwipeableTextMobileStepper() {
   );
 }
 
-export default SwipeableTextMobileStepper;
+export default PartnershipsStep;
