@@ -42,7 +42,7 @@ const useStyles = makeStyles({
 export default function OutlinedCard(props) {
   const classes = useStyles();
   const cardTitle = "Fee"//props.title
-  const message = "2019"
+  const message = "2021"
   const year = new Date().getFullYear()
   const paidYear = Number(message)
 
@@ -60,6 +60,10 @@ export default function OutlinedCard(props) {
           </Typography>
           <Typography variant="h5" component="h2">
               {cardTitle}
+          </Typography>
+          <br/>
+          <Typography variant="h3" component="h2">
+              Paid Until
           </Typography>
           <br />
           <Typography variant="h2" component="p">
@@ -84,6 +88,10 @@ export default function OutlinedCard(props) {
           </Typography>
           <Typography variant="h5" component="h2">
               {cardTitle}
+          </Typography>
+          <br/>
+          <Typography variant="h3" component="h2">
+              Paid Until
           </Typography>
           <br />
           <Typography variant="h2" component="p">

@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { Context } from './context/AuthContext';
 import LoginPage from './pages/LoginPage'
 import HomePage from './pages/HomePage'
+import ProfilePage from './pages/ProfilePage'
 import './index.css'
 
 function CustomRoute({ isPrivate, ...rest }) {
@@ -35,6 +36,7 @@ export default function Routes() {
         <Switch>
           <CustomRoute exact path="/" component={LoginPage} />
           <CustomRoute exact path="/home" component={HomePage} />
+          <CustomRoute exact path="/profile" component={ProfilePage} />
       </Switch>
   );
 }

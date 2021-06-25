@@ -11,7 +11,7 @@ import SwipeableViews from 'react-swipeable-views';
 const tutorialSteps = [
   {
     label: 'VideoNorte',
-    advantages: ["Desconto em Fotocópias","Impressão a cores","informação"] 
+    advantages: ["Desconto em Fotocópias","Impressão a cores","informação", "teste ao cumprimento da"] 
   },
   {
     label: 'Tasquinha Bracarense',
