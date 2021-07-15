@@ -48,6 +48,7 @@ export default function OutlinedCard(props) {
 
   const handleSeeFees = () => {
     console.log("Handle see fees")
+    props.handleSeeFees()
   }
 
   if(paidYear < year)

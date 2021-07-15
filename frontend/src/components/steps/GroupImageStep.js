@@ -60,8 +60,8 @@ const useStyles = makeStyles((theme) => ({
     color: '#fff'
   },
   img: {
-    height: 200,
-    maxWidth: 300,
+    height: 150,
+    maxWidth: 200,
     overflow: 'hidden',
     width: '100%',
   },
