@@ -9,7 +9,8 @@ const useStyles = makeStyles(theme => ({
         overflowX: 'scroll',
         overflowY: 'scroll',
         margin: theme.spacing(0),
-        padding: theme.spacing(3)
+        padding: theme.spacing(3),
+        maxWidth: '80%'
     },
     container: {
         maxHeight: '300px',
@@ -22,7 +23,7 @@ const useStyles = makeStyles(theme => ({
 const headCells = [
     { id: 'payment_date', label: 'Date' },
     { id: 'value_received',label:'Value'},
-    { id: 'years_paid', label: 'Number of Years Paid'}, 
+    { id: 'years_paid', label: 'Years Paid'}, 
     { id: 'actions', label: 'Actions', disableSorting: true }
 ]
 

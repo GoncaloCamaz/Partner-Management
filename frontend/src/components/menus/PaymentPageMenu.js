@@ -8,7 +8,7 @@ import ListIcon from '@material-ui/icons/List';
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: '100%',
+    maxWidth: '92%',
     borderRadius: 10
   },
   tabs: {
