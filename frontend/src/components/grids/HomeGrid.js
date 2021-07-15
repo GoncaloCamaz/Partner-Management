@@ -23,16 +23,22 @@ const useStyles = makeStyles((theme) => ({
 
 export default function FullWidthGrid() {
   const classes = useStyles();
-  const [seeFees, setSeeFees] = useState(false)
+  const [cardClicked, setCardClicked] = useState(false)
+  const [cardClicked_name, setCardClicked_name] = useState("")
 
   const handleSeeFees = () => {
-    console.log("mudaaa")
-    setSeeFees(true)
+    setCardClicked_name("payments")
+    setCardClicked(true)
   }
 
-  if(seeFees)
+  const handleSeeProfile = () => {
+    setCardClicked_name("profile")
+    setCardClicked(true)
+  }
+
+  if(cardClicked)
   {
-    return <Redirect to={{pathname: "payments"}}/>
+    return <Redirect to={{pathname: cardClicked_name}}/>
   }
   else
   {
@@ -41,7 +47,7 @@ export default function FullWidthGrid() {
         <Grid container spacing={3} className={classes.gridcontainer}>
           <Grid item lg={6} md={6} sm={12} xs={12}>
             <Paper className={classes.paper}>
-                <ProfileCard />
+                <ProfileCard handleSeeProfile={handleSeeProfile}/>
             </Paper>
             <br/>
             <Paper className={classes.paper}>

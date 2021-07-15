@@ -48,7 +48,7 @@ export default function OutlinedCard(props) {
   const groups = "TUM"
 
   const handleSeeProfile = () => {
-    console.log("Button pressed")
+    props.handleSeeProfile()
   }
 
   return (
