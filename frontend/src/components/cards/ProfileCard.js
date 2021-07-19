@@ -43,8 +43,9 @@ const useStyles = makeStyles({
 
 export default function OutlinedCard(props) {
   const classes = useStyles();
-  const name = "Gonçalo Dias Camaz Moreira"
+  const name = "Gonçalo Camaz"
   const email = "gcamaz@sapo.pt"
+  const associate_number = "124"
   const groups = "TUM"
 
   const handleSeeProfile = () => {
@@ -52,7 +53,7 @@ export default function OutlinedCard(props) {
   }
 
   return (
-    <Card className={classes.root} variant="outlined" onClick={handleSeeProfile}>
+    <Card className={classes.root} variant="outlined" >
       <CardContent className={classes.content}>
         <Typography >
             <PersonIcon className={classes.icon} fontSize="inherit"/>
@@ -60,15 +61,18 @@ export default function OutlinedCard(props) {
         <Typography variant="h4" component="h2">
             {name}
         </Typography>
-        <br/>
         <Typography variant="h5" component="h2">
           {email}
+        </Typography>
+        <br/>
+        <Typography variant="h5" component="h2">
+          Associate Number: {associate_number}
         </Typography>
         <br/>
         <GroupImageStep/>
       </CardContent>
       <CardActions>
-        <Typography variant="h5" component="h2">
+        <Typography variant="h5" component="h2" onClick={handleSeeProfile}>
                 Click to See Details
         </Typography>      
       </CardActions>

@@ -37,7 +37,7 @@ export default function OutlinedCard(props) {
   }
 
     return (
-      <Card className={classes.root} variant="outlined" onClick={handleSeePartnerships} >
+      <Card className={classes.root} variant="outlined">
         <CardContent>
           <Typography >
               <FaHandshake className={classes.icon} fontSize="inherit"/>
@@ -49,7 +49,7 @@ export default function OutlinedCard(props) {
             <PartnershipsStep/>
         </CardContent>
         <CardActions>
-          <Typography variant="h5" component="h2">
+          <Typography variant="h5" component="h2" onClick={handleSeePartnerships}>
                   Click to See Details
           </Typography>        
         </CardActions>

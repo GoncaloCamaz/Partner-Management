@@ -226,6 +226,18 @@ export default function ProfileForm(props) {
                   autoFocus
                   onChange={(event) => {handleInputChange(event)}}
               />
+              <TextField
+                  className={classes.input}
+                  variant="outlined"
+                  margin="normal"
+                  fullWidth
+                  required
+                  id="new_password_confirm"
+                  label="New Password Confirmation"
+                  name="new_password_confirm"
+                  autoFocus
+                  onChange={(event) => {handleInputChange(event)}}
+              />
             </Grid>
             <Grid item lg={12} md={12} sm={12} xs={12}>
             <Button

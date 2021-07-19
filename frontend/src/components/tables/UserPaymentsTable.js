@@ -3,13 +3,14 @@ import { Table, Paper, makeStyles, TableBody, TableRow, TableCell, Toolbar, Inpu
 import useTable from "./useTable";
 import { Search } from "@material-ui/icons";
 import Controls from "../controls/Controls";
+import ReceiptIcon from '@material-ui/icons/Receipt';
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
-        overflowX: 'scroll',
         overflowY: 'scroll',
         margin: theme.spacing(0),
         padding: theme.spacing(3),
+        width: '90%',
         maxWidth: '80%'
     },
     container: {
@@ -31,6 +32,10 @@ export default function UserPaymentsTable(props) {
     const classes = useStyles();
     const records = [{payment_date: "27/01/2015", value_received: 200, years_paid: 10}]//props.rows
     const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
+
+    const downloadReceipt = (item) => {
+        console.log(item)
+    }
 
     const {
         TblContainer,
@@ -84,7 +89,12 @@ export default function UserPaymentsTable(props) {
                                     <TableCell>{item.value_received}</TableCell>
                                     <TableCell>{item.years_paid}</TableCell>
                                     <TableCell>
-                                       
+                                        <Controls.ActionButton
+                                            color="primary"
+                                            title="Download Receipt"
+                                            onClick={() => { downloadReceipt(item) }}>
+                                            <ReceiptIcon fontSize="small" />
+                                        </Controls.ActionButton>
                                     </TableCell>
                                 </TableRow>)
                             })

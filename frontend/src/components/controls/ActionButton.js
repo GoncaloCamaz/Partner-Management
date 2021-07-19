@@ -6,9 +6,9 @@ import { Button, makeStyles } from '@material-ui/core';
  */
 const useStyles = makeStyles(theme => ({
     root: {
-        minWidth: 0,
-        margin: theme.spacing(0.5),
-        color: "#1888ff"
+        color: "#1888ff",
+        display: 'flex',
+        alignItems: 'center',
     },
     secondary: {
         backgroundColor: "lightred",

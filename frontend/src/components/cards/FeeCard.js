@@ -54,7 +54,7 @@ export default function OutlinedCard(props) {
   if(paidYear < year)
   {
     return (
-      <Card className={classes.warning} variant="outlined" onClick={handleSeeFees} >
+      <Card className={classes.warning} variant="outlined">
         <CardContent>
           <Typography >
               <EuroSymbolIcon className={classes.icon} fontSize="inherit"/>
@@ -72,7 +72,7 @@ export default function OutlinedCard(props) {
           </Typography>
         </CardContent>
         <CardActions>
-          <Typography variant="h5" component="h2">
+          <Typography variant="h5" component="h2" onClick={handleSeeFees}>
                   Click to See Details
           </Typography>        
         </CardActions>

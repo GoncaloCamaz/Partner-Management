@@ -43,7 +43,7 @@ export default function EcardDownloadCard(props) {
   }
 
     return (
-      <Card className={classes.root} variant="outlined" onClick={handleDownloadCard}>
+      <Card className={classes.root} variant="outlined">
         <CardContent>
           <Typography >
               <CreditCardIcon className={classes.icon} fontSize="inherit"/>
@@ -52,7 +52,7 @@ export default function EcardDownloadCard(props) {
               {cardTitle}
           </Typography>
           <br/>
-          <Typography variant="h5" component="h2">
+          <Typography variant="h5" component="h2" onClick={handleDownloadCard}>
               Click to Download
           </Typography>
         </CardContent>
