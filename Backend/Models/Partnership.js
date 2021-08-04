@@ -6,6 +6,7 @@ name: {type: String, required: true, unique: true, max : [127, "Max Length is 12
 phone_number: Number,
 email: String,
 address: String,
+category: {type: String, required: true, unique: true, max : [20, "Max Length is 127 characters"]},
 start_date: {type: Date},
 end_date: {type: Date},
 advantages: [String]

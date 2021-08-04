@@ -5,6 +5,7 @@ import LoginPage from './pages/LoginPage'
 import HomePage from './pages/HomePage'
 import ProfilePage from './pages/ProfilePage'
 import PaymentsPage from './pages/PaymentMainPage'
+import PartnershipsPage from './pages/PartnershipsPage';
 import './index.css'
 
 function CustomRoute({ isPrivate, ...rest }) {
@@ -39,6 +40,7 @@ export default function Routes() {
           <CustomRoute exact path="/home" component={HomePage} />
           <CustomRoute exact path="/profile" component={ProfilePage} />
           <CustomRoute exact path="/payments" component={PaymentsPage} />
+          <CustomRoute exact path="/partnerships" component={PartnershipsPage} />
       </Switch>
   );
 }

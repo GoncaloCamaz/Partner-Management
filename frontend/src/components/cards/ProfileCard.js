@@ -16,7 +16,6 @@ const useStyles = makeStyles({
       flexDirection: 'column',
       alignItems: 'center',
       '&:hover': {
-        cursor: 'pointer',
         background: "#060b26"
       }
   },
@@ -38,6 +37,11 @@ const useStyles = makeStyles({
   },
   media: {
     width: '20%',
+  },
+  text: {
+    '&:hover': {
+      cursor: 'pointer',
+    }
   }
 });
 
@@ -72,7 +76,7 @@ export default function OutlinedCard(props) {
         <GroupImageStep/>
       </CardContent>
       <CardActions>
-        <Typography variant="h5" component="h2" onClick={handleSeeProfile}>
+        <Typography className={classes.text} variant="h5" component="h2" onClick={handleSeeProfile}>
                 Click to See Details
         </Typography>      
       </CardActions>

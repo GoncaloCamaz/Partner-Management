@@ -14,7 +14,6 @@ const useStyles = makeStyles({
       flexDirection: 'column',
       alignItems: 'center',
       '&:hover': {
-        cursor: 'pointer',
         background: "#060b26"
       }
   },
@@ -31,6 +30,11 @@ const useStyles = makeStyles({
   },
   icon: {
       fontSize: 100,
+  },
+  text: {
+    '&:hover': {
+      cursor: 'pointer',
+    }
   }
 });
 
@@ -52,7 +56,7 @@ export default function EcardDownloadCard(props) {
               {cardTitle}
           </Typography>
           <br/>
-          <Typography variant="h5" component="h2" onClick={handleDownloadCard}>
+          <Typography className={classes.text} variant="h5" component="h2" onClick={handleDownloadCard}>
               Click to Download
           </Typography>
         </CardContent>

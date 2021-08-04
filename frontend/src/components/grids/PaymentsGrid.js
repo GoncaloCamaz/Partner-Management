@@ -43,7 +43,7 @@ export default function UserProfileGrid() {
             step_id: 2,
             step_name: "Finzalização",
             step_content: "A transferência irá ser registada pelo gestor de associados.O recibo poderá ser emitido assim que a transferência estiver confirmada."
-        }
+        },
     ]
   },
   {

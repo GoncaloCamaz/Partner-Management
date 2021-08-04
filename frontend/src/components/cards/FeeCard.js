@@ -15,7 +15,6 @@ const useStyles = makeStyles({
       flexDirection: 'column',
       alignItems: 'center',
       '&:hover': {
-        cursor: 'pointer',
         background: "#060b26"
       }
   },
@@ -36,6 +35,11 @@ const useStyles = makeStyles({
   },
   icon: {
       fontSize: 100,
+  },
+  text: {
+    '&:hover': {
+      cursor: 'pointer',
+    }
   }
 });
 
@@ -72,7 +76,7 @@ export default function OutlinedCard(props) {
           </Typography>
         </CardContent>
         <CardActions>
-          <Typography variant="h5" component="h2" onClick={handleSeeFees}>
+          <Typography className={classes.text} variant="h5" component="h2" onClick={handleSeeFees}>
                   Click to See Details
           </Typography>        
         </CardActions>
@@ -100,7 +104,7 @@ export default function OutlinedCard(props) {
           </Typography>
         </CardContent>
         <CardActions>
-          <Typography variant="h5" component="h2">
+          <Typography className={classes.text} variant="h5" component="h2">
                   Click to See Details
           </Typography>        
         </CardActions>

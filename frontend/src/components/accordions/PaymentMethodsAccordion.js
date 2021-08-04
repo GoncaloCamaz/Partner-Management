@@ -6,6 +6,7 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import PaymentSteps from '../steps/PaymentSteps'
+import Timeline from '../timelines/Timeline'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   heading: {
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
-  },
+  }
 }));
 
 export default function SimpleAccordion(props) {
@@ -38,8 +39,8 @@ export default function SimpleAccordion(props) {
                     >
                     <Typography className={classes.heading}>{item.name}</Typography>
                     </AccordionSummary>
-                    <AccordionDetails>
-                        <PaymentSteps steps={item.steps} />
+                    <AccordionDetails >
+                        <Timeline steps={item.steps} />
                     </AccordionDetails>
                 </Accordion>
             ))

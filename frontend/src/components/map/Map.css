@@ -1,0 +1,6 @@
+.leaflet-container {
+    position: fixed;
+    max-width: 70%;
+    width: 100vw;
+    height: 100vh;
+}

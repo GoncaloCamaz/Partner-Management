@@ -36,6 +36,11 @@ export default function FullWidthGrid() {
     setCardClicked(true)
   }
 
+  const handleSeePartnerships = () => {
+    setCardClicked_name("partnerships")
+    setCardClicked(true)
+  }
+
   if(cardClicked)
   {
     return <Redirect to={{pathname: cardClicked_name}}/>
@@ -60,7 +65,7 @@ export default function FullWidthGrid() {
             </Paper>
             <br/>
             <Paper className={classes.paper}>
-                <ParthershipsCard />
+                <ParthershipsCard handleSeePartnerships={handleSeePartnerships}/>
             </Paper>
           </Grid>
         </Grid>

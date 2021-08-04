@@ -16,7 +16,6 @@ const useStyles = makeStyles({
       flexDirection: 'column',
       alignItems: 'center',
       '&:hover': {
-        cursor: 'pointer',
         background: "#060b26"
       }
   },
@@ -25,6 +24,11 @@ const useStyles = makeStyles({
   },
   icon: {
       fontSize: 100,
+  },
+  text: {
+    '&:hover': {
+      cursor: 'pointer',
+    }
   }
 });
 
@@ -33,7 +37,7 @@ export default function OutlinedCard(props) {
   const cardTitle = "Partnerships"//props.title
 
   const handleSeePartnerships = () => {
-    console.log("Handle see partnerships")
+    props.handleSeePartnerships()
   }
 
     return (
@@ -49,7 +53,7 @@ export default function OutlinedCard(props) {
             <PartnershipsStep/>
         </CardContent>
         <CardActions>
-          <Typography variant="h5" component="h2" onClick={handleSeePartnerships}>
+          <Typography className={classes.text} variant="h5" component="h2" onClick={handleSeePartnerships}>
                   Click to See Details
           </Typography>        
         </CardActions>
