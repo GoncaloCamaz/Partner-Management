@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import Navbar from '../components/navbar/Navbar'
-import HomeGrid from '../components/grids/HomeGrid'
-import { Context } from '../context/AuthContext';
 
 import './Pages.css'
+import PaymentsGrid from '../components/grids/PaymentsGrid';
+import { Context } from '../context/AuthContext';
 
-export default function HomePage() {
+
+export default function PaymentsPage() {
+
     const authenticationContext = useContext(Context);
     const admin = true//authenticationContext.isAdmin
 
@@ -13,7 +15,7 @@ export default function HomePage() {
         <div className="home">
             <Navbar isAdmin={admin}/>
                 <div className="page-container">
-                    <HomeGrid />
+                    <PaymentsGrid />
                 </div>
         </div>   
     );

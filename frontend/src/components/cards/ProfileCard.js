@@ -42,6 +42,9 @@ const useStyles = makeStyles({
     '&:hover': {
       cursor: 'pointer',
     }
+  },
+  stepper: {
+    borderRadius: '10px'
   }
 });
 

@@ -16,15 +16,15 @@ export const SidebarData = [
     cName: 'nav-text'
   },
   {
-    title: 'Payments',
-    path: '/payments',
-    icon: <FaIcons.FaMoneyBillWave />,
-    cName: 'nav-text'
-  },
-  {
     title: 'Partnerships',
     path: '/partnerships',
     icon: <FaIcons.FaHandshake />,
+    cName: 'nav-text'
+  },
+  {
+    title: 'Payments',
+    path: '/payments',
+    icon: <FaIcons.FaMoneyBillWave />,
     cName: 'nav-text'
   },
   {
@@ -55,9 +55,9 @@ export const SidebarDataAdmin = [
         cName: 'nav-text'
       },
       {
-        title: 'Payments',
-        path: '/payments',
-        icon: <FaIcons.FaMoneyBillWave />,
+        title: 'Groups',
+        path: '/groups',
+        icon: <FaIcons.FaUsers />,
         cName: 'nav-text'
       },
       {
@@ -67,9 +67,9 @@ export const SidebarDataAdmin = [
         cName: 'nav-text'
       },
       {
-        title: 'Groups',
-        path: '/groups',
-        icon: <FaIcons.FaUsers />,
+        title: 'Payments',
+        path: '/payments',
+        icon: <FaIcons.FaMoneyBillWave />,
         cName: 'nav-text'
       },
       {

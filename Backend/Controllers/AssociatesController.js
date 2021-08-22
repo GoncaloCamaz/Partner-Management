@@ -14,17 +14,17 @@ Associates.createAssociate = (associate) => {
 Associates.updateAssociate = (associate) => {
     const updated = {
         name: associate.name,
-        phone_number: associate.phone_number,
+        phoneNumber: associate.phoneNumber,
         address: associate.address,
         email: associate.email,
-        user_role: associate.user_role,
-        joined_in: associate.joined_in,
+        userRole: associate.userRole,
+        joinedIn: associate.joinedIn,
         groups: associate.groups,
-        paid_until_year: associate.paid_until_year
+        paidUntilYear: associate.paidUntilYear
     }
 
     return Associate.findOneAndUpdate(
-        {associate_number: associate.associate_number},
+        {associateNumber: associate.associateNumber},
         {updated}
     ).exec()
 }
@@ -33,6 +33,7 @@ Associates.updateAssociate = (associate) => {
  * Updates associate password
  */
 Associates.updateAssociateCredentials = (newCredentials) => {
+    //TODO CIPHER PASSWORD
     return Associate.findOneAndUpdate(
         {email: newCredentials.email}, {password: newCredentials.password}
     ).exec()
@@ -42,9 +43,9 @@ Associates.updateAssociateCredentials = (newCredentials) => {
  * Deletes an associate
  * This method does not delete the user from 
  */
-Associates.deleteAssociate = (associate_number) => {
+Associates.deleteAssociate = (associateNumber) => {
     return Associate.findOneAndUpdate(
-        {associate_number: associate_number}, {active: false}
+        {associateNumber: associateNumber}, {active: false}
     ).exec()
 }
 
@@ -53,7 +54,7 @@ Associates.deleteAssociate = (associate_number) => {
  */
 Associates.listAll = () => {
     return Associate.find({active: true})
-                    .sort({associate_number: 1})
+                    .sort({associateNumber: 1})
                     .exec()
 }
 
@@ -69,6 +70,6 @@ Associates.findAssociateByEmail = (email) => {
  * Gets all associated with shares paid
  */
 Associates.listAllWithPaidShares = (year) => {
-    return Associate.find({paid_until_year: {$gte: year}})
+    return Associate.find({paidUntilYear: {$gte: year}})
                     .exec()
 }

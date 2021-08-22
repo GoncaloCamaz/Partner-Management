@@ -69,7 +69,6 @@ export default function UserProfileGrid() {
 ] 
 
   const updateSelected = (selected) => {
-      console.log(selected)
       setDisplayed(selected)
   }
 

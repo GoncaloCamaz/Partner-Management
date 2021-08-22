@@ -6,12 +6,14 @@ import markerIconPng from "leaflet/dist/images/marker-icon.png"
 import {Icon} from 'leaflet'
 
 export class DeviceMap extends React.Component {
-    constructor() {
-      super();
+    constructor(props) {
+      super(props);
       this.state = {
         lat: 41.5616,
         lng: -8.39653,
-        zoom: 13,
+        zoom: 17,
+        //addressList: this.props.location.state.addressList,
+        //addressObjects: []
       };
     }
 

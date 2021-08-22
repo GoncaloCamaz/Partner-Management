@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#1a83ff'
   },
   color: {
-    backgroundColor: '#060b26',
+    backgroundColor: '#1a83ff',
     color: '#fff'
   },
   button: {
@@ -42,9 +42,8 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'left'
   },
   header: {
-
     height: 50,
-    backgroundColor: '#060b26',
+    backgroundColor: '#1a83ff',
     color: '#fff'
   },
   img: {

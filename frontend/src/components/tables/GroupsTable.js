@@ -3,7 +3,8 @@ import { Table, Paper, makeStyles, TableBody, TableRow, TableCell, Toolbar, Inpu
 import useTable from "./useTable";
 import { Search } from "@material-ui/icons";
 import Controls from "../controls/Controls";
-import ReceiptIcon from '@material-ui/icons/Receipt';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -19,18 +20,27 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const headCells = [
-    { id: 'payment_date', label: 'Date' },
-    { id: 'value_received',label:'Value'},
-    { id: 'years_paid', label: 'Years Paid'}, 
-    { id: 'actions', label: 'Receipt Download', disableSorting: true }
+    { id: 'name',label: 'Name'},
+    { id: 'initials',label: 'Initials'},
+    { id: 'actions', label: 'Actions', disableSorting: true }
 ]
 
-export default function UserPaymentsTable(props) {
+export default function GroupsTable(props) {
     const classes = useStyles();
-    const records = [{payment_date: "27/01/2015", value_received: 200, years_paid: 10}]//props.rows
+    const records = [
+        {
+            name: "Tuna Universitária do Minho",
+            initials: "TUM"
+        }
+    ]//props.rows
+    
     const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
 
-    const downloadReceipt = (item) => {
+    const openEditPopup = (item) => {
+        console.log(item)
+    }
+
+    const openInPopupRemove = (item) => {
         console.log(item)
     }
 
@@ -51,8 +61,8 @@ export default function UserPaymentsTable(props) {
                 {
                     let filtered = items.filter(value => {
                         return (
-                            value.payment_date.toString().toLowerCase().includes(target.value.toLowerCase()) ||
-                            value.value_received.toString().toLowerCase().includes(target.value.toLowerCase()) 
+                            value.name.toString().toLowerCase().includes(target.value.toLowerCase()) || 
+                            value.initials.toString().toLowerCase().includes(target.value.toLowerCase()) 
                         );
                     })
                     return filtered      
@@ -82,15 +92,22 @@ export default function UserPaymentsTable(props) {
                         { 
                             recordsAfterPagingAndSorting().map((item, index) => {
                                 return (<TableRow key={index}>
-                                    <TableCell>{item.payment_date}</TableCell>
-                                    <TableCell>{item.value_received}</TableCell>
-                                    <TableCell>{item.years_paid}</TableCell>
+                                    <TableCell>{item.name}</TableCell>
+                                    <TableCell>{item.initials}</TableCell>
                                     <TableCell>
                                         <Controls.ActionButton
                                             color="primary"
-                                            title="Download"
-                                            onClick={() => { downloadReceipt(item) }}>
-                                            <ReceiptIcon fontSize="medium" />
+                                            title="Edit Group"
+                                            className={classes.editButton}
+                                            onClick={() => { openEditPopup(item) }}>
+                                            <EditIcon fontSize="small" />
+                                        </Controls.ActionButton>
+                                        <Controls.ActionButton
+                                            color="primary"
+                                            title="Remove Group"
+                                            className={classes.removeButton}
+                                            onClick={() => { openInPopupRemove(item) }}>
+                                            <DeleteIcon fontSize="small" />
                                         </Controls.ActionButton>
                                     </TableCell>
                                 </TableRow>)

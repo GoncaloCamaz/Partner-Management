@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     paddingLeft: 10,
     paddingRight: 10,
+    paddingTop: 10,
     paddingBottom: 10
   },
   input: {
@@ -99,7 +100,6 @@ export default function ProfileForm(props) {
                   label="Name"
                   name="name"
                   autoComplete="name"
-                  autoFocus
                   onChange={(event) => {handleInputChange(event)}}
               />
                 <TextField
@@ -110,7 +110,6 @@ export default function ProfileForm(props) {
                   id="nickname"
                   label="Nickname"
                   name="nickname"
-                  autoFocus
                   onChange={(event) => {handleInputChange(event)}}
               />
               <TextField
@@ -123,7 +122,6 @@ export default function ProfileForm(props) {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
-                  autoFocus
                   onChange={(event) => {handleInputChange(event)}}
               />
               <TextField
@@ -136,7 +134,6 @@ export default function ProfileForm(props) {
                   label="Phone Number"
                   name="phone_number"
                   autoComplete="phone"
-                  autoFocus
                   onChange={(event) => {handleInputChange(event)}}
               />
               <TextField
@@ -148,7 +145,6 @@ export default function ProfileForm(props) {
                   label="Address"
                   name="address"
                   autoComplete="address"
-                  autoFocus
                   onChange={(event) => {handleInputChange(event)}}
               />
             </Grid>
@@ -161,7 +157,6 @@ export default function ProfileForm(props) {
                   label="City"
                   name="city"
                   autoComplete="address-level2"
-                  autoFocus
                   onChange={(event) => {handleInputChange(event)}}
               />
             </Grid>
@@ -174,7 +169,6 @@ export default function ProfileForm(props) {
                     label="Postal Code"
                     name="postalcode"
                     autoComplete="postal-code"
-                    autoFocus
                     onChange={(event) => {handleInputChange(event)}}
                 />
                 </Grid>
@@ -211,7 +205,6 @@ export default function ProfileForm(props) {
                   id="old_password"
                   label="Old Password"
                   name="old_password"
-                  autoFocus
                   onChange={(event) => {handleInputChange(event)}}
               />
               <TextField
@@ -223,7 +216,6 @@ export default function ProfileForm(props) {
                   id="new_password"
                   label="New Password"
                   name="new_password"
-                  autoFocus
                   onChange={(event) => {handleInputChange(event)}}
               />
               <TextField
@@ -235,7 +227,6 @@ export default function ProfileForm(props) {
                   id="new_password_confirm"
                   label="New Password Confirmation"
                   name="new_password_confirm"
-                  autoFocus
                   onChange={(event) => {handleInputChange(event)}}
               />
             </Grid>

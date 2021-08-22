@@ -45,10 +45,10 @@ const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 370,
     flexGrow: 1,
-    backgroundColor: '#1a83ff'
+    backgroundColor: '#1a83ff',
   },
   color: {
-    backgroundColor: '#060b26',
+    backgroundColor: '#1a83ff',
     color: '#fff'
   },
   button: {
@@ -56,8 +56,8 @@ const useStyles = makeStyles((theme) => ({
   },
   header: {
     height: 50,
-    backgroundColor: '#060b26',
-    color: '#fff'
+    backgroundColor: '#1a83ff',
+    color: '#fff',
   },
   img: {
     height: 150,

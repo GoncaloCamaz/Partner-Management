@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import PartnershipsList from '../menus/PartnershipsList'
 import Map from '../map/Map'
+import PartnershipAddress from '../cards/PartnershipAddress';
+import PartnershipAdvantages from '../cards/PartnershipAdvantages';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,19 +28,31 @@ export default function PartnershipGrid() {
     {
       name: "Tasquinha Bracarense",
       category: "Alimentar",
+      advantages: ["Oferta da sopa","Sobremesa"],
+      addresses: ["Rua dos bares nº 5"]
     },
     {
       name: "VideoNorte",
       category: "Papelaria",
+      advantages: ["Desconto de 50% em fotocópias a preto e branco"],
+      addresses: ["Rua dos bares nº 20"]
+
     },
     {
         name: "Oculista",
-        category: "Saúde"
+        category: "Saúde",
+        advantages: ["Exames oculares gratuitos"],
+        addresses: ["Rua dos bares nº 25"]
     }
 ]
+  const [ selectedPartnershipAdvantages, setSelectedPartnershipAdvantages] = useState(listPartnerships[0].advantages)
+  const [ selectedPartnershipAddresses, setSelectedPartnershipAddresses] = useState(listPartnerships[0].addresses)
 
-    const updateSelected = (name) => {
-        console.log(name)
+    const updateSelected = (index) => {
+      const advantages = listPartnerships[index].advantages
+      const addresses = listPartnerships[index].addresses
+      setSelectedPartnershipAdvantages(advantages)
+      setSelectedPartnershipAddresses(addresses)
     }
 
   return (
@@ -48,8 +62,9 @@ export default function PartnershipGrid() {
                 <PartnershipsList partnerships={listPartnerships} updateSelected={updateSelected}/>
             </Grid>
             <Grid item lg={9} md={9} sm={12} xs={12}>
-                Lista Vantagens
-                <Map />
+                <PartnershipAdvantages advantages={selectedPartnershipAdvantages}/>
+                <br/>
+                <PartnershipAddress addresses={selectedPartnershipAddresses}/>
             </Grid>
         </Grid>
     </div>

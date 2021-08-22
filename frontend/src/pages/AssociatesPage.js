@@ -1,15 +1,16 @@
 import React from 'react';
 import Navbar from '../components/navbar/Navbar'
+import HomeGrid from '../components/grids/HomeGrid'
 
 import './Pages.css'
-import PaymentsGrid from '../components/grids/PaymentsGrid';
 
-export default function PaymentMainPage() {
+export default function AssociatesPage() {
+
     return (
         <div className="home">
-            <Navbar/>
+            <Navbar isAdmin="true"/>
                 <div className="page-container">
-                    <PaymentsGrid />
+                    <HomeGrid />
                 </div>
         </div>   
     );

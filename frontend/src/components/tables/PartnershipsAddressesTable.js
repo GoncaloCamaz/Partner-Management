@@ -3,7 +3,8 @@ import { Table, Paper, makeStyles, TableBody, TableRow, TableCell, Toolbar, Inpu
 import useTable from "./useTable";
 import { Search } from "@material-ui/icons";
 import Controls from "../controls/Controls";
-import ReceiptIcon from '@material-ui/icons/Receipt';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -19,18 +20,33 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const headCells = [
-    { id: 'payment_date', label: 'Date' },
-    { id: 'value_received',label:'Value'},
-    { id: 'years_paid', label: 'Years Paid'}, 
-    { id: 'actions', label: 'Receipt Download', disableSorting: true }
+    { id: 'address',label: 'Address'},
+    { id: 'city',label: 'City'},
+    { id: 'postalCode',label: 'Postal Code'},
+    { id: 'latitude',label: 'Latitude'},
+    { id: 'longitude',label: 'Longitude'},
+    { id: 'actions', label: 'Actions', disableSorting: true }
 ]
 
-export default function UserPaymentsTable(props) {
+export default function PartnershipsAddressesTable(props) {
     const classes = useStyles();
-    const records = [{payment_date: "27/01/2015", value_received: 200, years_paid: 10}]//props.rows
+    const records = [
+        {
+            address: "Tuna Universitária do Minho",
+            city: "TUM",
+            postalCode: "1234-111",
+            latitude: "lat",
+            longitude: "lon"
+        }
+    ]//props.rows
+    
     const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
 
-    const downloadReceipt = (item) => {
+    const openEditPopup = (item) => {
+        console.log(item)
+    }
+
+    const openInPopupRemove = (item) => {
         console.log(item)
     }
 
@@ -51,8 +67,11 @@ export default function UserPaymentsTable(props) {
                 {
                     let filtered = items.filter(value => {
                         return (
-                            value.payment_date.toString().toLowerCase().includes(target.value.toLowerCase()) ||
-                            value.value_received.toString().toLowerCase().includes(target.value.toLowerCase()) 
+                            value.address.toString().toLowerCase().includes(target.value.toLowerCase()) || 
+                            value.city.toString().toLowerCase().includes(target.value.toLowerCase()) ||
+                            value.postalCode.toString().toLowerCase().includes(target.value.toLowerCase()) ||
+                            value.latitude.toString().toLowerCase().includes(target.value.toLowerCase()) ||
+                            value.longitude.toString().toLowerCase().includes(target.value.toLowerCase()) 
                         );
                     })
                     return filtered      
@@ -82,15 +101,25 @@ export default function UserPaymentsTable(props) {
                         { 
                             recordsAfterPagingAndSorting().map((item, index) => {
                                 return (<TableRow key={index}>
-                                    <TableCell>{item.payment_date}</TableCell>
-                                    <TableCell>{item.value_received}</TableCell>
-                                    <TableCell>{item.years_paid}</TableCell>
+                                    <TableCell>{item.address}</TableCell>
+                                    <TableCell>{item.city}</TableCell>
+                                    <TableCell>{item.postalCode}</TableCell>
+                                    <TableCell>{item.latitude}</TableCell>
+                                    <TableCell>{item.longitude}</TableCell>
                                     <TableCell>
                                         <Controls.ActionButton
                                             color="primary"
-                                            title="Download"
-                                            onClick={() => { downloadReceipt(item) }}>
-                                            <ReceiptIcon fontSize="medium" />
+                                            title="Edit Address"
+                                            className={classes.editButton}
+                                            onClick={() => { openEditPopup(item) }}>
+                                            <EditIcon fontSize="small" />
+                                        </Controls.ActionButton>
+                                        <Controls.ActionButton
+                                            color="primary"
+                                            title="Remove Address"
+                                            className={classes.removeButton}
+                                            onClick={() => { openInPopupRemove(item) }}>
+                                            <DeleteIcon fontSize="small" />
                                         </Controls.ActionButton>
                                     </TableCell>
                                 </TableRow>)

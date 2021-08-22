@@ -18,7 +18,7 @@ function Navbar(props) {
     handleLogout() 
   }
 
-  if(false)
+  if(isAdmin)
   {
     return (
         <>

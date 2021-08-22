@@ -5,7 +5,6 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import PaymentSteps from '../steps/PaymentSteps'
 import Timeline from '../timelines/Timeline'
 
 const useStyles = makeStyles((theme) => ({

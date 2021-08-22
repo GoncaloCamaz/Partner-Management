@@ -4,7 +4,7 @@ import { Context } from './context/AuthContext';
 import LoginPage from './pages/LoginPage'
 import HomePage from './pages/HomePage'
 import ProfilePage from './pages/ProfilePage'
-import PaymentsPage from './pages/PaymentMainPage'
+import PaymentsPage from './pages/PaymentsPage'
 import PartnershipsPage from './pages/PartnershipsPage';
 import './index.css'
 
@@ -41,6 +41,9 @@ export default function Routes() {
           <CustomRoute exact path="/profile" component={ProfilePage} />
           <CustomRoute exact path="/payments" component={PaymentsPage} />
           <CustomRoute exact path="/partnerships" component={PartnershipsPage} />
+          <CustomRoute exact path="/associates" component={PartnershipsPage} />
+          <CustomRoute exact path="/groups" component={PartnershipsPage} />
+          <CustomRoute exact path="/settings" component={PartnershipsPage} />
       </Switch>
   );
 }
