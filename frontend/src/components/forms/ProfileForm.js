@@ -22,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
   gridcontainer: {
     textAlign: 'center',
     alignContent: 'center'
-    
   },
   form: {
     width: '80%', // Fix IE 11 issue.

@@ -13,9 +13,6 @@ const useStyles = makeStyles({
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      '&:hover': {
-        background: "#060b26"
-      }
   },
   warning: {
     width: '100%',

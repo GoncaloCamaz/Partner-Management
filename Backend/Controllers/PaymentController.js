@@ -7,12 +7,12 @@ Payments.createPayment = (payment) => {
 
 Payments.listAll = () => {
     return Payment.find()
-                  .sort({payment_date: 1})
+                  .sort({paymentdate: 1})
                   .exec()
 }
 
-Payments.listAllByAssociate = (associate_number) => {
-    return Payment.find({associate_number: associate_number})
+Payments.listAllByAssociate = (associateNumber) => {
+    return Payment.find({associateNumber: associateNumber})
                   .sort({payment_date: 1})
                   .exec()
 }

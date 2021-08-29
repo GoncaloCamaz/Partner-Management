@@ -73,6 +73,12 @@ export const SidebarDataAdmin = [
         cName: 'nav-text'
       },
       {
+        title: 'Reports',
+        path: '/reports',
+        icon: <FaIcons.FaFileCsv />,
+        cName: 'nav-text'
+      },
+      {
         title: 'Settings',
         path: '/settings',
         icon: <FaIcons.FaWrench />,

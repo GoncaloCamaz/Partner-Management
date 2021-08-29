@@ -3,7 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { Typography } from '@material-ui/core';
-import MapIcon from '@material-ui/icons/Map';
+import EmailIcon from '@material-ui/icons/Email';
+import PhoneIcon from '@material-ui/icons/Phone';
 
 const useStyles = makeStyles({
   root: {
@@ -15,42 +16,40 @@ const useStyles = makeStyles({
     listStyle: 'none',
     textAlign: "left"
   },
-  address: {
+  contact: {
     display: 'flex',
     flexDirection: 'row',
-    gap: '20px'
+    gap: '10px'
   },
 });
 
 export default function PartnershipContacts(props) {
   const classes = useStyles();
-  const addresses = props.addresses
+  const contacts = props.contacts
+  const telephone = contacts.telephone
+  const email = contacts.email
 
-  const showMap = (name) => {
-    console.log(name)
-  }
-
-    return (
-      <Card className={classes.root} variant="outlined">
-        <CardContent>
-          <Typography variant="h5" component="h2">
-            Contacts
-          </Typography>
-          <ul className={classes.list}>
-            {
-              addresses.map((item,index) => 
-              <li key={index}>
-                <div className={classes.address}>
-                  <Typography key={index}>
-                      {item} 
-                  </Typography>
-                    <MapIcon label="test"/>
-                </div>
-              </li>
-              )
-            }
-          </ul>
-        </CardContent>
-      </Card>
-    );
+  return (
+    <Card className={classes.root} variant="outlined">
+      <CardContent>
+        <Typography variant="h5" component="h2">
+          Contacts
+        </Typography>
+        <ul className={classes.list}>
+          <li>
+            <div className={classes.contact}>
+              <PhoneIcon/>
+              <Typography >{telephone}</Typography>
+            </div>
+          </li>
+          <li>
+            <div className={classes.contact}>
+              <EmailIcon/>
+              <Typography >{email}</Typography>
+            </div>
+          </li>
+        </ul>
+      </CardContent>
+    </Card>
+  );
 }

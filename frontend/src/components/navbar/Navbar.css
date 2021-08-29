@@ -71,8 +71,8 @@ span {
   margin-left: 16px;
 }
 
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 900px) {
   .nav-menu {
-    height: 100vh;
+    height: 100%;
   }
 }

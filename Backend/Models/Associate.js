@@ -3,20 +3,20 @@ const uniqueValidator = require('mongoose-unique-validator')
 const Schema = mongoose.Schema
 
 const AssociateSchema = new Schema({
-associate_number: { type: Number, required: true, unique: true},
+associateNumber: { type: Number, required: true, unique: true},
 name: {type: String, required: true,  max : [127, "Max Length is 127 characters"]},
-phone_number: Number,
+phoneNumber: Number,
 address: String,
 city: String,
-postal_code: String,
+postalCode: String,
 nickname: String,
 active: {type: Boolean, required: true},
 email: {type: String, required: true, unique: true, max : [127, "Max Length is 127 characters"]},
 password: {type: String, required: true},
-user_role: {type: String, required: true},
-joined_in: Date,
+userRole: {type: String, required: true},
+joinedIn: Date,
 groups: [{group_name: String}],
-paid_until_year: Number
+paidUntilYear: Number
 });
 
 AssociateSchema.plugin(uniqueValidator)

@@ -3,12 +3,18 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import LabelImportantIcon from '@material-ui/icons/LabelImportant';
 
 const useStyles = makeStyles({
   root: {
       width: '100%',
       backgroundColor: '#1a83ff',
       color: '#fff',
+  },
+  advantage: {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: '10px'
   },
   list: {
     listStyle: 'none',
@@ -30,9 +36,12 @@ export default function PartnershipAdvantages(props) {
             {
               advantages.map((item,index) => 
               <li key={index}>
-                <Typography key={index}>
-                    {item}
-                </Typography>
+                <div className={classes.advantage}>
+                  <LabelImportantIcon />
+                  <Typography key={index}>
+                      {item}
+                  </Typography>
+                </div>
                 </li>
               )
             }

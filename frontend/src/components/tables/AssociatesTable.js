@@ -7,6 +7,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import MapIcon from '@material-ui/icons/Map';
+import GroupIcon from '@material-ui/icons/Group';
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -34,17 +35,7 @@ const headCells = [
 
 export default function UserPaymentsTable(props) {
     const classes = useStyles();
-    const records = [
-        {
-            associateNumber: 123, 
-            name: "Gonçalo Camaz", 
-            nickname: "Miadas", 
-            fee: "2021", 
-            phoneNumber: "914049105", 
-            email: "gcamaz@sapo.pt",
-            joinedIn: "2017"
-        }
-    ]//props.rows
+    const records = props.rows
     
     const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
 
@@ -56,11 +47,15 @@ export default function UserPaymentsTable(props) {
         console.log(item)
     }
 
-    const openInUserAddresss = (item) => {
+    const openInUserAddress = (item) => {
         console.log(item)
     }
 
     const openInResetPassword = (item) => {
+        console.log(item)
+    }
+
+    const openInUserGroups = (item) => {
         console.log(item)
     }
 
@@ -135,8 +130,15 @@ export default function UserPaymentsTable(props) {
                                             color="primary"
                                             title="User Address"
                                             className={classes.removeButton}
-                                            onClick={() => { openInUserAddresss(item) }}>
+                                            onClick={() => { openInUserAddress(item) }}>
                                             <MapIcon fontSize="small" />
+                                        </Controls.ActionButton>
+                                        <Controls.ActionButton
+                                            color="primary"
+                                            title="User Groups"
+                                            className={classes.removeButton}
+                                            onClick={() => { openInUserGroups(item) }}>
+                                            <GroupIcon fontSize="small" />
                                         </Controls.ActionButton>
                                         <Controls.ActionButton
                                             color="primary"
