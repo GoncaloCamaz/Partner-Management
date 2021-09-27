@@ -8,6 +8,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
+        overflowX: 'scroll',
         overflowY: 'scroll',
         paddingTop: '20px'
     },

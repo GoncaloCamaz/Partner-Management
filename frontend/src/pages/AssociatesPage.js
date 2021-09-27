@@ -3,7 +3,8 @@ import Navbar from '../components/navbar/Navbar'
 import AssociatesTable from '../components/tables/AssociatesTable';
 import Popup from '../components/popup/Popup'
 import './Pages.css'
-import AssociateForm from '../components/forms/AssociateForm';
+import CreateAssociateForm from '../components/forms/CreateAssociateForm';
+import EditAssociateForm from '../components/forms/EditAssociateForm';
 import { getAssociates,
      createNewAssociate, 
      updateAssociate, 
@@ -13,6 +14,8 @@ import { getAssociates,
     } from '../api/AssociatesAPI'
 import { getGroups } from '../api/GroupsAPI'
 import MessagesDisplay from '../components/forms/MessagesDisplayForm';
+import AssociateAddresssForm from '../components/forms/AssociateAddressForm';
+import AssociateGroupsForm from '../components/forms/AssociateGroupsForm';
 
 class AssociatesPage extends Component {
     constructor(props) {
@@ -27,6 +30,9 @@ class AssociatesPage extends Component {
             popupAddAssociateOpen: false,
             popupEditAssociateOpen: false,
             popupRemoveAssociateOpen: false,
+            popupSeeAddressOpen: false,
+            popupSeeAssociateGroupsOpen: false,
+            popupResetPassword: false,
             errorMessage: '',
             errorPopupOpen: false,
             isLoaded: false
@@ -44,6 +50,9 @@ class AssociatesPage extends Component {
                         phoneNumber: "914049105", 
                         email: "gcamaz@sapo.pt",
                         joinedIn: "2017",
+                        address: "Rua do Socialismo 20",
+                        city: "VIla do conde",
+                        postalCode: "4485-032",
                         groups: ["TUM"]
                     },
                     {
@@ -53,6 +62,9 @@ class AssociatesPage extends Component {
                         fee: "2020", 
                         phoneNumber: "914049023", 
                         email: "gcamaz@sapo.pt",
+                        address: "Rua do Socialismo 90",
+                        city: "VIla do conde",
+                        postalCode: "4485-044",
                         joinedIn: "2016",
                         groups: ["Bomboémia"]
                     },
@@ -137,7 +149,7 @@ class AssociatesPage extends Component {
 
     addAssociateOnBackend(values) {
         console.log(values)
-      /*  const response = createNewAssociate(values)
+        const response = createNewAssociate(values)
         //TODO HANDLE RESPONSE
         if(response.status !== 200)
         {
@@ -146,12 +158,11 @@ class AssociatesPage extends Component {
             this.setOpenErrorPopup(true)
         }
         this.associatesTableUpdate(false)
-        */
     }
 
     editAssociateOnBackend(values) {
         console.log(values)
-      /*  const response = updateAssociate(values)
+        const response = updateAssociate(values)
         //TODO HANDLE RESPONSE
         if(response.status !== 200)
         {
@@ -160,11 +171,31 @@ class AssociatesPage extends Component {
             this.setOpenErrorPopup(true)
         }
         this.associatesTableUpdate(false)
-        */
     }
 
     removeAssociateOnBackend() {
+        console.log(this.state.recordForRemove)
+        const response = updateAssociate(this.state.recordForRemove)
+        //TODO HANDLE RESPONSE
+        if(response.status !== 200)
+        {
+            //check response error messages
+            this.setState({errorMessage: "Alguma coisa correu mal TODO: ERROR"})
+            this.setOpenErrorPopup(true)
+        }
+        this.associatesTableUpdate(false)
+    }
 
+    resetPasswordOnBackend(values)
+    {
+        console.log("RESET PASSWORD =>", values)
+        const result = resetPassword(values.associateNumber)
+        if(result.status !== 200)
+        {
+            //check response error messages
+            this.setState({errorMessage: "Alguma coisa correu mal TODO: ERROR"})
+            this.setOpenErrorPopup(true)
+        }
     }
 
 
@@ -204,6 +235,18 @@ class AssociatesPage extends Component {
         this.setState({errorPopupOpen: value})
     }
 
+    setOpenSeeAddressPopup = (value) => {
+        this.setState({popupSeeAddressOpen: value})
+    }
+
+    setOpenSeeAssociateGroups = (value) => {
+        this.setState({popupSeeAssociateGroupsOpen: value})
+    }
+
+    setOpenResetPasswordPopup = (value) => {
+        this.setState({popupResetPassword: value})
+    }
+
     handleAddNewAssociate = () => {
         this.setOpenAddAssociatePopup(true)
     }
@@ -222,20 +265,24 @@ class AssociatesPage extends Component {
 
     handleOpenAssociateAddress = (associate) => {
         console.log("OPEN ADDRESS =>", associate)
+        this.setState({recordForEdit: associate})
+        this.setOpenSeeAddressPopup(true)
     }
 
     handleResetAssociatePassword = (associate) => {
         console.log("RESET PASSWORD =>", associate)
-        const result = resetPassword(associate.associateNumber)
-        console.log("RESULT RESET => ", result)
+        this.setState({recordForRemove: associate.associateNumber})
+        this.setOpenResetPasswordPopup(true)
     }
 
     handleOpenAssociateGroups = (associate) => {
         console.log("SEE GROUPS =>", associate)
+        this.setState({recordForEdit: associate})
+        this.setOpenSeeAssociateGroups(true)
     }
 
     render () {
-        const {isLoaded, filteredAssociates} = this.state
+        const {isLoaded, filteredAssociates } = this.state
 
         if(!isLoaded)
         {
@@ -259,7 +306,7 @@ class AssociatesPage extends Component {
                                 title={'Novo Associado'}
                                 openPopup={this.state.popupAddAssociateOpen}
                                 setOpenPopup={this.setOpenAddAssociatePopup}>
-                                <AssociateForm 
+                                <CreateAssociateForm 
                                     recordForEdit ={this.state.recordForEdit}
                                     groups={this.state.groups}
                                     addOrEdit={this.addAssociateOnBackend}
@@ -269,8 +316,26 @@ class AssociatesPage extends Component {
                                 title={'Editar Associado'}
                                 openPopup={this.state.popupEditAssociateOpen}
                                 setOpenPopup={this.setOpenEditAssociatePopup}>
-                                <AssociateForm 
+                                <EditAssociateForm 
                                     recordForEdit ={this.state.recordForEdit}
+                                    addOrEdit={this.editAssociateOnBackend}
+                                />
+                            </Popup>
+                            <Popup 
+                                title={'Morada do Associado'}
+                                openPopup={this.state.popupSeeAddressOpen}
+                                setOpenPopup={this.setOpenSeeAddressPopup}>
+                                <AssociateAddresssForm 
+                                    recordForEdit ={this.state.recordForEdit}
+                                    addOrEdit={this.editAssociateOnBackend}
+                                />
+                            </Popup>
+                            <Popup 
+                                title={'Grupos do Associado'}
+                                openPopup={this.state.popupSeeAssociateGroupsOpen}
+                                setOpenPopup={this.setOpenSeeAssociateGroups}>
+                                <AssociateGroupsForm 
+                                    recordForEdit={this.state.recordForEdit}
                                     groups={this.state.groups}
                                     addOrEdit={this.editAssociateOnBackend}
                                 />
@@ -283,6 +348,16 @@ class AssociatesPage extends Component {
                                     mainMessage={"Tens a certeza que queres apagar o associado com o número: " + this.state.recordForRemove + " ?"}
                                     secundaryMessage={"Os registos de pagamentos e informações serão mantidos."}
                                     handleOk={this.removeAssociateOnBackend}
+                                />
+                            </Popup>
+                            <Popup 
+                                title={'Reset das Credênciais do Associado'}
+                                openPopup={this.state.popupResetPassword}
+                                setOpenPopup={this.setOpenResetPasswordPopup}>
+                                <MessagesDisplay 
+                                    mainMessage={"As credênciais do associado: " + this.state.recordForRemove + " vão ser atualizadas."}
+                                    secundaryMessage={"As novas credênciais vão ser enviadas para o email do associado."}
+                                    handleOk={this.resetPasswordOnBackend}
                                 />
                             </Popup>
                         </div>

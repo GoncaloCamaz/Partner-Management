@@ -13,7 +13,8 @@ const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
     },
-    pageContent: {
+    pageContent: {        
+        overflowX: 'scroll',
         overflowY: 'scroll',
         width: '100%',
         paddingTop: '20px'
@@ -32,9 +33,6 @@ const useStyles = makeStyles(theme => ({
         '&:hover': {
             background: "#1888ff"
           }
-    },
-    actionButton: {
-        justifyContent: 'center'
     }
 }))
 

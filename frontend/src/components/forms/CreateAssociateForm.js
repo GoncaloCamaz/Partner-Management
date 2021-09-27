@@ -24,7 +24,7 @@ const useStyles = makeStyles(({
     }
 }))
 
-export default function AssociateForm(props) {
+export default function CreateAssociateForm(props) {
     const { addOrEdit, recordForEdit } = props
     const groups = props.groups
     const classes = useStyles()

@@ -7,7 +7,6 @@ import './Pages.css'
 
 export default function PartnershipsPage() {
 
-    const authenticationContext = useContext(Context);
     const admin = true//authenticationContext.isAdmin
 
     return (
