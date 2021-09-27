@@ -8,13 +8,28 @@ import './Pages.css'
 export default function HomePage() {
     const authenticationContext = useContext(Context);
     const admin = true//authenticationContext.isAdmin
+    console.log(authenticationContext)
 
-    return (
-        <div className="home">
-            <Navbar isAdmin={admin}/>
+    if(admin === true)
+    {
+        return (
+            <div className="home">
+            <Navbar isAdmin={true}/>
                 <div className="page-container">
-                    <HomeGrid />
+
                 </div>
         </div>   
-    );
+        );
+    }
+    else
+    {
+        return (
+            <div className="home">
+                <Navbar isAdmin={false}/>
+                    <div className="page-container">
+                        <HomeGrid />
+                    </div>
+            </div>   
+        );
+    }
 }

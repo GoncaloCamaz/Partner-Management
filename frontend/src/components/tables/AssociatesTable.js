@@ -10,53 +10,70 @@ import MapIcon from '@material-ui/icons/Map';
 import GroupIcon from '@material-ui/icons/Group';
 
 const useStyles = makeStyles(theme => ({
+    root: {
+        flexGrow: 1,
+    },
     pageContent: {
         overflowY: 'scroll',
+        width: '100%',
         paddingTop: '20px'
     },
     container: {
         maxHeight: '300px',
     },
     searchInput: {
-        width: '50%'
+        width: '30%'
+    },
+    addButton: {
+        position: 'absolute',
+        right: 0,
+        color: '#fff',
+        background: 'rgb(26, 23, 89)',
+        '&:hover': {
+            background: "#1888ff"
+          }
+    },
+    actionButton: {
+        justifyContent: 'center'
     }
 }))
 
 const headCells = [
-    { id: 'associateNumber', label: 'Associate Number' },
-    { id: 'name',label: 'Name'},
-    { id: 'nickname', label: 'Nickname'}, 
-    { id: 'fee', label: 'Fee'},
-    { id: 'phoneNumber', label: 'Phone'}, 
+    { id: 'associateNumber', label: 'Número de Associado' },
+    { id: 'name',label: 'Nome'},
+    { id: 'nickname', label: 'Alcunha'}, 
+    { id: 'fee', label: 'Quota'},
+    { id: 'phoneNumber', label: 'Número de Telemóvel'}, 
     { id: 'email', label: 'Email'}, 
-    { id: 'joinedIn', label: "Joined In" },
-    { id: 'actions', label: 'Actions', disableSorting: true }
+    { id: 'joinedIn', label: "Ano de Entrada" },
+    { id: 'actions', label: 'Ações', disableSorting: true }
 ]
 
-export default function UserPaymentsTable(props) {
+export default function AssociatesTable(props) {
     const classes = useStyles();
-    const records = props.rows
-    
+    const records = props.records
+    const groups = props.groups
     const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
+    const [selectedGroup, setSelectedGroup] = useState('All')
 
     const openEditPopup = (item) => {
-        console.log(item)
+        props.handleEditAssociate(item)
     }
 
     const openInPopupRemove = (item) => {
-        console.log(item)
+        props.handleRemoveAssociate(item)
     }
 
     const openInUserAddress = (item) => {
-        console.log(item)
+        props.handleOpenAssociateAddress(item)
     }
 
     const openInResetPassword = (item) => {
-        console.log(item)
+        props.handleResetAssociatePassword(item)
     }
 
     const openInUserGroups = (item) => {
-        console.log(item)
+        props.handleOpenAssociateGroups(item)
     }
 
     const {
@@ -90,11 +107,30 @@ export default function UserPaymentsTable(props) {
         })
     }
 
+    const handleSelectGroupChange = e => {
+        console.log(e)
+        let groupName = e.target.value
+        setSelectedGroup(groupName)
+        props.handleSearch(groupName)
+    }
+
+    const handleAddAssociate = () => {
+        props.handleAddNewAssociate()
+    }
+
     return (
+        <div className={classes.root}>
             <Paper className={classes.pageContent}>
                 <Toolbar>
+                    <Controls.Select
+                        name="group"
+                        label="Grupo"
+                        value={selectedGroup}
+                        onChange={handleSelectGroupChange}
+                        options={groups}
+                    />
                     <Controls.Input
-                        label="Search"
+                        label="Procurar"
                         className={classes.searchInput}
                         InputProps={{
                             startAdornment: (<InputAdornment position="start">
@@ -102,6 +138,12 @@ export default function UserPaymentsTable(props) {
                             </InputAdornment>)
                         }}
                         onChange={handleSearch}
+                    />
+                    <Controls.Button
+                        text="Novo Associado"
+                        variant="outlined"
+                        className={classes.addButton}
+                        onClick={() => {handleAddAssociate(null)}}
                     />
                 </Toolbar>
                 <TblContainer className={classes.container}>
@@ -121,36 +163,36 @@ export default function UserPaymentsTable(props) {
                                     <TableCell>
                                         <Controls.ActionButton
                                             color="primary"
-                                            title="Edit User"
-                                            className={classes.editButton}
+                                            title="Editar Associado"
+                                            className={classes.actionButton}
                                             onClick={() => { openEditPopup(item) }}>
                                             <EditIcon fontSize="small" />
                                         </Controls.ActionButton>
                                         <Controls.ActionButton
                                             color="primary"
-                                            title="User Address"
-                                            className={classes.removeButton}
+                                            title="Morada"
+                                            className={classes.actionButton}
                                             onClick={() => { openInUserAddress(item) }}>
                                             <MapIcon fontSize="small" />
                                         </Controls.ActionButton>
                                         <Controls.ActionButton
                                             color="primary"
-                                            title="User Groups"
-                                            className={classes.removeButton}
+                                            title="Grupos do Associado"
+                                            className={classes.actionButton}
                                             onClick={() => { openInUserGroups(item) }}>
                                             <GroupIcon fontSize="small" />
                                         </Controls.ActionButton>
                                         <Controls.ActionButton
                                             color="primary"
-                                            title="Reset Password"
-                                            className={classes.removeButton}
+                                            title="Password Reset"
+                                            className={classes.actionButton}
                                             onClick={() => { openInResetPassword(item) }}>
                                             <VpnKeyIcon fontSize="small" />
                                         </Controls.ActionButton>
                                         <Controls.ActionButton
                                             color="primary"
-                                            title="Remove User"
-                                            className={classes.removeButton}
+                                            title="Remover Associado"
+                                            className={classes.actionButton}
                                             onClick={() => { openInPopupRemove(item) }}>
                                             <DeleteIcon fontSize="small" />
                                         </Controls.ActionButton>
@@ -163,5 +205,6 @@ export default function UserPaymentsTable(props) {
                 </TblContainer>
                 <TblPagination />
             </Paper>
+        </div>
     )
 }

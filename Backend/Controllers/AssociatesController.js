@@ -67,6 +67,14 @@ Associates.findAssociateByEmail = (email) => {
 }
 
 /**
+ * Finds an associate by its associate number
+ */
+Associates.findAssociateByAssociateNumber = (number) => {
+    return Associate.findOne({associateNumber: number})
+                    .exec()
+}
+
+/**
  * Gets all associated with shares paid
  */
 Associates.listAllWithPaidShares = (year) => {

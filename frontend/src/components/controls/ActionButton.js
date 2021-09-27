@@ -9,6 +9,7 @@ const useStyles = makeStyles(theme => ({
         color: "#1888ff",
         display: 'flex',
         alignItems: 'center',
+        justifyContent: 'center'
     },
     secondary: {
         backgroundColor: "lightred",

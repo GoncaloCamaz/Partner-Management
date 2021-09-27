@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import PartnershipsList from '../menus/PartnershipsList'
-import Map from '../map/Map'
 import PartnershipAddress from '../cards/PartnershipAddress';
 import PartnershipAdvantages from '../cards/PartnershipAdvantages';
 import PartnershipContacts from '../cards/PartnershipContacts';

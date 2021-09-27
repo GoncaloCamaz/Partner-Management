@@ -22,23 +22,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AssociatesGrid(props) {
     const classes = useStyles();
-    const tableRecords = props.records
-    const [filteredTableRecords, setFilteredTableRecords] = useState(tableRecords)
+    const records = props.records
 
     const handleReset = () => {
-      setFilteredTableRecords(tableRecords)
+      props.handleReset()
     }
 
     const handleSearch = (values) => {
-      var records = tableRecords
-
-      if(values.fee !== '')
-        records.filter(item => item.paidUntilYear === values.fee)
-      
-      if(values.group !== 'All')
-        records.filter(item => item.groups.contains(values.group))
-
-        setFilteredTableRecords(records)
+      props.handleSearch(values)
     }
 
     return (
@@ -48,7 +39,7 @@ export default function AssociatesGrid(props) {
                 <AssociatesTableOptionsForm handleReset={handleReset} handleSearch={handleSearch}/>
               </Grid>
               <Grid item lg={9} md={9} sm={12} xs={12}>
-                 <AssociatesTable records={filteredTableRecords} />
+                 <AssociatesTable records={records} />
               </Grid>
           </Grid>
       </div>

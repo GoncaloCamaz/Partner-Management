@@ -8,6 +8,7 @@ import PaymentsPage from './pages/PaymentsPage'
 import PartnershipsPage from './pages/PartnershipsPage';
 import AssociatesPage from './pages/AssociatesPage';
 import './index.css'
+import GroupsPage from './pages/GroupsPage';
 
 function CustomRoute({ isPrivate, ...rest }) {
   const { loading, authenticated } = useContext(Context);
@@ -43,7 +44,7 @@ export default function Routes() {
           <CustomRoute exact path="/payments" component={PaymentsPage} />
           <CustomRoute exact path="/partnerships" component={PartnershipsPage} />
           <CustomRoute exact path="/associates" component={AssociatesPage} />
-          <CustomRoute exact path="/groups" component={PartnershipsPage} />
+          <CustomRoute exact path="/groups" component={GroupsPage} />
           <CustomRoute exact path="/settings" component={PartnershipsPage} />
       </Switch>
   );

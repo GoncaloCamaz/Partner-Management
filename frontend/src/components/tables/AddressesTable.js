@@ -9,57 +9,45 @@ import DeleteIcon from '@material-ui/icons/Delete';
 const useStyles = makeStyles(theme => ({
     pageContent: {
         overflowY: 'scroll',
-        paddingTop: '20px',
-        width: '100%',
-        height: '100%',
+        paddingTop: '20px'
     },
     container: {
         maxHeight: '300px',
     },
     searchInput: {
-        width: '30%'
-    },
-    addButton: {
-        position: 'absolute',
-        right: 0,
-        color: '#fff',
-        background: 'rgb(26, 23, 89)',
-        '&:hover': {
-            background: "#1888ff"
-          }
+        width: '50%'
     }
 }))
 
 const headCells = [
-    { id: 'name',label: 'Nome'},
-    { id: 'initials',label: 'Iniciais'},
-    { id: 'imageURL', label: 'URL da Imagem'},
+    { id: 'address',label: 'Address'},
+    { id: 'city',label: 'City'},
+    { id: 'postalCode',label: 'Postal Code'},
+    { id: 'latitude',label: 'Latitude'},
+    { id: 'longitude',label: 'Longitude'},
     { id: 'actions', label: 'Actions', disableSorting: true }
 ]
 
-export default function GroupsTable(props) {
+export default function AddressesTable(props) {
     const classes = useStyles();
     const records = [
         {
-            name: "Tuna Universitária do Minho",
-            initials: "TUM",
-            imageURL: "https://image.png"
+            address: "Tuna Universitária do Minho",
+            city: "TUM",
+            postalCode: "1234-111",
+            latitude: "lat",
+            longitude: "lon"
         }
     ]//props.rows
+    
     const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
 
     const openEditPopup = (item) => {
         console.log(item)
-        props.handleGroupEdit(item)
     }
 
     const openInPopupRemove = (item) => {
         console.log(item)
-        props.handleGroupRemove(item)
-    }
-
-    const openInAddPopup = () => {
-        props.handleAddGroup()
     }
 
     const {
@@ -79,8 +67,11 @@ export default function GroupsTable(props) {
                 {
                     let filtered = items.filter(value => {
                         return (
-                            value.name.toString().toLowerCase().includes(target.value.toLowerCase()) || 
-                            value.initials.toString().toLowerCase().includes(target.value.toLowerCase()) 
+                            value.address.toString().toLowerCase().includes(target.value.toLowerCase()) || 
+                            value.city.toString().toLowerCase().includes(target.value.toLowerCase()) ||
+                            value.postalCode.toString().toLowerCase().includes(target.value.toLowerCase()) ||
+                            value.latitude.toString().toLowerCase().includes(target.value.toLowerCase()) ||
+                            value.longitude.toString().toLowerCase().includes(target.value.toLowerCase()) 
                         );
                     })
                     return filtered      
@@ -93,7 +84,7 @@ export default function GroupsTable(props) {
             <Paper className={classes.pageContent}>
                 <Toolbar>
                     <Controls.Input
-                        label="Procurar"
+                        label="Search"
                         className={classes.searchInput}
                         InputProps={{
                             startAdornment: (<InputAdornment position="start">
@@ -101,12 +92,6 @@ export default function GroupsTable(props) {
                             </InputAdornment>)
                         }}
                         onChange={handleSearch}
-                    />
-                     <Controls.Button
-                        text="Adicionar Grupo"
-                        variant="outlined"
-                        className={classes.addButton}
-                        onClick={() => {openInAddPopup(null)}}
                     />
                 </Toolbar>
                 <TblContainer className={classes.container}>
@@ -116,19 +101,23 @@ export default function GroupsTable(props) {
                         { 
                             recordsAfterPagingAndSorting().map((item, index) => {
                                 return (<TableRow key={index}>
-                                    <TableCell>{item.name}</TableCell>
-                                    <TableCell>{item.initials}</TableCell>
-                                    <TableCell>{item.imageURL}</TableCell>
+                                    <TableCell>{item.address}</TableCell>
+                                    <TableCell>{item.city}</TableCell>
+                                    <TableCell>{item.postalCode}</TableCell>
+                                    <TableCell>{item.latitude}</TableCell>
+                                    <TableCell>{item.longitude}</TableCell>
                                     <TableCell>
                                         <Controls.ActionButton
                                             color="primary"
-                                            title="Editar Grupo"
+                                            title="Edit Address"
+                                            className={classes.editButton}
                                             onClick={() => { openEditPopup(item) }}>
                                             <EditIcon fontSize="small" />
                                         </Controls.ActionButton>
                                         <Controls.ActionButton
                                             color="primary"
-                                            title="Remover Grupo"
+                                            title="Remove Address"
+                                            className={classes.removeButton}
                                             onClick={() => { openInPopupRemove(item) }}>
                                             <DeleteIcon fontSize="small" />
                                         </Controls.ActionButton>

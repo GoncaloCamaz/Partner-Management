@@ -20,25 +20,13 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const headCells = [
-    { id: 'address',label: 'Address'},
-    { id: 'city',label: 'City'},
-    { id: 'postalCode',label: 'Postal Code'},
-    { id: 'latitude',label: 'Latitude'},
-    { id: 'longitude',label: 'Longitude'},
+    { id: 'advantage',label: 'Advantage'},
     { id: 'actions', label: 'Actions', disableSorting: true }
 ]
 
-export default function PartnershipsAddressesTable(props) {
+export default function AdvantagesTable(props) {
     const classes = useStyles();
-    const records = [
-        {
-            address: "Tuna Universitária do Minho",
-            city: "TUM",
-            postalCode: "1234-111",
-            latitude: "lat",
-            longitude: "lon"
-        }
-    ]//props.rows
+    const records = ["Impressão gratis", "fotocopias"]//props.rows
     
     const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
 
@@ -67,11 +55,7 @@ export default function PartnershipsAddressesTable(props) {
                 {
                     let filtered = items.filter(value => {
                         return (
-                            value.address.toString().toLowerCase().includes(target.value.toLowerCase()) || 
-                            value.city.toString().toLowerCase().includes(target.value.toLowerCase()) ||
-                            value.postalCode.toString().toLowerCase().includes(target.value.toLowerCase()) ||
-                            value.latitude.toString().toLowerCase().includes(target.value.toLowerCase()) ||
-                            value.longitude.toString().toLowerCase().includes(target.value.toLowerCase()) 
+                            value.toString().toLowerCase().includes(target.value.toLowerCase())
                         );
                     })
                     return filtered      
@@ -101,22 +85,18 @@ export default function PartnershipsAddressesTable(props) {
                         { 
                             recordsAfterPagingAndSorting().map((item, index) => {
                                 return (<TableRow key={index}>
-                                    <TableCell>{item.address}</TableCell>
-                                    <TableCell>{item.city}</TableCell>
-                                    <TableCell>{item.postalCode}</TableCell>
-                                    <TableCell>{item.latitude}</TableCell>
-                                    <TableCell>{item.longitude}</TableCell>
+                                    <TableCell>{item}</TableCell>
                                     <TableCell>
                                         <Controls.ActionButton
                                             color="primary"
-                                            title="Edit Address"
+                                            title="Edit Advantage"
                                             className={classes.editButton}
                                             onClick={() => { openEditPopup(item) }}>
                                             <EditIcon fontSize="small" />
                                         </Controls.ActionButton>
                                         <Controls.ActionButton
                                             color="primary"
-                                            title="Remove Address"
+                                            title="Remove Advantage"
                                             className={classes.removeButton}
                                             onClick={() => { openInPopupRemove(item) }}>
                                             <DeleteIcon fontSize="small" />

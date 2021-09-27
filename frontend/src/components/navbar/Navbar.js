@@ -42,7 +42,7 @@ function Navbar(props) {
                             <li key={index} className={item.cName}>
                               <Link to="/" onClick={handleClick}>
                                 {item.icon}
-                                <span>{item.title}</span>
+                                <span className='navbar-span'>{item.title}</span>
                               </Link>
                             </li>
                           );
@@ -53,7 +53,7 @@ function Navbar(props) {
                             <li key={index} className={item.cName}>
                               <Link to={item.path}>
                                 {item.icon}
-                                <span>{item.title}</span>
+                                <span className='navbar-span'>{item.title}</span>
                               </Link>
                             </li>
                           );

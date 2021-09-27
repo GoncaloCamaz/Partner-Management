@@ -21,10 +21,7 @@ const useStyles = makeStyles({
     color: '#fff',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
-    '&:hover': {
-      cursor: 'pointer',
-    }
+    alignItems: 'center'
   },
   button: {
     color: '#fff'
@@ -42,7 +39,7 @@ const useStyles = makeStyles({
 export default function OutlinedCard(props) {
   const classes = useStyles();
   const cardTitle = "Fee"//props.title
-  const message = "2021"
+  const message = "2020"
   const year = new Date().getFullYear()
   const paidYear = Number(message)
 

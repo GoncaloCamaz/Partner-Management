@@ -39,9 +39,9 @@ const { checkAdminAuthorization, checkAuthorization } = require('../AuthUtils');
  */
  router.post('/update/credentials', checkAuthorization, async (req, res) => {
     try{
-        const { old_password } = req.body.old_password 
-        const { new_password } = req.body.new_password
-        const associate = controller.findAssociateByEmail(req.body.email)
+        const { old_password } = req.body.oldPassword 
+        const { new_password } = req.body.newPassword
+        const associate = controller.findAssociateByAssociateNumber(req.body.associateNumber)
         
         const validPassword = await bcrypt.compare(old_password, associate.password)
         if(validPassword)
@@ -92,6 +92,15 @@ router.get('/', checkAdminAuthorization, function (_req, res) {
                      .then(data => res.jsonp(data))
                      .catch(error => res.status(500).jsonp(error))
 });
+
+/**
+ * Get associate information by associate number
+ */
+router.get('/number/:number', checkAuthorization, function(req, res){
+    return controller.findAssociateByAssociateNumber(req.params.number)
+                     .then(data => res.jsonp(data))
+                     .catch(error => res.status(500).jsonp(error))
+})
 
 /**
  * Gets all associates with paid shares until given year

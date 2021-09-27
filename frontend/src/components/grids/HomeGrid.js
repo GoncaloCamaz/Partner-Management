@@ -10,10 +10,10 @@ import { Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   gridcontainer: {
-    textAlign: 'center',
+    textAlign: 'center'
   },
   paper: {
     backgroundColor: '#060b26',
@@ -52,20 +52,20 @@ export default function FullWidthGrid() {
         <Grid container spacing={3} className={classes.gridcontainer}>
           <Grid item lg={6} md={6} sm={12} xs={12}>
             <Paper className={classes.paper}>
-                <ProfileCard handleSeeProfile={handleSeeProfile}/>
+              <EcardDownloadCard />
             </Paper>
             <br/>
             <Paper className={classes.paper}>
-                <EcardDownloadCard />
+              <ProfileCard handleSeeProfile={handleSeeProfile}/>
             </Paper>
           </Grid>
           <Grid item lg={6} md={6} sm={12} xs={12}>
             <Paper className={classes.paper}>
-                <FeeCard handleSeeFees={handleSeeFees}/>
+              <FeeCard handleSeeFees={handleSeeFees}/>
             </Paper>
             <br/>
             <Paper className={classes.paper}>
-                <ParthershipsCard handleSeePartnerships={handleSeePartnerships}/>
+              <ParthershipsCard handleSeePartnerships={handleSeePartnerships}/>
             </Paper>
           </Grid>
         </Grid>
