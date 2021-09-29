@@ -6,53 +6,52 @@ import Controls from "../controls/Controls";
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ListIcon from '@material-ui/icons/List';
+import MapIcon from '@material-ui/icons/Map';
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
         overflowY: 'scroll',
+        width: '100%',
         paddingTop: '20px'
     },
     container: {
         maxHeight: '300px',
     },
     searchInput: {
-        width: '50%'
+        width: '30%'
     }
 }))
 
 const headCells = [
-    { id: 'name', label: 'Name' },
-    { id: 'starDate', label: 'Start Date'}, 
-    { id: 'active', label: 'Active'},
-    { id: 'phoneNumber', label: 'Phone'}, 
+    { id: 'name', label: 'Nome' },
+    { id: 'startDate', label: 'Início da Parceria'}, 
+    { id: 'active', label: 'Ativa'},
+    { id: 'phoneNumber', label: 'Número de Telemóvel'}, 
     { id: 'email', label: 'Email'}, 
-    { id: 'actions', label: 'Actions', disableSorting: true }
+    { id: 'actions', label: 'Ações', disableSorting: true }
 ]
 
 export default function PartnershipsTable(props) {
     const classes = useStyles();
-    const records = [
-        {
-            name: "Tasquinha", 
-            startDate: "27/12/2019",
-            active: "true", 
-            email: "gcamaz@sapo.pt",
-            phoneNumber: "123123123"
-        }
-    ]//props.rows
+    const records = props.rows
     
     const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
 
-    const openEditPopup = (item) => {
-        console.log(item)
+    const openSeeAddresses = (item) => {
+        props.handleSeeAddresses(item)
     }
 
-    const openInPopupRemove = (item) => {
+    const openEditPopup = (item) => {
         console.log(item)
+        props.handleEditPartnership(item)
+    }
+
+    const openRemovePopup = (item) => {
+        props.handleRemovePartnership(item)
     }
 
     const openAdvantagesPopup = (item) => {
-        console.log(item)
+        props.handleSeeAdvantages(item)
     }
 
     const {
@@ -87,7 +86,7 @@ export default function PartnershipsTable(props) {
             <Paper className={classes.pageContent}>
                 <Toolbar>
                     <Controls.Input
-                        label="Search"
+                        label="Procurar"
                         className={classes.searchInput}
                         InputProps={{
                             startAdornment: (<InputAdornment position="start">
@@ -112,23 +111,30 @@ export default function PartnershipsTable(props) {
                                     <TableCell>
                                         <Controls.ActionButton
                                             color="primary"
-                                            title="Advantages List"
+                                            title="Moradas"
                                             className={classes.editButton}
-                                            onClick={() => { openEditPopup(item) }}>
+                                            onClick={() => { openSeeAddresses(item) }}>
+                                            <MapIcon fontSize="small" />
+                                        </Controls.ActionButton>
+                                        <Controls.ActionButton
+                                            color="primary"
+                                            title="Vantagens"
+                                            className={classes.editButton}
+                                            onClick={() => { openAdvantagesPopup(item) }}>
                                             <ListIcon fontSize="small" />
                                         </Controls.ActionButton>
                                         <Controls.ActionButton
                                             color="primary"
-                                            title="Edit Partnerhsip"
+                                            title="Editar Parceria"
                                             className={classes.editButton}
-                                            onClick={() => { openAdvantagesPopup(item) }}>
+                                            onClick={() => { openEditPopup(item) }}>
                                             <EditIcon fontSize="small" />
                                         </Controls.ActionButton>
                                         <Controls.ActionButton
                                             color="primary"
-                                            title="Remove Partnership"
+                                            title="Remover Parceria"
                                             className={classes.removeButton}
-                                            onClick={() => { openInPopupRemove(item) }}>
+                                            onClick={() => { openRemovePopup(item) }}>
                                             <DeleteIcon fontSize="small" />
                                         </Controls.ActionButton>
                                     </TableCell>

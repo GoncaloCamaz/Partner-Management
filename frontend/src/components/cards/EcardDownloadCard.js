@@ -37,7 +37,7 @@ const useStyles = makeStyles({
 
 export default function EcardDownloadCard(props) {
   const classes = useStyles();
-  const cardTitle = "Associate Card"//props.title
+  const cardTitle = "Cartão de Associado"//props.title
 
   const handleDownloadCard = () => {
       console.log("button pressed")
@@ -54,7 +54,7 @@ export default function EcardDownloadCard(props) {
           </Typography>
           <br/>
           <Typography className={classes.text} variant="h5" component="h2" onClick={handleDownloadCard}>
-              Click to Download
+              Download
           </Typography>
         </CardContent>
       </Card>

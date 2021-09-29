@@ -36,6 +36,7 @@ export default function PartnershipAddress(props) {
   const [addressName, setAddressName] = useState('')
 
   const openMap = (name) => {
+    console.log(name)
     setAddressName(name)
     setOpenPopup(true)
   }
@@ -50,7 +51,7 @@ export default function PartnershipAddress(props) {
         </Popup>
         <CardContent>
           <Typography variant="h5" component="h2">
-            Addresses
+            Moradas
           </Typography>
           <ul className={classes.list}>
             {
@@ -59,10 +60,10 @@ export default function PartnershipAddress(props) {
                 <div className={classes.address}>
                     <MapIcon/>
                     <Typography key={index}>
-                        {item} 
+                        {item.address} 
                     </Typography>
                     <Typography onClick={() => {openMap(item)}} className={classes.clickHereMap}>
-                      (Click here to see on Map)
+                      (Clica para Ver no Mapa)
                     </Typography>
                   </div>
               </li>

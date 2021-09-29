@@ -3,90 +3,67 @@ import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 
 export const SidebarData = [
-  {
-    title: 'Home',
-    path: '/home',
-    icon: <AiIcons.AiFillHome />,
-    cName: 'nav-text'
-  },
-  {
-    title: 'My Profile',
-    path: '/profile',
-    icon: <FaIcons.FaUser />,
-    cName: 'nav-text'
-  },
-  {
-    title: 'Partnerships',
-    path: '/partnerships',
-    icon: <FaIcons.FaHandshake />,
-    cName: 'nav-text'
-  },
-  {
-    title: 'Payments',
-    path: '/payments',
-    icon: <FaIcons.FaMoneyBillWave />,
-    cName: 'nav-text'
-  },
-  {
-    title: 'Logout',
-    path: '/',
-    icon: <FaIcons.FaLongArrowAltRight />,
-    cName: 'nav-text'
-  },
-];
-
-export const SidebarDataAdmin = [
     {
-        title: 'Home',
+        title: 'Página Inicial',
         path: '/home',
+        visibleForAdmin: true,
+        visibleForUser: true,
         icon: <AiIcons.AiFillHome />,
         cName: 'nav-text'
       },
       {
-        title: 'My Profile',
+        title: 'Meu Perfil',
         path: '/profile',
+        visibleForAdmin: true,
+        visibleForUser: true,
         icon: <FaIcons.FaUser />,
         cName: 'nav-text'
       },
       {
-        title: 'Associates',
+        title: 'Associados',
         path: '/associates',
+        visibleForAdmin: true,
+        visibleForUser: false,
         icon: <FaIcons.FaUsers />,
         cName: 'nav-text'
       },
       {
-        title: 'Groups',
+        title: 'Grupos',
         path: '/groups',
+        visibleForAdmin: true,
+        visibleForUser: false,
         icon: <FaIcons.FaUsers />,
         cName: 'nav-text'
       },
       {
-        title: 'Partnerships',
+        title: 'Parcerias',
         path: '/partnerships',
+        visibleForAdmin: true,
+        visibleForUser: true,
         icon: <FaIcons.FaHandshake />,
         cName: 'nav-text'
       },
       {
-        title: 'Payments',
+        title: 'Pagamentos',
         path: '/payments',
+        visibleForAdmin: true,
+        visibleForUser: true,
         icon: <FaIcons.FaMoneyBillWave />,
         cName: 'nav-text'
       },
       {
-        title: 'Reports',
-        path: '/reports',
-        icon: <FaIcons.FaFileCsv />,
-        cName: 'nav-text'
-      },
-      {
-        title: 'Settings',
+        title: 'Definições',
         path: '/settings',
+        visibleForAdmin: true,
+        visibleForUser: false,
         icon: <FaIcons.FaWrench />,
         cName: 'nav-text'
       },
       {
         title: 'Logout',
         path: '/',
+        visibleForAdmin: true,
+        visibleForUser: true,
         icon: <FaIcons.FaLongArrowAltRight />,
         cName: 'nav-text'
       },

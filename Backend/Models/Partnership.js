@@ -5,7 +5,7 @@ const PartnershipSchema = new Schema({
 name: {type: String, required: true, unique: true, max : [127, "Max Length is 127 characters"]},
 phoneNumber: Number,
 email: String,
-addresses: [{city: {type: String, required: true}, postalCode: String, latitude: {type: String, required: true}, longitude: {type: String, required: true}}],
+addresses: [{address: {type: String, required: true}, city: {type: String, required: true}, postalCode: String, latitude: {type: String, required: true}, longitude: {type: String, required: true}}],
 startDate: {type: Date},
 active: {type: Boolean, required: true},
 advantages: [String]

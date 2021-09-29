@@ -29,9 +29,9 @@ const useStyles = makeStyles({
   }
 });
 
-export default function OutlinedCard(props) {
+export default function PartnershipsCard(props) {
   const classes = useStyles();
-  const cardTitle = "Partnerships"//props.title
+  const cardTitle = "Parcerias"//props.title
 
   const handleSeePartnerships = () => {
     props.handleSeePartnerships()
@@ -51,7 +51,7 @@ export default function OutlinedCard(props) {
         </CardContent>
         <CardActions>
           <Typography className={classes.text} variant="h5" component="h2" onClick={handleSeePartnerships}>
-                  Click to See Details
+                  Clica para Ver Detalhes
           </Typography>        
         </CardActions>
       </Card>

@@ -26,14 +26,14 @@ const useStyles = makeStyles({
 export default function PartnershipContacts(props) {
   const classes = useStyles();
   const contacts = props.contacts
-  const telephone = contacts.telephone
+  const telephone = contacts.phoneNumber
   const email = contacts.email
 
   return (
     <Card className={classes.root} variant="outlined">
       <CardContent>
         <Typography variant="h5" component="h2">
-          Contacts
+          Contactos
         </Typography>
         <ul className={classes.list}>
           <li>

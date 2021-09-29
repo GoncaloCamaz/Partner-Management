@@ -7,6 +7,7 @@ export default function useAuth() {
   const [loading, setLoading] = useState(true);
   const [isAdmin, setAdmin] = useState(false);
   const [token, setToken] = useState('')
+  const [authenticationObject, setAuthenticationObject] = useState({isAdmin: false, loading: false, token: null, authenticated: false})
 
   useEffect(() => {
     const token = localStorage.getItem("token")
@@ -18,8 +19,20 @@ export default function useAuth() {
   
   function handleLogin(paramusername, parampassword) {
     const URL = "http://backend:8080/login"
-    setLoading(true)
+    const authenticationResult = {
+      isAdmin: true,
+      loading: false,
+      token: "blablalablasidniufniaufn",
+      username: paramusername,
+      authenticated: true
+    }
+    setAuthenticationObject(authenticationResult)
+    setToken("blablablbablablb")
+    setLoading(false)
+    setAuthenticated(true)
+    history.push('/home');
 
+    /**
     axios.post(URL, {
       email: paramusername.username,
       password: parampassword.password
@@ -42,7 +55,7 @@ export default function useAuth() {
       setLoading(false)
       setAuthenticated(false);
     });
-    setLoading(false)
+     */
   }
 
   function handleLogout() {
@@ -53,5 +66,5 @@ export default function useAuth() {
     history.push('/');
   }
   
-  return { authenticated, loading, token, isAdmin, handleLogin, handleLogout };
+  return { authenticated, loading, token, isAdmin, authenticationObject,handleLogin, handleLogout };
 }

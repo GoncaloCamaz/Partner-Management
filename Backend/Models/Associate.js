@@ -15,7 +15,7 @@ email: {type: String, required: true, unique: true, max : [127, "Max Length is 1
 password: {type: String, required: true},
 userRole: {type: String, required: true},
 joinedIn: Date,
-groups: [{group_name: String}],
+groups: [String],
 paidUntilYear: Number
 });
 

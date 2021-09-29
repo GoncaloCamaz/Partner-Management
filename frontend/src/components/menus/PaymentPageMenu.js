@@ -50,8 +50,8 @@ export default function IconLabelTabs(props) {
         classes={{indicator: classes.indicator}}
         centered
       >
-        <Tab classeName={classes.tab} icon={<HelpIcon />} label="How to Pay" />
-        <Tab classeName={classes.tab} icon={<ListIcon />} label="Payments" />
+        <Tab classeName={classes.tab} icon={<HelpIcon />} label="Regularizar Quotas" />
+        <Tab classeName={classes.tab} icon={<ListIcon />} label="Recibos" />
       </Tabs>
     </Paper>
   );

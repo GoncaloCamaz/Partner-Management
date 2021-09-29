@@ -23,7 +23,7 @@ export default function AssociateNumberCard(props) {
       <Card className={classes.root} variant="outlined">
         <CardContent>
           <Typography  variant="h6" component="h6">
-              Associate Number: {associateNumber}
+              Número de Associado: {associateNumber}
           </Typography>
         </CardContent>
       </Card>

@@ -30,7 +30,7 @@ export default function PartnershipAdvantages(props) {
       <Card className={classes.root} variant="outlined">
         <CardContent>
           <Typography variant="h5" component="h2">
-            Advantages
+            Vantagens
           </Typography>
           <ul className={classes.list}>
             {

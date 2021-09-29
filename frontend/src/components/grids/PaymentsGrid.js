@@ -8,6 +8,7 @@ import PaymentMethodAccordion from '../accordions/PaymentMethodsAccordion'
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    maxWidth: '100%'
   },
   gridcontainer: {
     textAlign: 'center',

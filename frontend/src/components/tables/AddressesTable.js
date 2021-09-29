@@ -9,7 +9,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 const useStyles = makeStyles(theme => ({
     pageContent: {
         overflowY: 'scroll',
-        paddingTop: '20px'
+        paddingTop: '20px',
+        width: '100%'
     },
     container: {
         maxHeight: '300px',
@@ -20,12 +21,12 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const headCells = [
-    { id: 'address',label: 'Address'},
-    { id: 'city',label: 'City'},
-    { id: 'postalCode',label: 'Postal Code'},
+    { id: 'address',label: 'Morada'},
+    { id: 'city',label: 'Cidade'},
+    { id: 'postalCode',label: 'Código Postal'},
     { id: 'latitude',label: 'Latitude'},
     { id: 'longitude',label: 'Longitude'},
-    { id: 'actions', label: 'Actions', disableSorting: true }
+    { id: 'actions', label: 'Ações', disableSorting: true }
 ]
 
 export default function AddressesTable(props) {
@@ -84,7 +85,7 @@ export default function AddressesTable(props) {
             <Paper className={classes.pageContent}>
                 <Toolbar>
                     <Controls.Input
-                        label="Search"
+                        label="Procurar"
                         className={classes.searchInput}
                         InputProps={{
                             startAdornment: (<InputAdornment position="start">
@@ -109,14 +110,14 @@ export default function AddressesTable(props) {
                                     <TableCell>
                                         <Controls.ActionButton
                                             color="primary"
-                                            title="Edit Address"
+                                            title="Editar Morada"
                                             className={classes.editButton}
                                             onClick={() => { openEditPopup(item) }}>
                                             <EditIcon fontSize="small" />
                                         </Controls.ActionButton>
                                         <Controls.ActionButton
                                             color="primary"
-                                            title="Remove Address"
+                                            title="Remover Morada"
                                             className={classes.removeButton}
                                             onClick={() => { openInPopupRemove(item) }}>
                                             <DeleteIcon fontSize="small" />

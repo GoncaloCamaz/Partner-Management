@@ -43,15 +43,15 @@ export default class GroupsPage extends Component {
     }
 
     addGroupOnBackend(values) {
-
+        console.log("TODO - LINK TO BACKEND FUNCTION")
     }
 
     editGroupOnBackend(values) {
-
+        console.log("TODO - LINK TO BACKEND FUNCTION")
     }
 
     removeGroupOnBackend(values) {
-
+        console.log("TODO - LINK TO BACKEND FUNCTION")
     }
 
     handleGroupEdit = (item) => {

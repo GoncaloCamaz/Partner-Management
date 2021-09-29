@@ -59,12 +59,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function LoginPage() {
   const classes = useStyles();
-  const { handleLogin } = useContext(Context);
+  const { handleLogin, authenticated, isAdmin, loading, authenticationObject } = useContext(Context);
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
   const handleClick = () => {
-    handleLogin(username,password) 
+    handleLogin(username,password)
+    console.log(authenticationObject)
   }
 
   return (
@@ -77,7 +78,7 @@ export default function LoginPage() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Associates Platform 
+            Plataforma dos Associados 
           </Typography>
           <form className={classes.form}>
             <TextField
@@ -86,7 +87,7 @@ export default function LoginPage() {
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label="Email"
               name="email"
               autoComplete="email"
               autoFocus
@@ -111,12 +112,12 @@ export default function LoginPage() {
               className={classes.submit}
               onClick={handleClick}
             >
-              Sign In
+              Iniciar Sessão
             </Button>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
-                  Forgot password?
+                  Esqueceste-te da Password?
                 </Link>
               </Grid>
             </Grid>

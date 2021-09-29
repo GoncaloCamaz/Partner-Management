@@ -21,27 +21,27 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function UserProfileGrid() {
+export default function UserProfileGrid(props) {
   const classes = useStyles();
   const [displayedForm, setDisplayedForm] = useState(0)
+  const isAdmin = props.isAdmin
 
   const updateSelected = (selected) => {
-      console.log(selected)
       setDisplayedForm(selected)
   }
 
-  return (
-    <div className={classes.root}>
-        <Grid container spacing={3} className={classes.gridcontainer}>
-            <Grid item lg={3} md={3} sm={12} xs={12}>
-                <UserMenu updateSelected={updateSelected} />
-                <br />
-                <AssociateNumberCard />
-            </Grid>
-            <Grid item lg={9} md={9} sm={12} xs={12}>
-                <ProfileForm currentMenu={displayedForm} />
-            </Grid>
-        </Grid>
-    </div>
-  );
+    return (
+      <div className={classes.root}>
+          <Grid container spacing={3} className={classes.gridcontainer}>
+              <Grid item lg={3} md={3} sm={12} xs={12}>
+                  <UserMenu updateSelected={updateSelected} />
+                  <br />
+                  <AssociateNumberCard />
+              </Grid>
+              <Grid item lg={9} md={9} sm={12} xs={12}>
+                  <ProfileForm currentMenu={displayedForm} />
+              </Grid>
+          </Grid>
+      </div>
+    );
 }

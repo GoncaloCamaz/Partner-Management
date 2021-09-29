@@ -7,9 +7,13 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles(theme => ({
-    pageContent: {
+    root: {
+        flexGrow: 1,
         overflowX: 'scroll',
+    },
+    pageContent: {
         overflowY: 'scroll',
+        width: '100%',
         paddingTop: '20px'
     },
     container: {
@@ -22,12 +26,12 @@ const useStyles = makeStyles(theme => ({
 
 const headCells = [
     { id: 'associateNumber', label: 'Associate Number' },
-    { id: 'associateName', label: 'Name' },
-    { id: 'associateGroup', label: 'Group' },
-    { id: 'paymentDate', label: 'Date' },
-    { id: 'valueReceived',label:'Value'},
-    { id: 'yearsPaid', label: 'Years Paid'}, 
-    { id: 'actions', label: 'Receipt Download', disableSorting: true }
+    { id: 'associateName', label: 'Nome' },
+    { id: 'associateGroup', label: 'Grupo' },
+    { id: 'paymentDate', label: 'Data de Pagamento' },
+    { id: 'valueReceived',label:'Valor Recebido'},
+    { id: 'yearsPaid', label: 'Anos Pagos'}, 
+    { id: 'actions', label: 'Recibo', disableSorting: true }
 ]
 
 export default function PaymentsTable(props) {
@@ -70,6 +74,7 @@ export default function PaymentsTable(props) {
     }
 
     return (
+        <div className={classes.root}>
             <Paper className={classes.pageContent}>
                 <Toolbar>
                     <Controls.Input
@@ -120,5 +125,6 @@ export default function PaymentsTable(props) {
                 </TblContainer>
                 <TblPagination />
             </Paper>
+        </div>
     )
 }

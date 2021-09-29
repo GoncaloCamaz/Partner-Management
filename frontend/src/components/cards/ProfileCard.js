@@ -45,7 +45,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function OutlinedCard(props) {
+export default function ProfileCard(props) {
   const classes = useStyles();
   const name = "Gonçalo Camaz"
   const email = "gcamaz@sapo.pt"
@@ -70,14 +70,14 @@ export default function OutlinedCard(props) {
         </Typography>
         <br/>
         <Typography variant="h5" component="h2">
-          Associate Number: {associate_number}
+          Número de Associado: {associate_number}
         </Typography>
         <br/>
         <GroupImageStep/>
       </CardContent>
       <CardActions>
         <Typography className={classes.text} variant="h5" component="h2" onClick={handleSeeProfile}>
-                Click to See Details
+                Clica para Ver Detalhes
         </Typography>      
       </CardActions>
     </Card>

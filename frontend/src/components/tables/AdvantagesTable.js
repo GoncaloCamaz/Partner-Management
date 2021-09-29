@@ -20,8 +20,8 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const headCells = [
-    { id: 'advantage',label: 'Advantage'},
-    { id: 'actions', label: 'Actions', disableSorting: true }
+    { id: 'advantage',label: 'Vantagem'},
+    { id: 'actions', label: 'Ações', disableSorting: true }
 ]
 
 export default function AdvantagesTable(props) {
@@ -68,7 +68,7 @@ export default function AdvantagesTable(props) {
             <Paper className={classes.pageContent}>
                 <Toolbar>
                     <Controls.Input
-                        label="Search"
+                        label="Procurar"
                         className={classes.searchInput}
                         InputProps={{
                             startAdornment: (<InputAdornment position="start">
@@ -89,14 +89,14 @@ export default function AdvantagesTable(props) {
                                     <TableCell>
                                         <Controls.ActionButton
                                             color="primary"
-                                            title="Edit Advantage"
+                                            title="Editar Vantagem"
                                             className={classes.editButton}
                                             onClick={() => { openEditPopup(item) }}>
                                             <EditIcon fontSize="small" />
                                         </Controls.ActionButton>
                                         <Controls.ActionButton
                                             color="primary"
-                                            title="Remove Advantage"
+                                            title="Remover Vantagem"
                                             className={classes.removeButton}
                                             onClick={() => { openInPopupRemove(item) }}>
                                             <DeleteIcon fontSize="small" />

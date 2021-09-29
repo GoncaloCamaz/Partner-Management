@@ -96,7 +96,7 @@ export default function ProfileForm(props) {
                   required
                   fullWidth
                   id="name"
-                  label="Name"
+                  label="Nome"
                   name="name"
                   autoComplete="name"
                   onChange={(event) => {handleInputChange(event)}}
@@ -107,7 +107,7 @@ export default function ProfileForm(props) {
                   margin="normal"
                   fullWidth
                   id="nickname"
-                  label="Nickname"
+                  label="Alcunha"
                   name="nickname"
                   onChange={(event) => {handleInputChange(event)}}
               />
@@ -118,7 +118,7 @@ export default function ProfileForm(props) {
                   required
                   fullWidth
                   id="email"
-                  label="Email Address"
+                  label="Email"
                   name="email"
                   autoComplete="email"
                   onChange={(event) => {handleInputChange(event)}}
@@ -130,8 +130,8 @@ export default function ProfileForm(props) {
                   required
                   fullWidth
                   id="phone_number"
-                  label="Phone Number"
-                  name="phone_number"
+                  label="Número de Telemóvel"
+                  name="phoneNumber"
                   autoComplete="phone"
                   onChange={(event) => {handleInputChange(event)}}
               />
@@ -141,7 +141,7 @@ export default function ProfileForm(props) {
                   margin="normal"
                   fullWidth
                   id="address"
-                  label="Address"
+                  label="Morada"
                   name="address"
                   autoComplete="address"
                   onChange={(event) => {handleInputChange(event)}}
@@ -153,7 +153,7 @@ export default function ProfileForm(props) {
                   variant="outlined"
                   margin="normal"
                   id="city"
-                  label="City"
+                  label="Cidade"
                   name="city"
                   autoComplete="address-level2"
                   onChange={(event) => {handleInputChange(event)}}
@@ -165,7 +165,7 @@ export default function ProfileForm(props) {
                     variant="outlined"
                     margin="normal"
                     id="postalcode"
-                    label="Postal Code"
+                    label="Código Postal"
                     name="postalcode"
                     autoComplete="postal-code"
                     onChange={(event) => {handleInputChange(event)}}
@@ -180,7 +180,7 @@ export default function ProfileForm(props) {
                     startIcon={<SaveIcon />}
                     onClick={handleSubmit}
                   >
-                    Save
+                    Gravar
                   </Button>
                 </Grid>
             </Grid>
@@ -202,7 +202,7 @@ export default function ProfileForm(props) {
                   required
                   fullWidth
                   id="old_password"
-                  label="Old Password"
+                  label="Password Antiga"
                   name="old_password"
                   onChange={(event) => {handleInputChange(event)}}
               />
@@ -213,7 +213,7 @@ export default function ProfileForm(props) {
                   fullWidth
                   required
                   id="new_password"
-                  label="New Password"
+                  label="Nova Password"
                   name="new_password"
                   onChange={(event) => {handleInputChange(event)}}
               />
@@ -224,7 +224,7 @@ export default function ProfileForm(props) {
                   fullWidth
                   required
                   id="new_password_confirm"
-                  label="New Password Confirmation"
+                  label="Confirmação da Nova Password"
                   name="new_password_confirm"
                   onChange={(event) => {handleInputChange(event)}}
               />
@@ -238,7 +238,7 @@ export default function ProfileForm(props) {
                 startIcon={<SaveIcon />}
                 onClick={handleSubmit}
               >
-                Save
+                Gravar
               </Button>
             </Grid>
           </Grid>
@@ -255,6 +255,7 @@ export default function ProfileForm(props) {
          <form className={classes.form}>
           <Grid container spacing={3} className={classes.gridcontainer}>
             <Grid item lg={12} md={12} sm={12} xs={12}>
+              <h4>Seleciona os grupos a que pertences:</h4>
             <FormControl component="fieldset" className={classes.formControl}>
               <FormGroup>
                 <FormControlLabel
@@ -293,7 +294,7 @@ export default function ProfileForm(props) {
                 startIcon={<SaveIcon />}
                 onClick={handleSubmit}
               >
-                Save
+                Gravar
               </Button>
             </Grid>
           </Grid>

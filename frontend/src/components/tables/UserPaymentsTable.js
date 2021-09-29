@@ -19,10 +19,10 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const headCells = [
-    { id: 'paymentDate', label: 'Date' },
-    { id: 'valueReceived',label:'Value'},
-    { id: 'yearsPaid', label: 'Years Paid'}, 
-    { id: 'actions', label: 'Receipt Download', disableSorting: true }
+    { id: 'paymentDate', label: 'Data' },
+    { id: 'valueReceived',label:'Recebido (€)'},
+    { id: 'yearsPaid', label: 'Anos Pagos'}, 
+    { id: 'actions', label: 'Recibo', disableSorting: true }
 ]
 
 export default function UserPaymentsTable(props) {

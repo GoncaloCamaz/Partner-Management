@@ -12,9 +12,9 @@ import GroupIcon from '@material-ui/icons/Group';
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
+        overflowX: 'scroll',
     },
     pageContent: {        
-        overflowX: 'scroll',
         overflowY: 'scroll',
         width: '100%',
         paddingTop: '20px'

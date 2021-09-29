@@ -79,6 +79,6 @@
   }
 
   .nav-menu.active {
-    height: fit-content;
+    height: 100%;
   }
 }

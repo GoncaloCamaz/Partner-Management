@@ -22,40 +22,18 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function PartnershipGrid() {
+export default function PartnershipGrid(props) {
   const classes = useStyles();
-  const listPartnerships = [
-    {
-      name: "Tasquinha Bracarense",
-      category: "Alimentar",
-      advantages: ["Oferta da sopa","Sobremesa"],
-      addresses: ["Rua dos bares nº 5"],
-      contacts: {telephone: "123123123", email: "email@arc.pt"}
-    },
-    {
-      name: "VideoNorte",
-      category: "Papelaria",
-      advantages: ["Desconto de 50% em fotocópias a preto e branco"],
-      addresses: ["Rua dos bares nº 20"],
-      contacts: {telephone: "123123123", email: "email@arc.pt"}
-    },
-    {
-        name: "Oculista",
-        category: "Saúde",
-        advantages: ["Exames oculares gratuitos"],
-        addresses: ["Rua dos bares nº 25"],
-        contacts: {telephone: "123123123", email: "email@arc.pt"}
-    }
-]
+  const listPartnerships = props.partnerships
   const [ selectedPartnershipAdvantages, setSelectedPartnershipAdvantages] = useState(listPartnerships[0].advantages)
   const [ selectedPartnershipAddresses, setSelectedPartnershipAddresses] = useState(listPartnerships[0].addresses)
-  const [ selectedPartnershipContacts, setSelectedPartnershipContacts] = useState(listPartnerships[0].contacts)
+  const [ selectedPartnershipContacts, setSelectedPartnershipContacts] = useState(listPartnerships[0])
 
 
     const updateSelected = (index) => {
       const advantages = listPartnerships[index].advantages
       const addresses = listPartnerships[index].addresses
-      const contacts = listPartnerships[index].contacts
+      const contacts = listPartnerships[index]
       setSelectedPartnershipAdvantages(advantages)
       setSelectedPartnershipAddresses(addresses)
       setSelectedPartnershipContacts(contacts)
