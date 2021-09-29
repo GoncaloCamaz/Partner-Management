@@ -16,7 +16,16 @@ const useStyles = makeStyles(theme => ({
         maxHeight: '300px',
     },
     searchInput: {
-        width: '50%'
+        width: '30%'
+    },
+    addButton: {
+        position: 'relative',
+        left: '50%',
+        color: '#fff',
+        background: 'rgb(26, 23, 89)',
+        '&:hover': {
+            background: "#1888ff"
+          }
     }
 }))
 
@@ -31,24 +40,24 @@ const headCells = [
 
 export default function AddressesTable(props) {
     const classes = useStyles();
-    const records = [
-        {
-            address: "Tuna Universitária do Minho",
-            city: "TUM",
-            postalCode: "1234-111",
-            latitude: "lat",
-            longitude: "lon"
-        }
-    ]//props.rows
+    const records = props.records
     
     const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
 
+    const openAddPopup = (item) => {
+        props.handleAddAddress(item)
+    }
+
     const openEditPopup = (item) => {
-        console.log(item)
+        props.handleEditAddress(item)
     }
 
     const openInPopupRemove = (item) => {
-        console.log(item)
+        props.handleRemoveAddress(item)
+    }
+
+    const returnToPartnerships = () => {
+        props.handleReturnToPartnerships()
     }
 
     const {
@@ -93,6 +102,18 @@ export default function AddressesTable(props) {
                             </InputAdornment>)
                         }}
                         onChange={handleSearch}
+                    />
+                    <Controls.Button
+                        text="Regressar"
+                        variant="outlined"
+                        className={classes.addButton}
+                        onClick={returnToPartnerships}
+                    />
+                    <Controls.Button
+                        text="Nova Morada"
+                        variant="outlined"
+                        className={classes.addButton}
+                        onClick={() => {openAddPopup(null)}}
                     />
                 </Toolbar>
                 <TblContainer className={classes.container}>

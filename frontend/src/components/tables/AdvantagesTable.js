@@ -9,13 +9,23 @@ import DeleteIcon from '@material-ui/icons/Delete';
 const useStyles = makeStyles(theme => ({
     pageContent: {
         overflowY: 'scroll',
-        paddingTop: '20px'
+        paddingTop: '20px',
+        width: '100%'
     },
     container: {
         maxHeight: '300px',
     },
     searchInput: {
-        width: '50%'
+        width: '30%'
+    },
+    addButton: {
+        position: 'relative',
+        left: '50%',
+        color: '#fff',
+        background: 'rgb(26, 23, 89)',
+        '&:hover': {
+            background: "#1888ff"
+          }
     }
 }))
 
@@ -26,16 +36,24 @@ const headCells = [
 
 export default function AdvantagesTable(props) {
     const classes = useStyles();
-    const records = ["Impressão gratis", "fotocopias"]//props.rows
+    const records = props.records
     
     const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
 
+    const openAddPopup = (item) => {
+        props.handleAddAdvantage(item)
+    }
+
     const openEditPopup = (item) => {
-        console.log(item)
+        props.handleEditAdvantage(item)
     }
 
     const openInPopupRemove = (item) => {
-        console.log(item)
+        props.handleRemoveAdvantage(item)
+    }
+
+    const returnToPartnerships = () => {
+        props.handleReturnToPartnerships()
     }
 
     const {
@@ -76,6 +94,18 @@ export default function AdvantagesTable(props) {
                             </InputAdornment>)
                         }}
                         onChange={handleSearch}
+                    />
+                    <Controls.Button
+                        text="Regressar"
+                        variant="outlined"
+                        className={classes.addButton}
+                        onClick={returnToPartnerships}
+                    />
+                    <Controls.Button
+                        text="Nova Vantagem"
+                        variant="outlined"
+                        className={classes.addButton}
+                        onClick={() => {openAddPopup(null)}}
                     />
                 </Toolbar>
                 <TblContainer className={classes.container}>

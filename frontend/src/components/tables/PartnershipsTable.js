@@ -19,6 +19,15 @@ const useStyles = makeStyles(theme => ({
     },
     searchInput: {
         width: '30%'
+    },
+    addButton: {
+        position: 'absolute',
+        right: 0,
+        color: '#fff',
+        background: 'rgb(26, 23, 89)',
+        '&:hover': {
+            background: "#1888ff"
+          }
     }
 }))
 
@@ -36,6 +45,10 @@ export default function PartnershipsTable(props) {
     const records = props.rows
     
     const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
+
+    const openAddPopup = (item) => {
+        props.handleAddPartnership(item)
+    }
 
     const openSeeAddresses = (item) => {
         props.handleSeeAddresses(item)
@@ -94,6 +107,12 @@ export default function PartnershipsTable(props) {
                             </InputAdornment>)
                         }}
                         onChange={handleSearch}
+                    />
+                    <Controls.Button
+                        text="Nova Parceria"
+                        variant="outlined"
+                        className={classes.addButton}
+                        onClick={() => {openAddPopup(null)}}
                     />
                 </Toolbar>
                 <TblContainer className={classes.container}>

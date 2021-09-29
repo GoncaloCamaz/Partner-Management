@@ -6,6 +6,8 @@ import HomePage from './pages/HomePage'
 import ProfilePage from './pages/ProfilePage'
 import PaymentsPage from './pages/PaymentsPage'
 import PartnershipsPage from './pages/PartnershipsPage';
+import PartnershipAdvantagesPage from './pages/PartnershipAdvantagesPage';
+import PartnershipAddressesPage from './pages/PartnershipAddressesPage';
 import AssociatesPage from './pages/AssociatesPage';
 import './index.css'
 import GroupsPage from './pages/GroupsPage';
@@ -43,6 +45,8 @@ export default function Routes() {
           <CustomRoute exact path="/profile" component={ProfilePage} />
           <CustomRoute exact path="/payments" component={PaymentsPage} />
           <CustomRoute exact path="/partnerships" component={PartnershipsPage} />
+          <CustomRoute exact path="/partnerships/advantages" component={PartnershipAdvantagesPage}/>
+          <CustomRoute exact path="/partnerships/addresses" component={PartnershipAddressesPage} />
           <CustomRoute exact path="/associates" component={AssociatesPage} />
           <CustomRoute exact path="/groups" component={GroupsPage} />
           <CustomRoute exact path="/settings" component={PartnershipsPage} />
