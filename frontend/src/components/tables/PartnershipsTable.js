@@ -47,7 +47,7 @@ export default function PartnershipsTable(props) {
     const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
 
     const openAddPopup = (item) => {
-        props.handleAddPartnership(item)
+        props.handleAddPartnership(null)
     }
 
     const openSeeAddresses = (item) => {

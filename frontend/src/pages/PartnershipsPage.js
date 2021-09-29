@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import Navbar from '../components/navbar/Navbar'
 import PartnershipGrid from '../components/grids/PartnershipsGrid';
 import { Redirect } from 'react-router-dom';
-
+import Popup from '../components/popup/Popup'
 import './Pages.css'
 import PartnershipsTable from '../components/tables/PartnershipsTable';
+import CreatePartnershipForm from '../components/forms/CreatePartnershipForm';
 
 export default class PartnershipsPage extends Component {
     constructor(props) {
@@ -12,13 +13,15 @@ export default class PartnershipsPage extends Component {
 
         this.state = {
             isAdmin: true,
+            popupAddOpen: false,
             popupEditOpen: false,
             popupRemoveOpen: false,
             openSeeAddressesPage: false,
             openSeeAdvantagesPage: false,
             recordForEdit: null,
             recordForRemove: null,
-            partnerships: []
+            partnerships: [],
+            isLoaded: true
         }
     }
 
@@ -81,12 +84,24 @@ export default class PartnershipsPage extends Component {
         })
     }
 
+    addPartnershipOnBackend = (item) => {
+
+    }
+
+    setOpenAddPartnershipPopup = (value) => {
+        this.setState({popupAddOpen: value})
+    }
+
     setOpenPopupEditPartnership = (value) => {
         this.setState({popupEditOpen: value})
     }
 
     setOpenPopupRemovePartnership = (value) => {
         this.setState({popupRemoveOpen: value})
+    }
+
+    handleAddPartnership = (item) => {
+        this.setOpenAddPartnershipPopup(true)
     }
 
     handleSeeAddresses = (item) => {
@@ -136,11 +151,33 @@ export default class PartnershipsPage extends Component {
                             <div className="page-container">
                                 <PartnershipsTable 
                                     rows={partnerships}
+                                    handleAddPartnership={this.handleAddPartnership}
                                     handleSeeAddresses={this.handleSeeAddresses}
                                     handleEditPartnership={this.handleEditPartnership}
                                     handleRemovePartnership={this.handleRemovePartnership}
                                     handleSeeAdvantages={this.handleSeeAdvantages}
                                 />
+                                <Popup 
+                                    title={'Nova Parceria'}
+                                    openPopup={this.state.popupAddOpen}
+                                    setOpenPopup={this.setOpenAddPartnershipPopup}>
+                                    <CreatePartnershipForm 
+                                        recordForEdit={this.state.recordForEdit}
+                                        addOrEdit={this.addPartnershipOnBackend}
+                                    />
+                                </Popup>
+                                <Popup 
+                                    title={'Editar Parceria'}
+                                    openPopup={this.state.popupEditOpen}
+                                    setOpenPopup={this.setOpenPopupEditPartnership}>
+                                   
+                                </Popup>
+                                <Popup 
+                                    title={'Remover Parceria'}
+                                    openPopup={this.state.popupRemoveOpen}
+                                    setOpenPopup={this.setOpenPopupRemovePartnership}>
+                                   
+                                </Popup>
                             </div>
                     </div>   
                 );
