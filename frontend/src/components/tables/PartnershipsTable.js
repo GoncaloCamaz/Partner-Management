@@ -55,7 +55,6 @@ export default function PartnershipsTable(props) {
     }
 
     const openEditPopup = (item) => {
-        console.log(item)
         props.handleEditPartnership(item)
     }
 

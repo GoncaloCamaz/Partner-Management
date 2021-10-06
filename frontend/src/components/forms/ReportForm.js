@@ -5,10 +5,8 @@ import { makeStyles } from '@material-ui/core';
 import { useForm, Form } from './useForm';
 
 const initialFValues = {
-    name: '',
-    phoneNumber: '',
-    email: '',
-    startDate: ''
+    group: 'All',
+    feeYear: new Date().getFullYear()
 }
 
 const useStyles = makeStyles(({
@@ -21,20 +19,17 @@ const useStyles = makeStyles(({
     }
 }))
 
-export default function CreatePartnershipForm(props) {
+export default function ReportForm(props) {
     const { addOrEdit, recordForEdit } = props
+    const groups = props.groups
     const classes = useStyles()
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
-        if ('name' in fieldValues)
-            temp.name = fieldValues.name ? "" : "Insere o nome do parceiro."
-        if ('phoneNumber' in fieldValues)
-            temp.phoneNumber = fieldValues.phoneNumber ? "" : "Insere o contacto telefónico do parceiro."
-        if ('email' in fieldValues)
-            temp.email = fieldValues.email ? "" : "Insere o email do parceiro."
-        if('startDate' in fieldValues)
-            temp.startDate = fieldValues.startDate ? "" : "Insere a data de inicio da parceria."
+        if ('group' in fieldValues)
+            temp.group = fieldValues.group ? "" : "Seleciona um grupo."
+        if ('feeYear' in fieldValues)
+            temp.feeYear = fieldValues.feeYear ? "" : "Insere o Ano da Quota."
         setErrors({
             ...temp
         })
@@ -71,45 +66,27 @@ export default function CreatePartnershipForm(props) {
         <Form onSubmit={handleSubmit}>
             <Grid container>
                 <Grid item lg={12} md={12} sm={12} xs={12}>
-                    <Controls.Input
-                        label="Nome"
-                        name="name"
-                        value={values.name}
+                <Controls.Select
+                        name="group"
+                        label="Grupo"
+                        value={values.group}
                         onChange={handleInputChange}
-                        error={errors.name}
+                        options={groups}
+                        error={errors.initialGroup}
                     />
                     <Controls.Input
-                        name="email"
-                        label="Email"
-                        value={values.email}
+                        name="feeYear"
+                        label="Ano de Quota"
+                        value={values.feeYear}
                         onChange={handleInputChange}
-                        error={errors.email}
-                    />
-                    <Controls.Input
-                        label="Contacto Telefónico"
-                        name="phoneNumber"
-                        value={values.phoneNumber}
-                        onChange={handleInputChange}
-                        error={errors.phoneNumber}
-                    />
-                    <Controls.Input
-                        name="startDate"
-                        value={values.startDate}
-                        type="date"
-                        onChange={handleInputChange}
-                        error={errors.startDate}
+                        error={errors.feeYear}
                     />
                     <div>
                         <Controls.Button
                             className={classes.button}
                             type="submit"
-                            text="Gravar" 
+                            text="Download" 
                             onClick={handleSubmit}
-                        />
-                        <Controls.Button
-                            text="Refazer"
-                            color="default"
-                            onClick={resetForm} 
                         />
                     </div>
                 </Grid>

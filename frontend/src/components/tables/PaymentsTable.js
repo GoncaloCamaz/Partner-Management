@@ -36,12 +36,8 @@ const headCells = [
 
 export default function PaymentsTable(props) {
     const classes = useStyles();
-    const records = [{payment_date: "27/01/2015", value_received: 200, years_paid: 10}]//props.rows
+    const records = props.rows
     const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
-
-    const downloadReceipt = (item) => {
-        console.log(item)
-    }
 
     const {
         TblContainer,
@@ -49,6 +45,15 @@ export default function PaymentsTable(props) {
         TblPagination,
         recordsAfterPagingAndSorting
     } = useTable(records, headCells, filterFn);
+
+    const openInEditPopup = (item) => {
+        props.handleEditPayment(item)
+    }
+
+    const openInRemovePopup = (item) => {
+        props.handleRemovePayment(item)
+    }
+
 
     const handleSearch = e => {
         let target = e.target;
@@ -106,14 +111,14 @@ export default function PaymentsTable(props) {
                                             color="primary"
                                             title="Edit Payment"
                                             className={classes.editButton}
-                                            onClick={() => { openAdvantagesPopup(item) }}>
+                                            onClick={() => { openInEditPopup(item) }}>
                                             <EditIcon fontSize="small" />
                                         </Controls.ActionButton>
                                         <Controls.ActionButton
                                             color="primary"
                                             title="Remove Payment"
                                             className={classes.removeButton}
-                                            onClick={() => { openInPopupRemove(item) }}>
+                                            onClick={() => { openInRemovePopup(item) }}>
                                             <DeleteIcon fontSize="small" />
                                         </Controls.ActionButton>
                                     </TableCell>

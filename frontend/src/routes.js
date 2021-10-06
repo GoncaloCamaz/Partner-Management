@@ -11,6 +11,8 @@ import PartnershipAddressesPage from './pages/PartnershipAddressesPage';
 import AssociatesPage from './pages/AssociatesPage';
 import './index.css'
 import GroupsPage from './pages/GroupsPage';
+import PaymentMethodsPage from './pages/PaymentMethodsPage';
+import PaymentsListAllPage from './pages/PaymentsListAllPage';
 
 function CustomRoute({ isPrivate, ...rest }) {
   const { loading, authenticated } = useContext(Context);
@@ -44,6 +46,8 @@ export default function Routes() {
           <CustomRoute exact path="/home" component={HomePage} />
           <CustomRoute exact path="/profile" component={ProfilePage} />
           <CustomRoute exact path="/payments" component={PaymentsPage} />
+          <CustomRoute exact path="/payments/all" component={PaymentsListAllPage} />
+          <CustomRoute exact path="/payments/methods" component={PaymentMethodsPage} />
           <CustomRoute exact path="/partnerships" component={PartnershipsPage} />
           <CustomRoute exact path="/partnerships/advantages" component={PartnershipAdvantagesPage}/>
           <CustomRoute exact path="/partnerships/addresses" component={PartnershipAddressesPage} />

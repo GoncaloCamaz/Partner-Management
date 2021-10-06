@@ -27,7 +27,7 @@ const headCells = [
 
 export default function UserPaymentsTable(props) {
     const classes = useStyles();
-    const records = [{paymentDate: "27/01/2015", valueReceived: 200, yearsPaid: 10}]//props.rows
+    const records = props.rows
     const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
 
     const downloadReceipt = (item) => {

@@ -5,7 +5,8 @@ import { Redirect } from 'react-router-dom';
 import Popup from '../components/popup/Popup'
 import './Pages.css'
 import PartnershipsTable from '../components/tables/PartnershipsTable';
-import CreatePartnershipForm from '../components/forms/CreatePartnershipForm';
+import PartnershipForm from '../components/forms/PartnershipForm';
+import MessagesDisplayForm from '../components/forms/MessagesDisplayForm';
 
 export default class PartnershipsPage extends Component {
     constructor(props) {
@@ -31,7 +32,7 @@ export default class PartnershipsPage extends Component {
             [
             {
                 name: "Tasquinha Bracarense",
-                startDate: "26/12/1998",
+                startDate: "26-12-1998",
                 active: "true",
                 advantages: ["Oferta da sopa","Sobremesa"],
                 addresses: [
@@ -88,6 +89,10 @@ export default class PartnershipsPage extends Component {
 
     }
 
+    editPartnershipOnBackend = (item) => {
+
+    }
+
     setOpenAddPartnershipPopup = (value) => {
         this.setState({popupAddOpen: value})
     }
@@ -114,7 +119,7 @@ export default class PartnershipsPage extends Component {
     }
 
     handleRemovePartnership = (item) => {
-        this.setState({recordForRemove: item})
+        this.setState({recordForRemove: item.name})
         this.setOpenPopupRemovePartnership(true)
     }
 
@@ -161,8 +166,8 @@ export default class PartnershipsPage extends Component {
                                     title={'Nova Parceria'}
                                     openPopup={this.state.popupAddOpen}
                                     setOpenPopup={this.setOpenAddPartnershipPopup}>
-                                    <CreatePartnershipForm 
-                                        recordForEdit={this.state.recordForEdit}
+                                    <PartnershipForm 
+                                        recordForEdit={null}
                                         addOrEdit={this.addPartnershipOnBackend}
                                     />
                                 </Popup>
@@ -170,13 +175,20 @@ export default class PartnershipsPage extends Component {
                                     title={'Editar Parceria'}
                                     openPopup={this.state.popupEditOpen}
                                     setOpenPopup={this.setOpenPopupEditPartnership}>
-                                   
+                                   <PartnershipForm 
+                                        recordForEdit={this.state.recordForEdit}
+                                        addOrEdit={this.editPartnershipOnBackend}
+                                    />
                                 </Popup>
                                 <Popup 
                                     title={'Remover Parceria'}
                                     openPopup={this.state.popupRemoveOpen}
                                     setOpenPopup={this.setOpenPopupRemovePartnership}>
-                                   
+                                    <MessagesDisplayForm 
+                                        mainMessage={"Tens a certeza que queres apagar a parceria: " + this.state.recordForRemove + " ?"}
+                                        secundaryMessage={"Todas as vantagens e moradas relativas à mesma vão ser apagadas."}
+                                        handleOk={this.removePartnershipOnBackend}
+                                    />
                                 </Popup>
                             </div>
                     </div>   
