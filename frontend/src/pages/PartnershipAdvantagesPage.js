@@ -36,6 +36,7 @@ export default class PartnershipAdvantagesPage extends Component {
         }
         else
         {
+            console.log("hello")
         }
     }
 
@@ -75,7 +76,7 @@ export default class PartnershipAdvantagesPage extends Component {
         if(returnToPartnershipsPage)
         {
             return <Redirect to={{
-                pathname: "/partnerships",
+                pathname: "/admin/partnerships",
                 }}
             />
         }

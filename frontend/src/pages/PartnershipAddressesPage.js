@@ -76,7 +76,7 @@ export default class PartnershipAddressesPage extends Component {
         if(returnToPartnershipsPage)
         {
             return <Redirect to={{
-                pathname: "/partnerships",
+                pathname: "/admin/partnerships",
                 }}
             />
         }

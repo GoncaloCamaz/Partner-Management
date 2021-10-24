@@ -24,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
 export default function UserProfileGrid(props) {
   const classes = useStyles();
   const [displayedForm, setDisplayedForm] = useState(0)
-  const isAdmin = props.isAdmin
 
   const updateSelected = (selected) => {
       setDisplayedForm(selected)

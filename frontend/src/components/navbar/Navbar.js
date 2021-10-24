@@ -34,16 +34,18 @@ function Navbar(props) {
                   </Link>
                 </li>
                 {SidebarData.filter(item => { 
-                  if(isAdmin)
-                  {
-                    if(item.visibleForAdmin === true)
-                      return item
-                  }
-                  else
-                  {
-                    if(item.visibleForUser === true)
-                      return item
-                  }
+                    if(isAdmin)
+                    {
+                      if(item.visibleForAdmin === true)
+                        return item
+                    }
+                    else
+                    {
+                      if(item.visibleForUser === true)
+                        return item
+                    }
+
+                    return null
                   }).map((item, index) => {
                   if(item.title === "Logout")
                   {

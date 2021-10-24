@@ -9,7 +9,7 @@ import AdminProfileGrid from '../components/grids/AdminProfileGrid';
 export default function ProfilePage() {
 
     const authenticationContext = useContext(Context);
-    const admin = true//authenticationContext.isAdmin
+    const admin = authenticationContext.authenticationObject.isAdmin
 
     if(admin)
     {

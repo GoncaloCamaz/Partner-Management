@@ -71,7 +71,7 @@ export default class PaymentMethodsPage extends Component {
         if(returnToMainPaymentPage)
         {
             return <Redirect to={{
-                pathname: "/payments",
+                pathname: "/admin/payments",
                 }}
             />
         }else if(seeStepsPage)

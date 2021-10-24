@@ -38,16 +38,32 @@ export const SidebarData = [
       {
         title: 'Parcerias',
         path: '/partnerships',
-        visibleForAdmin: true,
+        visibleForAdmin: false,
         visibleForUser: true,
+        icon: <FaIcons.FaHandshake />,
+        cName: 'nav-text'
+      },
+      {
+        title: 'Parcerias',
+        path: '/admin/partnerships',
+        visibleForAdmin: true,
+        visibleForUser: false,
         icon: <FaIcons.FaHandshake />,
         cName: 'nav-text'
       },
       {
         title: 'Pagamentos',
         path: '/payments',
-        visibleForAdmin: true,
+        visibleForAdmin: false,
         visibleForUser: true,
+        icon: <FaIcons.FaMoneyBillWave />,
+        cName: 'nav-text'
+      },
+      {
+        title: 'Pagamentos',
+        path: '/admin/payments',
+        visibleForAdmin: true,
+        visibleForUser: false,
         icon: <FaIcons.FaMoneyBillWave />,
         cName: 'nav-text'
       },

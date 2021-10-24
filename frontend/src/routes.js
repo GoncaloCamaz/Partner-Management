@@ -14,9 +14,11 @@ import GroupsPage from './pages/GroupsPage';
 import PaymentMethodsPage from './pages/PaymentMethodsPage';
 import PaymentsListAllPage from './pages/PaymentsListAllPage';
 import PaymentMethodStepsPage from './pages/PaymentMethodStepsPage';
+import PaymentsAdminPage from './pages/PaymentsAdminPage';
+import PartnershipsAdminPage from './pages/PartnershipsAdminPage';
 
-function CustomRoute({ isPrivate, ...rest }) {
-  const { loading, authenticated } = useContext(Context);
+function CustomRoute({ isPrivate, mustBeAdmin,...rest }) {
+  const { loading, authenticated, authenticationObject } = useContext(Context);
 
   if (loading) {
     return (
@@ -29,11 +31,20 @@ function CustomRoute({ isPrivate, ...rest }) {
   /**
    * Redirect to initial login page if not able to authenticate
    */
-  if (isPrivate && !authenticated) {
+  if ((isPrivate && !authenticated) || (CheckAdminAuthorization(isPrivate, mustBeAdmin, authenticationObject.isAdmin) && !authenticated)) {
     return <Redirect to="/" />
   }
 
   return <Route {...rest} />;
+}
+
+function CheckAdminAuthorization(isPrivate, mustBeAdmin, authenticationObjectResult) {
+  if(isPrivate && mustBeAdmin && authenticationObjectResult === true)
+  {
+    return true
+  }
+
+  return false
 }
 
 /**
@@ -47,15 +58,17 @@ export default function Routes() {
           <CustomRoute isPrivate exact path="/home" component={HomePage} />
           <CustomRoute isPrivate exact path="/profile" component={ProfilePage} />
           <CustomRoute isPrivate exact path="/payments" component={PaymentsPage} />
-          <CustomRoute isPrivate exact path="/payments/all" component={PaymentsListAllPage} />
-          <CustomRoute isPrivate exact path="/payments/methods" component={PaymentMethodsPage} />
-          <CustomRoute isPrivate exact path="/payments/methods/steps" component={PaymentMethodStepsPage} />
+          <CustomRoute isPrivate mustBeAdmin exact path="/admin/payments" component={PaymentsAdminPage} />
+          <CustomRoute isPrivate mustBeAdmin exact path="/admin/payments/list" component={PaymentsListAllPage} />
+          <CustomRoute isPrivate mustBeAdmin exact path="/admin/payments/methods" component={PaymentMethodsPage} />
+          <CustomRoute isPrivate mustBeAdmin exact path="/admin/payments/methods/steps" component={PaymentMethodStepsPage} />
           <CustomRoute isPrivate exact path="/partnerships" component={PartnershipsPage} />
-          <CustomRoute isPrivate exact path="/partnerships/advantages" component={PartnershipAdvantagesPage}/>
-          <CustomRoute isPrivate exact path="/partnerships/addresses" component={PartnershipAddressesPage} />
-          <CustomRoute isPrivate exact path="/associates" component={AssociatesPage} />
-          <CustomRoute isPrivate exact path="/groups" component={GroupsPage} />
-          <CustomRoute isPrivate exact path="/settings" component={PartnershipsPage} />
+          <CustomRoute isPrivate mustBeAdmin exact path="/admin/partnerships" component={PartnershipsAdminPage} />
+          <CustomRoute isPrivate mustBeAdmin exact path="/admin/partnerships/advantages" component={PartnershipAdvantagesPage}/>
+          <CustomRoute isPrivate mustBeAdmin exact path="/admin/partnerships/addresses" component={PartnershipAddressesPage} />
+          <CustomRoute isPrivate mustBeAdmin exact path="/associates" component={AssociatesPage} />
+          <CustomRoute isPrivate mustBeAdmin exact path="/groups" component={GroupsPage} />
+          <CustomRoute isPrivate mustBeAdmin exact path="/settings" component={PartnershipsPage} />
       </Switch>
   );
 }

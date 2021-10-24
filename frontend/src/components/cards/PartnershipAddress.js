@@ -33,21 +33,25 @@ export default function PartnershipAddress(props) {
   const classes = useStyles();
   const addresses = props.addresses
   const [openPopup, setOpenPopup] = useState(false)
-  const [addressName, setAddressName] = useState('')
+  const [itemToSeeOnMap, setItemToSeeOnMap] = useState({})
 
-  const openMap = (name) => {
-    console.log(name)
-    setAddressName(name)
-    setOpenPopup(true)
+  const openMap = (item) => {
+    const itemToSeeOnMap = {address: item.address, position: [item.latitude, item.longitude]}
+    setItemToSeeOnMap(itemToSeeOnMap)
+    handleOpenPopup()
+  }
+
+  const handleOpenPopup = () => {
+      setOpenPopup(true)
   }
 
     return (
       <Card className={classes.root} variant="outlined">
         <Popup 
-          title={addressName}
+          title={itemToSeeOnMap.address}
           openPopup={openPopup}
           setOpenPopup={setOpenPopup}>
-            <Map />
+            <Map position={itemToSeeOnMap.position}/>
         </Popup>
         <CardContent>
           <Typography variant="h5" component="h2">

@@ -50,7 +50,7 @@ export default function ProfileCard(props) {
   const name = "Gonçalo Camaz"
   const email = "gcamaz@sapo.pt"
   const associate_number = "124"
-  const groups = "TUM"
+  //const groups = "TUM"
 
   const handleSeeProfile = () => {
     props.handleSeeProfile()

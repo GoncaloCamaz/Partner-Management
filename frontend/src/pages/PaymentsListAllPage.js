@@ -55,7 +55,7 @@ export default class PaymentsListAllPage extends Component {
         if(returnToMainPaymentPage)
         {
             return <Redirect to={{
-                pathname: "/payments",
+                pathname: "/admin/payments",
                 }}
             />
         }

@@ -7,7 +7,7 @@ import './Pages.css'
 
 export default function HomePage() {
     const authenticationContext = useContext(Context);
-    const admin = true//authenticationContext.isAdmin
+    const admin = authenticationContext.authenticationObject.isAdmin
 
     if(admin === true)
     {

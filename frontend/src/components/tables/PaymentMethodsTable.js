@@ -62,7 +62,6 @@ export default function PaymentMethodsTable(props) {
     }
 
     const {
-        TblContainer,
         TblHead,
         TblPagination,
         recordsAfterPagingAndSorting
