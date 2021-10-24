@@ -35,26 +35,30 @@ const headCells = [
     { id: 'actions', label: 'Ações', disableSorting: true }
 ]
 
-export default function AdvantagesTable(props) {
+export default function PaymentMethodsTable(props) {
     const classes = useStyles();
-    const records = props.records
+    const records = props.rows
     
     const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
 
     const openAddPopup = (item) => {
-        props.handleAddMethod(item)
+        props.handleAddPaymentMethod(item)
     }
 
     const openEditPopup = (item) => {
-        props.handleEditMethod(item)
+        props.handleEditPaymentMethod(item)
     }
 
     const openInPopupRemove = (item) => {
-        props.handleRemoveAdvantage(item)
+        props.handleRemovePaymentMethod(item)
     }
 
     const returnToPayments = () => {
         props.handleReturnToPayments()
+    }
+
+    const seeStepsPage = (item) => {
+        props.handleSeeStepsPage(item)
     }
 
     const {
@@ -109,7 +113,6 @@ export default function AdvantagesTable(props) {
                         onClick={() => {openAddPopup(null)}}
                     />
                 </Toolbar>
-                <TblContainer className={classes.container}>
                 <Table stickyHeader>
                     <TblHead />
                     <TableBody>
@@ -122,7 +125,7 @@ export default function AdvantagesTable(props) {
                                             color="primary"
                                             title="Ver Passos"
                                             className={classes.editButton}
-                                            onClick={() => { openEditPopup(item) }}>
+                                            onClick={() => { seeStepsPage(item)}}>
                                             <FormatListNumberedIcon fontSize="small" />
                                         </Controls.ActionButton>
                                         <Controls.ActionButton
@@ -145,7 +148,6 @@ export default function AdvantagesTable(props) {
                         }
                     </TableBody>
                     </Table>
-                </TblContainer>
                 <TblPagination />
             </Paper>
     )

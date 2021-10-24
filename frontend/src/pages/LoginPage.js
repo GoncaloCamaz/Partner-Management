@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { Context } from '../context/AuthContext';
 import ARCUM from '../static/arcum.png'
+import { Redirect } from 'react-router-dom';
 
 function Copyright() {
   return (
@@ -27,10 +28,10 @@ function Copyright() {
 }
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  main: {
     height: '100vh',
   },
-  image: {
+  imageLogin: {
     backgroundImage: `url(${ARCUM})`,
     backgroundRepeat: 'no-repeat',
     backgroundColor:
@@ -38,21 +39,21 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: 'contain',
     backgroundPosition: 'center',
   },
-  paper: {
+  paperLogin: {
     margin: theme.spacing(8, 4),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
   },
-  avatar: {
+  avatarLogin: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
-  form: {
+  formLogin: {
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
-  submit: {
+  submitLogin: {
     margin: theme.spacing(3, 0, 2),
   },
 }));
@@ -62,25 +63,40 @@ export default function LoginPage() {
   const { handleLogin, authenticated, isAdmin, loading, authenticationObject } = useContext(Context);
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
+  const [redirectToHomePage, setRedirectToHomePage] = useState(false)
+
 
   const handleClick = () => {
     handleLogin(username,password)
-    console.log(authenticationObject)
+    console.log("on click",authenticationObject)
+
+    if(authenticated === true)
+    {
+      setRedirectToHomePage(true)
+    }
   }
 
+  if(redirectToHomePage)
+  {
+    return <Redirect to={{
+      pathname: "home",
+      }}
+  />
+  }
+  else
+  {
   return (
-    <Grid container component="main" className={classes.root}>
-      <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
+    <Grid container component="main" className={classes.main}>
+      <Grid item xs={false} sm={4} md={7} className={classes.imageLogin} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
+        <div className={classes.paperLogin}>
+          <Avatar className={classes.avatarLogin}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Plataforma dos Associados 
           </Typography>
-          <form className={classes.form}>
+          <form className={classes.formLogin}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -129,4 +145,5 @@ export default function LoginPage() {
       </Grid>
     </Grid>
   );
+  }
 }

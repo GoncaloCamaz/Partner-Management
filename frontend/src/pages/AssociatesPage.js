@@ -188,7 +188,6 @@ class AssociatesPage extends Component {
 
     resetPasswordOnBackend(values)
     {
-        console.log("RESET PASSWORD =>", values)
         const result = resetPassword(values.associateNumber)
         if(result.status !== 200)
         {
@@ -252,31 +251,26 @@ class AssociatesPage extends Component {
     }
 
     handleEditAssociate = (associate) => {
-        console.log("EDIT =>", associate)
         this.setState({recordForEdit: associate})
         this.setOpenEditAssociatePopup(true)
     }
 
     handleRemoveAssociate = (associate) => {
-        console.log("REMOVE =>", associate)
         this.setState({recordForRemove: associate.associateNumber})
         this.setOpenRemoveAssociatePopup(true)
     }
 
     handleOpenAssociateAddress = (associate) => {
-        console.log("OPEN ADDRESS =>", associate)
         this.setState({recordForEdit: associate})
         this.setOpenSeeAddressPopup(true)
     }
 
     handleResetAssociatePassword = (associate) => {
-        console.log("RESET PASSWORD =>", associate)
         this.setState({recordForRemove: associate.associateNumber})
         this.setOpenResetPasswordPopup(true)
     }
 
     handleOpenAssociateGroups = (associate) => {
-        console.log("SEE GROUPS =>", associate)
         this.setState({recordForEdit: associate})
         this.setOpenSeeAssociateGroups(true)
     }

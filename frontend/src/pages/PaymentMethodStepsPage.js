@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import PaymentMethodsTable from '../components/tables/PaymentMethodsTable';
+import PaymentMethodStepsTable from '../components/tables/PaymentMethodStepsTable';
 import Popup from '../components/popup/Popup'
 import Navbar from '../components/navbar/Navbar'
 import { Redirect } from 'react-router-dom';
-import PaymentMethodForm from '../components/forms/PaymentMethodForm';
+import PaymentMethodStepForm from '../components/forms/PaymentMethodStepForm';
 
-export default class PaymentMethodsPage extends Component {
+export default class PaymentMethodStepsPage extends Component {
     constructor(props) {
         super(props)
 
@@ -15,18 +15,16 @@ export default class PaymentMethodsPage extends Component {
             popupRemoveOpen: false,
             recordForEdit: null,
             recordForRemove: null,
-            returnToMainPaymentPage: false,
-            seeStepsPage: false,
-            paymentMethodName: '',
-            paymentMethodSteps: [],
-            paymentMethods: [{name: "Presencial", steps: [{step_id: 1, step_name: "Enviar para o nib..."}]}
-            , {name: "Transferência", steps: [{step_id: 1, step_name: "Enviar para o lá..."}]}],
+            returnToPaymentMethodsPage: false,
+            paymentMethodName: this.props.location.state.paymentMethodName,
+            paymentMethodSteps: this.props.location.state.steps,
             isLoaded: true
         }
     }
 
     componentDidMount(){
         //todo 
+        console.log(this.state)
     }
 
     setOpenAddPopup = (value) => {
@@ -41,48 +39,33 @@ export default class PaymentMethodsPage extends Component {
         this.setState({popupRemoveOpen: value})
     }
 
-    handleAddPaymentMethod = (item) => {
+    handleAddPaymentMethodStep = (item) => {
         this.setOpenAddPopup(true)
     }
 
-    handleEditPaymentMethod = (item) => {
+    handleEditPaymentMethodStep = (item) => {
         this.setState({recordForEdit: item})
         this.setOpenEditPopup(true)
     }
 
-    handleRemovePaymentMethod = (item) => {
+    handleRemovePaymentMethodStep = (item) => {
         this.setState({recordForRemove: item})
         this.setOpenRemovePopup(true)
     }
 
-    handleSeeStepsPage = (item) => {
-        const steps = this.state.paymentMethods.filter(elm => elm.name === item.name)
-        this.setState({paymentMethodName: item.name, paymentMethodSteps: steps[0].steps})
-        this.setState({seeStepsPage: true})
-    }
-
-    handleReturnToPayments = () => {
-        this.setState({returnToMainPaymentPage: true})
+    handleReturnToPaymentMethods = () => {
+        this.setState({returnToPaymentMethodsPage: true})
     }
 
     render() {
-        const {returnToMainPaymentPage, seeStepsPage} = this.state
+        const {returnToPaymentMethodsPage} = this.state
 
-        if(returnToMainPaymentPage)
+        if(returnToPaymentMethodsPage)
         {
             return <Redirect to={{
-                pathname: "/payments",
+                pathname: "/payments/methods",
                 }}
             />
-        }else if(seeStepsPage)
-        {
-            return <Redirect to={{
-                pathname:"methods/steps",
-                state: {
-                    paymentMethodName: this.state.paymentMethodName,
-                    steps: this.state.paymentMethodSteps
-                }
-            }}/>
         }
         else
         {
@@ -90,37 +73,36 @@ export default class PaymentMethodsPage extends Component {
                 <div className="home">
                 <Navbar isAdmin={true}/>
                     <div className="page-container">
-                        <PaymentMethodsTable 
-                            rows={this.state.paymentMethods}
-                            handleAddPaymentMethod={this.handleAddPaymentMethod}
-                            handleEditPaymentMethod={this.handleEditPaymentMethod}
-                            handleRemovePaymentMethod={this.handleRemovePaymentMethod}
-                            handleSeeStepsPage={this.handleSeeStepsPage}
-                            handleReturnToPayments={this.handleReturnToPayments}
+                        <PaymentMethodStepsTable 
+                            rows={this.state.paymentMethodSteps}
+                            handleAddPaymentMethodStep={this.handleAddPaymentMethodStep}
+                            handleEditPaymentMethodStep={this.handleEditPaymentMethodStep}
+                            handleRemovePaymentMethodStep={this.handleRemovePaymentMethodStep}
+                            handleReturnToPaymentMethods={this.handleReturnToPaymentMethods}
                         />
                         <Popup
-                            title={"Adicionar Método de Pagamento"}
+                            title={"Adicionar Passo"}
                             openPopup={this.state.popupAddOpen}
                             setOpenPopup={this.setOpenAddPopup}>
-                            <PaymentMethodForm
+                            <PaymentMethodStepForm
                                 recordForEdit={null}
                                 addOrEdit={this.addPaymntMethodOnBackend}
                             />
                         </Popup>
                         <Popup
-                            title={"Editar Método de Pagamento"}
+                            title={"Editar Passo"}
                             openPopup={this.state.popupEditOpen}
                             setOpenPopup={this.setOpenEditPopup}>
-                            <PaymentMethodForm
+                            <PaymentMethodStepForm
                                 recordForEdit={this.state.recordForEdit}
                                 addOrEdit={this.editPaymentMethodOnBackend}
                             />
                         </Popup>
                         <Popup
-                            title={"Remover Método de Pagamento"}
+                            title={"Remover Passo"}
                             openPopup={this.state.popupRemoveOpen}
                             setOpenPopup={this.setOpenRemovePopup}>
-                            <PaymentMethodForm
+                            <PaymentMethodStepForm
                                 recordForEdit={this.state.recordForRemove}
                                 addOrEdit={this.removePaymentMethodOnBackend}
                             />

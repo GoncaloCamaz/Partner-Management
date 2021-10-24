@@ -7,14 +7,10 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles(theme => ({
-    root: {
-        flexGrow: 1,
-        overflowX: 'scroll',
-    },
     pageContent: {
         overflowY: 'scroll',
-        width: '100%',
-        paddingTop: '20px'
+        paddingTop: '20px',
+        width: '100%'
     },
     container: {
         maxHeight: '300px',
@@ -24,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     },
     addButton: {
         position: 'relative',
-        left: '45%',
+        left: '50%',
         color: '#fff',
         background: 'rgb(26, 23, 89)',
         '&:hover': {
@@ -34,19 +30,33 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const headCells = [
-    { id: 'associateNumber', label: 'Associate Number' },
-    { id: 'associateName', label: 'Nome' },
-    { id: 'associateGroup', label: 'Grupo' },
-    { id: 'paymentDate', label: 'Data de Pagamento' },
-    { id: 'valueReceived',label:'Valor Recebido'},
-    { id: 'yearsPaid', label: 'Anos Pagos'}, 
-    { id: 'actions', label: 'Recibo', disableSorting: true }
+    { id: 'step_id',label: 'Ordem'},
+    { id: 'step_name',label: 'Descrição'},
+    { id: 'actions', label: 'Ações', disableSorting: true }
 ]
 
-export default function PaymentsTable(props) {
+export default function PaymentMethodStepsTable(props) {
     const classes = useStyles();
+    console.log(props.rows)
     const records = props.rows
+    
     const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
+
+    const openAddPopup = (item) => {
+        props.handleAddPaymentMethodStep(item)
+    }
+
+    const openEditPopup = (item) => {
+        props.handleEditPaymentMethodStep(item)
+    }
+
+    const openInPopupRemove = (item) => {
+        props.handleRemovePaymentMethodStep(item)
+    }
+
+    const returnToPayments = () => {
+        props.handleReturnToPaymentMethods()
+    }
 
     const {
         TblContainer,
@@ -54,22 +64,6 @@ export default function PaymentsTable(props) {
         TblPagination,
         recordsAfterPagingAndSorting
     } = useTable(records, headCells, filterFn);
-
-    const openAddPopup = (item) => {
-        props.handleOpenAddPayment(item)
-    }
-
-    const openInEditPopup = (item) => {
-        props.handleEditPayment(item)
-    }
-
-    const openInRemovePopup = (item) => {
-        props.handleRemovePayment(item)
-    }
-
-    const returnToPayments = () => {
-        props.handleReturnToPayments()
-    }
 
     const handleSearch = e => {
         let target = e.target;
@@ -81,11 +75,8 @@ export default function PaymentsTable(props) {
                 {
                     let filtered = items.filter(value => {
                         return (
-                            value.associateNumber.toString().toLowerCase().includes(target.value.toLowerCase()) ||
-                            value.associateName.toString().toLowerCase().includes(target.value.toLowerCase()) ||
-                            value.associateGroup.toString().toLowerCase().includes(target.value.toLowerCase()) ||
-                            value.paymentDate.toString().toLowerCase().includes(target.value.toLowerCase()) ||
-                            value.value_received.toString().toLowerCase().includes(target.value.toLowerCase()) 
+                            value.step_id.toString().toLowerCase().includes(target.value.toLowerCase()) ||
+                            value.step_name.toString().toLowerCase().includes(target.value.toLowerCase())
                         );
                     })
                     return filtered      
@@ -95,11 +86,10 @@ export default function PaymentsTable(props) {
     }
 
     return (
-        <div className={classes.root}>
             <Paper className={classes.pageContent}>
                 <Toolbar>
                     <Controls.Input
-                        label="Search"
+                        label="Procurar"
                         className={classes.searchInput}
                         InputProps={{
                             startAdornment: (<InputAdornment position="start">
@@ -115,7 +105,7 @@ export default function PaymentsTable(props) {
                         onClick={returnToPayments}
                     />
                     <Controls.Button
-                        text="Registar Pagamento"
+                        text="Novo Passo"
                         variant="outlined"
                         className={classes.addButton}
                         onClick={() => {openAddPopup(null)}}
@@ -128,25 +118,21 @@ export default function PaymentsTable(props) {
                         { 
                             recordsAfterPagingAndSorting().map((item, index) => {
                                 return (<TableRow key={index}>
-                                    <TableCell>{item.associateNumber}</TableCell>
-                                    <TableCell>{item.associateName}</TableCell>
-                                    <TableCell>{item.associateGroup}</TableCell>
-                                    <TableCell>{item.paymentDate}</TableCell>
-                                    <TableCell>{item.valueReceived}</TableCell>
-                                    <TableCell>{item.yearsPaid}</TableCell>
+                                    <TableCell>{item.step_id}</TableCell>
+                                    <TableCell>{item.step_name}</TableCell>
                                     <TableCell>
                                         <Controls.ActionButton
                                             color="primary"
-                                            title="Edit Payment"
+                                            title="Editar Passo"
                                             className={classes.editButton}
-                                            onClick={() => { openInEditPopup(item) }}>
+                                            onClick={() => { openEditPopup(item) }}>
                                             <EditIcon fontSize="small" />
                                         </Controls.ActionButton>
                                         <Controls.ActionButton
                                             color="primary"
-                                            title="Remove Payment"
+                                            title="Remover Passo"
                                             className={classes.removeButton}
-                                            onClick={() => { openInRemovePopup(item) }}>
+                                            onClick={() => { openInPopupRemove(item) }}>
                                             <DeleteIcon fontSize="small" />
                                         </Controls.ActionButton>
                                     </TableCell>
@@ -158,6 +144,5 @@ export default function PaymentsTable(props) {
                 </TblContainer>
                 <TblPagination />
             </Paper>
-        </div>
     )
 }

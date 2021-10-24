@@ -13,6 +13,7 @@ import './index.css'
 import GroupsPage from './pages/GroupsPage';
 import PaymentMethodsPage from './pages/PaymentMethodsPage';
 import PaymentsListAllPage from './pages/PaymentsListAllPage';
+import PaymentMethodStepsPage from './pages/PaymentMethodStepsPage';
 
 function CustomRoute({ isPrivate, ...rest }) {
   const { loading, authenticated } = useContext(Context);
@@ -43,17 +44,18 @@ export default function Routes() {
   return (
         <Switch>
           <CustomRoute exact path="/" component={LoginPage} />
-          <CustomRoute exact path="/home" component={HomePage} />
-          <CustomRoute exact path="/profile" component={ProfilePage} />
-          <CustomRoute exact path="/payments" component={PaymentsPage} />
-          <CustomRoute exact path="/payments/all" component={PaymentsListAllPage} />
-          <CustomRoute exact path="/payments/methods" component={PaymentMethodsPage} />
-          <CustomRoute exact path="/partnerships" component={PartnershipsPage} />
-          <CustomRoute exact path="/partnerships/advantages" component={PartnershipAdvantagesPage}/>
-          <CustomRoute exact path="/partnerships/addresses" component={PartnershipAddressesPage} />
-          <CustomRoute exact path="/associates" component={AssociatesPage} />
-          <CustomRoute exact path="/groups" component={GroupsPage} />
-          <CustomRoute exact path="/settings" component={PartnershipsPage} />
+          <CustomRoute isPrivate exact path="/home" component={HomePage} />
+          <CustomRoute isPrivate exact path="/profile" component={ProfilePage} />
+          <CustomRoute isPrivate exact path="/payments" component={PaymentsPage} />
+          <CustomRoute isPrivate exact path="/payments/all" component={PaymentsListAllPage} />
+          <CustomRoute isPrivate exact path="/payments/methods" component={PaymentMethodsPage} />
+          <CustomRoute isPrivate exact path="/payments/methods/steps" component={PaymentMethodStepsPage} />
+          <CustomRoute isPrivate exact path="/partnerships" component={PartnershipsPage} />
+          <CustomRoute isPrivate exact path="/partnerships/advantages" component={PartnershipAdvantagesPage}/>
+          <CustomRoute isPrivate exact path="/partnerships/addresses" component={PartnershipAddressesPage} />
+          <CustomRoute isPrivate exact path="/associates" component={AssociatesPage} />
+          <CustomRoute isPrivate exact path="/groups" component={GroupsPage} />
+          <CustomRoute isPrivate exact path="/settings" component={PartnershipsPage} />
       </Switch>
   );
 }

@@ -1,17 +1,18 @@
 require('dotenv').config();
 var express = require('express'),
 app = express(),
-port = process.env.PORT || 1234;
+port = process.env.PORT || 8080;
 app.listen(port);
 
 var cors = require('cors')
 app.use(cors());
 
+/**
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://mongo:27017/database', { useNewUrlParser: true, useUnifiedTopology: true })
   .then(()=> console.log('Mongo running... status: ' + mongoose.connection.readyState))
   .catch(()=> console.log('Mongo: connection error!'))
- 
+ */
 app.use(function (_req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");

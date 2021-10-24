@@ -8,6 +8,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import MapIcon from '@material-ui/icons/Map';
 import GroupIcon from '@material-ui/icons/Group';
+import PaymentIcon from '@material-ui/icons/Payment';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -159,6 +160,13 @@ export default function AssociatesTable(props) {
                                     <TableCell>{item.email}</TableCell>
                                     <TableCell>{item.joinedIn}</TableCell>
                                     <TableCell>
+                                        <Controls.ActionButton
+                                            color="primary"
+                                            title="Registar Pagamento"
+                                            className={classes.actionButton}
+                                            onClick={() => { openEditPopup(item) }}>
+                                            <PaymentIcon fontSize="small" />
+                                        </Controls.ActionButton>
                                         <Controls.ActionButton
                                             color="primary"
                                             title="Editar Associado"

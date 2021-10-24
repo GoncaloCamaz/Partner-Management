@@ -34,43 +34,43 @@ function Navbar(props) {
                   </Link>
                 </li>
                 {SidebarData.filter(item => { 
-                                      if(isAdmin)
-                                      {
-                                        if(item.visibleForAdmin === true)
-                                          return item
-                                      }
-                                      else
-                                      {
-                                        if(item.visibleForUser === true)
-                                          return item
-                                      }
+                  if(isAdmin)
+                  {
+                    if(item.visibleForAdmin === true)
+                      return item
+                  }
+                  else
+                  {
+                    if(item.visibleForUser === true)
+                      return item
+                  }
                   }).map((item, index) => {
-                                if(item.title === "Logout")
-                                {
-                                    return (
-                                        <li key={index} className={item.cName}>
-                                          <Link to="/" onClick={handleClick}>
-                                            {item.icon}
-                                            <span className='navbar-span'>{item.title}</span>
-                                          </Link>
-                                        </li>
-                                      );
-                                }
-                                else
-                                {
-                                    return (
-                                        <li key={index} className={item.cName}>
-                                          <Link to={item.path}>
-                                            {item.icon}
-                                            <span className='navbar-span'>{item.title}</span>
-                                          </Link>
-                                        </li>
-                                      );
-                                }
+                  if(item.title === "Logout")
+                  {
+                    return (
+                      <li key={index} className={item.cName}>
+                        <Link to="/" onClick={handleClick}>
+                          {item.icon}
+                          <span className='navbar-span'>{item.title}</span>
+                        </Link>
+                      </li>
+                    );
+                  }
+                  else
+                  {
+                    return (
+                      <li key={index} className={item.cName}>
+                        <Link to={item.path}>
+                          {item.icon}
+                          <span className='navbar-span'>{item.title}</span>
+                        </Link>
+                      </li>
+                    );
+                  }
                   })
                 }
-        </ul>
-      </nav>
+            </ul>
+          </nav>
     </IconContext.Provider>
   </>
   );

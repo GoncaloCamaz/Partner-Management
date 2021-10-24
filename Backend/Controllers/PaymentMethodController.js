@@ -1,4 +1,4 @@
-var PaymentMethod = require('../Models/PaymentMethods')
+var PaymentMethod = require('../Models/Paymentmethods')
 const PaymentMethods = module.exports
 
 /**

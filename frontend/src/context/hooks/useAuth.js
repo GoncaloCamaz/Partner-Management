@@ -4,9 +4,7 @@ import axios from 'axios'
 
 export default function useAuth() {
   const [authenticated, setAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [isAdmin, setAdmin] = useState(false);
-  const [token, setToken] = useState('')
+  const [loading, setLoading] = useState(false)
   const [authenticationObject, setAuthenticationObject] = useState({isAdmin: false, loading: false, token: null, authenticated: false})
 
   useEffect(() => {
@@ -17,54 +15,48 @@ export default function useAuth() {
     setLoading(false);
   }, []);
   
-  function handleLogin(paramusername, parampassword) {
-    const URL = "http://backend:8080/login"
-    const authenticationResult = {
-      isAdmin: true,
-      loading: false,
-      token: "blablalablasidniufniaufn",
-      username: paramusername,
-      authenticated: true
+  async function handleLogin(username, password) {
+    const URL = "http://localhost:8080/login"
+    var authenticationResult = {
+      isAdmin: false, 
+      token: null, 
+      authenticated: false
     }
-    setAuthenticationObject(authenticationResult)
-    setToken("blablablbablablb")
-    setLoading(false)
-    setAuthenticated(true)
-    history.push('/home');
 
-    /**
-    axios.post(URL, {
-      email: paramusername.username,
-      password: parampassword.password
+    await axios.post(URL, {
+      email: username,
+      password: password
     })
     .then((response) => {
       if(response.status === 200)
       {
         localStorage.setItem("token", response.data.token)
-        setToken(response.data.token)
         if(response.data.user_role === 'ADMIN')
         {
-            setAdmin(true)
+          authenticationResult.isAdmin = true
         }
-        setLoading(false)
-        setAuthenticated(true);
-        history.push('/home');
+        
+        authenticationResult.token = response.data.token
+        authenticationResult.authenticated = true
+        setAuthenticationObject(authenticationResult)
+        setAuthenticated(true)
       }
     }).catch(error => {
       window.alert("Bad credentials inserted!")
-      setLoading(false)
-      setAuthenticated(false);
+      setAuthenticationObject(authenticationResult)
     });
-     */
   }
 
   function handleLogout() {
-    setAuthenticated(false);
-    setToken('')
-    setAdmin(false)
+    var authenticationResult = {
+      isAdmin: false, 
+      token: null, 
+      authenticated: false
+    }
     localStorage.removeItem("token")
+    setAuthenticationObject(authenticationResult)
     history.push('/');
   }
   
-  return { authenticated, loading, token, isAdmin, authenticationObject,handleLogin, handleLogout };
+  return { authenticated, authenticationObject, handleLogin, handleLogout };
 }
