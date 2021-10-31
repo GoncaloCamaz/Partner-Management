@@ -17,6 +17,13 @@ router.post('/login', async (req, res) => {
         console.log(accessToken)
         res.status(200).jsonp({token: accessToken, user_role: 'ADMIN'})
     }
+    else
+    {
+        const userinfo = {email: req.body.email, user_role: "USER"}
+        const accessToken = jwt.sign(userinfo, /**process.env.ACCESS_TOKEN_SECRET*/'diufiusdfndsifnianiunai', {expiresIn: '2h'})
+        console.log(accessToken)
+        res.status(200).jsonp({token: accessToken, user_role: 'USER'})
+    }
     /**
     try{
         const credentials = {

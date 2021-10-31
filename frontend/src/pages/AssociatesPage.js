@@ -16,6 +16,7 @@ import { getGroups } from '../api/GroupsAPI'
 import MessagesDisplay from '../components/forms/MessagesDisplayForm';
 import AssociateAddresssForm from '../components/forms/AssociateAddressForm';
 import AssociateGroupsForm from '../components/forms/AssociateGroupsForm';
+import PaymentForm from '../components/forms/PaymentForm';
 
 class AssociatesPage extends Component {
     constructor(props) {
@@ -33,6 +34,7 @@ class AssociatesPage extends Component {
             popupSeeAddressOpen: false,
             popupSeeAssociateGroupsOpen: false,
             popupResetPassword: false,
+            popupRegistPaymentOpen: false,
             errorMessage: '',
             errorPopupOpen: false,
             isLoaded: false
@@ -197,6 +199,12 @@ class AssociatesPage extends Component {
         }
     }
 
+    submitPayment = (items) => {
+        console.log(items)
+        //todo
+        this.setOpenPaymentPopup(false)
+    }
+
 
     handleReset = () => {
         const associates = this.state.associates
@@ -227,6 +235,10 @@ class AssociatesPage extends Component {
 
     setOpenRemoveAssociatePopup = (value) => {
         this.setState({popupRemoveAssociateOpen: value})
+    }
+
+    setOpenPaymentPopup = (value) => {
+        this.setState({popupRegistPaymentOpen: value})
     }
 
     setOpenErrorPopup = (value) =>
@@ -275,6 +287,12 @@ class AssociatesPage extends Component {
         this.setOpenSeeAssociateGroups(true)
     }
 
+    handleRegistPayment = (values) => {
+        const associate = {...values, associateName: values.name}
+        this.setState({recordForEdit: associate})
+        this.setOpenPaymentPopup(true)
+    }
+
     render () {
         const {isLoaded, filteredAssociates } = this.state
 
@@ -295,6 +313,7 @@ class AssociatesPage extends Component {
                                 handleOpenAssociateAddress={this.handleOpenAssociateAddress}
                                 handleResetAssociatePassword={this.handleResetAssociatePassword}
                                 handleOpenAssociateGroups={this.handleOpenAssociateGroups}
+                                handleRegistPayment={this.handleRegistPayment}
                             />
                             <Popup 
                                 title={'Novo Associado'}
@@ -304,6 +323,15 @@ class AssociatesPage extends Component {
                                     recordForEdit ={this.state.recordForEdit}
                                     groups={this.state.groups}
                                     addOrEdit={this.addAssociateOnBackend}
+                                />
+                            </Popup>
+                            <Popup 
+                                title={'Registar Pagamento'}
+                                openPopup={this.state.popupRegistPaymentOpen}
+                                setOpenPopup={this.setOpenPaymentPopup}>
+                                <PaymentForm 
+                                    recordForEdit ={this.state.recordForEdit}
+                                    addOrEdit={this.submitPayment}
                                 />
                             </Popup>
                             <Popup 

@@ -14,12 +14,12 @@ const useStyles = makeStyles({
       color: '#fff',
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center',
+      alignItems: 'center'
   },
   content: {
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center',
+      alignItems: 'center'
   },
  icon: {
       fontSize: 100

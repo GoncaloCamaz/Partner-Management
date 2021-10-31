@@ -36,11 +36,10 @@ const useStyles = makeStyles(theme => ({
 const headCells = [
     { id: 'associateNumber', label: 'Associate Number' },
     { id: 'associateName', label: 'Nome' },
-    { id: 'associateGroup', label: 'Grupo' },
     { id: 'paymentDate', label: 'Data de Pagamento' },
     { id: 'valueReceived',label:'Valor Recebido'},
     { id: 'yearsPaid', label: 'Anos Pagos'}, 
-    { id: 'actions', label: 'Recibo', disableSorting: true }
+    { id: 'actions', label: 'Ações', disableSorting: true }
 ]
 
 export default function PaymentsTable(props) {
@@ -130,7 +129,6 @@ export default function PaymentsTable(props) {
                                 return (<TableRow key={index}>
                                     <TableCell>{item.associateNumber}</TableCell>
                                     <TableCell>{item.associateName}</TableCell>
-                                    <TableCell>{item.associateGroup}</TableCell>
                                     <TableCell>{item.paymentDate}</TableCell>
                                     <TableCell>{item.valueReceived}</TableCell>
                                     <TableCell>{item.yearsPaid}</TableCell>

@@ -11,3 +11,12 @@
     padding-bottom: 10px;
     display: flex;
 }
+
+*::-webkit-scrollbar {
+    display: none;
+}
+
+* {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}

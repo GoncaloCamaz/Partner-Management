@@ -3,7 +3,8 @@ const Schema = mongoose.Schema
 
 const DefinitionsSchema = new Schema({
 ecardUrl: String,
-shareValue: {type: Number, required: true},
+feeValue: {type: Number, required: true},
+currentAssociateNumber: {type: Number, required: true},
 gmailHost: {type: String, required: true},
 gmailPort: {type: Number, required: true},
 gmailUsername: {type: String, required: true},

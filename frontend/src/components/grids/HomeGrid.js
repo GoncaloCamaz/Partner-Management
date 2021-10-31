@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
+import Grid from '@mui/material/Grid';
 import FeeCard from '../cards/FeeCard'
 import ProfileCard from '../cards/ProfileCard'
 import EcardDownloadCard from '../cards/EcardDownloadCard'
@@ -10,10 +10,11 @@ import { Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    maxHeight: 'fit-content'
   },
   gridcontainer: {
-    textAlign: 'center'
+    textAlign: 'center',
   },
   paper: {
     backgroundColor: '#060b26',
@@ -48,15 +49,16 @@ export default function FullWidthGrid() {
   else
   {
     return (
+
       <div className={classes.root}>
-        <Grid container spacing={3} className={classes.gridcontainer}>
+        <Grid container columnSpacing={3} className={classes.gridcontainer}>
           <Grid item lg={6} md={6} sm={12} xs={12}>
             <Paper className={classes.paper}>
-              <EcardDownloadCard />
+              <ProfileCard handleSeeProfile={handleSeeProfile}/>
             </Paper>
             <br/>
             <Paper className={classes.paper}>
-              <ProfileCard handleSeeProfile={handleSeeProfile}/>
+              <EcardDownloadCard />
             </Paper>
           </Grid>
           <Grid item lg={6} md={6} sm={12} xs={12}>
@@ -70,6 +72,7 @@ export default function FullWidthGrid() {
           </Grid>
         </Grid>
       </div>
+    
     );
   }
 }

@@ -44,6 +44,7 @@ const headCells = [
     { id: 'fee', label: 'Quota'},
     { id: 'phoneNumber', label: 'Número de Telemóvel'}, 
     { id: 'email', label: 'Email'}, 
+    { id: 'active', label: 'Ativo'},
     { id: 'joinedIn', label: "Ano de Entrada" },
     { id: 'actions', label: 'Ações', disableSorting: true }
 ]
@@ -73,6 +74,10 @@ export default function AssociatesTable(props) {
 
     const openInUserGroups = (item) => {
         props.handleOpenAssociateGroups(item)
+    }
+
+    const openRegistPaymentPopup = (item) => {
+        props.handleRegistPayment(item)
     }
 
     const {
@@ -107,7 +112,6 @@ export default function AssociatesTable(props) {
     }
 
     const handleSelectGroupChange = e => {
-        console.log(e)
         let groupName = e.target.value
         setSelectedGroup(groupName)
         props.handleSearch(groupName)
@@ -158,13 +162,14 @@ export default function AssociatesTable(props) {
                                     <TableCell>{item.fee}</TableCell>
                                     <TableCell>{item.phoneNumber}</TableCell>
                                     <TableCell>{item.email}</TableCell>
+                                    <TableCell>{item.active}</TableCell>
                                     <TableCell>{item.joinedIn}</TableCell>
                                     <TableCell>
                                         <Controls.ActionButton
                                             color="primary"
                                             title="Registar Pagamento"
                                             className={classes.actionButton}
-                                            onClick={() => { openEditPopup(item) }}>
+                                            onClick={() => { openRegistPaymentPopup(item) }}>
                                             <PaymentIcon fontSize="small" />
                                         </Controls.ActionButton>
                                         <Controls.ActionButton

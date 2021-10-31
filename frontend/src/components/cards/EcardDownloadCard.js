@@ -14,14 +14,6 @@ const useStyles = makeStyles({
       flexDirection: 'column',
       alignItems: 'center',
   },
-  warning: {
-    width: '100%',
-    backgroundColor: 'red',
-    color: '#fff',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
   button: {
     color: '#fff'
   },

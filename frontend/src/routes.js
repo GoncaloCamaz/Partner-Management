@@ -16,6 +16,7 @@ import PaymentsListAllPage from './pages/PaymentsListAllPage';
 import PaymentMethodStepsPage from './pages/PaymentMethodStepsPage';
 import PaymentsAdminPage from './pages/PaymentsAdminPage';
 import PartnershipsAdminPage from './pages/PartnershipsAdminPage';
+import SettingsPage from './pages/SettingsPage';
 
 function CustomRoute({ isPrivate, mustBeAdmin,...rest }) {
   const { loading, authenticated, authenticationObject } = useContext(Context);
@@ -68,7 +69,7 @@ export default function Routes() {
           <CustomRoute isPrivate mustBeAdmin exact path="/admin/partnerships/addresses" component={PartnershipAddressesPage} />
           <CustomRoute isPrivate mustBeAdmin exact path="/associates" component={AssociatesPage} />
           <CustomRoute isPrivate mustBeAdmin exact path="/groups" component={GroupsPage} />
-          <CustomRoute isPrivate mustBeAdmin exact path="/settings" component={PartnershipsPage} />
+          <CustomRoute isPrivate mustBeAdmin exact path="/settings" component={SettingsPage} />
       </Switch>
   );
 }
