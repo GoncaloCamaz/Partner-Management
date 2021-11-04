@@ -14,30 +14,46 @@ const useStyles = makeStyles(({
     }
 }))
 
+function InitializeGroups(groups, associateGroups)
+{
+    var content = []
+    groups.forEach(item => content.push(associateGroups.includes(item.initials) ? {name: item.initials, checked: true} : {name: item.initials, checked: false}))
+
+    return content
+}
+
 export default function AssociateGroupsForm(props) {
+    const classes = useStyles()
+
     const groups = props.groups
     const associateGroups = props.recordForEdit.groups
-    var content = []
-    groups.forEach(item => content.push(associateGroups.includes(item.id) ? {name: item.id, checked: true} : {name: item.id, checked: false}))
-    const classes = useStyles()
+    const content = InitializeGroups(groups, associateGroups)
     const [columnsSelected, setColumnsSelected] = useState(content)    
     
     const handleSubmit = _event => {
         const selected = columnsSelected.filter(item => item.checked === true)
-        props.selectedHeaders(selected)
+        let associateWithGroups = {...props.recordForEdit, groupsSelected: selected}
+        props.addOrEdit(associateWithGroups)
     }
 
     const handleChange = (event) => {
-        var content = columnsSelected
-        
-        for(const elm in content)
+
+        const nameOfGroup = event.target.name
+        const contentOnState = columnsSelected
+        var newContent = []
+
+        for(const i in contentOnState)
         {
-            if(content[elm].name === event.target.name)
+            if(contentOnState[i].name === nameOfGroup)
             {
-                content[elm].checked = !content[elm].checked
+                newContent.push({name: contentOnState[i].name, checked: !contentOnState[i].checked})
+            }
+            else
+            {
+                newContent.push({name: contentOnState[i].name, checked: contentOnState[i].checked})
             }
         }
-        setColumnsSelected(content)
+        setColumnsSelected(newContent)
     }
 
     return (
@@ -46,7 +62,7 @@ export default function AssociateGroupsForm(props) {
                     <FormGroup>
                         {columnsSelected.map((item, index) => ( 
                             <FormControlLabel key={index}
-                                control={<Checkbox checked={item.checked} onChange={handleChange} name={item.name}/>}
+                                control={<Checkbox value={item.checked} name={item.name} onChange={handleChange}/>}
                                 label={item.name}
                             />
                             ))

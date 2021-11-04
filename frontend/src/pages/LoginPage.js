@@ -10,7 +10,6 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { Context } from '../context/AuthContext';
-import ARCUM from '../static/arcum.png'
 import { Redirect } from 'react-router-dom';
 
 function Copyright() {
@@ -31,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh',
   },
   imageLogin: {
-    backgroundImage: `url(${ARCUM})`,
+    backgroundImage: `url(http://arcum.pt/images/logos/arcum.png)`,
     backgroundRepeat: 'no-repeat',
     backgroundColor:
       theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
@@ -59,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function LoginPage() {
   const classes = useStyles();
-  const { handleLogin, authenticated, isAdmin, loading, authenticationObject } = useContext(Context);
+  const { handleLogin, authenticated, authenticationObject } = useContext(Context);
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [redirectToHomePage, setRedirectToHomePage] = useState(false)
@@ -67,8 +66,6 @@ export default function LoginPage() {
 
   const handleClick = () => {
     handleLogin(username,password)
-    console.log("on click",authenticationObject)
-
     if(authenticated === true)
     {
       setRedirectToHomePage(true)
@@ -93,7 +90,7 @@ export default function LoginPage() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Plataforma dos Associados 
+            Associados ARCUM
           </Typography>
           <form className={classes.formLogin}>
             <TextField

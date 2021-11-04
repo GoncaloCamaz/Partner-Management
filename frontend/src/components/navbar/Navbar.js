@@ -62,7 +62,7 @@ function Navbar(props) {
                   {
                     return (
                       <li key={index} className={item.cName}>
-                        <Link to={item.path}>
+                        <Link to={{pathname: item.path}}>
                           {item.icon}
                           <span className='navbar-span'>{item.title}</span>
                         </Link>

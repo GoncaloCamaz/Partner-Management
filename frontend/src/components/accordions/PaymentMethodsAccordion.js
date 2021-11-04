@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function SimpleAccordion(props) {
+export default function PaymentMethodsAccordion(props) {
   const classes = useStyles();
   const paymentMethods = props.paymentMethods
   const [expanded, setExpanded] = React.useState("panel0");
@@ -30,15 +30,16 @@ export default function SimpleAccordion(props) {
     <div className={classes.root}>
         {
             paymentMethods.map((item, index) => (
-                <Accordion expanded={expanded === 'panel' + index} onChange={handleChange('panel' + index)}>
+                <Accordion key={index} expanded={expanded === 'panel' + index} onChange={handleChange('panel' + index)}>
                     <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id={index}
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1a-content"
+                      id={index}
+                      key={index+item}
                     >
                     <Typography className={classes.heading}>{item.name}</Typography>
                     </AccordionSummary>
-                    <AccordionDetails >
+                    <AccordionDetails>
                         <Timeline steps={item.steps} />
                     </AccordionDetails>
                 </Accordion>

@@ -18,9 +18,6 @@ const useStyles = makeStyles({
       indicatorColor: '#fff',
       borderRadius: 5
   },
-  tab: {
-    backgroundColor: "#fff"
-  },
   indicator: {
     backgroundColor: "#060b26",
     paddingLeft: 10,
@@ -51,9 +48,9 @@ export default function IconLabelTabs(props) {
         classes={{indicator: classes.indicator}}
         centered
       >
-        <Tab classeName={classes.tab} icon={<PersonIcon />} label="Informações do Associado" />
-        <Tab classeName={classes.tab} icon={<VpnKeyIcon />} label="Credênciais" />
-        <Tab classeName={classes.tab} icon={<GroupIcon />} label="Grupos" />
+        <Tab icon={<PersonIcon />} label="Informações do Associado" />
+        <Tab icon={<VpnKeyIcon />} label="Credênciais" />
+        <Tab icon={<GroupIcon />} label="Grupos" />
       </Tabs>
     </Paper>
   );

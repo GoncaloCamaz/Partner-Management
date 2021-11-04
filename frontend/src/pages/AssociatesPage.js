@@ -17,8 +17,10 @@ import MessagesDisplay from '../components/forms/MessagesDisplayForm';
 import AssociateAddresssForm from '../components/forms/AssociateAddressForm';
 import AssociateGroupsForm from '../components/forms/AssociateGroupsForm';
 import PaymentForm from '../components/forms/PaymentForm';
+import { GroupContext } from '../context/GroupContext'
 
 class AssociatesPage extends Component {
+    static contextType = GroupContext
     constructor(props) {
         super(props)
 
@@ -122,9 +124,9 @@ class AssociatesPage extends Component {
                     },
             ],
             groups: [{
-                id: "All", key: "All", title: "All", label: "All"
+                name: "Tuna Universitária do Minho", initials: "TUM"
             },{
-                id: "TUM", key: "TUM", title: "TUM", label: "TUM"
+                name: "Bomboémia", initials: "Bomboemia"
             }]
         }, () => {
             this.setState({filteredAssociates: this.state.associates})
@@ -295,6 +297,8 @@ class AssociatesPage extends Component {
 
     render () {
         const {isLoaded, filteredAssociates } = this.state
+        const { groups } = this.context
+        console.log(groups)
 
         if(!isLoaded)
         {

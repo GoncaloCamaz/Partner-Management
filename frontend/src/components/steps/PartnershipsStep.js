@@ -93,7 +93,7 @@ function PartnershipsStep() {
             {Math.abs(activeStep - index) <= 2 ? (
                 step.advantages.map((item, index) => {
                     return (
-                        <Paper square elevation={0} className={classes.content}>
+                        <Paper key={index} square elevation={0} className={classes.content}>
                             <Typography key={index} >
                                 {bull} {item}
                             </Typography>

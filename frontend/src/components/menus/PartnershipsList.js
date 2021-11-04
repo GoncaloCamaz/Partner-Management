@@ -15,9 +15,6 @@ const useStyles = makeStyles({
       indicatorColor: '#fff',
       borderRadius: 5
   },
-  tab: {
-    backgroundColor: "#fff"
-  },
   indicator: {
     backgroundColor: "#060b26",
     paddingLeft: 10,
@@ -50,7 +47,7 @@ export default function PartnershipsList(props) {
         centered
       >
         {list.map((item, index) => (
-            <Tab key={index} classeName={classes.tab} label={item.name} />
+            <Tab key={index} label={item.name} />
         ))}
       </Tabs>
     </Paper>

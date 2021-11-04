@@ -7,39 +7,6 @@ import Button from '@material-ui/core/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
-import TUM from '../../static/tum.png'
-import TUNAOMINHO from '../../static/tunaominho.png'
-import GMP from '../../static/gmp.png'
-import GFUM from '../../static/gfum.png'
-import GPUM from '../../static/gpum.png'
-import BOMBOEMIA from '../../static/bomb.png'
-
-const tutorialSteps = [
-  {
-    label: 'Tuna Universitária do Minho',
-    imgPath: TUM
-  },
-  {
-    label: 'TunaoMinho',
-    imgPath: TUNAOMINHO,
-  },
-  {
-    label: 'Bomboémia',
-    imgPath: BOMBOEMIA,
-  },
-  {
-    label: 'Grupo de Poesia da Universidade do Minho',
-    imgPath: GPUM
-  },
-  {
-    label: 'Grupo de Música Popular',
-    imgPath: GMP  
-},
-{
-    label: 'Grupo Folclórico da Universidade do Minho',
-    imgPath: GFUM  
-},
-];
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -70,11 +37,13 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function GroupImageStep() {
+function GroupImageStep(props) {
   const classes = useStyles();
   const theme = useTheme();
+  const groups = props.groups
+  const maxSteps = groups.length
   const [activeStep, setActiveStep] = React.useState(0);
-  const maxSteps = tutorialSteps.length;
+
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -91,7 +60,7 @@ function GroupImageStep() {
   return (
     <div className={classes.root}>
       <Paper square elevation={0} className={classes.header}>
-        <Typography className={classes.textHeader}>{tutorialSteps[activeStep].label}</Typography>
+        <Typography className={classes.textHeader}>{activeStep.name}</Typography>
       </Paper>
       <SwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
@@ -99,10 +68,10 @@ function GroupImageStep() {
         onChangeIndex={handleStepChange}
         enableMouseEvents
       >
-        {tutorialSteps.map((step, index) => (
-          <div key={step.label}>
+        {groups.map((item, index) => (
+          <div key={item.name}>
             {Math.abs(activeStep - index) <= 2 ? (
-              <img className={classes.img} src={step.imgPath} alt={step.label} />
+              <img className={classes.img} src={item.imageURL} alt={item.name} />
             ) : null}
           </div>
         ))}

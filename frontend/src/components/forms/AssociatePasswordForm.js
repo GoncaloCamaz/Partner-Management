@@ -5,9 +5,9 @@ import { makeStyles } from '@material-ui/core';
 import { useForm, Form } from './useForm';
 
 const initialFValues = {
-    city: '',
-    postalCode: '',
-    address: '',
+    newPassword: '',
+    oldPassword: '',
+    newPasswordConfirmation: '',
 }
 
 const useStyles = makeStyles(({
@@ -20,12 +20,18 @@ const useStyles = makeStyles(({
     }
 }))
 
-export default function AssociateAddresssForm(props) {
+export default function AssociatePasswordForm(props) {
     const { addOrEdit, recordForEdit } = props
     const classes = useStyles()
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
+        if ('newPassword' in fieldValues)
+            temp.newPassword = fieldValues.newPassword ? "" : "Insere a nova Password."
+        if ('oldPassword' in fieldValues)
+            temp.oldPassword = fieldValues.oldPassword ? "" : "Insere a tua antiga Password."
+        if ('newPasswordConfirmation' in fieldValues)
+            temp.newPasswordConfirmation = fieldValues.newPasswordConfirmation ? "" : "Insere novamente a nova Password."
         setErrors({
             ...temp
         })
@@ -63,23 +69,28 @@ export default function AssociateAddresssForm(props) {
             <Grid container>
                 <Grid item lg={12} md={12} sm={12} xs={12}>
                     <Controls.Input
-                        label="Morada"
-                        name="address"
-                        value={values.address}
+                        label="Password Antiga"
+                        name="oldPassword"
+                        type="password"
+                        value={values.oldPassword}
                         onChange={handleInputChange}
+                        error={errors.oldPassword}
+                    />
+                      <Controls.Input
+                        label="Nova Password"
+                        name="newPassword"
+                        type="password"
+                        value={values.newPassword}
+                        onChange={handleInputChange}
+                        error={errors.newPassword}
                     />
                     <Controls.Input
-                        name="city"
-                        label="Cidade"
-                        value={values.city}
+                        label="Confirmação da nova Password"
+                        name="newPasswordConfirmation"
+                        type="password"
+                        value={values.newPasswordConfirmation}
                         onChange={handleInputChange}
-                    />
-                    <Controls.Input
-                        label="Código Postal"
-                        name="postalCode"
-                        value={values.postalCode}
-                        onChange={handleInputChange}
-                        error={errors.postalCode}
+                        error={errors.newPasswordConfirmation}
                     />
                     <div>
                         <Controls.Button

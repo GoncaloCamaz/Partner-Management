@@ -5,6 +5,10 @@ import { makeStyles } from '@material-ui/core';
 import { useForm, Form } from './useForm';
 
 const initialFValues = {
+    name: '',
+    nickname: '',
+    email: '',
+    phoneNumber: '',
     city: '',
     postalCode: '',
     address: '',
@@ -20,12 +24,18 @@ const useStyles = makeStyles(({
     }
 }))
 
-export default function AssociateAddresssForm(props) {
+export default function AssociateForm(props) {
     const { addOrEdit, recordForEdit } = props
     const classes = useStyles()
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
+        if ('name' in fieldValues)
+            temp.name = fieldValues.name ? "" : "Insere o teu nome."
+        if ('phoneNumber' in fieldValues)
+            temp.phoneNumber = fieldValues.phoneNumber ? "" : "Insere o teu contacto telefónico."
+        if ('email' in fieldValues)
+            temp.email = fieldValues.email ? "" : "Insere o teu email."
         setErrors({
             ...temp
         })
@@ -63,8 +73,39 @@ export default function AssociateAddresssForm(props) {
             <Grid container>
                 <Grid item lg={12} md={12} sm={12} xs={12}>
                     <Controls.Input
+                        label="Nome"
+                        name="name"
+                        autoComplete="name"
+                        value={values.name}
+                        onChange={handleInputChange}
+                        error={errors.name}
+                    />
+                      <Controls.Input
+                        label="Alcunha"
+                        name="nickname"
+                        value={values.nickname}
+                        onChange={handleInputChange}
+                    />
+                      <Controls.Input
+                        label="Email"
+                        name="email"
+                        autoComplete="email"
+                        value={values.email}
+                        onChange={handleInputChange}
+                        error={errors.email}
+                    />
+                    <Controls.Input
+                        label="Número de Telemóvel"
+                        name="phoneNumber"
+                        autoComplete="phone"
+                        value={values.phoneNumber}
+                        onChange={handleInputChange}
+                        error={errors.phoneNumber}
+                    />
+                    <Controls.Input
                         label="Morada"
                         name="address"
+                        autoComplete="address"
                         value={values.address}
                         onChange={handleInputChange}
                     />
@@ -72,14 +113,15 @@ export default function AssociateAddresssForm(props) {
                         name="city"
                         label="Cidade"
                         value={values.city}
+                        autoComplete="address-level2"
                         onChange={handleInputChange}
                     />
                     <Controls.Input
                         label="Código Postal"
                         name="postalCode"
+                        autoComplete="postal-code"
                         value={values.postalCode}
                         onChange={handleInputChange}
-                        error={errors.postalCode}
                     />
                     <div>
                         <Controls.Button

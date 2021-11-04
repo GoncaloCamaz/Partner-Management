@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -6,6 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import PersonIcon from '@material-ui/icons/Person';
 import GroupImageStep from '../steps/GroupImageStep'
+import { GroupContext } from '../../context/GroupContext'
 
 const useStyles = makeStyles({
   root: {
@@ -47,10 +48,14 @@ const useStyles = makeStyles({
 
 export default function ProfileCard(props) {
   const classes = useStyles();
-  const name = "Gonçalo Camaz"
-  const email = "gcamaz@sapo.pt"
-  const associate_number = "124"
-  //const groups = "TUM"
+  const associate = props.associate
+
+  const groupContext = useContext(GroupContext)
+  var groupsToDisplay = []
+  groupContext.groups.forEach((item) => {
+    if(associate.groups.includes(item.initials))
+      groupsToDisplay.push(item)
+  })
 
   const handleSeeProfile = () => {
     props.handleSeeProfile()
@@ -63,17 +68,17 @@ export default function ProfileCard(props) {
             <PersonIcon className={classes.icon} fontSize="inherit"/>
         </Typography>
         <Typography variant="h4" component="h2">
-            {name}
+            {associate.name}
         </Typography>
         <Typography variant="h5" component="h2">
-          {email}
+          {associate.email}
         </Typography>
         <br/>
         <Typography variant="h5" component="h2">
-          Número de Associado: {associate_number}
+          Número de Associado: {associate.associateNumber}
         </Typography>
         <br/>
-        <GroupImageStep/>
+        <GroupImageStep groups={groupsToDisplay}/>
       </CardContent>
       <CardActions>
         <Typography className={classes.text} variant="h5" component="h2" onClick={handleSeeProfile}>

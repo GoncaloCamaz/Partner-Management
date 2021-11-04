@@ -17,8 +17,8 @@ const useStyles = makeStyles({
 
 export default function AssociateNumberCard(props) {
   const classes = useStyles();
-  const associateNumber = 124 // props.associateNumber
-
+  const associateNumber = props.associateNumber
+  
     return (
       <Card className={classes.root} variant="outlined">
         <CardContent>

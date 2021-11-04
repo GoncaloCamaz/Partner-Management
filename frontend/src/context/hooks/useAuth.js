@@ -16,7 +16,7 @@ export default function useAuth() {
   }, []);
   
   async function handleLogin(username, password) {
-    const URL = "http://localhost:8080/login"
+    const URL = "http://192.168.1.224:8080/login"
     var authenticationResult = {
       isAdmin: false, 
       token: null, 
