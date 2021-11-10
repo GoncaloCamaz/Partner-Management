@@ -21,6 +21,7 @@ import { GroupContext } from '../context/GroupContext'
 
 class AssociatesPage extends Component {
     static contextType = GroupContext
+    
     constructor(props) {
         super(props)
 
@@ -28,6 +29,7 @@ class AssociatesPage extends Component {
             associates: [],
             filteredAssociates: [],
             groups: [],
+            groupsForTableSelect: [{id: 'All',key: 'All', title: 'All',name: 'All'}],
             recordForEdit: null,
             recordForRemove: null,
             popupAddAssociateOpen: false,
@@ -123,13 +125,43 @@ class AssociatesPage extends Component {
                         groups: ["Bomboémia"]
                     },
             ],
-            groups: [{
-                name: "Tuna Universitária do Minho", initials: "TUM"
-            },{
-                name: "Bomboémia", initials: "Bomboemia"
+            groups:  [{
+                name: "Bomboémia",
+                initials: "Bomboémia",
+                imageURL: "http://arcum.pt/images/bomboemia/logo_full.png"
+            },
+            {
+                name: "Grupo Folclórico da Universidade do Minho",
+                initials: "GFUM",
+                imageURL: "http://arcum.pt/images/gfum/logo.png"
+            },
+            {
+                name: "Grupo de Música Popular da Universidade do Minho",
+                initials: "GMP",
+                imageURL: "http://arcum.pt/images/gmp/logo.png"
+            },
+            {
+                name: "Grupo de Poesia da Universidade do Minho",
+                initials: "GPUM",
+                imageURL: "http://arcum.pt/images/gpum/logo_alt.png"
+            },
+            {
+                name: "Tuna Universitária do Minho",
+                initials: "TUM",
+                imageURL: "http://arcum.pt/images/tum/logo.png"
+            },
+            {
+                name: "Tun'ao Minho",
+                initials: "Tun'ao Minho",
+                imageURL: "http://arcum.pt/images/tunao/logo.png"
             }]
         }, () => {
             this.setState({filteredAssociates: this.state.associates})
+            const groups = this.state.groups
+            for(const i in groups)
+            {
+                this.state.groupsForTableSelect.push({id: groups[i].initials, key: groups[i].initials, name: groups[i].initials, title: groups[i].initials})
+            }
         })
     }
 
@@ -298,7 +330,7 @@ class AssociatesPage extends Component {
     render () {
         const {isLoaded, filteredAssociates } = this.state
         const { groups } = this.context
-        console.log(groups)
+        console.log("context on component",groups)
 
         if(!isLoaded)
         {
@@ -310,7 +342,7 @@ class AssociatesPage extends Component {
                                 records={filteredAssociates} 
                                 handleReset={this.handleReset}
                                 handleSearch={this.handleSearch}
-                                groups={this.state.groups}
+                                groups={this.state.groupsForTableSelect}
                                 handleAddNewAssociate={this.handleAddNewAssociate}
                                 handleEditAssociate={this.handleEditAssociate}
                                 handleRemoveAssociate={this.handleRemoveAssociate}
@@ -362,7 +394,7 @@ class AssociatesPage extends Component {
                                 setOpenPopup={this.setOpenSeeAssociateGroups}>
                                 <AssociateGroupsForm 
                                     recordForEdit={this.state.recordForEdit}
-                                    groups={this.state.groups}
+                                    groups={groups}
                                     addOrEdit={this.editAssociateOnBackend}
                                 />
                             </Popup>

@@ -1,6 +1,6 @@
 .navbar {
   background-color: #060b26;
-  height: 80px;
+  height: 70px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -9,15 +9,13 @@
 .menu-bars {
   margin-left: 2rem;
   font-size: 2rem;
-  background: none;
 }
 
 .nav-menu {
   background-color: #060b26;
-  min-height: 100%;
-  height: auto;
   width: 250px;
   display: flex;
+  height: 100%;
   justify-content: center;
   position: absolute;
   z-index: 10000;
@@ -28,8 +26,11 @@
 
 .nav-menu.active {
   left: 0;
+  position:fixed;
   min-height: 100%;
-  height: auto;
+  height: 100%;
+  overflow: scroll;
+  height:fit-content;
   transition: 350ms;
 }
 
@@ -78,9 +79,10 @@
 @media screen and (min-width: 900px) {
   .nav-menu {
     min-height: 100%;
-    height: auto;  }
+    height: 100%;  
+  }
 
   .nav-menu.active {
     min-height: 100%;
-    height: auto;  }
+    height: 100%;  }
 }
