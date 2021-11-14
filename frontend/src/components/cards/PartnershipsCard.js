@@ -9,6 +9,7 @@ import PartnershipsStep from '../steps/PartnershipsStep';
 
 const useStyles = makeStyles({
   root: {
+    height: '100%',
       width: '100%',
       backgroundColor: '#1a83ff',
       color: '#fff',
@@ -51,7 +52,7 @@ export default function PartnershipsCard(props) {
         </CardContent>
         <CardActions>
           <Typography className={classes.text} variant="h5" component="h2" onClick={handleSeePartnerships}>
-                  Clica para Ver Detalhes
+                Ver Detalhes
           </Typography>        
         </CardActions>
       </Card>

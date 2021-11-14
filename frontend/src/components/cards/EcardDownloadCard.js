@@ -4,10 +4,12 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import CreditCardIcon from '@material-ui/icons/CreditCard';
+import generateCard from '../pdf/AssociateCardGenerator';
 
 const useStyles = makeStyles({
   root: {
       width: '100%',
+      height: '100%',
       backgroundColor: '#1a83ff',
       color: '#fff',
       display: 'flex',
@@ -30,9 +32,17 @@ const useStyles = makeStyles({
 export default function EcardDownloadCard(props) {
   const classes = useStyles();
   const cardTitle = "Cartão de Associado"//props.title
+  const associate = props.associate
 
   const handleDownloadCard = () => {
-      console.log("button pressed")
+    const name = "Cartao - " + associate.name + ".pdf"
+    const content = {
+      associate: associate,
+      arcumImage: props.arcumImage
+    }
+
+    var doc = generateCard(content)
+    doc.save(name)
   }
 
     return (

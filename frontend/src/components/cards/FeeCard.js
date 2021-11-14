@@ -8,6 +8,7 @@ import EuroSymbolIcon from '@material-ui/icons/EuroSymbol';
 
 const useStyles = makeStyles({
   root: {
+      height: '100%',
       width: '100%',
       backgroundColor: '#1a83ff',
       color: '#fff',
@@ -16,6 +17,7 @@ const useStyles = makeStyles({
       alignItems: 'center',
   },
   warning: {
+    height: '100%',
     width: '100%',
     backgroundColor: 'red',
     color: '#fff',
@@ -30,6 +32,9 @@ const useStyles = makeStyles({
       fontSize: 100,
   },
   text: {
+    bottom: 0,
+    display: 'flex',
+    justifyContent: 'flex-end',
     '&:hover': {
       cursor: 'pointer',
     }
@@ -70,7 +75,7 @@ export default function OutlinedCard(props) {
         </CardContent>
         <CardActions>
           <Typography className={classes.text} variant="h5" component="h2" onClick={handleSeeFees}>
-                  Clica para Ver Detalhes
+                  Ver Detalhes
           </Typography>        
         </CardActions>
       </Card>
@@ -98,7 +103,7 @@ export default function OutlinedCard(props) {
         </CardContent>
         <CardActions>
           <Typography className={classes.text} variant="h5" component="h2">
-                  Click to See Details
+                  Ver Detalhes
           </Typography>        
         </CardActions>
       </Card>

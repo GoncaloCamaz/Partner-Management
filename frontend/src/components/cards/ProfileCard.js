@@ -10,6 +10,7 @@ import { GroupContext } from '../../context/GroupContext'
 
 const useStyles = makeStyles({
   root: {
+    height: '100%',
       width: '100%',
       backgroundColor: '#1a83ff',
       color: '#fff',
@@ -82,7 +83,7 @@ export default function ProfileCard(props) {
       </CardContent>
       <CardActions>
         <Typography className={classes.text} variant="h5" component="h2" onClick={handleSeeProfile}>
-                Clica para Ver Detalhes
+                Ver Detalhes
         </Typography>      
       </CardActions>
     </Card>

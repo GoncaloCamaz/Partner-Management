@@ -112,14 +112,14 @@ function PartnershipsStep() {
         activeStep={activeStep}
         nextButton={
           <Button className={classes.button} size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
-            Next
+            Próximo
             {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
           </Button>
         }
         backButton={
           <Button className={classes.button} size="small" onClick={handleBack} disabled={activeStep === 0}>
             {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
-            Back
+            Anterior
           </Button>
         }
       />

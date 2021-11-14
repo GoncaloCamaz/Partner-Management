@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { createTheme, makeStyles, ThemeProvider, useTheme } from '@material-ui/core/styles';
 import MobileStepper from '@material-ui/core/MobileStepper';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
   color: {
     backgroundColor: '#1a83ff',
-    color: '#fff'
+    color: '#fff',
   },
   button: {
     color:"#fff"
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
   textHeader: {
     paddingTop: 10,
-  }
+  },
 }));
 
 function GroupImageStep(props) {
@@ -84,14 +84,14 @@ function GroupImageStep(props) {
         activeStep={activeStep}
         nextButton={
           <Button className={classes.button} size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
-            Next
+            Próximo
             {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
           </Button>
         }
         backButton={
           <Button className={classes.button} size="small" onClick={handleBack} disabled={activeStep === 0}>
             {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
-            Back
+            Anterior
           </Button>
         }
       />

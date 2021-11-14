@@ -42,7 +42,7 @@ export default function HomePage() {
     const [cardClicked, setCardClicked] = useState(false)
     const [cardClicked_name, setCardClicked_name] = useState("")
     const [propsToSend, setPropsToSend] = useState({})
-    const associate = {associateNumber: 123, name: "Gonçalo  Dias Camaz Moreira", nickname: "Camadas", phoneNumber: "936954775",email: "gcamaz@sapo.pt", password: "myPassword123!!",active: true, address:"Rua do Socialismo 20",city: "Vila do Conde",postalCode: "4485-032",groups: ["TUM"]}
+    const associate = {associateNumber: 123, name: "Gonçalo  Dias Camaz Moreira", nickname: "Camadas", phoneNumber: "936954775",email: "gcamaz@sapo.pt", password: "myPassword123!!",active: true, address:"Rua do Socialismo 20",city: "Vila do Conde",postalCode: "4485-032",paidUntilYear: 2021,groups: ["TUM"]}
 
     const handleSeeFees = () => {
         setCardClicked_name("payments")
@@ -90,7 +90,7 @@ export default function HomePage() {
                                         </Paper>
                                         <br/>
                                         <Paper className={classes.paper}>
-                                            <EcardDownloadCard associate={associate}/>
+                                            <EcardDownloadCard associate={associate} arcumImage={"http://arcum.pt/images/logos/arcum.png"}/>
                                         </Paper>
                                         <br/>
                                     </Grid>

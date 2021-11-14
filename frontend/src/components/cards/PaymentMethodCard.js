@@ -56,7 +56,7 @@ export default function PaymentMethodCard(props) {
         </CardContent>
         <CardActions>
           <Typography className={classes.text} variant="h5" component="h2" onClick={handleSeePaymentMethods}>
-                  Clica para Ver Detalhes
+                  Ver Detalhes
           </Typography>        
         </CardActions>
       </Card>
