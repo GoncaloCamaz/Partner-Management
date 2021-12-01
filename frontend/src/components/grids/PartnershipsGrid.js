@@ -13,6 +13,9 @@ const useStyles = makeStyles((theme) => ({
   gridcontainer: {
     textAlign: 'center',
   },
+  gridwithcardcontainer: {
+    color: '#fff',
+  },
   paper: {
     backgroundColor: '#060b26',
     color: theme.palette.text.secondary,
@@ -45,12 +48,17 @@ export default function PartnershipGrid(props) {
             <Grid item lg={3} md={3} sm={12} xs={12}>
                 <PartnershipsList partnerships={listPartnerships} updateSelected={updateSelected}/>
             </Grid>
-            <Grid item lg={6} md={6} sm={12} xs={12}>
-                <PartnershipAdvantages advantages={selectedPartnershipAdvantages}/>
-                <br/>
-                <PartnershipAddress addresses={selectedPartnershipAddresses}/>
-                <br/>
+            <Grid item lg={9} md={9} sm={12} xs={12}>
+            <Grid container spacing={3} className={classes.gridwithcardcontainer}>
+              <Grid item lg={9} md={9} sm={12} xs={12}>
+                  <PartnershipAdvantages advantages={selectedPartnershipAdvantages}/>
+                  <br/>
+                  <PartnershipAddress addresses={selectedPartnershipAddresses}/>
+              </Grid>
+              <Grid item lg={3} md={3} sm={12} xs={12}>
                 <PartnershipContacts contacts={selectedPartnershipContacts}/>
+              </Grid>
+            </Grid>
             </Grid>
         </Grid>
     </div>

@@ -42,6 +42,7 @@ export default function PartnershipContacts(props) {
               <Typography >{telephone}</Typography>
             </div>
           </li>
+          <br/>
           <li>
             <div className={classes.contact}>
               <EmailIcon/>

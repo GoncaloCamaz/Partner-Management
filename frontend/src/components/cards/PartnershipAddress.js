@@ -11,7 +11,7 @@ const useStyles = makeStyles({
   root: {
       width: '100%',
       backgroundColor: '#1a83ff',
-      color: '#fff',
+      color: '#fff'
   },
   list: {
     listStyle: 'none',
