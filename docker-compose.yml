@@ -5,7 +5,12 @@ services:
     image: mongo:latest
     container_name: database
     restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME: admin
+      - MONGO_INITDB_DATABASE: pmdb
+      - MONGO_INITDB_ROOT_PASSWORD: password
     volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
       - mongo-data:/home/app/data
     networks: 
       main:
@@ -21,8 +26,16 @@ services:
     restart: always
     depends_on: 
       - database
+    environment:
+      - DBPORT: 27017
+      - DBNAME: pmdb
+      - DBAUTHENTICATIONREQUIRED: true 
+      - DBUSERNAME: admin
+      - DBPASSWORD: password
+      - PORT: 8082
+      - ACCESS_TOKEN_SECRET: place_new_token_here
     ports:
-      - 8080:8080
+      - 8082:8082
     networks: 
       main:
         aliases: 

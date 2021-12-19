@@ -1,0 +1,20 @@
+{
+  "name": "groupsimageserver",
+  "version": "1.0.0",
+  "description": "Server to store images",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gonçalo Camaz",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "gridfs-stream": "^1.1.1",
+    "mongoose": "^6.1.2",
+    "multer": "^1.4.4",
+    "multer-gridfs-storage": "^5.0.2"
+  }
+}

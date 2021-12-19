@@ -3,8 +3,8 @@ const Schema = mongoose.Schema
 const uniqueValidator = require('mongoose-unique-validator')
 
 const PaymentMethodSchema = new Schema({
-name: {type: String, required: true, unique: true},
-steps: [{step_id: Number, step_name: String}]
+    name: {type: String, required: true, unique: true},
+    steps: [{stepId: Number, stepDescription: String}]
 });
 
 PaymentMethodSchema.plugin(uniqueValidator)
