@@ -1,44 +1,67 @@
-require('dotenv').config()
-const express = require('express')
-const connection = require('./db')
-const Grid = require('gridfs-stream')
-const mongoose = require('mongoose')
-const app = express()
-const port = process.env.PORT || 8083;
+const express = require("express");
+const app = express();
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 
-let gfs;
-connection();
+const groupRoutes = require("./Routes/GroupsRoute");
 
-const conn = mongoose.connection
-conn.once("open", function() {
-    gfs = Grid(conn.db, mongoose.mongo);
-    gfs.collection("photos");
-})
+var dbNetworkName = process.env.NETWORK || "localhost"
+var dbPort = process.env.DBPORT || 27017
+var dbName = process.env.DBNAME || "pmdb"
+var dbUsername = process.env.DBUSERNAME || "admin"
+var dbPassword = process.env.DBPASSWORD || "password"
+var dbAuthentication = process.env.DBAUTHENTICATIONREQUIRED === true ? dbUsername + ':' + dbPassword + '@' : "" 
 
-app.use("/file", require('.Routes/FileRoute'));
+let connectionQuery = "mongodb://" 
+  + dbAuthentication
+  + dbNetworkName
+  + ':' 
+  + dbPort
+  + '/' 
+  + dbName
 
-app.get('file/:filename', async (req, res) => {
-    try {
-        const file = await gfs.files.findOne({filename: req.params.filename})
-        const readStream = gfs.createReadStream(file.filename);
+mongoose.connect(connectionQuery, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('Connecting: ' +  connectionQuery))
+  .then(()=> console.log('Mongo running... status: ' + mongoose.connection.readyState))
+  .catch(()=> console.log('Mongo: connection error!'))
+mongoose.Promise = global.Promise;
 
-        readStream.pipe(res)
-    } catch{
-        res.send('Something went wrong!')
+app.use('/uploads', express.static('uploads'));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  if (req.method === "OPTIONS") {
+    res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
+    return res.status(200).json({});
+  }
+  next();
+});
+
+// Routes which should handle requests
+app.use("/", groupRoutes);
+
+app.use((req, res, next) => {
+  const error = new Error("Not found");
+  error.status = 404;
+  next(error);
+});
+
+app.use((error, req, res, next) => {
+  res.status(error.status || 500);
+  res.json({
+    error: {
+      message: error.message
     }
-})
+  });
+});
 
-app.delete("file/:filename", async (req, res) => {
-    try {
-        await gfs.files.deleteOne({filename: req.params.filename})
-        res.send("Image deleted!")
-    } catch (error) {
-        res.send("Something went wrong!")
-    }
-})
+port = process.env.PORT || 8083;
+app.listen(port);
 
-app.listen(port, console.log("Listening on port ${port}..."));
-
-var cors = require('cors')
-app.use(cors());
-
+module.exports = app;
