@@ -1,8 +1,8 @@
 import axios from "axios";
-import { backendURL } from "./ApiConstants";
+import { backendURL } from "../constants";
 
 export async function createNewAssociate(data) {
-    let path = backendURL + "/associates/create"
+    let path = backendURL + "associates/create"
 
     const associate = data
     const requestparams = {
@@ -21,7 +21,7 @@ export async function createNewAssociate(data) {
 }
 
 export async function updateAssociate(data) {
-    let path = backendURL + "/associates/update"
+    let path = backendURL + "associates/update"
 
     const associate = data
     const requestparams = {
@@ -41,7 +41,7 @@ export async function updateAssociate(data) {
 
 export function deleteAssociate(associateNumber)
 {
-    let path = backendURL + "/associates/delete/" + associateNumber
+    let path = backendURL + "associates/delete/" + associateNumber
     const requestparams = {
         headers: {
             Authorization: localStorage.getItem('token')
@@ -59,7 +59,7 @@ export function deleteAssociate(associateNumber)
 }
 
 export function updateAssociateCredentials(associateNumber, oldPassword, newPassword) {
-    let path = backendURL + "/associates/update/credentials"
+    let path = backendURL + "associates/update/credentials"
 
     const data = {
         associateNumber: associateNumber, 
@@ -82,7 +82,7 @@ export function updateAssociateCredentials(associateNumber, oldPassword, newPass
 }
 
 export function getAssociates() {
-    let path = backendURL + "/associates"
+    let path = backendURL + "associates"
     const requestparams = {
         headers: {
             Authorization: localStorage.getItem('token')
@@ -100,7 +100,7 @@ export function getAssociates() {
 }
 
 export function getAssociateInformation(associateNumber) {
-    let path = backendURL + "/associates/number/" + associateNumber
+    let path = backendURL + "associates/number/" + associateNumber
     const requestparams = {
         headers: {
             Authorization: localStorage.getItem('token')
@@ -118,7 +118,7 @@ export function getAssociateInformation(associateNumber) {
 }
 
 export function resetPassword(associateNumber) {
-    let path = backendURL + "/associates/password/reset/" + associateNumber
+    let path = backendURL + "associates/password/reset/" + associateNumber
     const requestparams = {
         headers: {
             Authorization: localStorage.getItem('token')

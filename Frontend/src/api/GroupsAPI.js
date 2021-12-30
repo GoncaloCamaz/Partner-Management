@@ -1,8 +1,8 @@
 import axios from "axios";
-import { backendURL } from "./ApiConstants";
+import { groupsServerURL } from "../constants";
 
 export function createNewGroup(data) {
-    let path = backendURL + "/groups/create"
+    let path = groupsServerURL + "groups/create"
 
     const associate = data
     const requestparams = {
@@ -21,7 +21,7 @@ export function createNewGroup(data) {
 }
 
 export function updateGroup(data) {
-    let path = backendURL + "/groups/update"
+    let path = groupsServerURL + "groups/update"
 
     const group = data
     const requestparams = {
@@ -40,7 +40,7 @@ export function updateGroup(data) {
 }
 
 export function getGroups() {
-    let path = backendURL + "/groups"
+    let path = groupsServerURL + "groups"
     const requestparams = {
         headers: {
             Authorization: localStorage.getItem('token')

@@ -89,7 +89,6 @@ router.get("/:name", (req, res, next) => {
     .select('name initials groupImage')
     .exec()
     .then(doc => {
-      console.log("From database", doc);
       if (doc) {
         res.status(200).json({
             group: doc

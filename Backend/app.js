@@ -1,18 +1,18 @@
 require('dotenv').config();
 var express = require('express'),
 app = express(),
-port = process.env.PORT || 8080;
+port = process.env.PORT || 8082;
 app.listen(port);
 
 var cors = require('cors')
 app.use(cors());
 
-var dbNetworkName = process.env.NETWORK || "localhost"
+var dbNetworkName = process.env.DBNETWORK || "localhost"
 var dbPort = process.env.DBPORT || 27017
 var dbName = process.env.DBNAME || "pmdb"
 var dbUsername = process.env.DBUSERNAME || "admin"
 var dbPassword = process.env.DBPASSWORD || "password"
-var dbAuthentication = process.env.DBAUTHENTICATIONREQUIRED === true ? dbUsername + ':' + dbPassword + '@' : "" 
+var dbAuthentication = dbUsername + ':' + dbPassword + '@'
 
 var mongoose = require('mongoose');
 let connectionQuery = "mongodb://" 
@@ -22,11 +22,12 @@ let connectionQuery = "mongodb://"
   + dbPort
   + '/' 
   + dbName
+  + '?authSource=admin'
 
 mongoose.connect(connectionQuery, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connecting: ' +  connectionQuery))
   .then(()=> console.log('Mongo running... status: ' + mongoose.connection.readyState))
-  .catch(()=> console.log('Mongo: connection error!'))
+  .catch(()=> console.log('Mongo: connection error! ' + connectionQuery))
 
 app.use(function (_req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -48,6 +49,5 @@ app.use('/payments', require('./Routes/PaymentsRoute'));
 app.use('/paymentmethods', require('./Routes/PaymentMethodsRoute'));
 app.use('/groups', require('./Routes/GroupsRoute'));
 app.use('/partners', require('./Routes/PartnersRoute'));
-app.use('/definitions', require('./Routes/DefinitionsRoute'));
 
 module.exports = app;

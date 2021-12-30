@@ -9,9 +9,9 @@ const { checkAdminAuthorization, checkAuthorization } = require('../AuthUtils');
  */
  router.post('/create', async (req, res) => {
     try{
-        const { password } = req.body.password 
-        const hash = await bcrypt.hash(password, 10)
-        const associate = {password: hash, ...rest}
+       // const { password } = req.body.password 
+      //  const hash = await bcrypt.hash(password, 10)
+        const associate = req.body
     
         return controller.createAssociate(associate)
                          .then(data => res.jsonp(data))
@@ -87,7 +87,7 @@ router.post('/credentials/reset', checkAuthorization, function(_req, res) {
 /**
  * Get all associates
  */
-router.get('/', checkAdminAuthorization, function (_req, res) {
+router.get('/', function (_req, res) {
     return controller.listAll()
                      .then(data => res.jsonp(data))
                      .catch(error => res.status(500).jsonp(error))

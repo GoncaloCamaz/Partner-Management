@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import history from '../../history';
 import axios from 'axios'
+import {backendURL} from '../../constants'
 
 export default function useAuth() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -12,12 +13,11 @@ export default function useAuth() {
     if (token) {
       setAuthenticated(true);
     }
-    setLoading(false);
-  }, []);
+  }, [loading]);
   
   async function handleLogin(username, password) {
     setLoading(true)
-    const URL = "http://192.168.1.224:8080/login"
+    const URL = backendURL + "login"
     var authenticationResult = {
       isAdmin: false, 
       token: null, 
@@ -41,10 +41,12 @@ export default function useAuth() {
         authenticationResult.authenticated = true
         setAuthenticationObject(authenticationResult)
         setAuthenticated(true)
+        setLoading(false);
       }
     }).catch(error => {
       window.alert("Bad credentials inserted!")
       setAuthenticationObject(authenticationResult)
+      setLoading(false);
     });
   }
 

@@ -5,12 +5,12 @@ const mongoose = require("mongoose");
 
 const groupRoutes = require("./Routes/GroupsRoute");
 
-var dbNetworkName = process.env.NETWORK || "localhost"
+var dbNetworkName = process.env.DBNETWORK || "localhost"
 var dbPort = process.env.DBPORT || 27017
 var dbName = process.env.DBNAME || "pmdb"
 var dbUsername = process.env.DBUSERNAME || "admin"
 var dbPassword = process.env.DBPASSWORD || "password"
-var dbAuthentication = process.env.DBAUTHENTICATIONREQUIRED === true ? dbUsername + ':' + dbPassword + '@' : "" 
+var dbAuthentication = dbUsername + ':' + dbPassword + '@'
 
 let connectionQuery = "mongodb://" 
   + dbAuthentication
@@ -19,6 +19,7 @@ let connectionQuery = "mongodb://"
   + dbPort
   + '/' 
   + dbName
+  + '?authSource=admin'
 
 mongoose.connect(connectionQuery, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connecting: ' +  connectionQuery))

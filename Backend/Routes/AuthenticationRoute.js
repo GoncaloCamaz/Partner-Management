@@ -8,24 +8,7 @@ const { checkAdminAuthorization } = require('../AuthUtils');
 /**
  * Authentication process
  */
-router.post('/login', async (req, res) => { 
-/** testing
-    if(req.body.email === "gcamaz@sapo.pt")
-    {
-        const userinfo = {email: req.body.email, user_role: "ADMIN"}
-        const accessToken = jwt.sign(userinfo, /**process.env.ACCESS_TOKEN_SECRET'diufiusdfndsifnianiunai', {expiresIn: '2h'})
-        console.log(accessToken)
-        res.status(200).jsonp({token: accessToken, user_role: 'ADMIN'})
-    }
-    else
-    {
-        const userinfo = {email: req.body.email, user_role: "USER"}
-        const accessToken = jwt.sign(userinfo, /**process.env.ACCESS_TOKEN_SECRET'diufiusdfndsifnianiunai', {expiresIn: '2h'})
-        console.log(accessToken)
-        res.status(200).jsonp({token: accessToken, user_role: 'USER'})
-    }
-**/
-    
+router.post('/login', async (req, res) => {   
     try{
         const credentials = {
             email: req.body.email,
@@ -34,17 +17,17 @@ router.post('/login', async (req, res) => {
         const user = controller.findAssociateByEmail(credentials.email)
         if(user)
         {
-            const validPassword = await bcrypt.compare(credentials.password, user.password)
-            if(validPassword)
-            {
+            //const validPassword = await bcrypt.compare(credentials.password, user.password)
+            //if(validPassword)
+            //{
                 const userinfo = {email: user.email, user_role: user.user_role}
                 const accessToken = jwt.sign(userinfo, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '2h'})
                 res.status(200).jsonp({token: accessToken})
-            }
-            else
-            {
+            //}
+           // else
+           // {
                 res.status(401).jsonp("Wrong credentials!")
-            }
+           // }
         }
         else
         {
