@@ -2,7 +2,8 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-
+const port = process.env.PORT || 8083;
+app.listen(port);
 const groupRoutes = require("./Routes/GroupsRoute");
 
 var dbNetworkName = process.env.DBNETWORK || "localhost"
@@ -21,12 +22,11 @@ let connectionQuery = "mongodb://"
   + dbName
   + '?authSource=admin'
 
-mongoose.connect(connectionQuery, { useNewUrlParser: true, useUnifiedTopology: true })
+/**mongoose.connect(connectionQuery, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connecting: ' +  connectionQuery))
   .then(()=> console.log('Mongo running... status: ' + mongoose.connection.readyState))
   .catch(()=> console.log('Mongo: connection error!'))
-mongoose.Promise = global.Promise;
-
+mongoose.Promise = global.Promise;*/
 app.use('/uploads', express.static('uploads'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -61,8 +61,5 @@ app.use((error, req, res, next) => {
     }
   });
 });
-
-port = process.env.PORT || 8083;
-app.listen(port);
 
 module.exports = app;

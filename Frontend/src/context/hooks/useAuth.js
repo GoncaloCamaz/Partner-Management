@@ -13,7 +13,7 @@ export default function useAuth() {
     if (token) {
       setAuthenticated(true);
     }
-  }, [loading]);
+  }, []);
   
   async function handleLogin(username, password) {
     setLoading(true)
@@ -41,12 +41,10 @@ export default function useAuth() {
         authenticationResult.authenticated = true
         setAuthenticationObject(authenticationResult)
         setAuthenticated(true)
-        setLoading(false);
       }
     }).catch(error => {
       window.alert("Bad credentials inserted!")
       setAuthenticationObject(authenticationResult)
-      setLoading(false);
     });
   }
 

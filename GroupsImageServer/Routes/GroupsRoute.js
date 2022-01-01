@@ -32,6 +32,8 @@ const upload = multer({
 const Group = require("../Models/Groups");
 
 router.get("/", (req, res, next) => {
+  return       res.status(200).json("fuck off");
+
   Group.find()
     .exec()
     .then(docs => {

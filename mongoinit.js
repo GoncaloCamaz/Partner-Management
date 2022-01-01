@@ -1,14 +1,13 @@
-db = db.getSiblingDB('admin');
-// move to the admin db - always created in Mongo
-db.auth("admin", "password");
+db.auth('admin', 'password');
 // log as root admin if you decided to authenticate in your docker-compose file...
 db = db.getSiblingDB('pmdb');
 
-db.createCollection('Associate');
-db.createCollection('PaymentMethod');
+db.createCollection('associates');
+db.createCollection('paymentmethods');
 
 
-db.Associate.insert({
+
+db.associates.insert({
     associateNumber: 0,
     name: "Gestor de Associados",
     phoneNumber: "",
@@ -25,7 +24,7 @@ db.Associate.insert({
     paindUntilYear: ''
 })
 
-db.Associate.insert({
+db.associates.insert({
     associateNumber: 1,
     name: "Gonçalo Dias Camaz Moreira",
     phoneNumber: "912345568",
@@ -42,7 +41,7 @@ db.Associate.insert({
     paindUntilYear: 2021
 })
 
-db.PaymentMethod.insert({
+db.paymentmethods.insert({
     name: "Presencial",
     steps: [{
         stepId: 1,
@@ -59,7 +58,7 @@ db.PaymentMethod.insert({
 })
 
 
-db.PaymentMethod.insert({
+db.paymentmethods.insert({
     name: "Transferência Bancária",
     steps: [{
         stepId: 1,
