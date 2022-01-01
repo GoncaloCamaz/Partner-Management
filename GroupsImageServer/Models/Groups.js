@@ -7,4 +7,4 @@ const groupSchema = mongoose.Schema({
     groupImage: { type: String, required: true }
 });
 
-module.exports = mongoose.model('Group', groupSchema);
+module.exports = mongoose.model('Group', groupSchema, 'groups');

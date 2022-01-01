@@ -54,7 +54,7 @@ services:
       - DBNETWORK=database
       - DBUSERNAME=${DB_USER}
       - DBPASSWORD=${DB_PASSWORD}
-      - PORT=${BACKEND_PORT}
+      - PORT=${IMAGESERVER_PORT}
       - ACCESS_TOKEN_SECRET=${ACCESS_TOKEN_SECRET}}
     ports:
       - ${IMAGESERVER_PORT}:${IMAGESERVER_PORT}

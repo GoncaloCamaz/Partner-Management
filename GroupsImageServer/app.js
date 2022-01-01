@@ -1,65 +1,68 @@
+require("dotenv").config();
+const upload = require("./Routes/Upload");
+const Grid = require("gridfs-stream");
+const mongoose = require("mongoose");
+const mongodb = require('mongodb')
+const connection = require("./db");
 const express = require("express");
 const app = express();
-const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
-const port = process.env.PORT || 8083;
-app.listen(port);
-const groupRoutes = require("./Routes/GroupsRoute");
+const mime = require('mime')
 
-var dbNetworkName = process.env.DBNETWORK || "localhost"
-var dbPort = process.env.DBPORT || 27017
-var dbName = process.env.DBNAME || "pmdb"
-var dbUsername = process.env.DBUSERNAME || "admin"
-var dbPassword = process.env.DBPASSWORD || "password"
-var dbAuthentication = dbUsername + ':' + dbPassword + '@'
+let gfs;
+connection();
 
-let connectionQuery = "mongodb://" 
-  + dbAuthentication
-  + dbNetworkName
-  + ':' 
-  + dbPort
-  + '/' 
-  + dbName
-  + '?authSource=admin'
-
-/**mongoose.connect(connectionQuery, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('Connecting: ' +  connectionQuery))
-  .then(()=> console.log('Mongo running... status: ' + mongoose.connection.readyState))
-  .catch(()=> console.log('Mongo: connection error!'))
-mongoose.Promise = global.Promise;*/
-app.use('/uploads', express.static('uploads'));
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-  );
-  if (req.method === "OPTIONS") {
-    res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
-    return res.status(200).json({});
-  }
-  next();
+const conn = mongoose.connection;
+conn.once("open", function () {
+    gfs = Grid(conn.db, mongoose.mongo);
+    gfs.collection("photos");
 });
 
-// Routes which should handle requests
-app.use("/", groupRoutes);
+app.use("/upload", upload);
 
-app.use((req, res, next) => {
-  const error = new Error("Not found");
-  error.status = 404;
-  next(error);
-});
+// media routes
+app.get("/file/:filename", async (req, res) => {
+    try {
+        const filename = req.params.filename
+        gfs.files.findOne({ filename: filename }, (err, file) => {
+          if (err) {
+              // report the error
+              console.log(err);
+          } else {
+              // detect the content type and set the appropriate response headers.
+              let mimeType = file.contentType;
+              if (!mimeType) {
+                  mimeType = mime.lookup(file.filename);
+              }
+              res.set({
+                  'Content-Type': mimeType,
+                  'Content-Disposition': 'attachment; filename=' + file.filename
+              });
 
-app.use((error, req, res, next) => {
-  res.status(error.status || 500);
-  res.json({
-    error: {
-      message: error.message
+              const readStream = gfs.createReadStream({
+                  filename: file.filename
+              });
+              readStream.on('error', err => {
+                  // report stream error
+                  console.log(err);
+              });
+              // the response will be the file itself.
+              readStream.pipe(res);
+          }
+      });
+    } catch (error) {
+        res.send("not found");
     }
-  });
 });
 
-module.exports = app;
+app.delete("/file/:filename", async (req, res) => {
+    try {
+        await gfs.files.deleteOne({ filename: req.params.filename });
+        res.send("success");
+    } catch (error) {
+        console.log(error);
+        res.send("An error occured.");
+    }
+});
+
+const port = process.env.PORT || 8083;
+app.listen(port, console.log(`Listening on port ${port}...`));
