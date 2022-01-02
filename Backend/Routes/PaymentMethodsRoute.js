@@ -23,7 +23,7 @@ router.delete('/delete/:name', checkAdminAuthorization, function(req,res){
 /**
  * Get all Payment methods
  */
-router.get('/', checkAuthorization,function (_req, res) {
+router.get('/', checkAuthorization, function (_req, res) {
     return controller.listAll()
                      .then(data => res.jsonp(data))
                      .catch(error => res.status(500).jsonp(error))

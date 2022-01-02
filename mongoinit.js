@@ -4,8 +4,8 @@ db = db.getSiblingDB('pmdb');
 
 db.createCollection('associates');
 db.createCollection('paymentmethods');
-
-
+db.createCollection('payments');
+db.createCollection('partnerships');
 
 db.associates.insert({
     associateNumber: 0,
@@ -39,6 +39,23 @@ db.associates.insert({
     joinedIn: '',
     groups: ["TUM"],
     paindUntilYear: 2021
+})
+
+db.associates.insert({
+    associateNumber: 2,
+    name: "António Joaquim Manuel",
+    phoneNumber: "913333333",
+    address: "Rua do Minho",
+    city: "Braga",
+    postalCode: "4710-123",
+    nickname: "TóManel",
+    active: true,
+    email: "tomanel@gmail.cpm",
+    password: "password",
+    userRole: "USER",
+    joinedIn: '',
+    groups: ["TUM", "Bomboémia"],
+    paindUntilYear: 2020
 })
 
 db.paymentmethods.insert({
@@ -76,4 +93,29 @@ db.paymentmethods.insert({
         stepId: 4,
         stepDescription: "Poderás fazer download ao recibo assim que o gestor de associados registar o pagamento na plataforma." 
     }]
+})
+
+db.payments.insert({
+    associateNumber: 1,
+    associateName: "Gonçalo Dias Camaz Moreira",
+    paymentDate: new Date(2021,12,20),
+    valueReceived: 20,
+    yearsPaid: 2
+})
+
+db.partnerships.insert({
+    name: "VideoNorte",
+    phoneNumber: 253051420,
+    email: "geral@videonorte.pt",
+    website: "www.videonorte.pt",
+    addresses: [{
+        address: "Rua Nova de Santa Cruz 49",
+        city: "Braga",
+        postalCode: "4710-409",
+        latitude: "41.557213163098396",
+        longitude: "-8.399418413529137"
+    }],
+    startDate: new Date(2020,10,2),
+    active: true,
+    advantages: ["Desconto de 15% em impressões a cores","Desconto de 10% em impressões a cores"]
 })
