@@ -11,13 +11,13 @@ function App() {
   
   return (
     <div className="App">
+      <Provider store={reduxStore}>
         <GroupProvider>
-          <Provider store={reduxStore}>
-            <Router history={history}>
-              <Routes />
-            </Router>
-          </Provider>
+          <Router history={history}>
+            <Routes />
+          </Router>
         </GroupProvider>
+      </Provider>
     </div>
   );
 }

@@ -14,7 +14,9 @@ router.post('/login', async (req, res) => {
             email: req.body.email,
             password: req.body.password
         }
+        console.log(credentials)
         const user = await controller.findAssociateByEmail(credentials.email)
+        console.log(user)
         if(user)
         {
             const validPassword = user.password === credentials.password ? true : false //await bcrypt.compare(credentials.password, user.password)
@@ -22,7 +24,7 @@ router.post('/login', async (req, res) => {
             {
                 const userinfo = {email: user.email, user_role: user.user_role}
                 const accessToken = jwt.sign(userinfo, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '2h'})
-                res.status(200).jsonp({token: accessToken})
+                res.status(200).jsonp({token: accessToken, userRole: userinfo.user_role})
             }
             else
             {

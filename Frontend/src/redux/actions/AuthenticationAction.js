@@ -8,18 +8,18 @@ const AuthenticationActionType = {
 }
 
 const LoginAuthenticationAction = (userState, history, setErrorHandler) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         try{
             const URL = backendURL + "login"
-            const response = {token: "manananana", userRole: "ADMIN"}//await axios.post(URL,userState)
-            const isAdmin = response.userRole === "ADMIN" ? true : false
-            const data = response;
-            dispatch({type: AuthenticationActionType.LOGIN_SUCCESS, payload: {email: userState.email, isAdmin: isAdmin, ...podata}})
+            const response = await axios.post(URL,userState)
+            const data = response.data;
+            const isAdmin = data.userRole === "ADMIN" ? true : false
+            dispatch({type: AuthenticationActionType.LOGIN_SUCCESS, payload: {email: userState.email, isAdmin: isAdmin, ...data}})
             history.push("/home")
         } 
         catch (error){
             dispatch({type: AuthenticationActionType.LOGIN_FAILED, payload: {}})
-            setErrorHandler({ hasError: true, message: error.response.data.message });
+            setErrorHandler({ hasError: true, message: error });
         }
     }
 }

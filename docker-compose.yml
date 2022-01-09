@@ -66,15 +66,15 @@ services:
     build:
       context: ./Frontend
       dockerfile: Dockerfile
+      args:
+        - REACT_APP_BACKENDURL=${REACT_APP_BACKEND_URL}
+        - REACT_APP_GROUPSERVERURL=${REACT_APP_GROUPSERVER_URL}
     container_name: frontend
     restart: always
     depends_on:
       - backend
       - groupserver
       - database
-    environment:
-      - BACKENDURL=${BACKEND_URL}
-      - GROUPSERVERURL=${GROUPSERVER_URL}
     ports: 
       - 80:81
     networks:

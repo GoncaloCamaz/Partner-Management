@@ -15,3 +15,5 @@ router.get('/', checkAuthorization, async (req,res) => {
         res.status(500).jsonp("Something went wrong!")
     }
 })
+
+module.exports = router;
