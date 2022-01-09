@@ -1,3 +1,5 @@
+const { db } = require("./Backend/Models/Associate");
+
 db.auth('admin', 'password');
 // log as root admin if you decided to authenticate in your docker-compose file...
 db = db.getSiblingDB('pmdb');
@@ -6,6 +8,7 @@ db.createCollection('associates');
 db.createCollection('paymentmethods');
 db.createCollection('payments');
 db.createCollection('partnerships');
+db.createCollection('groups');
 
 db.associates.insert({
     associateNumber: 0,
@@ -118,4 +121,40 @@ db.partnerships.insert({
     startDate: new Date(2020,10,2),
     active: true,
     advantages: ["Desconto de 15% em impressões a cores","Desconto de 10% em impressões a cores"]
+})
+
+db.groups.insert({
+    name: "Bomboémia",
+    initials: "Bomboémia",
+    imagePath: ''
+})
+
+db.groups.insert({
+    name: "Grupo Folclórico da Universidade do Minho",
+    initials: "GFUM",
+    imagePath: ''
+})
+
+db.groups.insert({
+    name: "Grupo de Música Popular da Universidade do Minho",
+    initials: "GMP",
+    imagePath: ''
+})
+
+db.groups.insert({
+    name: "Grupo de Poesia da Universidade do Minho",
+    initials: "GPUM",
+    imagePath: ''
+})
+
+db.groups.insert({
+    name: "Tuna Universitária do Minho",
+    initials: "TUM",
+    imagePath: ''
+})
+
+db.groups.insert({
+    name: "Tun'ao Minho",
+    initials: "Tun'ao Minho",
+    imagePath: ''
 })

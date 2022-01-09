@@ -1,21 +1,22 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 import './Navbar.css';
 import { IconContext } from 'react-icons';
-import { Context } from '../../context/AuthContext';
+import { LogoutAuthenticationAction } from '../../redux/actions/AuthenticationAction';
+import {connect} from 'react-redux'
 
 function Navbar(props) {
+  const { authState, logout } = props;
+  const isAdmin = authState.isAdmin
   const [sidebar, setSidebar] = useState(false);
-  const { handleLogout } = useContext(Context);
-  const isAdmin = props.isAdmin
-
   const showSidebar = () => setSidebar(!sidebar);
+  const history = useHistory();
 
   const handleClick = () => {
-    handleLogout() 
+    logout(history);
   }
 
   return (
@@ -78,4 +79,18 @@ function Navbar(props) {
   );
 }
 
-export default Navbar;
+const mapStateToProps = (state) => {
+  return {
+    ...state,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logout: (history) => {
+      dispatch(LogoutAuthenticationAction(history));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar)

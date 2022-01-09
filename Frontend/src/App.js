@@ -2,19 +2,22 @@ import React from 'react';
 import { Router } from 'react-router-dom';
 import Routes from './routes';
 import history from './history';
-import { AuthProvider } from './context/AuthContext';
-import { GroupProvider } from './context/GroupContext'
+import { GroupProvider } from './context/GroupContext';
+import {Provider} from 'react-redux'
+import store from './redux/store';
 
 function App() {
+  const reduxStore = store
+  
   return (
     <div className="App">
-      <AuthProvider>
         <GroupProvider>
-          <Router history={history}>
-            <Routes />
-          </Router>
+          <Provider store={reduxStore}>
+            <Router history={history}>
+              <Routes />
+            </Router>
+          </Provider>
         </GroupProvider>
-      </AuthProvider>
     </div>
   );
 }

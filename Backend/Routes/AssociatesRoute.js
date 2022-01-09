@@ -13,7 +13,7 @@ const { checkAdminAuthorization, checkAuthorization } = require('../AuthUtils');
       //  const hash = await bcrypt.hash(password, 10)
         const associate = req.body
     
-        return controller.createAssociate(associate)
+        return await controller.createAssociate(associate)
                          .then(data => res.jsonp(data))
                          .catch(error => res.status(500).jsonp(error))
     } catch(e) {
@@ -24,9 +24,9 @@ const { checkAdminAuthorization, checkAuthorization } = require('../AuthUtils');
 /**
  * Updates Associate's information
  */
- router.post('/update', checkAuthorization, function (req, res) {
+ router.post('/update', checkAuthorization, async (req, res) => {
     try{
-        return controller.updateAssociate(req.body)
+        return await controller.updateAssociate(req.body)
                          .then(data => res.jsonp(data))
                          .catch(error => res.status(500).jsonp(error))
     } catch(e) {
@@ -76,7 +76,7 @@ router.post('/credentials/reset', checkAuthorization, function(_req, res) {
  */
  router.delete('/delete:associateNumber', checkAdminAuthorization, async (req, res) => {
     try{
-        return controller.deleteAssociate(req.params.associateNumber)
+        return await controller.deleteAssociate(req.params.associateNumber)
                          .then(data => res.jsonp(data))
                          .catch(error => res.status(500).jsonp(error))
     } catch(e) {
@@ -87,28 +87,37 @@ router.post('/credentials/reset', checkAuthorization, function(_req, res) {
 /**
  * Get all associates
  */
-router.get('/', function (_req, res) {
-    return controller.listAll()
-                     .then(data => res.jsonp(data))
-                     .catch(error => res.status(500).jsonp(error))
+router.get('/', async function (_req, res) {
+    try {
+        const data = await controller.listAll();
+        return res.jsonp(data);
+    } catch (error) {
+        return res.status(500).jsonp(error);
+    }
 });
 
 /**
  * Get associate information by associate number
  */
-router.get('/number/:number', checkAuthorization, function(req, res){
-    return controller.findAssociateByAssociateNumber(req.params.number)
-                     .then(data => res.jsonp(data))
-                     .catch(error => res.status(500).jsonp(error))
+router.get('/number/:number', checkAuthorization, async function(req, res){
+    try {
+        const data = await controller.findAssociateByAssociateNumber(req.params.number);
+        return res.jsonp(data);
+    } catch (error) {
+        return res.status(500).jsonp(error);
+    }
 })
 
 /**
  * Gets all associates with paid shares until given year
  */
-router.get('/fees/:year', checkAdminAuthorization, function(req,res){
-    return controller.listAllWithPaidShares(req.params.year)
-                     .then(data => res.jsonp(data))
-                     .catch(error => res.status(500).jsonp(error))
+router.get('/fees/:year', checkAdminAuthorization, async function(req,res){
+    try {
+        const data = await controller.listAllWithPaidShares(req.params.year);
+        return res.jsonp(data);
+    } catch (error) {
+        return res.status(500).jsonp(error);
+    }
 })
 
 

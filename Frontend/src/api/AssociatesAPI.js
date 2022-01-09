@@ -1,6 +1,17 @@
 import axios from "axios";
 import { backendURL } from "../constants";
 
+export async function getInitialInformation(email) {
+    let path = backendURL + "all/"+email
+    await axios.get(path)
+         .then((response) => {
+            return response
+         })
+         .catch(error => {
+             return error
+         })
+}
+
 export async function createNewAssociate(data) {
     let path = backendURL + "associates/create"
 
