@@ -1,7 +1,5 @@
-const { db } = require("./Backend/Models/Associate");
-
 db.auth('admin', 'password');
-// log as root admin if you decided to authenticate in your docker-compose file...
+
 db = db.getSiblingDB('pmdb');
 
 db.createCollection('associates');
