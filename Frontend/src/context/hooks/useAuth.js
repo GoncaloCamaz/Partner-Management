@@ -7,15 +7,16 @@ export default function useAuth() {
   const [authenticated, setAuthenticated] = useState(false);
   const [loading, setLoading] = useState(false)
   const [authenticationObject, setAuthenticationObject] = useState({isAdmin: false, loading: false, token: null, authenticated: false})
-
+  
   useEffect(() => {
-    const token = localStorage.getItem("token")
+    const token = localStorage.getItem('token');
     if (token) {
       setAuthenticated(true);
     }
-  }, []);
+    setLoading(false);
+  }, [loading]);
   
-  async function handleLogin(username, password) {
+  function handleLogin(username, password) {
     setLoading(true)
     const URL = backendURL + "login"
     var authenticationResult = {
@@ -24,7 +25,7 @@ export default function useAuth() {
       authenticated: false
     }
 
-    await axios.post(URL, {
+    axios.post(URL, {
       email: username,
       password: password
     })
@@ -32,8 +33,10 @@ export default function useAuth() {
       if(response.status === 200)
       {
         localStorage.setItem("token", response.data.token)
-        if(response.data.user_role === 'ADMIN')
+        localStorage.setItem("user", username)
+        if(response.data.userRole === 'ADMIN')
         {
+          localStorage.setItem("isAdmin", "true")
           authenticationResult.isAdmin = true
         }
         
@@ -41,6 +44,8 @@ export default function useAuth() {
         authenticationResult.authenticated = true
         setAuthenticationObject(authenticationResult)
         setAuthenticated(true)
+        setLoading(false)
+        history.push('/home');
       }
     }).catch(error => {
       window.alert("Bad credentials inserted!")

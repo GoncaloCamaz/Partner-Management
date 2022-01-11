@@ -2,8 +2,10 @@ import React from 'react';
 import { Router } from 'react-router-dom';
 import Routes from './routes';
 import history from './history';
+import { GroupProvider } from './context/GroupContext';
+import {Provider} from 'react-redux'
+import store from './redux/store';
 import { AuthProvider } from './context/AuthContext';
-import { GroupProvider } from './context/GroupContext'
 
 function App() {
   return (

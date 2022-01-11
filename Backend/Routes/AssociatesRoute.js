@@ -74,7 +74,7 @@ router.post('/credentials/reset', checkAuthorization, function(_req, res) {
 /**
  * Create new Associate
  */
- router.delete('/delete:associateNumber', checkAdminAuthorization, async (req, res) => {
+ router.delete('/delete/:associateNumber', checkAdminAuthorization, async (req, res) => {
     try{
         return controller.deleteAssociate(req.params.associateNumber)
                          .then(data => res.jsonp(data))
@@ -100,6 +100,18 @@ router.get('/number/:number', checkAuthorization, function(req, res){
     return controller.findAssociateByAssociateNumber(req.params.number)
                      .then(data => res.jsonp(data))
                      .catch(error => res.status(500).jsonp(error))
+})
+
+/**
+ * Get associate information by associate number
+ */
+ router.get('/email/:email', checkAuthorization, async function(req, res){
+    try {
+        const data = await controller.findAssociateByEmail(req.params.email);
+        return res.jsonp(data);
+    } catch (error) {
+        return res.status(500).jsonp(error);
+    }
 })
 
 /**

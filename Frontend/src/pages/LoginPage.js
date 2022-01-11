@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -10,7 +10,6 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { Context } from '../context/AuthContext';
-import { Redirect } from 'react-router-dom';
 
 function Copyright() {
   return (
@@ -58,29 +57,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function LoginPage() {
   const classes = useStyles();
-  const { handleLogin, authenticated, authenticationObject } = useContext(Context);
+  const { handleLogin } = useContext(Context);
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
-  const [redirectToHomePage, setRedirectToHomePage] = useState(false)
-
 
   const handleClick = () => {
     handleLogin(username,password)
-    if(authenticated === true)
-    {
-      setRedirectToHomePage(true)
-    }
   }
 
-  if(redirectToHomePage)
-  {
-    return <Redirect to={{
-      pathname: "home",
-      }}
-  />
-  }
-  else
-  {
   return (
     <Grid container component="main" className={classes.main}>
       <Grid item xs={false} sm={4} md={7} className={classes.imageLogin} />
@@ -141,5 +125,4 @@ export default function LoginPage() {
       </Grid>
     </Grid>
   );
-  }
 }

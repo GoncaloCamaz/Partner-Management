@@ -44,12 +44,11 @@ const useStyles = makeStyles({
 export default function OutlinedCard(props) {
   const classes = useStyles();
   const cardTitle = "Quota"//props.title
-  const message = "2020"
+  const message = props.associate.paindUntilYear || 2022
   const year = new Date().getFullYear()
   const paidYear = Number(message)
 
   const handleSeeFees = () => {
-    console.log("Handle see fees")
     props.handleSeeFees()
   }
 
@@ -61,7 +60,7 @@ export default function OutlinedCard(props) {
           <Typography >
               <EuroSymbolIcon className={classes.icon} fontSize="inherit"/>
           </Typography>
-          <Typography variant="h5" component="h2">
+          <Typography variant="h4" component="h2">
               {cardTitle}
           </Typography>
           <br/>

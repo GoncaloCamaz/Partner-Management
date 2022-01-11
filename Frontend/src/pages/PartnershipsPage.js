@@ -14,62 +14,70 @@ export default class PartnershipsPage extends Component {
     }
 
     componentDidMount() {
+        console.log(this.props)
         //this.partnershipsTableUpdate()
-        this.setState({partnerships: 
-            [
-            {
-                name: "Tasquinha Bracarense",
-                startDate: "26-12-1998",
-                active: "true",
-                advantages: ["Oferta da sopa","Sobremesa"],
-                addresses: [
-                    {
-                        address: "Rua dos bares nº 5",
-                        city: "braga",
-                        postalCode: "4482-123",
-                        latitude: "41.5616",
-                        longitude: "-8.39653"
-                    }
-                ],
-                phoneNumber: "123123123", 
-                email: "email@arc.pt"
-            },
-            {
-                name: "Video Norte",
-                startDate: "26/12/1998",
-                active: "true",
-                advantages: ["Desconto de 50 centimos por impressao"],
-                addresses: [
-                    {
-                        address: "Rua dos bares nº 115",
-                        city: "braga",
-                        postalCode: "44822-123",
-                        latitude: "41.5616",
-                        longitude: "-8.39653"
-                    }
-                ],
-                phoneNumber: "123123123", 
-                email: "email@arc.pt"
-            },
-            {
-                name: "Oculista",
-                startDate: "26/12/1998",
-                active: "true",
-                advantages: ["Oferta da sopa","Sobremesa"],
-                addresses: [
-                    {
-                        address: "Rua dos bares nº 5",
-                        city: "braga",
-                        postalCode: "4482-123",
-                        latitude: "41.5616",
-                        longitude: "-8.39653"
-                    }
-                ],
-                phoneNumber: "123123123", 
-                email: "email@arc.pt"
-            }
-            ]
-        })
+        if(this.props.location.content !== undefined)
+        {
+            this.setState({partnerships: this.props.location.content})
+        }
+        else
+        {
+            this.setState({partnerships: 
+                [
+                {
+                    name: "Tasquinha Bracarense",
+                    startDate: "26-12-1998",
+                    active: "true",
+                    advantages: ["Oferta da sopa","Sobremesa"],
+                    addresses: [
+                        {
+                            address: "Rua dos bares nº 5",
+                            city: "braga",
+                            postalCode: "4482-123",
+                            latitude: "41.5616",
+                            longitude: "-8.39653"
+                        }
+                    ],
+                    phoneNumber: "123123123", 
+                    email: "email@arc.pt"
+                },
+                {
+                    name: "Video Norte",
+                    startDate: "26/12/1998",
+                    active: "true",
+                    advantages: ["Desconto de 50 centimos por impressao"],
+                    addresses: [
+                        {
+                            address: "Rua dos bares nº 115",
+                            city: "braga",
+                            postalCode: "44822-123",
+                            latitude: "41.5616",
+                            longitude: "-8.39653"
+                        }
+                    ],
+                    phoneNumber: "123123123", 
+                    email: "email@arc.pt"
+                },
+                {
+                    name: "Oculista",
+                    startDate: "26/12/1998",
+                    active: "true",
+                    advantages: ["Oferta da sopa","Sobremesa"],
+                    addresses: [
+                        {
+                            address: "Rua dos bares nº 5",
+                            city: "braga",
+                            postalCode: "4482-123",
+                            latitude: "41.5616",
+                            longitude: "-8.39653"
+                        }
+                    ],
+                    phoneNumber: "123123123", 
+                    email: "email@arc.pt"
+                }
+                ]
+            })
+        }
         this.setState({isLoaded: true})
     }
 
