@@ -28,9 +28,9 @@ db.associates.insert({
     associateNumber: 1,
     name: "Gonçalo Dias Camaz Moreira",
     phoneNumber: "912345568",
-    address: "Rua de Aveleda",
-    city: "Vila do Conde",
-    postalCode: "4485-123",
+    address: "Rua Dr. Alberto Silva",
+    city: "Braga",
+    postalCode: "4700-123",
     nickname: "Camadas",
     active: true,
     email: "gcamaz@sapo.pt",
@@ -42,7 +42,7 @@ db.associates.insert({
 })
 
 db.associates.insert({
-    associateNumber: 2,
+    associateNumber: 635,
     name: "António Joaquim Manuel",
     phoneNumber: "913333333",
     address: "Rua do Minho",
@@ -117,5 +117,22 @@ db.partnerships.insert({
     }],
     startDate: new Date(2020,10,2),
     active: true,
-    advantages: ["Desconto de 15% em impressões a cores","Desconto de 10% em impressões a cores"]
+    advantages: ["Desconto de 15% em impressões a Preto e Branco","Desconto de 10% em impressões a cores"]
+})
+
+db.partnerships.insert({
+    name: "Restaurante do Alberto",
+    phoneNumber: 213456432,
+    email: "geral@restaurante.pt",
+    website: "www.restaurantealberto.pt",
+    addresses: [{
+        address: "Rua Nova de Santa Cruz 50",
+        city: "Braga",
+        postalCode: "4710-429",
+        latitude: "41.556113163098396",
+        longitude: "-8.399318413529137"
+    }],
+    startDate: new Date(2020,10,2),
+    active: true,
+    advantages: ["Oferta da Sopa","Pack Full Menu (Café, prato principal, sobremesa)"]
 })

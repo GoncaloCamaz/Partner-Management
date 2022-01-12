@@ -1,20 +1,11 @@
-zimport React, { useContext, useState, useEffect } from 'react';
-import Navbar from '../components/navbar/Navbar'
+import React from 'react';
 import { Context } from '../context/AuthContext';
 import { GroupContext } from '../context/GroupContext';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@mui/material/Grid';
-import FeeCard from '../components/cards/FeeCard'
-import ProfileCard from '../components/cards/ProfileCard'
-import EcardDownloadCard from '../components/cards/EcardDownloadCard'
-import ParthershipsCard from '../components/cards/PartnershipsCard'
-import { Redirect } from 'react-router-dom';
 import './Pages.css'
 import HomePageAdmin from './HomePageAdmin';
 import HomePageUser from './HomePageUser';
 import { Component } from 'react';
 import axios from "axios";
-import { Context } from '../context/AuthContext'
 import {backendURL} from '../constants'
 
 class HomePage extends Component {
@@ -66,14 +57,23 @@ class HomePage extends Component {
     }
 
     render() {
-        if(this.state.isAdmin === true)
+        if(!this.state.isLoaded)
         {
-            return <HomePageAdmin />
-            
+            return <div>
+                <h1>Loading</h1>
+            </div>
         }
         else
         {
-            return <HomePageUser content={this.state.homePageContent} />
+            if(this.state.isAdmin === true)
+            {
+                return <HomePageAdmin />
+                
+            }
+            else
+            {
+                return <HomePageUser content={this.state.homePageContent} />
+            }
         }
     }
 }

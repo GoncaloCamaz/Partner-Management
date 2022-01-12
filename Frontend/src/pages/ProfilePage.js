@@ -73,7 +73,7 @@ export default function ProfilePage(props) {
     
     const admin = GetAdminContentFromContext()
     const groups = GetGroupsContentFromContext()
-
+    console.log("props location content", props.location.content)
     const associate = LoadAssociateContent(props.location.content)
     console.log(associate)
     const updateSelected = (selected) => {
@@ -110,7 +110,7 @@ export default function ProfilePage(props) {
                                 <Grid item lg={3} md={3} sm={12} xs={12}>
                                     <UserMenu updateSelected={updateSelected} />
                                     <br/>
-                                    <AssociateNumberCard associateNumber={1}/>
+                                    <AssociateNumberCard associateNumber={635}/>
                                 </Grid>
                                 <Grid item lg={9} md={9} sm={12} xs={12}>
                                     <ProfileForm currentMenu={displayedForm} groups={groups} associate={associate}/>
