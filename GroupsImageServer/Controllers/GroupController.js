@@ -1,4 +1,4 @@
-var Group = require('../Models/Group')
+var Group = require('../Models/Groups')
 const Groups = module.exports
 
 /**

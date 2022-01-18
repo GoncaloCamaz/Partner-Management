@@ -1,6 +1,5 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React from 'react';
 import Navbar from '../components/navbar/Navbar'
-import { GroupContext } from '../context/GroupContext';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@mui/material/Grid';
 import FeeCard from '../components/cards/FeeCard'
@@ -9,92 +8,101 @@ import EcardDownloadCard from '../components/cards/EcardDownloadCard'
 import ParthershipsCard from '../components/cards/PartnershipsCard'
 import { Redirect } from 'react-router-dom';
 import './Pages.css'
+import { GroupContext } from '../context/GroupContext';
+import { withRouter } from 'react-router-dom';
+import { Component } from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-      maxHeight: 'fit-content',
-      height: '100%'
-    },
-    gridcontainer: {
-      textAlign: 'center',
-    },
-    paper: {
-      backgroundColor: '#060b26',
-      color: theme.palette.text.secondary,
-    }, 
-  }));
-
-export default function HomePageUser(props) {
-    const {groups,handleGetGroups} = useContext(GroupContext)
-    useEffect(() => {
-        if (groups.length === 0) {
-            handleGetGroups()
+class HomePageUser extends Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            associate: props.associate || {},
+            partnerships: props.partnerships || [],
+            isLoaded: false,
+            cardClicked: false,
+            cardClickedName: '',
+            contentToShareWithProps: {}
         }
-      }, [groups, handleGetGroups])
-
-    const classes = useStyles();
-    const [cardClicked, setCardClicked] = useState(false)
-    const [cardClicked_name, setCardClicked_name] = useState("")
-    const [propsToSend, setPropsToSend] = useState({})
-
-    const associate = props.content.associate
-    const partnerships = props.content.partnerships
-
-    const handleSeeFees = () => {
-        setCardClicked_name("payments")
-        setCardClicked(true)
-      }
-    
-    const handleSeeProfile = () => {
-        setCardClicked_name("profile")
-        setPropsToSend(associate)
-        setCardClicked(true)
-    }
-    
-    const handleSeePartnerships = () => {
-       setCardClicked_name("partnerships")
-       setPropsToSend(partnerships)
-       setCardClicked(true)
     }
 
-    
-    if(cardClicked)
-    {
-        return <Redirect push to={{pathname: cardClicked_name, content: propsToSend}}/>
+    componentDidMount() {
+        console.log(this.props)
+        const groupsFromContext = this.props.groups
+        if(groupsFromContext.length === 0)
+        {
+            this.props.handleGetGroups()
+            console.log(this.props)
+        }
     }
-    else
-    {
-        return (
-            <div className="home">
-                <Navbar/>
-                <div className="page-container">
-                    <div className={classes.root}>
-                        <Grid container columnSpacing={3} className={classes.gridcontainer}>
-                            <Grid item lg={6} md={6} sm={12} xs={12}>
-                                <Paper className={classes.paper}>
-                                    <ProfileCard associate={associate} handleSeeProfile={handleSeeProfile}/>
-                                </Paper>
-                                <br/>
-                                <Paper className={classes.paper}>
-                                    <EcardDownloadCard associate={associate} arcumImage={"http://arcum.pt/images/logos/arcum.png"}/>
-                                </Paper>
+
+    handleSeeFees() {
+        this.setState({cardClickedName: "payments"}, () => {
+            this.setState({cardClicked: true})
+        })
+    }
+
+    handleSeeProfile() {
+        this.setState({cardClickedName: "profile"}, () => {
+            this.setState({contentToShareWithProps: this.state.associate}, () => {
+                this.setState({cardClicked: true})
+            })
+        })
+    }
+
+    handleSeePartnerships() {
+        this.setState({cardClickedName: "partnerships"}, () => {
+            this.setState({contentToShareWithProps: this.state.partnerships}, () => {
+                this.setState({cardClicked: true})
+            })
+        })
+    }
+
+    render() {
+        if(this.state.cardClicked)
+        {
+            return <Redirect push to={{pathname: this.state.cardClickedName, content: this.state.contentToShareWithProps}}/>
+        }
+        else
+        {
+            return (
+                <div className="home">
+                    <Navbar/>
+                    <div className="page-container">
+                        <div style={{flexGrow: 1, maxHeight: 'fit-content', height: '100%'}}>
+                            <Grid container columnSpacing={3} style={{textAlign: 'center'}} >
+                                <Grid item lg={6} md={6} sm={12} xs={12}>
+                                    <Paper style={{backgroundColor:'#060b26'}}>
+                                        <ProfileCard associate={this.state.associate} handleSeeProfile={this.handleSeeProfile}/>
+                                    </Paper>
+                                    <br/>
+                                    <Paper style={{backgroundColor:'#060b26'}}>
+                                        <EcardDownloadCard associate={this.state.associate} arcumImage={"http://arcum.pt/images/logos/arcum.png"}/>
+                                    </Paper>
+                                    <br/>
+                                </Grid>
+                                <Grid item lg={6} md={6} sm={12} xs={12}>
+                                    <Paper style={{backgroundColor:'#060b26'}}>
+                                        <FeeCard associate={this.state.associate} handleSeeFees={this.handleSeeFees}/>
+                                    </Paper>
+                                    <br/>
+                                    <Paper style={{backgroundColor:'#060b26'}}>
+                                        <ParthershipsCard partnerships={this.state.partnerships} handleSeePartnerships={this.handleSeePartnerships}/>
+                                    </Paper>
+                                </Grid>
                             </Grid>
-                            <Grid item lg={6} md={6} sm={12} xs={12}>
-                                <Paper className={classes.paper}>
-                                    <FeeCard associate={associate} handleSeeFees={handleSeeFees}/>
-                                </Paper>
-                                <br/>
-                                <Paper className={classes.paper}>
-                                    <ParthershipsCard partnerships={partnerships} handleSeePartnerships={handleSeePartnerships}/>
-                                </Paper>
-                            </Grid>
-                        </Grid>
+                        </div>
                     </div>
-                </div>
-            </div>   
-        );
+                </div>   
+            );
+        }
     }
 }
+
+const HomePageUserContext = (props) => 
+    <GroupContext.Consumer>
+        {
+            context => <HomePageUser {...props} groups={context.groups} handleGetGroups={context.handleGetGroups} />
+        }
+    </GroupContext.Consumer>
+
+    export default withRouter(HomePageUserContext)

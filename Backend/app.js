@@ -47,7 +47,7 @@ app.use('/', require('./Routes/AuthenticationRoute'));
 app.use('/associates', require('./Routes/AssociatesRoute'));
 app.use('/payments', require('./Routes/PaymentsRoute'));
 app.use('/paymentmethods', require('./Routes/PaymentMethodsRoute'));
-app.use('/groups', require('./Routes/GroupsRoute'));
 app.use('/partners', require('./Routes/PartnersRoute'));
+app.use('/all', require('./Routes/GeneralRoute'))
 
 module.exports = app;

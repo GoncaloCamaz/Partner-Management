@@ -1,2 +1,2 @@
-export const backendURL = process.env.REACT_APP_BACKENDURL ||'http://localhost/api/backend/'
-export const groupsServerURL = process.env.REACT_APP_GROUPSERVERURL || 'http://localhost:8083/'
+export const backendURL = process.env.REACT_APP_BACKEND_URL ||'http://localhost/api/backend/'
+export const groupsServerURL = process.env.REACT_APP_GROUPSERVER_URL || 'http://localhost/api/groups/'

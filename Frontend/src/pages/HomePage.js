@@ -14,8 +14,11 @@ class HomePage extends Component {
     constructor(props){
         super(props)
         this.state={
+            errorMessage: '',
+            authenticationError: false,
             isLoaded: false,
-            homePageContent: [],
+            associate: {},
+            partnerships: [],
             isAdmin: false
         }
     }
@@ -46,13 +49,20 @@ class HomePage extends Component {
         }
         axios.get(path, requestparams)
         .then((response) => {
-            this.setState({homePageContent: response.data}, () => {
-                this.setState({isLoaded: true})
-            })
+            if(response.status === 200)
+            {
+                const data = response.data
+                this.setState({associate: data.associate, partnerships: data.partnerships}, () => {
+                    this.setState({isLoaded: true})
+                })
+            }
         })
         .catch(error => {
-            console.log(error)
-            this.setState({isLoaded: true})
+            this.setState({errorMessage: error.message}, () => {
+                this.setState({authenticationError: true}, () => {
+                    this.setState({isLoaded: true})
+                })
+            })
         })
     }
 
@@ -60,19 +70,28 @@ class HomePage extends Component {
         if(!this.state.isLoaded)
         {
             return <div>
-                <h1>Loading</h1>
+                <h1>TODO: Loading page</h1>
             </div>
         }
         else
         {
-            if(this.state.isAdmin === true)
+            if(this.state.authenticationError)
             {
-                return <HomePageAdmin />
-                
+                return <div>
+                <h1>TODO: Error page {this.state.errorMessage}</h1>
+            </div>
             }
             else
             {
-                return <HomePageUser content={this.state.homePageContent} />
+                if(this.state.isAdmin === true)
+                {
+                    return <HomePageAdmin />
+                    
+                }
+                else
+                {
+                    return <HomePageUser associate={this.state.associate} partnerships={this.state.partnerships}/>
+                }
             }
         }
     }

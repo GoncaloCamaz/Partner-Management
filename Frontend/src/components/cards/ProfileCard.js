@@ -50,8 +50,9 @@ const useStyles = makeStyles({
 export default function ProfileCard(props) {
   const classes = useStyles();
   const associate = props.associate
-
+  console.log(props)
   const groupContext = useContext(GroupContext)
+
   var groupsToDisplay = []
   groupContext.groups.forEach((item) => {
     if(associate.groups.includes(item.initials))

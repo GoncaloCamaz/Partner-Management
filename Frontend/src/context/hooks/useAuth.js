@@ -19,6 +19,7 @@ export default function useAuth() {
   function handleLogin(username, password) {
     setLoading(true)
     const URL = backendURL + "login"
+    console.log(URL)
     var authenticationResult = {
       isAdmin: false, 
       token: null, 
@@ -36,7 +37,7 @@ export default function useAuth() {
         localStorage.setItem("user", username)
         if(response.data.userRole === 'ADMIN')
         {
-          localStorage.setItem("isAdmin", "true")
+          localStorage.setItem("isAdmin", "1")
           authenticationResult.isAdmin = true
         }
         

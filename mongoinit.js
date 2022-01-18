@@ -6,6 +6,7 @@ db.createCollection('associates');
 db.createCollection('paymentmethods');
 db.createCollection('payments');
 db.createCollection('partnerships');
+db.createCollection('groups')
 
 db.associates.insert({
     associateNumber: 0,
@@ -42,7 +43,7 @@ db.associates.insert({
 })
 
 db.associates.insert({
-    associateNumber: 635,
+    associateNumber: 2,
     name: "António Joaquim Manuel",
     phoneNumber: "913333333",
     address: "Rua do Minho",
@@ -56,6 +57,23 @@ db.associates.insert({
     joinedIn: '',
     groups: ["TUM", "Bomboémia"],
     paindUntilYear: 2020
+})
+
+db.associates.insert({
+    associateNumber: 3,
+    name: "Maria Albertina",
+    phoneNumber: "912345321",
+    address: "Rua do Carmo",
+    city: "Braga",
+    postalCode: "4710-123",
+    nickname: "banessa",
+    active: true,
+    email: "mariaalbertina@gmail.cpm",
+    password: "password",
+    userRole: "USER",
+    joinedIn: '',
+    groups: ["Bomboémia"],
+    paindUntilYear: 2022
 })
 
 db.paymentmethods.insert({
@@ -84,6 +102,26 @@ db.paymentmethods.insert({
     {
         stepId: 2,
         stepDescription: "PT50000706020041579000450" 
+    },
+    {
+        stepId: 3,
+        stepDescription: "Enviar o comprovativo para o email associados@arcum.pt" 
+    },
+    {
+        stepId: 4,
+        stepDescription: "Poderás fazer download ao recibo assim que o gestor de associados registar o pagamento na plataforma." 
+    }]
+})
+
+db.paymentmethods.insert({
+    name: "Transferência MBWay",
+    steps: [{
+        stepId: 1,
+        stepDescription: "Transferir a quantia relativa às quotas em atraso (10€/ano) para o Número da ARCUM." 
+    },
+    {
+        stepId: 2,
+        stepDescription: "913421191" 
     },
     {
         stepId: 3,
@@ -135,4 +173,63 @@ db.partnerships.insert({
     startDate: new Date(2020,10,2),
     active: true,
     advantages: ["Oferta da Sopa","Pack Full Menu (Café, prato principal, sobremesa)"]
+})
+
+db.partnerships.insert({
+    name: "Oculista Boa Vista",
+    phoneNumber: 3212321,
+    email: "geral@boavista.pt",
+    website: "www.oculistaboavista.pt",
+    addresses: [{
+        address: "Rua Nova de Santa Cruz 69",
+        city: "Braga",
+        postalCode: "4710-429",
+        latitude: "41.566113163098396",
+        longitude: "-8.499318413529137"
+    }],
+    startDate: new Date(2020,10,2),
+    active: true,
+    advantages: ["Oferta de óculos de sol na compra de óculos graduados","Lentes solares"]
+})
+
+db.groups.insert({
+    name: "Bomboémia",
+    initials: "Bomboémia",
+    imageName: 'bomboemia.png',
+    imageURL: "http://arcum.pt/images/bomboemia/logo_full.png"
+})
+
+db.groups.insert({
+    name: "Grupo Folclórico da Universidade do Minho",
+    initials: "GFUM",
+    imageName: '',
+    imageURL: "http://arcum.pt/images/gfum/logo.png"
+})
+
+db.groups.insert({
+    name: "Grupo de Música Popular da Universidade do Minho",
+    initials: "GMP",
+    imageName: '',
+    imageURL: "http://arcum.pt/images/gmp/logo.png"
+})
+
+db.groups.insert({
+    name: "Grupo de Poesia da Universidade do Minho",
+    initials: "GPUM",
+    imageName: '',
+    imageURL: "http://arcum.pt/images/gpum/logo_alt.png"
+})
+
+db.groups.insert({
+    name: "Tuna Universitária do Minho",
+    initials: "TUM",
+    imageName: '',
+    imageURL: "http://arcum.pt/images/tum/logo.png"
+})
+
+db.groups.insert({
+    name: "Tun'ao Minho",
+    initials: "Tun'ao Minho",
+    imageName: '',
+    imageURL: "http://arcum.pt/images/tunao/logo.png"
 })
