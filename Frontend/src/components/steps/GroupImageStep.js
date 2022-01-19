@@ -7,8 +7,6 @@ import Button from '@material-ui/core/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
-import { GroupContext } from '../../context/GroupContext';
-
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -29,7 +27,7 @@ const useStyles = makeStyles(() => ({
     color: '#fff',
   },
   img: {
-    height: 155,
+    height: 160,
     maxWidth: 200,
     overflow: 'hidden',
     width: '100%',
@@ -77,25 +75,29 @@ function GroupImageStep(props) {
           </div>
         ))}
       </SwipeableViews>
-      <MobileStepper
-        className={classes.color}
-        steps={maxSteps}
-        position="static"
-        variant="text"
-        activeStep={activeStep}
-        nextButton={
-          <Button className={classes.button} size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
-            Próximo
-            {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
-          </Button>
-        }
-        backButton={
-          <Button className={classes.button} size="small" onClick={handleBack} disabled={activeStep === 0}>
-            {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
-            Anterior
-          </Button>
-        }
-      />
+      {groups.length > 1? 
+        <MobileStepper
+          className={classes.color}
+          steps={maxSteps}
+          position="static"
+          variant="text"
+          activeStep={activeStep}
+          nextButton={
+            <Button className={classes.button} size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
+              Próximo
+              {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+            </Button>
+          }
+          backButton={
+            <Button className={classes.button} size="small" onClick={handleBack} disabled={activeStep === 0}>
+              {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+              Anterior
+            </Button>
+          }
+        />
+        :
+          null
+      }
     </div>
   );
 }
