@@ -49,16 +49,11 @@ export default function PartnershipGrid(props) {
                 <PartnershipsList partnerships={listPartnerships} updateSelected={updateSelected}/>
             </Grid>
             <Grid item lg={9} md={9} sm={12} xs={12}>
-            <Grid container spacing={3} className={classes.gridwithcardcontainer}>
-              <Grid item lg={9} md={9} sm={12} xs={12}>
-                  <PartnershipAdvantages advantages={selectedPartnershipAdvantages}/>
-                  <br/>
-                  <PartnershipAddress addresses={selectedPartnershipAddresses}/>
-              </Grid>
-              <Grid item lg={3} md={3} sm={12} xs={12}>
-                <PartnershipContacts contacts={selectedPartnershipContacts}/>
-              </Grid>
-            </Grid>
+              <PartnershipAdvantages advantages={selectedPartnershipAdvantages}/>
+              <br/>
+              <PartnershipAddress addresses={selectedPartnershipAddresses}/>
+              <br/>
+              <PartnershipContacts contacts={selectedPartnershipContacts}/>
             </Grid>
         </Grid>
     </div>

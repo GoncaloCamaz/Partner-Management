@@ -33,7 +33,7 @@ export default function PartnershipContacts(props) {
     <Card className={classes.root} variant="outlined">
       <CardContent>
         <Typography variant="h5" component="h2">
-          Contactos
+          Redes Sociais e Contactos
         </Typography>
         <ul className={classes.list}>
           <li>
