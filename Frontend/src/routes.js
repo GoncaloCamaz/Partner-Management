@@ -3,7 +3,6 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { AppContext } from './context/AppContext';
 import LoginPage from './pages/LoginPage'
 import HomePage from './pages/HomePage'
-import ProfilePage from './pages/ProfilePage'
 import PaymentsPage from './pages/PaymentsPage'
 import PartnershipsPage from './pages/PartnershipsPage';
 import PartnershipAdvantagesPage from './pages/PartnershipAdvantagesPage';

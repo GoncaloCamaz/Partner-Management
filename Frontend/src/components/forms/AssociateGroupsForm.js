@@ -17,7 +17,9 @@ const useStyles = makeStyles(({
 function InitializeGroups(groups, associateGroups)
 {
     var content = []
-    groups.forEach(item => content.push(associateGroups.includes(item.initials) ? {name: item.initials, checked: true} : {name: item.initials, checked: false}))
+    groups.forEach(item => content.push(associateGroups.includes(item.initials) 
+        ? {name: item.initials, checked: true} 
+        : {name: item.initials, checked: false}))
 
     return content
 }
@@ -32,7 +34,8 @@ export default function AssociateGroupsForm(props) {
     
     const handleSubmit = _event => {
         const selected = columnsSelected.filter(item => item.checked === true)
-        let associateWithGroups = {...props.recordForEdit, groupsSelected: selected}
+                                        .map(item => {return item.name})
+        let associateWithGroups = {...props.recordForEdit, groups: selected}
         props.addOrEdit(associateWithGroups)
     }
 
@@ -72,7 +75,7 @@ export default function AssociateGroupsForm(props) {
                         <Controls.Button
                             className={classes.button}
                             type="submit"
-                            text="Gravar" 
+                            text="Atualizar" 
                             onClick={handleSubmit}/>
                     </div>
                 </Grid>

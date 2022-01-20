@@ -33,6 +33,10 @@ class UserProfilePage extends Component {
         this.setState({displayedForm: selected})
     }
 
+    handleUpdateAssociate = (associate) => {
+        console.log(associate)
+    }
+
     render() {
         if(!this.state.isLoaded)
         {
@@ -75,7 +79,12 @@ class UserProfilePage extends Component {
                                             <AssociateNumberCard associateNumber={this.state.associate.associateNumber}/>
                                         </Grid>
                                         <Grid item lg={9} md={9} sm={12} xs={12}>
-                                            <ProfileForm currentMenu={this.state.displayedForm} groups={this.state.groups} associate={this.state.associate}/>
+                                            <ProfileForm 
+                                                currentMenu={this.state.displayedForm} 
+                                                groups={this.state.groups} 
+                                                associate={this.state.associate} 
+                                                updateAssociate={this.handleUpdateAssociate}
+                                            />
                                         </Grid>
                                     </Grid>
                                 </div>

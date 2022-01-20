@@ -46,9 +46,9 @@ const useStyles = makeStyles((theme) => ({
 function PartnershipsStep(props) {
   const classes = useStyles();
   const theme = useTheme();
-  const tutorialSteps = props.partnerships
+  const partnerships = props.partnerships
   const [activeStep, setActiveStep] = React.useState(0);
-  const maxSteps = tutorialSteps.length;
+  const maxSteps = partnerships.length;
   const bull = <span className={classes.bullet}>•</span>;
 
   const handleNext = () => {
@@ -62,11 +62,11 @@ function PartnershipsStep(props) {
   const handleStepChange = (step) => {
     setActiveStep(step);
   };
-//tutorialSteps[activeStep].name}</Typography>
+
   return (
     <div className={classes.root}>
       <Paper square elevation={0} className={classes.header}>
-        <Typography className={classes.textHeader}>{  }</Typography> 
+        <Typography className={classes.textHeader}>{partnerships[activeStep].name}</Typography>
       </Paper>
       <SwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
@@ -74,7 +74,7 @@ function PartnershipsStep(props) {
         onChangeIndex={handleStepChange}
         enableMouseEvents
       >
-        {tutorialSteps.map((step, index) => (
+        {partnerships.map((step, index) => (
           <div key={step.label}>
             {Math.abs(activeStep - index) <= 2 ? (
                 step.advantages.map((item, index) => {
@@ -90,7 +90,8 @@ function PartnershipsStep(props) {
           </div>
         ))}
       </SwipeableViews>
-      <MobileStepper
+      {maxSteps > 1 ?
+        <MobileStepper
         className={classes.color}
         steps={maxSteps}
         position="static"
@@ -109,6 +110,10 @@ function PartnershipsStep(props) {
           </Button>
         }
       />
+      :
+      null
+    }
+    
     </div>
   );
 }

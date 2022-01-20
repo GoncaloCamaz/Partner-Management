@@ -85,7 +85,7 @@ export default function AssociatePasswordForm(props) {
                         error={errors.newPassword}
                     />
                     <Controls.Input
-                        label="Confirmação da nova Password"
+                        label="Confirmação da Password"
                         name="newPasswordConfirmation"
                         type="password"
                         value={values.newPasswordConfirmation}

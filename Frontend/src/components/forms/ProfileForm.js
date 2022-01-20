@@ -7,6 +7,7 @@ import AssociateGroupsForm from './AssociateGroupsForm';
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    flexGrow: 1,
     backgroundColor: "#fff",
     borderRadius: 5,
     width: '100%',
@@ -19,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
     alignContent: 'center'
   },
   form: {
-    width: '80%', // Fix IE 11 issue.
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'column',
@@ -48,7 +48,7 @@ export default function ProfileForm(props) {
   const groups = props.groups
 
   const handleUpdateAssociateInformation = (associate) => {
-    console.log("changes", associate)
+    props.updateAssociate(associate)
   }
   
   if(selectedMenu === 0)
@@ -57,7 +57,7 @@ export default function ProfileForm(props) {
       <div className={classes.root}>
         <div className={classes.form}>
           <Grid container spacing={3} className={classes.gridcontainer}>
-            <Grid item lg={12} md={12} sm={12} xs={12}>
+            <Grid item >
               <AssociateForm recordForEdit={associate} addOrEdit={handleUpdateAssociateInformation}/>
             </Grid>
           </Grid>
@@ -71,7 +71,7 @@ export default function ProfileForm(props) {
       <div className={classes.root}>
          <div className={classes.form}>
           <Grid container spacing={3} className={classes.gridcontainer}>
-            <Grid item lg={12} md={12} sm={12} xs={12}>
+            <Grid item >
               <AssociatePasswordForm recordForEdit={associate} addOrEdit={handleUpdateAssociateInformation}/>
             </Grid>
           </Grid>
@@ -85,7 +85,7 @@ export default function ProfileForm(props) {
       <div className={classes.root}>
          <div className={classes.form}>
           <Grid container spacing={3} className={classes.gridcontainer}>
-            <Grid item lg={12} md={12} sm={12} xs={12}>
+            <Grid item >
               <h4>Seleciona os grupos a que pertences:</h4>
               <AssociateGroupsForm recordForEdit={associate} addOrEdit={handleUpdateAssociateInformation} groups={groups}/>
             </Grid>
