@@ -8,21 +8,6 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
 
-const tutorialSteps = [
-  {
-    label: 'VideoNorte',
-    advantages: ["Desconto em Fotocópias","Impressão a cores","informação", "teste ao cumprimento da"] 
-  },
-  {
-    label: 'Tasquinha Bracarense',
-    advantages: ["Desconto de 50 centimos no prato do dia","Oferta da sopa e ou sobremesa"],
-  },
-  {
-    label: 'Mozart',
-    advantages: ["Penduricalhos à borla"],
-  },
-];
-
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 370,
@@ -58,9 +43,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function PartnershipsStep() {
+function PartnershipsStep(props) {
   const classes = useStyles();
   const theme = useTheme();
+  const tutorialSteps = props.partnerships
   const [activeStep, setActiveStep] = React.useState(0);
   const maxSteps = tutorialSteps.length;
   const bull = <span className={classes.bullet}>•</span>;
@@ -76,11 +62,11 @@ function PartnershipsStep() {
   const handleStepChange = (step) => {
     setActiveStep(step);
   };
-
+//tutorialSteps[activeStep].name}</Typography>
   return (
     <div className={classes.root}>
       <Paper square elevation={0} className={classes.header}>
-        <Typography className={classes.textHeader}>{tutorialSteps[activeStep].label}</Typography>
+        <Typography className={classes.textHeader}>{  }</Typography> 
       </Paper>
       <SwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}

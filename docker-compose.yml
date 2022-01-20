@@ -73,8 +73,8 @@ services:
       - groupserver
       - database
     environment:
-      - BACKENDURL=${BACKEND_URL}
-      - GROUPSERVERURL=${GROUPSERVER_URL}
+      - REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL}
+      - REACT_APP_GROUPSERVER_URL=${REACT_APP_GROUPSERVER_URL}
     ports: 
       - 80:81
     networks:

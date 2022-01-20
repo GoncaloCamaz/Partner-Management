@@ -6,25 +6,18 @@ import {backendURL} from '../../constants'
 export default function useAuth() {
   const [authenticated, setAuthenticated] = useState(false);
   const [loading, setLoading] = useState(false)
-  const [authenticationObject, setAuthenticationObject] = useState({isAdmin: false, loading: false, token: null, authenticated: false})
-
+  
   useEffect(() => {
-    const token = localStorage.getItem("token")
+    const token = localStorage.getItem('token');
     if (token) {
       setAuthenticated(true);
     }
-  }, []);
+  }, [loading]);
   
-  async function handleLogin(username, password) {
+  function handleLogin(username, password) {
     setLoading(true)
     const URL = backendURL + "login"
-    var authenticationResult = {
-      isAdmin: false, 
-      token: null, 
-      authenticated: false
-    }
-
-    await axios.post(URL, {
+    axios.post(URL, {
       email: username,
       password: password
     })
@@ -32,32 +25,26 @@ export default function useAuth() {
       if(response.status === 200)
       {
         localStorage.setItem("token", response.data.token)
-        if(response.data.user_role === 'ADMIN')
+        localStorage.setItem("user", username)
+        if(response.data.userRole === 'ADMIN')
         {
-          authenticationResult.isAdmin = true
+          localStorage.setItem("isAdmin", "1")
         }
-        
-        authenticationResult.token = response.data.token
-        authenticationResult.authenticated = true
-        setAuthenticationObject(authenticationResult)
         setAuthenticated(true)
+        setLoading(false)
+        history.push('/home');
       }
     }).catch(error => {
       window.alert("Bad credentials inserted!")
-      setAuthenticationObject(authenticationResult)
     });
   }
 
   function handleLogout() {
-    var authenticationResult = {
-      isAdmin: false, 
-      token: null, 
-      authenticated: false
-    }
     localStorage.removeItem("token")
-    setAuthenticationObject(authenticationResult)
+    localStorage.removeItem('user')
+    localStorage.removeItem('isAdmin')
     history.push('/');
   }
   
-  return { authenticated, authenticationObject, handleLogin, handleLogout };
+  return { authenticated, handleLogin, handleLogout };
 }

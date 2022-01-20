@@ -5,17 +5,28 @@ import { Link } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 import './Navbar.css';
 import { IconContext } from 'react-icons';
-import { Context } from '../../context/AuthContext';
+import { AppContext } from '../../context/AppContext';
+import history from '../../history';
 
-function Navbar(props) {
+function Navbar() {
   const [sidebar, setSidebar] = useState(false);
-  const { handleLogout } = useContext(Context);
-  const isAdmin = props.isAdmin
+  const { state } = useContext(AppContext);
+  const isAdmin = state.authentication.isAdmin || localStorage.getItem("admin") === "1" ? true : false
 
   const showSidebar = () => setSidebar(!sidebar);
 
   const handleClick = () => {
-    handleLogout() 
+    localStorage.removeItem("token")
+    localStorage.removeItem("user")
+    localStorage.removeItem("admin")
+    state.updateAuthentication({
+      isAuthenticated: false,
+      isAdmin: false,
+      token: '',
+      loading: false
+    }, () => {
+      history.push("/")
+    })
   }
 
   return (

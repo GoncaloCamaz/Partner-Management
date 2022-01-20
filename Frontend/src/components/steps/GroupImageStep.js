@@ -1,5 +1,5 @@
 import React from 'react';
-import { createTheme, makeStyles, ThemeProvider, useTheme } from '@material-ui/core/styles';
+import {makeStyles, useTheme } from '@material-ui/core/styles';
 import MobileStepper from '@material-ui/core/MobileStepper';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -8,7 +8,7 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     maxWidth: 370,
     flexGrow: 1,
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     color: '#fff',
   },
   img: {
-    height: 155,
+    height: 160,
     maxWidth: 200,
     overflow: 'hidden',
     width: '100%',
@@ -43,7 +43,6 @@ function GroupImageStep(props) {
   const groups = props.groups
   const maxSteps = groups.length
   const [activeStep, setActiveStep] = React.useState(0);
-
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -76,25 +75,29 @@ function GroupImageStep(props) {
           </div>
         ))}
       </SwipeableViews>
-      <MobileStepper
-        className={classes.color}
-        steps={maxSteps}
-        position="static"
-        variant="text"
-        activeStep={activeStep}
-        nextButton={
-          <Button className={classes.button} size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
-            Próximo
-            {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
-          </Button>
-        }
-        backButton={
-          <Button className={classes.button} size="small" onClick={handleBack} disabled={activeStep === 0}>
-            {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
-            Anterior
-          </Button>
-        }
-      />
+      {groups.length > 1? 
+        <MobileStepper
+          className={classes.color}
+          steps={maxSteps}
+          position="static"
+          variant="text"
+          activeStep={activeStep}
+          nextButton={
+            <Button className={classes.button} size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
+              Próximo
+              {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+            </Button>
+          }
+          backButton={
+            <Button className={classes.button} size="small" onClick={handleBack} disabled={activeStep === 0}>
+              {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+              Anterior
+            </Button>
+          }
+        />
+        :
+          null
+      }
     </div>
   );
 }

@@ -8,20 +8,14 @@ import EditAssociateForm from '../components/forms/EditAssociateForm';
 import { getAssociates,
      createNewAssociate, 
      updateAssociate, 
-     deleteAssociate,
-     getAssociateInformation ,
      resetPassword
     } from '../api/AssociatesAPI'
-import { getGroups } from '../api/GroupsAPI'
 import MessagesDisplay from '../components/forms/MessagesDisplayForm';
 import AssociateAddresssForm from '../components/forms/AssociateAddressForm';
 import AssociateGroupsForm from '../components/forms/AssociateGroupsForm';
 import PaymentForm from '../components/forms/PaymentForm';
-import { GroupContext } from '../context/GroupContext'
 
-class AssociatesPage extends Component {
-    static contextType = GroupContext
-    
+class AssociatesPage extends Component {    
     constructor(props) {
         super(props)
 

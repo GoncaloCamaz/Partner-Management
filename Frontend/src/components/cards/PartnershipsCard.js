@@ -9,7 +9,7 @@ import PartnershipsStep from '../steps/PartnershipsStep';
 
 const useStyles = makeStyles({
   root: {
-    height: '100%',
+      height: '100%',
       width: '100%',
       backgroundColor: '#1a83ff',
       color: '#fff',
@@ -33,6 +33,7 @@ const useStyles = makeStyles({
 export default function PartnershipsCard(props) {
   const classes = useStyles();
   const cardTitle = "Parcerias"//props.title
+  const partnerships = props.partnerships
 
   const handleSeePartnerships = () => {
     props.handleSeePartnerships()
@@ -41,6 +42,7 @@ export default function PartnershipsCard(props) {
     return (
       <Card className={classes.root} variant="outlined">
         <CardContent>
+          <br/>
           <Typography >
               <FaHandshake className={classes.icon} fontSize="inherit"/>
           </Typography>
@@ -48,7 +50,7 @@ export default function PartnershipsCard(props) {
               {cardTitle}
           </Typography>
           <br />
-            <PartnershipsStep/>
+            <PartnershipsStep partnerships={partnerships}/>
         </CardContent>
         <CardActions>
           <Typography className={classes.text} variant="h5" component="h2" onClick={handleSeePartnerships}>

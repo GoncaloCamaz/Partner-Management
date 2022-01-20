@@ -2,7 +2,6 @@ require("dotenv").config();
 const upload = require("./Routes/Upload");
 const Grid = require("gridfs-stream");
 const mongoose = require("mongoose");
-const mongodb = require('mongodb')
 const connection = require("./db");
 const express = require("express");
 const app = express();
@@ -17,6 +16,15 @@ conn.once("open", function () {
     gfs.collection("photos");
 });
 
+app.use(function (_req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE, PATCH,OPTIONS');
+    res.header('Access-Control-Allow-Credentials', true)
+    next();
+  });
+
+app.use("/", require('./Routes/GroupRoute'))
 app.use("/upload", upload);
 
 // media routes

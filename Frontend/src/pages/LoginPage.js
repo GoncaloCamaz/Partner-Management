@@ -9,8 +9,10 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { Context } from '../context/AuthContext';
-import { Redirect } from 'react-router-dom';
+import {AppContext } from '../context/AppContext';
+import {backendURL} from '../constants'
+import axios from 'axios'
+import history from '../history'
 
 function Copyright() {
   return (
@@ -56,31 +58,83 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+async function handleLogin(email, password) {
+  const URL = backendURL + "login"
+  const result = await axios.post(URL, {
+    email: email,
+    password: password
+  })
+  .then((response) => {
+    if(response.status === 200)
+    {
+      console.log(response)
+      return {
+        hasErrors: false,
+        content: response.data
+      }
+    }
+  }).catch(error => {
+    return {
+      hasErrors: true,
+      errorMessage: error.message
+    }
+  });
+  return result
+}
+
 export default function LoginPage() {
   const classes = useStyles();
-  const { handleLogin, authenticated, authenticationObject } = useContext(Context);
-  const [username, setUsername] = useState("")
+  const {state} = useContext(AppContext);
+  const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [redirectToHomePage, setRedirectToHomePage] = useState(false)
 
+  const startLoginProcedure = async () => {
+    await handleLogin(email,password).then((result) => {
+      if(result.hasErrors === false)
+      {
+        const content = result.content
+        const token = 'Bearer ' + content.token
+        const userRole = content.userRole
+        localStorage.setItem("token",token)
+        localStorage.setItem("user", email)
+        if(userRole === 'ADMIN')
+        {
+          localStorage.setItem("admin", "1")
+        }
+        state.updateAuthentication({
+          ...content,
+          isAuthenticated: true, 
+          isAdmin: userRole === 'ADMIN' ? true : false ,
+          email: email, authenticationTimestamp: new Date(), 
+          loading: false}, () => {
+            history.push("/home")
+          })
+      }
+      else
+      {
+        state.updateAuthentication({ 
+          loading: false
+        })
+        window.alert("O email e ou password estão incorretos!")
+      }
+    }, (error) => {
+      state.updateAuthentication({ 
+        loading: false
+      }, window.alert(error.message))
+      return error;
+    })
+  }
 
   const handleClick = () => {
-    handleLogin(username,password)
-    if(authenticated === true)
-    {
-      setRedirectToHomePage(true)
-    }
+    const currentState = state.authentication
+    state.updateAuthentication({
+      ...currentState,
+      loading: true
+    }, () => {
+      startLoginProcedure()
+    })
   }
 
-  if(redirectToHomePage)
-  {
-    return <Redirect to={{
-      pathname: "home",
-      }}
-  />
-  }
-  else
-  {
   return (
     <Grid container component="main" className={classes.main}>
       <Grid item xs={false} sm={4} md={7} className={classes.imageLogin} />
@@ -103,7 +157,7 @@ export default function LoginPage() {
               name="email"
               autoComplete="email"
               autoFocus
-              onChange={(event) => {setUsername(event.target.value)}}
+              onChange={(event) => {setEmail(event.target.value)}}
             />
             <TextField
               variant="outlined"
@@ -141,5 +195,4 @@ export default function LoginPage() {
       </Grid>
     </Grid>
   );
-  }
 }
