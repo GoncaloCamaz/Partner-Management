@@ -6,7 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import PersonIcon from '@material-ui/icons/Person';
 import GroupImageStep from '../steps/GroupImageStep'
-import { GroupContext } from '../../context/GroupContext'
+import { AppContext } from '../../context/AppContext'
 
 const useStyles = makeStyles({
   root: {
@@ -49,12 +49,11 @@ const useStyles = makeStyles({
 
 export default function ProfileCard(props) {
   const classes = useStyles();
+  const appContext = useContext(AppContext)
   const associate = props.associate
-  console.log(props)
-  const groupContext = useContext(GroupContext)
-
+  const groups =  appContext.state.groups || []
   var groupsToDisplay = []
-  groupContext.groups.forEach((item) => {
+  groups.forEach((item) => {
     if(associate.groups.includes(item.initials))
       groupsToDisplay.push(item)
   })
@@ -79,7 +78,6 @@ export default function ProfileCard(props) {
         <Typography variant="h5" component="h2">
           Número de Associado: {associate.associateNumber}
         </Typography>
-        <br/>
         <GroupImageStep groups={groupsToDisplay}/>
       </CardContent>
       <CardActions>

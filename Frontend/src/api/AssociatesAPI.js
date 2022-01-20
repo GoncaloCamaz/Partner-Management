@@ -9,13 +9,22 @@ export async function getInitialInformation(email) {
         }       
     }
 
-    await axios.get(path, requestparams)
+    const result = await axios.get(path, requestparams)
          .then((response) => {
-            return response.data
+            return {
+                hasErrors: false,
+                statusCode: response.status,
+                data: response.data
+            }
          })
          .catch(error => {
-             return error
-         })
+            return {
+                hasErrors: true,
+                message: error.message,
+            }         
+        })
+
+         return result
 }
 
 export async function createNewAssociate(data) {
@@ -28,13 +37,21 @@ export async function createNewAssociate(data) {
         }       
     }
 
-    await axios.post(path, associate, requestparams)
-         .then((response) => {
-            return response
-         })
-         .catch(error => {
-             return error
-         })
+    const result = await axios.post(path, associate, requestparams)
+        .then((response) => {
+            return {
+                hasErrors: false,
+                statusCode: response.status,
+                data: response.data
+            }
+        })
+        .catch(error => {
+            return {
+                hasErrors: true,
+                message: error.message
+            }
+        })
+    return result;
 }
 
 export async function updateAssociate(data) {

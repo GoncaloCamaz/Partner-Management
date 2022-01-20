@@ -1,7 +1,5 @@
 import React, { useContext, useState } from 'react';
 import Navbar from '../components/navbar/Navbar'
-import { Context } from '../context/AuthContext';
-import { GroupContext } from '../context/GroupContext'
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import UserMenu from '../components/menus/UserInfoMenu'
@@ -11,6 +9,7 @@ import './Pages.css'
 import AdminProfileForm from '../components/forms/AdminProfileForm';
 import {backendURL} from '../constants'
 import axios from 'axios';
+
 const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
@@ -27,55 +26,15 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
-function GetAdminContentFromContext() 
-{
-    const authenticationContext = useContext(Context);
-    const admin = authenticationContext.authenticationObject.isAdmin
-
-    return admin
-}
-
-function GetGroupsContentFromContext()
-{
-    const groupContext = useContext(GroupContext)
-    const groups = groupContext.groups
-
-    return groups
-}
-
-function LoadAssociateContent(content)
-{
-    let associate = content
-    if(associate === undefined)
-    {
-        let path = backendURL + "associates/email/"+"gcamaz@sapo.pt"
-        const requestparams = {
-            headers: {
-                authorization: 'Bearer ' + localStorage.getItem('token')
-            }       
-        }
-        axios.get(path, requestparams)
-        .then((response) => {
-            console.log(response)
-            return response.data
-        })
-        .catch(error => {
-            console.log(error)
-        })
-    }
-
-    return associate
-}
 
 export default function ProfilePage(props) {
     const classes = useStyles();
     const [displayedForm, setDisplayedForm] = useState(0)
     
-    const admin = GetAdminContentFromContext()
-    const groups = GetGroupsContentFromContext()
-    console.log("props location content", props.location.content)
-    const associate = LoadAssociateContent(props.location.content)
-    console.log(associate)
+    const admin = false//GetAdminContentFromContext()
+    const groups =[]// GetGroupsContentFromContext()
+
+    const associate = null//LoadAssociateContent(props.location.content)
     const updateSelected = (selected) => {
         setDisplayedForm(selected)
     }

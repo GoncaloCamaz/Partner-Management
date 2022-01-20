@@ -9,7 +9,6 @@ import VpnKeyIcon from '@material-ui/icons/VpnKey';
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: '100%',
     borderRadius: 10
   },
   tabs: {

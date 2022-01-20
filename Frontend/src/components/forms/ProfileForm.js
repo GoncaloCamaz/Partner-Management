@@ -7,7 +7,6 @@ import AssociateGroupsForm from './AssociateGroupsForm';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
     backgroundColor: "#fff",
     borderRadius: 5,
     width: '100%',

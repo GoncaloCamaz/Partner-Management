@@ -9,8 +9,7 @@ import PartnershipsStep from '../steps/PartnershipsStep';
 
 const useStyles = makeStyles({
   root: {
-      height: '422px',
-      minHeight: '100%',
+      height: '100%',
       width: '100%',
       backgroundColor: '#1a83ff',
       color: '#fff',

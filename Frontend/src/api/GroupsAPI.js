@@ -39,20 +39,29 @@ export function updateGroup(data) {
          })
 }
 
-export function getGroups() {
-    let path = groupsServerURL + "groups"
+export async function getGroups() {
+    let path = groupsServerURL 
     const requestparams = {
         headers: {
             Authorization: localStorage.getItem('token')
         }       
     }
 
-    axios.get(path, requestparams)
-         .then((response) => 
-         {
-            return response.data
-         })
-         .catch((error) => {
-             return error
-         })
+    const result = await axios.get(path, requestparams)
+    .then((response) => 
+    {
+        return {
+            hasErrors: false,
+            statusCode: response.status,
+            data: response.data
+        }
+    })
+    .catch((error) => {
+        return {
+            hasErrors: true,
+            message: error.message
+        }
+    })
+
+    return result;
 }

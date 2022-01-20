@@ -1,69 +1,82 @@
 import React from 'react';
-import { Context } from '../context/AuthContext';
-import { GroupContext } from '../context/GroupContext';
 import './Pages.css'
 import HomePageAdmin from './HomePageAdmin';
 import HomePageUser from './HomePageUser';
 import { Component } from 'react';
-import axios from "axios";
-import {backendURL} from '../constants'
+import { AppContext } from '../context/AppContext';
+import * as AssociatesAPI from '../api/AssociatesAPI';
+import * as GroupsAPI from '../api/GroupsAPI';
+import { withRouter } from 'react-router-dom';
 
 class HomePage extends Component {
-    static contextType = Context
-
     constructor(props){
         super(props)
         this.state={
             errorMessage: '',
-            authenticationError: false,
+            errorHasOccured: false,
             isLoaded: false,
-            associate: {},
-            partnerships: [],
             isAdmin: false
         }
     }
 
-
     componentDidMount(){
-        const adminInformation = localStorage.getItem("isAdmin") === "true" || false
-        if(adminInformation === true)
+        const context = this.props.context.state
+        if(context.authentication.isAuthenticated)
         {
-            this.setState({isAdmin: true}, () => {
-                this.setState({isLoaded: true})
-            })
-        }        
-        else
-        {
-            this.fetchUserData("gcamaz@sapo.pt")
-        }
+            if(context.groups.length === 0)
+            {
+                this.fetchGroupData()
+            }
 
+            this.setState({isLoaded: false, isAdmin: context.authentication.isAdmin}, () => {
+                this.fetchInitialData(context.authentication.email)
+            })
+        }
     }
 
-    fetchUserData(email)
+    fetchInitialData = async (email) =>
     {
-        let path = backendURL + "all/"+email
-        const requestparams = {
-            headers: {
-                authorization: 'Bearer ' + localStorage.getItem('token')
-            }       
-        }
-        axios.get(path, requestparams)
-        .then((response) => {
-            if(response.status === 200)
-            {
-                const data = response.data
-                this.setState({associate: data.associate, partnerships: data.partnerships}, () => {
-                    this.setState({isLoaded: true})
-                })
-            }
+        const result = await AssociatesAPI.getInitialInformation(email).then((result) => {
+            return result;
+        }, (error) => {
+            return error;
         })
-        .catch(error => {
-            this.setState({errorMessage: error.message}, () => {
-                this.setState({authenticationError: true}, () => {
-                    this.setState({isLoaded: true})
+        if(result.hasErrors)
+        {
+            this.setState({errorMessage: result.errorMessage, errorHasOccured: true},
+                this.setState({
+                    isLoaded: true
+                }))
+        }
+        else
+        {
+            this.props.context.state.updateAssociate(result.data.associate, () => {
+                this.props.context.state.updatePartnerships(result.data.partnerships, () => {
+                    this.setState({ isLoaded: true})
                 })
             })
+        }
+    }
+
+    fetchGroupData = async () =>  
+    {
+        const result = await GroupsAPI.getGroups().then((result) => {
+            return result;
+        }, (error) => {
+            return error;
         })
+
+        if(result.hasErrors)
+        {
+            this.setState({errorMessage: result.errorMessage, errorHasOccured: true},
+                this.setState({
+                    isLoaded: true
+                }))
+        }
+        else
+        {
+            this.props.context.state.updateGroups(result.data)
+        }
     }
 
     render() {
@@ -75,11 +88,11 @@ class HomePage extends Component {
         }
         else
         {
-            if(this.state.authenticationError)
+            if(this.state.errorHasOccured)
             {
                 return <div>
                 <h1>TODO: Error page {this.state.errorMessage}</h1>
-            </div>
+                </div>
             }
             else
             {
@@ -90,11 +103,18 @@ class HomePage extends Component {
                 }
                 else
                 {
-                    return <HomePageUser associate={this.state.associate} partnerships={this.state.partnerships}/>
+                    return <HomePageUser />
                 }
             }
         }
     }
 }
 
-export default HomePage
+const HomePageContext = (props) => 
+    <AppContext.Consumer>
+        {
+            context => <HomePage {...props} context={context}/>
+        }
+    </AppContext.Consumer>
+
+export default withRouter(HomePageContext)

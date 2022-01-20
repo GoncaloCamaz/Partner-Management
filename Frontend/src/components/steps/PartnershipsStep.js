@@ -62,11 +62,11 @@ function PartnershipsStep(props) {
   const handleStepChange = (step) => {
     setActiveStep(step);
   };
-
+//tutorialSteps[activeStep].name}</Typography>
   return (
     <div className={classes.root}>
       <Paper square elevation={0} className={classes.header}>
-        <Typography className={classes.textHeader}>{tutorialSteps[activeStep].name}</Typography>
+        <Typography className={classes.textHeader}>{  }</Typography> 
       </Paper>
       <SwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}

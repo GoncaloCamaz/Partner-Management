@@ -2,19 +2,16 @@ import React from 'react';
 import { Router } from 'react-router-dom';
 import Routes from './routes';
 import history from './history';
-import { GroupProvider } from './context/GroupContext';
-import { AuthProvider } from './context/AuthContext';
+import AppContextProvider from './context/AppContext';
 
 function App() {
   return (
     <div className="App">
-      <AuthProvider>
-        <GroupProvider>
-          <Router history={history}>
-            <Routes />
-          </Router>
-        </GroupProvider>
-      </AuthProvider>
+      <AppContextProvider>
+        <Router history={history}>
+          <Routes />
+        </Router>
+      </AppContextProvider>
     </div>
   );
 }
