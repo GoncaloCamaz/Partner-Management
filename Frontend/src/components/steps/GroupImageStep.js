@@ -68,7 +68,7 @@ function GroupImageStep(props) {
         enableMouseEvents
       >
         {groups.map((item, index) => (
-          <div key={item.name}>
+          <div key={index}>
             {Math.abs(activeStep - index) <= 2 ? (
               <img className={classes.img} src={item.imageURL} alt={item.name} />
             ) : null}

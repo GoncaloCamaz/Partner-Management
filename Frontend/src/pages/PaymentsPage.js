@@ -1,74 +1,70 @@
 import React, { Component } from 'react';
-import Navbar from '../components/navbar/Navbar'
-import './Pages.css'
-import PaymentsGrid from '../components/grids/PaymentsGrid';
+import { withRouter } from 'react-router-dom';
+import { AppContext } from '../context/AppContext';
+import Grid from '@material-ui/core/Grid';
+import PaymentPageMenu from '../components/menus/PaymentPageMenu'
+import UserPaymentsTable from '../components/tables/UserPaymentsTable';
+import PaymentMethodAccordion from '../components/accordions/PaymentMethodsAccordion'
+import * as PaymentMethodsAPI from '../api/PaymentMethodsAPI'
 
-export default class PaymentsPage extends Component {
+class PaymentsPage extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            paymentMethods: [{
-                name: "Transferência Bancária", 
-                steps: [
-                    {
-                        step_id: 0,
-                        step_name: "Efetuar Transferência",
-                        step_content: "Efetuar transferência bancária para o seguinte NIB: 12318212192381939131931231"
-                    },
-                    {
-                        step_id: 1,
-                        step_name: "Enviar comprovativo",
-                        step_content: "Enviar comprovativo da transferência para: associados@arcum.pt"
-                    },
-                    {
-                        step_id: 2,
-                        step_name: "Finzalização",
-                        step_content: "A transferência irá ser registada pelo gestor de associados.O recibo poderá ser emitido assim que a transferência estiver confirmada."
-                    },
-                ]
-              },
-              {
-                name: "Presencialmente", 
-                steps: [
-                    {
-                        step_id: 0,
-                        step_name: "Entrar em contacto com o Gestor de Associados",
-                        step_content: "Contactar o gestor de associados através do email associados@arcum.pt"
-                    },
-                    {
-                        step_id: 1,
-                        step_name: "Combinar uma data",
-                        step_content: "Combinar com o gestor de associados a melhor data para regularizar as quotas."
-                    },
-                    {
-                        step_id: 2,
-                        step_name: "Finzalização",
-                        step_content: "A transferência irá ser registada pelo gestor de associados. O recibo poderá ser emitido assim que a transferência estiver confirmada."
-                    }
-                ]
-              }],
-            associatePayments: [{paymentDate: "27/01/2015", valueReceived: 200, yearsPaid: 10}],
-            isLoaded: true
+            paymentMethods: [],
+            associatePayments: [],
+            isLoaded: true,
+            hasErrors: false,
+            errorMessage: '',
+            displayedMenu: 0
         }
     }
 
     componentDidMount() {
+        if(this.state.displayedMenu === 0 && this.paymentMethods.length === 0)
+        {
 
+        }
+    }
+
+    handleUpdateSelectedMenu = (value) => {
+        this.setState({displayedMenu: value})
     }
 
     render() 
     {        
-        return (
-            <div className="home">
-                <Navbar isAdmin={false}/>
-                    <div className="page-container">
-                        <PaymentsGrid 
-                            paymentMethods={this.state.paymentMethods}
-                            associatePayments={this.state.associatePayments}
-                        />
-                    </div>
-            </div>   
-        );
+        if(!this.state.isLoaded)
+        {
+            <h1>loading</h1>
+        }
+        else 
+        {
+            return (
+                <div style={{flexGrow: 1, maxWidth: '100%'}}>
+                    <Grid container spacing={3} style={{textAlign: 'center'}}>
+                        <Grid item lg={3} md={3} sm={12} xs={12}>
+                            <PaymentPageMenu updateSelected={this.handleUpdateSelectedMenu} />
+                        </Grid>
+                        <Grid item lg={9} md={9} sm={12} xs={12}>
+                            {this.state.displayedMenu === 0 ? 
+                                <PaymentMethodAccordion paymentMethods={this.state.paymentMethods}/>
+                            :
+                                <UserPaymentsTable rows={this.state.associatePayments}/>
+                            }
+                        </Grid>
+                    </Grid>
+                </div>
+            );
+        }
     }
 }
+
+const PaymentsPageContext = (props) => 
+    <AppContext.Consumer>
+        {
+            context => <PaymentsPage {...props} context={context}/>
+        }
+    </AppContext.Consumer>
+
+export default withRouter(PaymentsPageContext)

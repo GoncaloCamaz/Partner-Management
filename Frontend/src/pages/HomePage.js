@@ -1,5 +1,4 @@
 import React from 'react';
-import './Pages.css'
 import HomePageAdmin from './HomePageAdmin';
 import HomePageUser from './HomePageUser';
 import { Component } from 'react';

@@ -19,12 +19,9 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 export default function HomePageAdmin() {
-    const classes = useStyles();
     return (
-        <div className="home">
-            <Navbar isAdmin={true}/>
-                <div className="page-container">
-                </div>
-        </div>   
-    );
+      <div>
+        
+      </div>
+      );
 }

@@ -24,7 +24,7 @@ export async function getInitialInformation(email) {
             }         
         })
 
-         return result
+    return result
 }
 
 export async function createNewAssociate(data) {
@@ -64,16 +64,24 @@ export async function updateAssociate(data) {
         }       
     }
 
-    await axios.post(path, associate, requestparams)
-         .then((response) => {
-            return response.data
-         })
-         .catch(error => {
-             return error
-         })
+    const result = await axios.post(path, associate, requestparams)
+        .then((response) => {
+            return {
+                hasErrors: false,
+                statusCode: response.status,
+                data: response.data
+            }
+        })
+        .catch(error => {
+            return {
+                hasErrors: true,
+                message: error.message
+            }
+        })
+    return result
 }
 
-export function deleteAssociate(associateNumber)
+export async function deleteAssociate(associateNumber)
 {
     let path = backendURL + "associates/delete/" + associateNumber
     const requestparams = {
@@ -82,17 +90,26 @@ export function deleteAssociate(associateNumber)
         }       
     }
 
-    axios.delete(path, requestparams)
-         .then((response) => 
-         {
-            return response.data
-         })
-         .catch((error) => {
-             return error
-         })
+    const result = await axios.delete(path, requestparams)
+        .then((response) => 
+        {
+            return {
+                hasErrors: false,
+                statusCode: response.status,
+                data: response.data
+            }        
+        })
+        .catch((error) => {
+            return {
+                hasErrors: true,
+                message: error.message
+            }         
+        })
+
+    return result;
 }
 
-export function updateAssociateCredentials(associateNumber, oldPassword, newPassword) {
+export async function updateAssociateCredentials(associateNumber, oldPassword, newPassword) {
     let path = backendURL + "associates/update/credentials"
 
     const data = {
@@ -106,16 +123,25 @@ export function updateAssociateCredentials(associateNumber, oldPassword, newPass
         }       
     }
 
-    axios.post(path, data, requestparams)
-         .then((response) => {
-            return response.data
-         })
-         .catch(error => {
-             return error
-         })
+    const result = await axios.post(path, data, requestparams)
+        .then((response) => {
+            return {
+                hasErrors: false,
+                statusCode: response.status,
+                data: response.data
+            }             
+        })
+        .catch(error => {
+            return {
+                hasErrors: true,
+                message: error.message
+            }             
+        })
+    
+    return result;
 }
 
-export function getAssociates() {
+export async function getAssociates() {
     let path = backendURL + "associates"
     const requestparams = {
         headers: {
@@ -123,17 +149,26 @@ export function getAssociates() {
         }       
     }
 
-    axios.get(path, requestparams)
+    const result = axios.get(path, requestparams)
          .then((response) => 
          {
-            return response.data
-         })
-         .catch((error) => {
-             return error
-         })
+            return {
+                hasErrors: false,
+                statusCode: response.status,
+                data: response.data
+            }             
+        })
+        .catch((error) => {
+            return {
+                hasErrors: true,
+                message: error.message
+            }               
+        })
+    
+    return result;
 }
 
-export function getAssociateInformation(associateNumber) {
+export async function getAssociateInformation(associateNumber) {
     let path = backendURL + "associates/number/" + associateNumber
     const requestparams = {
         headers: {
@@ -141,17 +176,26 @@ export function getAssociateInformation(associateNumber) {
         }       
     }
 
-    axios.get(path, requestparams)
-         .then((response) => 
-         {
-            return response.data
-         })
-         .catch((error) => {
-             return error
-         })
+    const result = await axios.get(path, requestparams)
+        .then((response) => 
+        {
+            return {
+                hasErrors: false,
+                statusCode: response.status,
+                data: response.data
+            }      
+        })
+        .catch((error) => {
+            return {
+                hasErrors: true,
+                message: error.message
+            }          
+        })
+    
+    return result
 }
 
-export function resetPassword(associateNumber) {
+export async function resetPassword(associateNumber) {
     let path = backendURL + "associates/password/reset/" + associateNumber
     const requestparams = {
         headers: {
@@ -159,12 +203,21 @@ export function resetPassword(associateNumber) {
         }       
     }
 
-    axios.get(path, requestparams)
-         .then((response) => 
-         {
-            return response.data
-         })
-         .catch((error) => {
-             return error
-         })
+    const result = await axios.get(path, requestparams)
+        .then((response) => 
+        {
+            return {
+                hasErrors: false,
+                statusCode: response.status,
+                data: response.data
+            }   
+        })
+        .catch((error) => {
+            return {
+                hasErrors: true,
+                message: error.message
+            }  
+        })
+    
+    return result;
 }

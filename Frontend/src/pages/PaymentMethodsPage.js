@@ -87,9 +87,7 @@ export default class PaymentMethodsPage extends Component {
         else
         {
             return(
-                <div className="home">
-                <Navbar isAdmin={true}/>
-                    <div className="page-container">
+<>
                         <PaymentMethodsTable 
                             rows={this.state.paymentMethods}
                             handleAddPaymentMethod={this.handleAddPaymentMethod}
@@ -125,8 +123,7 @@ export default class PaymentMethodsPage extends Component {
                                 addOrEdit={this.removePaymentMethodOnBackend}
                             />
                         </Popup>
-                    </div>
-            </div>   
+                        </>
             );
         }
     }

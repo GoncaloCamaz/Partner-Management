@@ -75,12 +75,12 @@ function PartnershipsStep(props) {
         enableMouseEvents
       >
         {partnerships.map((step, index) => (
-          <div key={step.label}>
+          <div key={index}>
             {Math.abs(activeStep - index) <= 2 ? (
-                step.advantages.map((item, index) => {
+                step.advantages.map((item, i) => {
                     return (
-                        <Paper key={index} square elevation={0} className={classes.content}>
-                            <Typography key={index} >
+                        <Paper key={'advantages-' + i} square elevation={0} className={classes.content}>
+                            <Typography >
                                 {bull} {item}
                             </Typography>
                         </Paper>

@@ -25,7 +25,7 @@ function Navbar() {
       token: '',
       loading: false
     }, () => {
-      history.push("/")
+      history.push("/login")
     })
   }
 
@@ -55,7 +55,6 @@ function Navbar() {
                       if(item.visibleForUser === true)
                         return item
                     }
-
                     return null
                   }).map((item, index) => {
                   if(item.title === "Logout")

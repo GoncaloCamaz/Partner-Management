@@ -27,23 +27,13 @@ class PartnershipsPage extends Component {
         if(!isLoaded)
         {
             return (
-                <div className="home">
-                    <Navbar/>
-                        <div className="page-container">
-                            Loading
-                        </div>
-                </div>   
+                <h1>Loading</h1>
             );
         }
         else
         {
             return (
-                <div className="home">
-                    <Navbar/>
-                        <div className="page-container">
-                            <PartnershipGrid partnerships={partnerships}/>
-                        </div>
-                </div>   
+                <PartnershipGrid partnerships={partnerships}/>  
             );
         }
     }    

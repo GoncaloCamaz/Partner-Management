@@ -22,6 +22,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+//not used anymore
+
 export default function PaymentsGrid(props) {
   const classes = useStyles();
   const [displayed, setDisplayed] = useState(0)

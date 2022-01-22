@@ -76,7 +76,6 @@ export default function UserPaymentsTable(props) {
                     />
                 </Toolbar>
                 <TblContainer className={classes.container}>
-                <Table stickyHeader>
                     <TblHead />
                     <TableBody>
                         { 
@@ -97,7 +96,6 @@ export default function UserPaymentsTable(props) {
                             })
                         }
                     </TableBody>
-                    </Table>
                 </TblContainer>
                 <TblPagination />
             </Paper>
