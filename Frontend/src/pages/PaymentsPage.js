@@ -22,7 +22,7 @@ class PaymentsPage extends Component {
     }
 
     componentDidMount() {
-        if(this.state.displayedMenu === 0 && this.paymentMethods.length === 0)
+        if(this.state.displayedMenu === 0 && this.state.paymentMethods.length === 0)
         {
 
         }

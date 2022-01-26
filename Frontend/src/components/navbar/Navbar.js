@@ -25,7 +25,7 @@ function Navbar() {
       token: '',
       loading: false
     }, () => {
-      history.push("/login")
+      history.push("/")
     })
   }
 

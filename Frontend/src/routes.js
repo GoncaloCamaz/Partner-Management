@@ -20,7 +20,7 @@ import Navbar from './components/navbar/Navbar';
 import './index.css'
 import './pages/Pages.css'
 
-function CustomRoute({ isPrivate, loginPage ,mustBeAdmin,...rest }) {
+function CustomRoute({ isPrivate, mustBeAdmin,...rest }) {
   const { state } = useContext(AppContext);
   const authenticationState = state.authentication
   if (authenticationState.loading === true) {
@@ -32,11 +32,7 @@ function CustomRoute({ isPrivate, loginPage ,mustBeAdmin,...rest }) {
   }
   else
   {
-    if(loginPage===true)
-    {
-      return <Route {...rest} />;
-    }
-    else if(isPrivate && mustBeAdmin===false && authenticationState.isAuthenticated && authenticationState.isAdmin===false)
+    if(isPrivate && mustBeAdmin===false && authenticationState.isAuthenticated && authenticationState.isAdmin===false)
     {
       return <Route {...rest} />;
     }
@@ -46,7 +42,7 @@ function CustomRoute({ isPrivate, loginPage ,mustBeAdmin,...rest }) {
     }
   }
 
-  return <Redirect to="/login" />
+  return <Redirect to="/" />
 }
 
 /**
@@ -56,7 +52,7 @@ function CustomRoute({ isPrivate, loginPage ,mustBeAdmin,...rest }) {
 export default function Routes() {
   return (
     <Switch>
-      <Route exact path="/login" component={LoginPage} />
+      <Route exact path="/" component={LoginPage} />
       <Route component={DefaultLayout}/>
     </Switch>
   );

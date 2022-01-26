@@ -50,6 +50,10 @@ export default function ProfileForm(props) {
   const handleUpdateAssociateInformation = (associate) => {
     props.updateAssociate(associate)
   }
+
+  const handleUpdateAssociateCredentials = (credentials) => {
+    props.updateAssociateCredentials(credentials)
+  } 
   
   if(selectedMenu === 0)
   {
@@ -72,7 +76,7 @@ export default function ProfileForm(props) {
          <div className={classes.form}>
           <Grid container spacing={3} className={classes.gridcontainer}>
             <Grid item >
-              <AssociatePasswordForm recordForEdit={associate} addOrEdit={handleUpdateAssociateInformation}/>
+              <AssociatePasswordForm recordForEdit={associate} addOrEdit={handleUpdateAssociateCredentials}/>
             </Grid>
           </Grid>
         </div>

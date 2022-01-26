@@ -15,17 +15,18 @@ Associates.updateAssociate = (associate) => {
     const updated = {
         name: associate.name,
         phoneNumber: associate.phoneNumber,
+        nickname: associate.nickname,
+        city: associate.city,
         address: associate.address,
+        postalCode: associate.postalCode,
         email: associate.email,
-        userRole: associate.userRole,
         joinedIn: associate.joinedIn,
         groups: associate.groups,
-        paidUntilYear: associate.paidUntilYear
     }
 
     return Associate.findOneAndUpdate(
         {associateNumber: associate.associateNumber},
-        {updated}
+        updated
     ).exec()
 }
 
