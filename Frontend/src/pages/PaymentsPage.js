@@ -6,6 +6,7 @@ import PaymentPageMenu from '../components/menus/PaymentPageMenu'
 import UserPaymentsTable from '../components/tables/UserPaymentsTable';
 import PaymentMethodAccordion from '../components/accordions/PaymentMethodsAccordion'
 import * as PaymentMethodsAPI from '../api/PaymentMethodsAPI'
+import * as PaymentsAPI from '../api/PaymentsAPI'
 
 class PaymentsPage extends Component {
     constructor(props) {
@@ -24,11 +25,70 @@ class PaymentsPage extends Component {
     componentDidMount() {
         if(this.state.displayedMenu === 0 && this.state.paymentMethods.length === 0)
         {
+            this.setState({isLoaded: false}, () => {
+                this.fetchPaymentMethods()
+            })
+        }
+    }
 
+    fetchPaymentMethods = async () => {
+        const result = await PaymentMethodsAPI.getPaymentMethods().then((result) => {
+            return result;
+        }, (error) => {
+            return error;
+        })
+
+        if(result.hasErrors)
+        {
+            this.setState({errorMessage: result.errorMessage, errorHasOccured: true},
+                this.setState({
+                    isLoaded: true
+                }))
+        }
+        else
+        {
+            this.setState({
+                paymentMethods: result.data, 
+            }, () => {
+                this.setState({ isLoaded: true})
+            })
+        }
+    }
+
+    fetchAssociatePayments = async () => {
+        const associateNumber = this.props.context.state.associate.associateNumber
+        const result = await PaymentsAPI.getAssociatePayments(associateNumber).then((result) => {
+            return result;
+        }, (error) => {
+            return error;
+        })
+
+        if(result.hasErrors)
+        {
+            this.setState({errorMessage: result.errorMessage, errorHasOccured: true},
+                this.setState({
+                    isLoaded: true
+                }))
+        }
+        else
+        {
+            this.setState({
+                associatePayments: result.data, 
+            }, () => {
+                this.setState({ isLoaded: true})
+            })
         }
     }
 
     handleUpdateSelectedMenu = (value) => {
+        if(value === 0 && this.state.paymentMethods.length === 0)
+        {
+            this.fetchPaymentMethods()
+        }
+        else if(value === 1 && this.state.associatePayments.length === 0)
+        {
+            this.fetchAssociatePayments()
+        }
         this.setState({displayedMenu: value})
     }
 
@@ -36,7 +96,9 @@ class PaymentsPage extends Component {
     {        
         if(!this.state.isLoaded)
         {
-            <h1>loading</h1>
+            return (
+                <h1>loading</h1>
+            )
         }
         else 
         {

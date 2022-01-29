@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PaymentMethodsTable from '../components/tables/PaymentMethodsTable';
 import Popup from '../components/popup/Popup'
-import Navbar from '../components/navbar/Navbar'
 import { Redirect } from 'react-router-dom';
 import PaymentMethodForm from '../components/forms/PaymentMethodForm';
 
@@ -19,8 +18,7 @@ export default class PaymentMethodsPage extends Component {
             seeStepsPage: false,
             paymentMethodName: '',
             paymentMethodSteps: [],
-            paymentMethods: [{name: "Presencial", steps: [{step_id: 1, step_name: "Enviar para o nib..."}]}
-            , {name: "Transferência", steps: [{step_id: 1, step_name: "Enviar para o lá..."}]}],
+            paymentMethods: [],
             isLoaded: true
         }
     }

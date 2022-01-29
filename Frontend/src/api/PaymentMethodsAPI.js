@@ -8,7 +8,6 @@ export async function getPaymentMethods() {
             Authorization: localStorage.getItem('token')
         }       
     }
-
     const result = await axios.get(path, requestparams)
          .then((response) => {
             return {
@@ -23,6 +22,5 @@ export async function getPaymentMethods() {
                 message: error.message,
             }         
         })
-
     return result
 }

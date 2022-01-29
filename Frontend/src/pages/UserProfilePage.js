@@ -133,22 +133,22 @@ class UserProfilePage extends Component {
                                 showAlert={this.state.showAlert}
                                 timeout={5000}
                             />
-                                <Grid container spacing={3} style={{textAlign: 'center'}}>
-                                    <Grid item lg={3} md={3} sm={12} xs={12}>
-                                        <UserMenu updateSelected={this.handleUpdateFormSelected} />
-                                        <br/>
-                                        <AssociateNumberCard associateNumber={this.state.associate.associateNumber}/>
-                                    </Grid>
-                                    <Grid item lg={9} md={9} sm={12} xs={12}>
-                                        <ProfileForm 
-                                            currentMenu={this.state.displayedForm} 
-                                            groups={this.state.groups} 
-                                            associate={this.state.associate} 
-                                            updateAssociate={this.handleUpdateAssociate}
-                                            updateAssociateCredentials={this.handleUpdateAssociateCredentials}
-                                        />
-                                    </Grid>
+                            <Grid container spacing={3} style={{textAlign: 'center'}}>
+                                <Grid item lg={3} md={3} sm={12} xs={12}>
+                                    <UserMenu updateSelected={this.handleUpdateFormSelected} />
+                                    <br/>
+                                    <AssociateNumberCard associateNumber={this.state.associate.associateNumber}/>
                                 </Grid>
+                                <Grid item lg={9} md={9} sm={12} xs={12}>
+                                    <ProfileForm 
+                                        currentMenu={this.state.displayedForm} 
+                                        groups={this.state.groups} 
+                                        associate={this.state.associate} 
+                                        updateAssociate={this.handleUpdateAssociate}
+                                        updateAssociateCredentials={this.handleUpdateAssociateCredentials}
+                                    />
+                                </Grid>
+                            </Grid>
                         </div>
                     );
                 }

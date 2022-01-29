@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import Stack from '@mui/material/Stack';
 import Alert from '@mui/material/Alert';
 import IconButton from '@mui/material/IconButton';
-import Collapse from '@mui/material/Collapse';
 import AlertTitle from '@mui/material/AlertTitle';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -39,6 +38,7 @@ export default function Alerts(props) {
 
     useEffect(() => {
       setTimeout(() => setOpen(false), timeout);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     if(open)

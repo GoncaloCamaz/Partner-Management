@@ -26,7 +26,7 @@ export default function BasicTimeline(props) {
                 <TimelineConnector />
                 </TimelineSeparator>
                 <TimelineContent  className={classes.root}>
-                    {item.step_content}
+                    {item.stepDescription}
                 </TimelineContent>
             </TimelineItem>
         ))}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Table, Paper, makeStyles, TableBody, TableRow, TableCell, Toolbar, InputAdornment } from '@material-ui/core';
+import { Paper, makeStyles, TableBody, TableRow, TableCell, Toolbar, InputAdornment } from '@material-ui/core';
 import useTable from "./useTable";
 import { Search } from "@material-ui/icons";
 import Controls from "../controls/Controls";
