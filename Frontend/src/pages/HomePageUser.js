@@ -68,7 +68,7 @@ class HomePageUser extends Component {
                                 <ProfileCard associate={this.state.associate} handleSeeProfile={this.handleSeeProfile}/>
                             </Paper>
                             <Paper style={{backgroundColor:'#060b26', textAlign: 'center', marginBottom: '20px'}}>
-                                <EcardDownloadCard associate={this.state.associate} arcumImage={"http://arcum.pt/images/logos/arcum.png"}/>
+                                <EcardDownloadCard associate={this.state.associate}/>
                             </Paper>
                         </Grid>
                         <Grid item lg={6} md={6} sm={12} xs={12}>

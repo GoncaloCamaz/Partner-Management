@@ -4,8 +4,10 @@ import useTable from "./useTable";
 import { Search } from "@material-ui/icons";
 import Controls from "../controls/Controls";
 import ReceiptIcon from '@material-ui/icons/Receipt';
+import generateReceipt from '../pdf/ReceiptGenerator';
+import arcumLogo from '../../static/arcum.png'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
     pageContent: {
         overflowY: 'scroll',
         paddingTop: '20px'
@@ -31,7 +33,19 @@ export default function UserPaymentsTable(props) {
     const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
 
     const downloadReceipt = (item) => {
-        console.log(item)
+        const name = "Recibo - " + item.paymentDate + ".pdf"
+        const content = {
+          associateNumber: item.associateNumber,
+          associateName: 'Gonçalo Dias Camaz Moreira',
+          associateFeeYear: 2021,
+          arcumImage: arcumLogo,
+          paidValue: item.valueReceived,
+          yearsPaid: item.yearsPaid,
+          paymentDate: item.paymentDate
+        }
+    
+        var doc = generateReceipt(content)
+        doc.save(name)
     }
 
     const {

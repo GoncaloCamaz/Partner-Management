@@ -5,6 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import CreditCardIcon from '@material-ui/icons/CreditCard';
 import generateCard from '../pdf/AssociateCardGenerator';
+import arcum from '../../static/arcum.png';
 
 const useStyles = makeStyles({
   root: {
@@ -38,7 +39,7 @@ export default function EcardDownloadCard(props) {
     const name = "Cartao - " + associate.name + ".pdf"
     const content = {
       associate: associate,
-      arcumImage: props.arcumImage
+      arcumImage: arcum
     }
 
     var doc = generateCard(content)

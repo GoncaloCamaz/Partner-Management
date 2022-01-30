@@ -12,7 +12,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import {AppContext } from '../context/AppContext';
 import {backendURL} from '../constants'
 import axios from 'axios'
-import history from '../history'
+import history from '../history';
+import arcum from '../static/arcum.png'
 
 function Copyright() {
   return (
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh',
   },
   imageLogin: {
-    backgroundImage: `url(http://arcum.pt/images/logos/arcum.png)`,
+    backgroundImage: `url(${arcum})`,
     backgroundRepeat: 'no-repeat',
     backgroundColor:
       theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
