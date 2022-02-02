@@ -16,7 +16,8 @@ const useStyles = makeStyles({
       color: '#fff',
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center'
+      alignItems: 'center',
+      textAlign: 'center'
   },
   content: {
       display: 'flex',

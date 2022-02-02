@@ -22,8 +22,8 @@ export default function BasicTimeline(props) {
         {steps.map((item, index) => (
             <TimelineItem key={index}>
                 <TimelineSeparator>
-                <TimelineDot />
-                <TimelineConnector />
+                <TimelineDot style={{backgroundColor: "#060b26"}}/>
+                <TimelineConnector style={{backgroundColor: "#060b26"}}/>
                 </TimelineSeparator>
                 <TimelineContent  className={classes.root}>
                     {item.stepDescription}

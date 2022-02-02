@@ -14,7 +14,6 @@ const useStyles = makeStyles({
   },
   list: {
     listStyle: 'none',
-    textAlign: "left"
   },
   contact: {
     display: 'flex',
@@ -33,8 +32,9 @@ export default function PartnershipContacts(props) {
     <Card className={classes.root} variant="outlined">
       <CardContent>
         <Typography variant="h5" component="h2">
-          Redes Sociais e Contactos
+          Contactos e Redes Sociais
         </Typography>
+        <br/>
         <ul className={classes.list}>
           <li>
             <div className={classes.contact}>

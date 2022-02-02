@@ -7,6 +7,12 @@ import Button from '@material-ui/core/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
+import tum from '../../static/tum.png';
+import tunaominho from '../../static/tunaominho.png';
+import gpum from '../../static/gpum.png';
+import gfum from '../../static/gfum.png';
+import gmp from '../../static/gmp.png';
+import bomboemia from '../../static/bomboemia.png';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -27,7 +33,7 @@ const useStyles = makeStyles(() => ({
     color: '#fff',
   },
   img: {
-    height: 160,
+    height: 180,
     maxWidth: 200,
     overflow: 'hidden',
     width: '100%',
@@ -36,6 +42,26 @@ const useStyles = makeStyles(() => ({
     paddingTop: 10,
   },
 }));
+
+function getImageObject(imageName) {
+  switch(imageName) {
+    case 'tum.png' :
+      return tum;
+    case 'tunaominho.png':
+      return tunaominho
+    case 'gpum.png':
+      return gpum;
+    case 'gmp.png':
+      return gmp;
+    case 'gfum.png':
+      return gfum;
+    case 'bomboemia.png':
+      return bomboemia;
+    default:
+      return tum;
+  }
+
+}
 
 function GroupImageStep(props) {
   const classes = useStyles();
@@ -70,7 +96,7 @@ function GroupImageStep(props) {
         {groups.map((item, index) => (
           <div key={index}>
             {Math.abs(activeStep - index) <= 2 ? (
-              <img className={classes.img} src={item.imageURL} alt={item.name} />
+              <img className={classes.img} src={getImageObject(item.imageName)} alt={item.name} />
             ) : null}
           </div>
         ))}

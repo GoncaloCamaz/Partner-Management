@@ -14,11 +14,10 @@ const useStyles = makeStyles({
   advantage: {
     display: 'flex',
     flexDirection: 'row',
-    gap: '10px'
+    gap: '10px',
   },
   list: {
     listStyle: 'none',
-    textAlign: "left"
   }
 });
 
@@ -32,6 +31,7 @@ export default function PartnershipAdvantages(props) {
           <Typography variant="h5" component="h2">
             Vantagens
           </Typography>
+          <br/>
           <ul className={classes.list}>
             {
               advantages.map((item,index) => 

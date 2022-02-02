@@ -64,23 +64,20 @@ class HomePageUser extends Component {
                 return (
                     <Grid container columnSpacing={3} style={{maxHeight: '100%'}}>
                         <Grid item lg={6} md={6} sm={12} xs={12}> 
-                            <Paper style={{backgroundColor:'#060b26', textAlign: 'center', marginBottom: '20px'}}>
+                            <Paper style={{marginBottom: '20px'}}>
                                 <ProfileCard associate={this.state.associate} handleSeeProfile={this.handleSeeProfile}/>
                             </Paper>
-                            <Paper style={{backgroundColor:'#060b26', textAlign: 'center', marginBottom: '20px'}}>
+                            <Paper style={{marginBottom: '20px'}}>
                                 <EcardDownloadCard associate={this.state.associate}/>
                             </Paper>
                         </Grid>
                         <Grid item lg={6} md={6} sm={12} xs={12}>
-                            <Paper style={{backgroundColor:'#060b26', textAlign: 'center', marginBottom: '20px'}}>
+                            <Paper style={{marginBottom: '20px'}}>
                                 <FeeCard associate={this.state.associate} handleSeeFees={this.handleSeeFees}/>
                             </Paper>
-                            <Paper style={{backgroundColor:'#060b26', textAlign: 'center', marginBottom: '20px'}}>
+                            <Paper style={{marginBottom: '20px'}}>
                                 <ParthershipsCard partnerships={this.state.partnerships} handleSeePartnerships={this.handleSeePartnerships}/>
                             </Paper>
-                        </Grid>
-                        <Grid item lg={12} md={12} sm={12} xs={12}>
-                            <br/>
                         </Grid>
                     </Grid>
                 );

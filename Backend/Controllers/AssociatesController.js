@@ -26,7 +26,8 @@ Associates.updateAssociate = (associate) => {
 
     return Associate.findOneAndUpdate(
         {associateNumber: associate.associateNumber},
-        updated
+        updated,
+        {new: true}
     ).exec()
 }
 

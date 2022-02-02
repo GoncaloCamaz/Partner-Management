@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
 function PartnershipsStep(props) {
   const classes = useStyles();
   const theme = useTheme();
-  const partnerships = props.partnerships
+  const partnerships = props.partnerships || []
   const [activeStep, setActiveStep] = React.useState(0);
   const maxSteps = partnerships.length;
   const bull = <span className={classes.bullet}>•</span>;

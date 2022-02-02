@@ -68,7 +68,6 @@ async function handleLogin(email, password) {
   .then((response) => {
     if(response.status === 200)
     {
-      console.log(response)
       return {
         hasErrors: false,
         content: response.data
@@ -107,9 +106,10 @@ export default function LoginPage() {
           isAuthenticated: true, 
           isAdmin: userRole === 'ADMIN' ? true : false ,
           email: email, authenticationTimestamp: new Date(), 
-          loading: false}, () => {
-            history.push("/home")
-          })
+          loading: false
+        }, () => {
+          history.push("/home")
+        })
       }
       else
       {

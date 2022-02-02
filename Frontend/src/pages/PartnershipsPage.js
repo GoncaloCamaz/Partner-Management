@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { AppContext } from '../context/AppContext';
-import Grid from '@mui/material/Grid';
+import Grid from '@material-ui/core/Grid';
 import PartnershipsList from '../components/menus/PartnershipsList'
 import PartnershipAddress from '../components/cards/PartnershipAddress';
 import PartnershipAdvantages from '../components/cards/PartnershipAdvantages';
 import PartnershipContacts from '../components/cards/PartnershipContacts';
-
+import * as PartnershipsAPI from '../api/PartnershipsAPI'
 
 class PartnershipsPage extends Component {
     constructor(props) {
@@ -15,27 +15,61 @@ class PartnershipsPage extends Component {
         this.state = {
             partnerships: [],
             isLoaded: false,
-            currentPartnership: {}
+            currentPartnership: {},
+            errorMessage: '',
+            errorHasOccured: false
         }
     }
 
     componentDidMount() {
-        const context = this.props.context.state.partnerships
-        this.setState({partnerships: context, currentPartnership: context[0]},
-            this.setState({isLoaded: true}))
+        const partnershipsList = this.props.context.state.partnerships || []
+        if(partnershipsList.length === 0)
+        {
+            this.setState({isLoaded: false}, () => {
+                this.fetchPartnerships()
+            })
+        }
+        else
+        {
+            this.setState({
+                partnerships: partnershipsList, 
+                currentPartnership: partnershipsList[0] 
+            }, () => {
+                this.setState({isLoaded: true})
+            })
+        }
+    }
+
+    fetchPartnerships = async () => {
+        const result = await PartnershipsAPI.getPartnerships().then((result) => {
+            return result;
+        }, (error) => {
+            return error;
+        })
+
+        if(result.hasErrors)
+        {
+            this.setState({errorMessage: result.errorMessage, errorHasOccured: true},
+                this.setState({
+                    isLoaded: true
+                }))
+        }
+        else
+        {
+            this.setState({
+                partnerships: result.data, 
+            }, () => {
+                this.setState({ isLoaded: true})
+            })
+        }
     }
 
     handleUpdateSelectedPartnership = (value) => {
-        this.setState({isLoaded: false}, () => {
-            this.setState({currentPartnership: this.state.partnerships[value]}, () => {
-                this.setState({isLoaded: true})
-            })
-        })
+        this.setState({currentPartnership: this.state.partnerships[value]})
     }
 
     render() {
         const { partnerships, isLoaded } = this.state
-        console.log("partnerships", partnerships)
         if(!isLoaded)
         {
             return (

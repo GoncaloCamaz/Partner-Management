@@ -202,34 +202,34 @@ db.groups.insert({
 db.groups.insert({
     name: "Grupo Folclórico da Universidade do Minho",
     initials: "GFUM",
-    imageName: '',
+    imageName: 'gfum.png',
     imageURL: "http://arcum.pt/images/gfum/logo.png"
 })
 
 db.groups.insert({
     name: "Grupo de Música Popular da Universidade do Minho",
     initials: "GMP",
-    imageName: '',
+    imageName: 'gmp.png',
     imageURL: "http://arcum.pt/images/gmp/logo.png"
 })
 
 db.groups.insert({
     name: "Grupo de Poesia da Universidade do Minho",
     initials: "GPUM",
-    imageName: '',
+    imageName: 'gpum.png',
     imageURL: "http://arcum.pt/images/gpum/logo_alt.png"
 })
 
 db.groups.insert({
     name: "Tuna Universitária do Minho",
     initials: "TUM",
-    imageName: '',
+    imageName: 'tum.png',
     imageURL: "http://arcum.pt/images/tum/logo.png"
 })
 
 db.groups.insert({
     name: "Tun'ao Minho",
     initials: "Tun'ao Minho",
-    imageName: '',
+    imageName: 'tunaominho.png',
     imageURL: "http://arcum.pt/images/tunao/logo.png"
 })
