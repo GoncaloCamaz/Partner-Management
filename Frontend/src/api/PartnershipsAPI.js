@@ -1,8 +1,8 @@
 import axios from "axios";
 import { backendURL } from "../constants";
 
-export async function getPaymentMethods() {
-    let path = backendURL + "paymentmethods"
+export async function getPartnerships() {
+    let path = backendURL + "partnerships"
     const requestparams = {
         headers: {
             Authorization: localStorage.getItem('token')

@@ -12,7 +12,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import {AppContext } from '../context/AppContext';
 import {backendURL} from '../constants'
 import axios from 'axios'
-import history from '../history'
+import history from '../history';
+import arcum from '../static/arcum.png'
 
 function Copyright() {
   return (
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh',
   },
   imageLogin: {
-    backgroundImage: `url(http://arcum.pt/images/logos/arcum.png)`,
+    backgroundImage: `url(${arcum})`,
     backgroundRepeat: 'no-repeat',
     backgroundColor:
       theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
@@ -67,7 +68,6 @@ async function handleLogin(email, password) {
   .then((response) => {
     if(response.status === 200)
     {
-      console.log(response)
       return {
         hasErrors: false,
         content: response.data
@@ -106,9 +106,10 @@ export default function LoginPage() {
           isAuthenticated: true, 
           isAdmin: userRole === 'ADMIN' ? true : false ,
           email: email, authenticationTimestamp: new Date(), 
-          loading: false}, () => {
-            history.push("/home")
-          })
+          loading: false
+        }, () => {
+          history.push("/home")
+        })
       }
       else
       {

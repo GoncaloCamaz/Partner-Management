@@ -3,7 +3,6 @@ import Navbar from '../components/navbar/Navbar'
 import { Redirect } from 'react-router-dom';
 import './Pages.css'
 import AdvantagesTable from '../components/tables/AdvantagesTable';
-import Popup from '../components/popup/Popup'
 
 export default class PartnershipAdvantagesPage extends Component {
     constructor(props) {

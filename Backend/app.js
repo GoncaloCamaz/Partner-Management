@@ -24,7 +24,7 @@ let connectionQuery = "mongodb://"
   + dbName
   + '?authSource=admin'
 
-mongoose.connect(connectionQuery, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(connectionQuery, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
   .then(() => console.log('Connecting: ' +  connectionQuery))
   .then(()=> console.log('Mongo running... status: ' + mongoose.connection.readyState))
   .catch(()=> console.log('Mongo: connection error! ' + connectionQuery))

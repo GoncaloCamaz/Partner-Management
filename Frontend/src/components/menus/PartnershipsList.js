@@ -27,7 +27,7 @@ const useStyles = makeStyles({
 export default function PartnershipsList(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-  const list = props.partnerships
+  const partnerships = props.partnerships
 
   const handleChange = (_event, newValue) => {
     setValue(newValue);
@@ -46,7 +46,7 @@ export default function PartnershipsList(props) {
         classes={{indicator: classes.indicator}}
         centered
       >
-        {list.map((item, index) => (
+        {partnerships.map((item, index) => (
             <Tab key={index} label={item.name} />
         ))}
       </Tabs>

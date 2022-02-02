@@ -1,5 +1,4 @@
 import React from 'react';
-import './Pages.css'
 import HomePageAdmin from './HomePageAdmin';
 import HomePageUser from './HomePageUser';
 import { Component } from 'react';
@@ -41,6 +40,7 @@ class HomePage extends Component {
         }, (error) => {
             return error;
         })
+        
         if(result.hasErrors)
         {
             this.setState({errorMessage: result.errorMessage, errorHasOccured: true},

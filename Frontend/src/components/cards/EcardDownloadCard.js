@@ -5,16 +5,14 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import CreditCardIcon from '@material-ui/icons/CreditCard';
 import generateCard from '../pdf/AssociateCardGenerator';
+import arcum from '../../static/arcum.png';
 
 const useStyles = makeStyles({
   root: {
       width: '100%',
-      height: '100%',
       backgroundColor: '#1a83ff',
       color: '#fff',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
+      textAlign: 'center'
   },
   button: {
     color: '#fff'
@@ -31,14 +29,14 @@ const useStyles = makeStyles({
 
 export default function EcardDownloadCard(props) {
   const classes = useStyles();
-  const cardTitle = "Cartão de Associado"//props.title
+  const cardTitle = "Cartão de Associado"
   const associate = props.associate
 
   const handleDownloadCard = () => {
     const name = "Cartao - " + associate.name + ".pdf"
     const content = {
       associate: associate,
-      arcumImage: props.arcumImage
+      arcumImage: arcum
     }
 
     var doc = generateCard(content)

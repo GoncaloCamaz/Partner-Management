@@ -32,6 +32,11 @@ export default function AssociatePasswordForm(props) {
             temp.oldPassword = fieldValues.oldPassword ? "" : "Insere a tua antiga Password."
         if ('newPasswordConfirmation' in fieldValues)
             temp.newPasswordConfirmation = fieldValues.newPasswordConfirmation ? "" : "Insere novamente a nova Password."
+        if('newPasswordConfirmation' in fieldValues && 
+            'oldPassword' in fieldValues && 
+            'newPassword' in fieldValues)
+            temp.newPasswordConfirmation = fieldValues.newPasswordConfirmation !== fieldValues.newPassword ? "A credêncial inserida na confirmação da password não corresponde à nova password!" : ""
+
         setErrors({
             ...temp
         })
@@ -85,7 +90,7 @@ export default function AssociatePasswordForm(props) {
                         error={errors.newPassword}
                     />
                     <Controls.Input
-                        label="Confirmação da nova Password"
+                        label="Confirmação da Password"
                         name="newPasswordConfirmation"
                         type="password"
                         value={values.newPasswordConfirmation}

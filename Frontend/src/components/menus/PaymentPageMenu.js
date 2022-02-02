@@ -29,7 +29,7 @@ const useStyles = makeStyles({
 export default function IconLabelTabs(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-
+  
   const handleChange = (_event, newValue) => {
     setValue(newValue);
     props.updateSelected(newValue)

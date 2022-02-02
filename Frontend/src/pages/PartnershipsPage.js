@@ -1,110 +1,109 @@
 import React, { Component } from 'react';
-import Navbar from '../components/navbar/Navbar'
-import PartnershipGrid from '../components/grids/PartnershipsGrid';
-import './Pages.css'
+import { withRouter } from 'react-router-dom';
+import { AppContext } from '../context/AppContext';
+import Grid from '@material-ui/core/Grid';
+import PartnershipsList from '../components/menus/PartnershipsList'
+import PartnershipAddress from '../components/cards/PartnershipAddress';
+import PartnershipAdvantages from '../components/cards/PartnershipAdvantages';
+import PartnershipContacts from '../components/cards/PartnershipContacts';
+import * as PartnershipsAPI from '../api/PartnershipsAPI'
 
-export default class PartnershipsPage extends Component {
+class PartnershipsPage extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
             partnerships: [],
-            isLoaded: false
+            isLoaded: false,
+            currentPartnership: {},
+            errorMessage: '',
+            errorHasOccured: false
         }
     }
 
     componentDidMount() {
-        console.log(this.props)
-        //this.partnershipsTableUpdate()
-        if(this.props.location.content !== undefined)
+        const partnershipsList = this.props.context.state.partnerships || []
+        if(partnershipsList.length === 0)
         {
-            this.setState({partnerships: this.props.location.content})
+            this.setState({isLoaded: false}, () => {
+                this.fetchPartnerships()
+            })
         }
         else
         {
-            this.setState({partnerships: 
-                [
-                {
-                    name: "Tasquinha Bracarense",
-                    startDate: "26-12-1998",
-                    active: "true",
-                    advantages: ["Oferta da sopa","Sobremesa"],
-                    addresses: [
-                        {
-                            address: "Rua dos bares nº 5",
-                            city: "braga",
-                            postalCode: "4482-123",
-                            latitude: "41.5616",
-                            longitude: "-8.39653"
-                        }
-                    ],
-                    phoneNumber: "123123123", 
-                    email: "email@arc.pt"
-                },
-                {
-                    name: "Video Norte",
-                    startDate: "26/12/1998",
-                    active: "true",
-                    advantages: ["Desconto de 50 centimos por impressao"],
-                    addresses: [
-                        {
-                            address: "Rua dos bares nº 115",
-                            city: "braga",
-                            postalCode: "44822-123",
-                            latitude: "41.5616",
-                            longitude: "-8.39653"
-                        }
-                    ],
-                    phoneNumber: "123123123", 
-                    email: "email@arc.pt"
-                },
-                {
-                    name: "Oculista",
-                    startDate: "26/12/1998",
-                    active: "true",
-                    advantages: ["Oferta da sopa","Sobremesa"],
-                    addresses: [
-                        {
-                            address: "Rua dos bares nº 5",
-                            city: "braga",
-                            postalCode: "4482-123",
-                            latitude: "41.5616",
-                            longitude: "-8.39653"
-                        }
-                    ],
-                    phoneNumber: "123123123", 
-                    email: "email@arc.pt"
-                }
-                ]
+            this.setState({
+                partnerships: partnershipsList, 
+                currentPartnership: partnershipsList[0] 
+            }, () => {
+                this.setState({isLoaded: true})
             })
         }
-        this.setState({isLoaded: true})
+    }
+
+    fetchPartnerships = async () => {
+        const result = await PartnershipsAPI.getPartnerships().then((result) => {
+            return result;
+        }, (error) => {
+            return error;
+        })
+
+        if(result.hasErrors)
+        {
+            this.setState({errorMessage: result.errorMessage, errorHasOccured: true},
+                this.setState({
+                    isLoaded: true
+                }))
+        }
+        else
+        {
+            this.setState({
+                partnerships: result.data, 
+            }, () => {
+                this.setState({ isLoaded: true})
+            })
+        }
+    }
+
+    handleUpdateSelectedPartnership = (value) => {
+        this.setState({currentPartnership: this.state.partnerships[value]})
     }
 
     render() {
         const { partnerships, isLoaded } = this.state
-
         if(!isLoaded)
         {
             return (
-                <div className="home">
-                    <Navbar isAdmin={false}/>
-                        <div className="page-container">
-                            Loading
-                        </div>
-                </div>   
+                <h1>Loading</h1>
             );
         }
         else
         {
             return (
-                <div className="home">
-                    <Navbar isAdmin={false}/>
-                        <div className="page-container">
-                            <PartnershipGrid partnerships={partnerships}/>
-                        </div>
-                </div>   
+                <div style={{flexGrow: 1}}>
+                    <Grid container spacing={3} style={{textAlign: 'center'}}>
+                        <Grid item lg={3} md={3} sm={12} xs={12}>
+                            <PartnershipsList partnerships={partnerships} updateSelected={this.handleUpdateSelectedPartnership}/>
+                        </Grid>
+                        <Grid item lg={9} md={9} sm={12} xs={12}>
+                            <PartnershipAdvantages partnership={this.state.currentPartnership}/>
+                            <br/>
+                            <PartnershipAddress partnership={this.state.currentPartnership}/>
+                            <br/>
+                            <PartnershipContacts partnership={this.state.currentPartnership}/>
+                        </Grid>
+                    </Grid>
+                </div>  
             );
         }
     }    
 }
+
+
+const PartnershipsPageContext = (props) => 
+    <AppContext.Consumer>
+        {
+            context => <PartnershipsPage {...props} context={context}/>
+        }
+    </AppContext.Consumer>
+
+export default withRouter(PartnershipsPageContext)

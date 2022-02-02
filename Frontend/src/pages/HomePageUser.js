@@ -1,5 +1,4 @@
 import React from 'react';
-import Navbar from '../components/navbar/Navbar'
 import Paper from '@material-ui/core/Paper';
 import Grid from '@mui/material/Grid';
 import FeeCard from '../components/cards/FeeCard'
@@ -7,7 +6,6 @@ import ProfileCard from '../components/cards/ProfileCard'
 import EcardDownloadCard from '../components/cards/EcardDownloadCard'
 import ParthershipsCard from '../components/cards/PartnershipsCard'
 import { Redirect } from 'react-router-dom';
-import './Pages.css'
 import { AppContext } from '../context/AppContext';
 import { withRouter } from 'react-router-dom';
 import { Component } from 'react';
@@ -64,32 +62,24 @@ class HomePageUser extends Component {
             else
             {
                 return (
-                    <div className="home">
-                        <Navbar/>
-                        <div className="page-container">
-                                <Grid container columnSpacing={3} style={{maxHeight: '100%'}}>
-                                    <Grid item lg={6} md={6} sm={12} xs={12}> 
-                                        <Paper style={{backgroundColor:'#060b26', textAlign: 'center', marginBottom: '20px'}}>
-                                            <ProfileCard associate={this.state.associate} handleSeeProfile={this.handleSeeProfile}/>
-                                        </Paper>
-                                        <Paper style={{backgroundColor:'#060b26', textAlign: 'center', marginBottom: '20px'}}>
-                                            <EcardDownloadCard associate={this.state.associate} arcumImage={"http://arcum.pt/images/logos/arcum.png"}/>
-                                        </Paper>
-                                    </Grid>
-                                    <Grid item lg={6} md={6} sm={12} xs={12}>
-                                        <Paper style={{backgroundColor:'#060b26', textAlign: 'center', marginBottom: '20px'}}>
-                                            <FeeCard associate={this.state.associate} handleSeeFees={this.handleSeeFees}/>
-                                        </Paper>
-                                        <Paper style={{backgroundColor:'#060b26', textAlign: 'center', marginBottom: '20px'}}>
-                                            <ParthershipsCard partnerships={this.state.partnerships} handleSeePartnerships={this.handleSeePartnerships}/>
-                                        </Paper>
-                                    </Grid>
-                                    <Grid item lg={12} md={12} sm={12} xs={12}>
-                                        <br/>
-                                    </Grid>
-                                </Grid>
-                        </div>
-                    </div>   
+                    <Grid container columnSpacing={3} style={{maxHeight: '100%'}}>
+                        <Grid item lg={6} md={6} sm={12} xs={12}> 
+                            <Paper style={{marginBottom: '20px'}}>
+                                <ProfileCard associate={this.state.associate} handleSeeProfile={this.handleSeeProfile}/>
+                            </Paper>
+                            <Paper style={{marginBottom: '20px'}}>
+                                <EcardDownloadCard associate={this.state.associate}/>
+                            </Paper>
+                        </Grid>
+                        <Grid item lg={6} md={6} sm={12} xs={12}>
+                            <Paper style={{marginBottom: '20px'}}>
+                                <FeeCard associate={this.state.associate} handleSeeFees={this.handleSeeFees}/>
+                            </Paper>
+                            <Paper style={{marginBottom: '20px'}}>
+                                <ParthershipsCard partnerships={this.state.partnerships} handleSeePartnerships={this.handleSeePartnerships}/>
+                            </Paper>
+                        </Grid>
+                    </Grid>
                 );
             }
         }

@@ -15,7 +15,6 @@ const useStyles = makeStyles({
   },
   list: {
     listStyle: 'none',
-    textAlign: "left"
   },
   address: {
     display: 'flex',
@@ -31,7 +30,7 @@ const useStyles = makeStyles({
 
 export default function PartnershipAddress(props) {
   const classes = useStyles();
-  const addresses = props.addresses
+  const addresses = props.partnership.addresses
   const [openPopup, setOpenPopup] = useState(false)
   const [itemToSeeOnMap, setItemToSeeOnMap] = useState({})
 
@@ -57,6 +56,7 @@ export default function PartnershipAddress(props) {
           <Typography variant="h5" component="h2">
             Moradas
           </Typography>
+          <br/>
           <ul className={classes.list}>
             {
               addresses.map((item,index) => 
