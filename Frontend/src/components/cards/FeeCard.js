@@ -15,6 +15,7 @@ const useStyles = makeStyles({
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
+      textAlign: 'center'
   },
   warning: {
     height: '100%',
@@ -23,7 +24,8 @@ const useStyles = makeStyles({
     color: '#fff',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
+    textAlign: 'center'
   },
   button: {
     color: '#fff'

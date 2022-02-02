@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 
 export default function PartnershipAdvantages(props) {
   const classes = useStyles();
-  const advantages = props.advantages
+  const advantages = props.partnership.advantages
 
   return (
       <Card className={classes.root} variant="outlined">

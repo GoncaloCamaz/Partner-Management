@@ -21,7 +21,7 @@
   z-index: 10000;
   top: 0;
   left: -100%;
-  transition: 850ms;
+  transition: 450ms;
 }
 
 .nav-menu.active {
@@ -31,7 +31,7 @@
   height: 100%;
   overflow: scroll;
   height:fit-content;
-  transition: 850ms;
+  transition: 450ms;
 }
 
 .nav-text {

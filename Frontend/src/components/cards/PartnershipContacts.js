@@ -25,7 +25,7 @@ const useStyles = makeStyles({
 
 export default function PartnershipContacts(props) {
   const classes = useStyles();
-  const contacts = props.contacts
+  const contacts = props.partnership
   const telephone = contacts.phoneNumber
   const email = contacts.email
 

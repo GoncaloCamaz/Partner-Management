@@ -31,7 +31,7 @@ const useStyles = makeStyles({
 
 export default function PartnershipAddress(props) {
   const classes = useStyles();
-  const addresses = props.addresses
+  const addresses = props.partnership.addresses
   const [openPopup, setOpenPopup] = useState(false)
   const [itemToSeeOnMap, setItemToSeeOnMap] = useState({})
 

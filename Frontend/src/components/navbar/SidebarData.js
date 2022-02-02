@@ -76,7 +76,7 @@ export const SidebarData = [
         cName: 'nav-text'
       },
       {
-        title: 'Logout',
+        title: 'Terminar Sessão',
         path: '/',
         visibleForAdmin: true,
         visibleForUser: true,
