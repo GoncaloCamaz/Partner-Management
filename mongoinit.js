@@ -20,7 +20,7 @@ db.associates.insert({
     email: "associados@arcum.pt",
     password: "password",
     userRole: "ADMIN",
-    joinedIn: '',
+    joinedIn: null,
     groups: [],
     paindUntilYear: ''
 })
@@ -37,7 +37,7 @@ db.associates.insert({
     email: "gcamaz@sapo.pt",
     password: "password",
     userRole: "USER",
-    joinedIn: '',
+    joinedIn: new Date(2020,10,2),
     groups: ["TUM"],
     paindUntilYear: 2021
 })
@@ -54,7 +54,7 @@ db.associates.insert({
     email: "tomanel@gmail.cpm",
     password: "password",
     userRole: "USER",
-    joinedIn: '',
+    joinedIn: new Date(2018,10,2),
     groups: ["TUM", "Bomboémia"],
     paindUntilYear: 2020
 })
@@ -71,7 +71,7 @@ db.associates.insert({
     email: "mariaalbertina@gmail.cpm",
     password: "password",
     userRole: "USER",
-    joinedIn: '',
+    joinedIn: new Date(2018,10,2),
     groups: ["Bomboémia"],
     paindUntilYear: 2022
 })

@@ -10,16 +10,25 @@ export default function generateReceipt(props)
     const paymentDate = props.paymentDate
     const associateFeeYear = props.associateFeeYear
     var doc = new jsPDF({orientation: "landscape", format: "A5"})
-    
-    doc.setFontSize(12);
+
+    doc.addImage(arcum, "PNG",10,10,80,40)
     doc.setTextColor("#023b7e")
-    const textToAdd = "A ARCUM declara que o(a) associado(a) " + 
-        associateName + ", sócio(a) nº " + associateNumber + ",\npagou no dia " + paymentDate + 
+
+    // Receipt Title and date
+    doc.setFontSize(20);
+    doc.text("Recibo Pagamento Quotas", 100,20)
+    const date = new Date().toISOString().split('T')[0]
+    doc.text("Data do Recibo: " + date, 100, 30)
+    doc.text("NIF: 502652381", 100,40)
+
+    // Receipt text
+    const textToAdd = "A Associação Recreativa e Cultural da Universidade do Minho (ARCUM)\ndeclara que o(a) associado(a) " + 
+        associateName + ",\nsócio(a) nº " + associateNumber + ", pagou no dia " + paymentDate + 
         " o valor de " + paidValue + "€, correspondente a " +  
         yearsPaid + " anos de quotas.\n"
         + "Mais informa que as quotas se encontram regularizadas até ao ano de " + associateFeeYear+ " inclusive."
-    doc.text(textToAdd, 10,80)
-    doc.addImage(arcum, "PNG",10,10,80,40)
+    doc.setFontSize(13);
+    doc.text(textToAdd, 10,120)
 
     return doc
 }

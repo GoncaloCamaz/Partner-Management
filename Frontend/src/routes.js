@@ -40,6 +40,10 @@ function CustomRoute({ isPrivate, mustBeAdmin,...rest }) {
     {
       return <Route {...rest} />;
     }
+    else if(isPrivate && mustBeAdmin===false && authenticationState.isAuthenticated && authenticationState.isAdmin===true)
+    {
+      return <Route {...rest} />;
+    }
   }
 
   return <Redirect to="/" />

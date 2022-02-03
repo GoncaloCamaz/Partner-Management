@@ -22,7 +22,7 @@ router.post('/login', async (req, res) => {
             {
                 const userinfo = {email: user.email, userRole: user.userRole}
                 const accessToken = jwt.sign(userinfo, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '2h'})
-                res.status(200).jsonp({token: accessToken})
+                res.status(200).jsonp({token: accessToken, userRole: userinfo.userRole})
             }
             else
             {

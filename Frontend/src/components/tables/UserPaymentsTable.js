@@ -33,7 +33,8 @@ export default function UserPaymentsTable(props) {
     const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
 
     const downloadReceipt = (item) => {
-        const name = "Recibo - " + item.paymentDate + ".pdf"
+        const date = new Date(item.paymentDate).toISOString().split('T')[0]
+        const name = "Recibo - " + date + ".pdf"
         const content = {
           associateNumber: item.associateNumber,
           associateName: 'Gonçalo Dias Camaz Moreira',
@@ -41,7 +42,7 @@ export default function UserPaymentsTable(props) {
           arcumImage: arcumLogo,
           paidValue: item.valueReceived,
           yearsPaid: item.yearsPaid,
-          paymentDate: item.paymentDate
+          paymentDate: date
         }
     
         var doc = generateReceipt(content)
@@ -94,8 +95,9 @@ export default function UserPaymentsTable(props) {
                     <TableBody>
                         { 
                             recordsAfterPagingAndSorting().map((item, index) => {
+                                const date = new Date(item.paymentDate).toISOString().split('T')[0]
                                 return (<TableRow key={index}>
-                                    <TableCell>{item.paymentDate}</TableCell>
+                                    <TableCell>{date}</TableCell>
                                     <TableCell>{item.valueReceived}</TableCell>
                                     <TableCell>{item.yearsPaid}</TableCell>
                                     <TableCell>

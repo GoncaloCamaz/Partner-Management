@@ -14,6 +14,7 @@ const useStyles = makeStyles({
   },
   list: {
     listStyle: 'none',
+    textAlign: "left"
   },
   contact: {
     display: 'flex',

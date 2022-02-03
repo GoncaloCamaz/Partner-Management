@@ -15,6 +15,7 @@ const useStyles = makeStyles({
   },
   list: {
     listStyle: 'none',
+    textAlign: "left"
   },
   address: {
     display: 'flex',
