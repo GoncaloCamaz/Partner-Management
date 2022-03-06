@@ -122,7 +122,7 @@ function GroupImageStep(props) {
           }
         />
         :
-          null
+          <br/>
       }
     </div>
   );

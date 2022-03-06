@@ -40,10 +40,11 @@ class PaymentsPage extends Component {
 
         if(result.hasErrors)
         {
-            this.setState({errorMessage: result.errorMessage, errorHasOccured: true},
+            this.setState({errorMessage: result.errorMessage, errorHasOccured: true}, () => {
                 this.setState({
                     isLoaded: true
-                }))
+                })
+            })
         }
         else
         {

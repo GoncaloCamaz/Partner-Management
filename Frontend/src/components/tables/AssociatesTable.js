@@ -6,7 +6,6 @@ import Controls from "../controls/Controls";
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
-import MapIcon from '@material-ui/icons/Map';
 import GroupIcon from '@material-ui/icons/Group';
 import PaymentIcon from '@material-ui/icons/Payment';
 
@@ -41,7 +40,7 @@ const headCells = [
     { id: 'associateNumber', label: 'Número de Associado' },
     { id: 'name',label: 'Nome'},
     { id: 'nickname', label: 'Alcunha'}, 
-    { id: 'fee', label: 'Quota'},
+    { id: 'paindUntilYear', label: 'Quota'},
     { id: 'phoneNumber', label: 'Número de Telemóvel'}, 
     { id: 'email', label: 'Email'}, 
     { id: 'active', label: 'Ativo'},
@@ -62,10 +61,6 @@ export default function AssociatesTable(props) {
 
     const openInPopupRemove = (item) => {
         props.handleRemoveAssociate(item)
-    }
-
-    const openInUserAddress = (item) => {
-        props.handleOpenAssociateAddress(item)
     }
 
     const openInResetPassword = (item) => {
@@ -100,7 +95,7 @@ export default function AssociatesTable(props) {
                             value.associateNumber.toString().toLowerCase().includes(target.value.toLowerCase()) ||
                             value.name.toString().toLowerCase().includes(target.value.toLowerCase()) ||
                             value.nickname.toString().toLowerCase().includes(target.value.toLowerCase()) ||
-                            value.fee.toString().toLowerCase().includes(target.value.toLowerCase()) ||
+                            value.paindUntilYear.toString().toLowerCase().includes(target.value.toLowerCase()) ||
                             value.email.toString().toLowerCase().includes(target.value.toLowerCase()) || 
                             value.phoneNumber.toString().toLowerCase().includes(target.value.toLowerCase()) 
                         );
@@ -159,55 +154,52 @@ export default function AssociatesTable(props) {
                                     <TableCell>{item.associateNumber}</TableCell>
                                     <TableCell>{item.name}</TableCell>
                                     <TableCell>{item.nickname}</TableCell>
-                                    <TableCell>{item.fee}</TableCell>
+                                    <TableCell>{item.paindUntilYear}</TableCell>
                                     <TableCell>{item.phoneNumber}</TableCell>
                                     <TableCell>{item.email}</TableCell>
-                                    <TableCell>{item.active}</TableCell>
+                                    <TableCell>{item.active === true ? 'true' : 'false'}</TableCell>
                                     <TableCell>{item.joinedIn}</TableCell>
-                                    <TableCell>
-                                        <Controls.ActionButton
-                                            color="primary"
-                                            title="Registar Pagamento"
-                                            className={classes.actionButton}
-                                            onClick={() => { openRegistPaymentPopup(item) }}>
-                                            <PaymentIcon fontSize="small" />
-                                        </Controls.ActionButton>
-                                        <Controls.ActionButton
-                                            color="primary"
-                                            title="Editar Associado"
-                                            className={classes.actionButton}
-                                            onClick={() => { openEditPopup(item) }}>
-                                            <EditIcon fontSize="small" />
-                                        </Controls.ActionButton>
-                                        <Controls.ActionButton
-                                            color="primary"
-                                            title="Morada"
-                                            className={classes.actionButton}
-                                            onClick={() => { openInUserAddress(item) }}>
-                                            <MapIcon fontSize="small" />
-                                        </Controls.ActionButton>
-                                        <Controls.ActionButton
-                                            color="primary"
-                                            title="Grupos do Associado"
-                                            className={classes.actionButton}
-                                            onClick={() => { openInUserGroups(item) }}>
-                                            <GroupIcon fontSize="small" />
-                                        </Controls.ActionButton>
-                                        <Controls.ActionButton
-                                            color="primary"
-                                            title="Password Reset"
-                                            className={classes.actionButton}
-                                            onClick={() => { openInResetPassword(item) }}>
-                                            <VpnKeyIcon fontSize="small" />
-                                        </Controls.ActionButton>
-                                        <Controls.ActionButton
-                                            color="primary"
-                                            title="Remover Associado"
-                                            className={classes.actionButton}
-                                            onClick={() => { openInPopupRemove(item) }}>
-                                            <DeleteIcon fontSize="small" />
-                                        </Controls.ActionButton>
-                                    </TableCell>
+                                    {item.associateNumber !== 0 ? 
+                                        <TableCell>
+                                            <Controls.ActionButton
+                                                color="primary"
+                                                title="Registar Pagamento"
+                                                className={classes.actionButton}
+                                                onClick={() => { openRegistPaymentPopup(item) }}>
+                                                <PaymentIcon fontSize="small" />
+                                            </Controls.ActionButton>
+                                            <Controls.ActionButton
+                                                color="primary"
+                                                title="Editar Associado"
+                                                className={classes.actionButton}
+                                                onClick={() => { openEditPopup(item) }}>
+                                                <EditIcon fontSize="small" />
+                                            </Controls.ActionButton>
+                                            <Controls.ActionButton
+                                                color="primary"
+                                                title="Grupos do Associado"
+                                                className={classes.actionButton}
+                                                onClick={() => { openInUserGroups(item) }}>
+                                                <GroupIcon fontSize="small" />
+                                            </Controls.ActionButton>
+                                            <Controls.ActionButton
+                                                color="primary"
+                                                title="Password Reset"
+                                                className={classes.actionButton}
+                                                onClick={() => { openInResetPassword(item) }}>
+                                                <VpnKeyIcon fontSize="small" />
+                                            </Controls.ActionButton>
+                                            <Controls.ActionButton
+                                                color="primary"
+                                                title="Remover Associado"
+                                                className={classes.actionButton}
+                                                onClick={() => { openInPopupRemove(item) }}>
+                                                <DeleteIcon fontSize="small" />
+                                            </Controls.ActionButton>
+                                        </TableCell>
+                                        :
+                                        null
+                                    }
                                 </TableRow>)
                             })
                         }

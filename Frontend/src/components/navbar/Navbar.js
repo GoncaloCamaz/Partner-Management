@@ -11,7 +11,7 @@ import history from '../../history';
 function Navbar() {
   const [sidebar, setSidebar] = useState(false);
   const { state } = useContext(AppContext);
-  const isAdmin = state.authentication.isAdmin || localStorage.getItem("admin") === "1" ? true : false
+  const isAdmin = state.authentication.isAdmin  ? true : false
 
   const showSidebar = () => setSidebar(!sidebar);
 
