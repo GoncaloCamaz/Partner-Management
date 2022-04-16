@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Navbar from '../components/navbar/Navbar'
 import { Redirect } from 'react-router-dom';
 import Popup from '../components/popup/Popup'
 import './Pages.css'
@@ -93,44 +92,41 @@ export default class PartnershipAddressesPage extends Component {
         else
         {
             return (
-                <div className="home">
-                    <Navbar isAdmin={true}/>
-                        <div className="page-container">
-                            <AddressesTable 
-                                records={this.state.addressesList}
-                                handleAddAddress={this.handleAddAddress}
-                                handleEditAddress={this.handleEditAddress}
-                                handleRemoveAddress={this.handleRemoveAddress}
-                                handleReturnToPartnerships={this.handleReturnToPartnerships}
-                            />
-                             <Popup 
-                                title={'Nova Morada'}
-                                openPopup={this.state.popupAddOpen}
-                                setOpenPopup={this.setOpenAddAddress}>
-                                <PartnershipAddresssForm 
-                                    recordForEdit={null}
-                                    addOrEdit={this.addPartnershipAddressOnBackend}
-                                />
-                            </Popup>
-                            <Popup 
-                                title={'Editar Morada'}
-                                openPopup={this.state.popupEditOpen}
-                                setOpenPopup={this.setOpenPopupEditAddress}>
-                                <PartnershipAddresssForm 
-                                    recordForEdit={this.state.recordForEdit}
-                                    addOrEdit={this.editPartnershipAddressOnBackend}
-                                />
-                            </Popup>
-                            <Popup 
-                                title={'Remover Morada'}
-                                openPopup={this.state.popupRemoveOpen}
-                                setOpenPopup={this.setOpenPopupRemoveAddress}>
-                                <MessagesDisplay 
-                                    mainMessage={"Tens a certeza que pretendes apagar a morada " + this.state.recordForRemove + "?"}
-                                />
-                            </Popup>
-                        </div>
-                </div>   
+				<div className="page-container">
+					<AddressesTable 
+						records={this.state.addressesList}
+						handleAddAddress={this.handleAddAddress}
+						handleEditAddress={this.handleEditAddress}
+						handleRemoveAddress={this.handleRemoveAddress}
+						handleReturnToPartnerships={this.handleReturnToPartnerships}
+					/>
+						<Popup 
+						title={'Nova Morada'}
+						openPopup={this.state.popupAddOpen}
+						setOpenPopup={this.setOpenAddAddress}>
+						<PartnershipAddresssForm 
+							recordForEdit={null}
+							addOrEdit={this.addPartnershipAddressOnBackend}
+						/>
+					</Popup>
+					<Popup 
+						title={'Editar Morada'}
+						openPopup={this.state.popupEditOpen}
+						setOpenPopup={this.setOpenPopupEditAddress}>
+						<PartnershipAddresssForm 
+							recordForEdit={this.state.recordForEdit}
+							addOrEdit={this.editPartnershipAddressOnBackend}
+						/>
+					</Popup>
+					<Popup 
+						title={'Remover Morada'}
+						openPopup={this.state.popupRemoveOpen}
+						setOpenPopup={this.setOpenPopupRemoveAddress}>
+						<MessagesDisplay 
+							mainMessage={"Tens a certeza que pretendes apagar a morada " + this.state.recordForRemove + "?"}
+						/>
+					</Popup>
+				</div>
             );
         }
     }    

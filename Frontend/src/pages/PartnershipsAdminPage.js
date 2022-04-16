@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Navbar from '../components/navbar/Navbar'
 import { Redirect } from 'react-router-dom';
 import Popup from '../components/popup/Popup'
 import './Pages.css'
@@ -148,48 +147,45 @@ export default class PartnershipsAdminPage extends Component {
         else
         {
             return (
-                <div className="home">
-                    <Navbar isAdmin={true}/>
-                        <div className="page-container">
-                            <PartnershipsTable 
-                                rows={partnerships}
-                                handleAddPartnership={this.handleAddPartnership}
-                                handleSeeAddresses={this.handleSeeAddresses}
-                                handleEditPartnership={this.handleEditPartnership}
-                                handleRemovePartnership={this.handleRemovePartnership}
-                                handleSeeAdvantages={this.handleSeeAdvantages}
-                            />
-                            <Popup 
-                                title={'Nova Parceria'}
-                                openPopup={this.state.popupAddOpen}
-                                setOpenPopup={this.setOpenAddPartnershipPopup}>
-                                <PartnershipForm 
-                                    recordForEdit={null}
-                                    addOrEdit={this.addPartnershipOnBackend}
-                                />
-                            </Popup>
-                            <Popup 
-                                title={'Editar Parceria'}
-                                openPopup={this.state.popupEditOpen}
-                                setOpenPopup={this.setOpenPopupEditPartnership}>
-                               <PartnershipForm 
-                                    recordForEdit={this.state.recordForEdit}
-                                    addOrEdit={this.editPartnershipOnBackend}
-                                />
-                            </Popup>
-                            <Popup 
-                                title={'Remover Parceria'}
-                                openPopup={this.state.popupRemoveOpen}
-                                setOpenPopup={this.setOpenPopupRemovePartnership}>
-                                <MessagesDisplayForm 
-                                    mainMessage={"Tens a certeza que queres apagar a parceria: " + this.state.recordForRemove + " ?"}
-                                    secundaryMessage={"Todas as vantagens e moradas relativas à mesma vão ser apagadas."}
-                                    handleOk={this.removePartnershipOnBackend}
-                                />
-                            </Popup>  
-                        </div>
-                 </div>   
-                );
+				<div className="page-container">
+					<PartnershipsTable 
+						rows={partnerships}
+						handleAddPartnership={this.handleAddPartnership}
+						handleSeeAddresses={this.handleSeeAddresses}
+						handleEditPartnership={this.handleEditPartnership}
+						handleRemovePartnership={this.handleRemovePartnership}
+						handleSeeAdvantages={this.handleSeeAdvantages}
+					/>
+					<Popup 
+						title={'Nova Parceria'}
+						openPopup={this.state.popupAddOpen}
+						setOpenPopup={this.setOpenAddPartnershipPopup}>
+						<PartnershipForm 
+							recordForEdit={null}
+							addOrEdit={this.addPartnershipOnBackend}
+						/>
+					</Popup>
+					<Popup 
+						title={'Editar Parceria'}
+						openPopup={this.state.popupEditOpen}
+						setOpenPopup={this.setOpenPopupEditPartnership}>
+						<PartnershipForm 
+							recordForEdit={this.state.recordForEdit}
+							addOrEdit={this.editPartnershipOnBackend}
+						/>
+					</Popup>
+					<Popup 
+						title={'Remover Parceria'}
+						openPopup={this.state.popupRemoveOpen}
+						setOpenPopup={this.setOpenPopupRemovePartnership}>
+						<MessagesDisplayForm 
+							mainMessage={"Tens a certeza que queres apagar a parceria: " + this.state.recordForRemove + " ?"}
+							secundaryMessage={"Todas as vantagens e moradas relativas à mesma vão ser apagadas."}
+							handleOk={this.removePartnershipOnBackend}
+						/>
+					</Popup>  
+				</div>
+            );
         }
     }
 }    

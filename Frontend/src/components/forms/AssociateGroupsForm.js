@@ -60,25 +60,24 @@ export default function AssociateGroupsForm(props) {
     }
 
     return (
-            <Grid container>
-                <Grid item lg={12} md={12} sm={12} xs={12}>
-                    <FormGroup>
-                        {columnsSelected.map((item, index) => ( 
-                            <FormControlLabel key={index}
-                                control={<Checkbox value={item.checked} name={item.name} onChange={handleChange}/>}
-                                label={item.name}
-                            />
-                            ))
-                        }
-                    </FormGroup>
-                    <div>
-                        <Controls.Button
-                            className={classes.button}
-                            type="submit"
-                            text="Atualizar" 
-                            onClick={handleSubmit}/>
-                    </div>
-                </Grid>
-            </Grid>
+		<Grid container >
+			<Grid item lg={12} md={12} sm={12} xs={12}>
+				<FormGroup className='root'>
+					{columnsSelected.map((item, index) => ( 
+						<FormControlLabel key={index}
+							control={<Checkbox value={item.checked} name={item.name} onChange={handleChange}/>}
+							label={item.name}
+						/>
+						))
+					}
+				</FormGroup>
+				<Controls.Button
+					className={classes.button}
+					type="submit"
+					text="Atualizar" 
+					onClick={handleSubmit}
+				/>
+			</Grid>
+		</Grid>
     )
 }

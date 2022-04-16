@@ -3,13 +3,11 @@ import { withRouter } from 'react-router-dom';
 import { AppContext } from '../context/AppContext';
 import AssociatesTable from '../components/tables/AssociatesTable';
 import Popup from '../components/popup/Popup'
-import './Pages.css'
 import CreateAssociateForm from '../components/forms/CreateAssociateForm';
 import EditAssociateForm from '../components/forms/EditAssociateForm';
 import * as AssociatesAPI from '../api/AssociatesAPI';
-import * as PaymentsAPI from '../api/PaymentsAPI';
+import {createPayment} from '../api/PaymentsAPI';
 import MessagesDisplay from '../components/forms/MessagesDisplayForm';
-import AssociateAddresssForm from '../components/forms/AssociateAddressForm';
 import AssociateGroupsForm from '../components/forms/AssociateGroupsForm';
 import PaymentForm from '../components/forms/PaymentForm';
 
@@ -42,12 +40,21 @@ class AssociatesPage extends Component {
         if(groups.length > 0)
         {
             let groupsForSelect = [];
-            groupsForSelect.push({id: 'All',key: 'All', title: 'All',name: 'All'})
-            groups.forEach(group => groupsForSelect.push({id: group.initials, key: group.initials, name: group.initials, title: group.initials}))
-
+            groupsForSelect.push({
+				id: 'Todos',
+				key: 'Todos', 
+				title: 'Todos',
+				name: 'Todos'
+			})
+            groups.forEach(group => groupsForSelect.push({
+				id: group.initials, 
+				key: group.initials, 
+				name: group.initials, 
+				title: group.initials
+			}))
             this.setState({groups: groups, groupsForTableSelect: groupsForSelect})
         }
-        this.associatesTableUpdate()        
+        this.associatesTableUpdate();        
     }
 
     associatesTableUpdate = async () => {
@@ -58,13 +65,12 @@ class AssociatesPage extends Component {
         }, (error) => {
             return error;
         })
-        console.log(result)
         if(result.hasErrors)
         {
             this.setState({errorMessage: result.errorMessage, errorPopupOpen: true},
                 this.setState({
                     isLoaded: true
-                }))
+                }));
         }
         else
         {
@@ -72,68 +78,128 @@ class AssociatesPage extends Component {
                 associates: result.data,
                 filteredAssociates: result.data
             }, () => {
-                this.setState({ isLoaded: true})
-            })
+                this.setState({ isLoaded: true});
+            });
         }
         
-
-        this.setState({isLoaded: true})
+        this.setState({isLoaded: true});
     }
 
-    addAssociateOnBackend(values) {
-        console.log(values)
-        const response = AssociatesAPI.createNewAssociate(values)
-        //TODO HANDLE RESPONSE
-        if(response.status !== 200)
+    addAssociate = async (values) => {
+		const associate = this.createNewAssociateFromValues(values);
+		const result = await AssociatesAPI.createNewAssociate(associate).then((result) => {
+            return result;
+        }, (error) => {
+            return error;
+        })
+
+		if(result.hasErrors)
         {
-            //check response error messages
-            this.setState({errorMessage: "Alguma coisa correu mal TODO: ERROR"})
-            this.setOpenErrorPopup(true)
+            this.setState({errorMessage: result.message}, () => {
+				this.setOpenErrorPopup(true);
+			});
         }
-        this.associatesTableUpdate(false)
+		else
+		{
+			this.setOpenAddAssociatePopup(false);
+			this.associatesTableUpdate();
+		}
     }
 
-    editAssociateOnBackend(values) {
-        console.log(values)
-        const response = AssociatesAPI.updateAssociate(values)
-        //TODO HANDLE RESPONSE
-        if(response.status !== 200)
+	createNewAssociateFromValues(values) {
+		const associate = {
+			name: values.name,
+			nickname: values.nickname || '',
+			groups: [values.initialGroup],
+			phoneNumber: values.phoneNumber || '',
+			email: values.email,
+			city: values.city,
+			address: values.address,
+			postalCode: values.postalCode,
+			joinedIn: new Date(values.joinedIn)
+		}
+
+		return associate;
+	}
+
+    editAssociate = async (values) => {
+		const result = await AssociatesAPI.updateAssociate(values).then((result) => {
+            return result;
+        }, (error) => {
+            return error;
+        })
+
+		if(result.hasErrors)
         {
-            //check response error messages
-            this.setState({errorMessage: "Alguma coisa correu mal TODO: ERROR"})
-            this.setOpenErrorPopup(true)
+            this.setState({errorMessage: result.message}, () => {
+				this.setOpenErrorPopup(true);
+			});
         }
-        this.associatesTableUpdate(false)
+		else
+		{
+			this.setOpenEditAssociatePopup(false);
+			this.associatesTableUpdate();
+		}
     }
 
-    removeAssociateOnBackend() {
-        console.log(this.state.recordForRemove)
-        const response = AssociatesAPI.updateAssociate(this.state.recordForRemove)
-        //TODO HANDLE RESPONSE
-        if(response.status !== 200)
+    removeAssociate = async (values) => {
+		const result = await AssociatesAPI.deleteAssociate(values).then((result) => {
+            return result;
+        }, (error) => {
+            return error;
+        })
+
+		if(result.hasErrors)
         {
-            //check response error messages
-            this.setState({errorMessage: "Alguma coisa correu mal TODO: ERROR"})
-            this.setOpenErrorPopup(true)
+            this.setState({errorMessage: result.message}, () => {
+				this.setOpenErrorPopup(true);
+			});
         }
-        this.associatesTableUpdate(false)
+		else
+		{
+			this.setOpenRemoveAssociatePopup(false);
+			this.associatesTableUpdate();
+		}
     }
 
-    resetPasswordOnBackend(values)
+    resetPassword = async (values) =>
     {
-        const result = AssociatesAPI.resetPassword(values.associateNumber)
-        if(result.status !== 200)
+		const result = await AssociatesAPI.resetPassword(values).then((result) => {
+            return result;
+        }, (error) => {
+            return error;
+        })
+
+		if(result.hasErrors)
         {
-            //check response error messages
-            this.setState({errorMessage: "Alguma coisa correu mal TODO: ERROR"})
-            this.setOpenErrorPopup(true)
+            this.setState({errorMessage: result.message}, () => {
+				this.setOpenErrorPopup(true);
+			});
         }
+		else
+		{
+			this.setOpenResetPasswordPopup(false);
+		}
     }
 
-    submitPayment = (items) => {
-        console.log(items)
-        //todo
-        this.setOpenPaymentPopup(false)
+    submitPayment = async (values) => {
+		const result = await createPayment(values).then((result) => {
+            return result;
+        }, (error) => {
+            return error;
+        })
+
+		if(result.hasErrors)
+        {
+            this.setState({errorMessage: result.message}, () => {
+				this.setOpenErrorPopup(true);
+			});
+        }
+		else
+		{
+			this.setOpenPaymentPopup(false);
+			this.associatesTableUpdate();
+		}
     }
 
 
@@ -144,7 +210,7 @@ class AssociatesPage extends Component {
 
     handleSearch = (values) => {
         var records = this.state.associates
-        if(values !== 'All')
+        if(values !== 'Todos')
         {
             const searchResult = records.filter(item => item.groups.includes(values))
             this.setState({filteredAssociates: searchResult})
@@ -190,6 +256,7 @@ class AssociatesPage extends Component {
     }
 
     handleAddNewAssociate = () => {
+		this.setState({recordForEdit: {}})
         this.setOpenAddAssociatePopup(true)
     }
 
@@ -201,11 +268,6 @@ class AssociatesPage extends Component {
     handleRemoveAssociate = (associate) => {
         this.setState({recordForRemove: associate.associateNumber})
         this.setOpenRemoveAssociatePopup(true)
-    }
-
-    handleOpenAssociateAddress = (associate) => {
-        this.setState({recordForEdit: associate})
-        this.setOpenSeeAddressPopup(true)
     }
 
     handleResetAssociatePassword = (associate) => {
@@ -257,9 +319,10 @@ class AssociatesPage extends Component {
                         openPopup={this.state.popupAddAssociateOpen}
                         setOpenPopup={this.setOpenAddAssociatePopup}>
                         <CreateAssociateForm 
-                            recordForEdit ={this.state.recordForEdit}
+							isCreate={true}
+                            recordForEdit ={null}
                             groups={this.state.groupsForTableSelect}
-                            addOrEdit={this.addAssociateOnBackend}
+                            addOrEdit={this.addAssociate}
                         />
                     </Popup>
                     <Popup 
@@ -277,16 +340,7 @@ class AssociatesPage extends Component {
                         setOpenPopup={this.setOpenEditAssociatePopup}>
                         <EditAssociateForm 
                             recordForEdit ={this.state.recordForEdit}
-                            addOrEdit={this.editAssociateOnBackend}
-                        />
-                    </Popup>
-                    <Popup 
-                        title={'Morada do Associado'}
-                        openPopup={this.state.popupSeeAddressOpen}
-                        setOpenPopup={this.setOpenSeeAddressPopup}>
-                        <AssociateAddresssForm 
-                            recordForEdit ={this.state.recordForEdit}
-                            addOrEdit={this.editAssociateOnBackend}
+                            addOrEdit={this.editAssociate}
                         />
                     </Popup>
                     <Popup 
@@ -296,7 +350,7 @@ class AssociatesPage extends Component {
                         <AssociateGroupsForm 
                             recordForEdit={this.state.recordForEdit}
                             groups={this.state.groups}
-                            addOrEdit={this.editAssociateOnBackend}
+                            addOrEdit={this.editAssociate}
                         />
                     </Popup>
                     <Popup 
@@ -306,7 +360,7 @@ class AssociatesPage extends Component {
                         <MessagesDisplay 
                             mainMessage={"Tens a certeza que queres apagar o associado com o número: " + this.state.recordForRemove + " ?"}
                             secundaryMessage={"Os registos de pagamentos e informações serão mantidos."}
-                            handleOk={this.removeAssociateOnBackend}
+                            handleOk={this.removeAssociate}
                         />
                     </Popup>
                     <Popup 
@@ -316,7 +370,7 @@ class AssociatesPage extends Component {
                         <MessagesDisplay 
                             mainMessage={"As credênciais do associado: " + this.state.recordForRemove + " vão ser atualizadas."}
                             secundaryMessage={"As novas credênciais vão ser enviadas para o email do associado."}
-                            handleOk={this.resetPasswordOnBackend}
+                            handleOk={this.resetPassword}
                         />
                     </Popup>
                 </div>

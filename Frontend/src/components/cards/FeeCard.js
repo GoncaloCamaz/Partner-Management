@@ -8,6 +8,7 @@ import EuroSymbolIcon from '@material-ui/icons/EuroSymbol';
 
 const useStyles = makeStyles({
   root: {
+	  maxHeight: '500px',
       height: '100%',
       width: '100%',
       backgroundColor: '#1a83ff',
@@ -18,6 +19,7 @@ const useStyles = makeStyles({
       textAlign: 'center'
   },
   warning: {
+	maxHeight: '500px',
     height: '100%',
     width: '100%',
     backgroundColor: 'red',

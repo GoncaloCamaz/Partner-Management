@@ -1,8 +1,10 @@
+const { paymentDTOMapper } = require('../DTO/PaymentDTO')
 var Payment = require('../Models/Payment')
 const Payments = module.exports
 
 Payments.createPayment = (payment) => {
-    return Payment.create(payment)
+	const paymentDTO = paymentDTOMapper(payment);
+    return Payment.create(paymentDTO)
 }
 
 Payments.listAll = () => {

@@ -22,7 +22,7 @@ db.associates.insert({
     userRole: "ADMIN",
     joinedIn: null,
     groups: [],
-    paindUntilYear: ''
+    currentFeeYear: 0
 })
 
 db.associates.insert({
@@ -39,7 +39,7 @@ db.associates.insert({
     userRole: "USER",
     joinedIn: new Date(2020,10,2),
     groups: ["TUM"],
-    paindUntilYear: 2021
+    currentFeeYear: 2021
 })
 
 db.associates.insert({
@@ -56,7 +56,7 @@ db.associates.insert({
     userRole: "USER",
     joinedIn: new Date(2018,10,2),
     groups: ["TUM", "Bomboémia"],
-    paindUntilYear: 2020
+    currentFeeYear: 2020
 })
 
 db.associates.insert({
@@ -73,7 +73,7 @@ db.associates.insert({
     userRole: "USER",
     joinedIn: new Date(2018,10,2),
     groups: ["Bomboémia"],
-    paindUntilYear: 2022
+    currentFeeYear: 2022
 })
 
 db.paymentmethods.insert({

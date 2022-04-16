@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Navbar from '../components/navbar/Navbar'
 import { Redirect } from 'react-router-dom';
 import './Pages.css'
 import Popup from '../components/popup/Popup'
@@ -109,26 +108,23 @@ export default class PaymentsAdminPage extends Component {
         else
         {
             return (
-                <div className="home">
-                    <Navbar isAdmin={true}/>
-                        <div className="page-container">
-                            <PaymentsAdminPageGrid 
-                                handleSeePaymentMethods={this.handleSeePaymentMethods}
-                                handleSeeAllPayments={this.handleSeeAllPayments}
-                                handleSeePaymentReports={this.handleSeePaymentReports}
-                            />
-                             <Popup 
-                                title={'Gerar Relatório'}
-                                openPopup={this.state.seePaymentReportsPopup}
-                                setOpenPopup={this.setOpenPaymentReportPopup}>
-                                <ReportForm 
-                                    recordForEdit={null}
-                                    groups={this.state.groups}
-                                    addOrEdit={this.generateReport}
-                                />
-                            </Popup>
-                        </div>
-                </div>   
+				<div className="page-container">
+					<PaymentsAdminPageGrid 
+						handleSeePaymentMethods={this.handleSeePaymentMethods}
+						handleSeeAllPayments={this.handleSeeAllPayments}
+						handleSeePaymentReports={this.handleSeePaymentReports}
+					/>
+						<Popup 
+						title={'Gerar Relatório'}
+						openPopup={this.state.seePaymentReportsPopup}
+						setOpenPopup={this.setOpenPaymentReportPopup}>
+						<ReportForm 
+							recordForEdit={null}
+							groups={this.state.groups}
+							addOrEdit={this.generateReport}
+						/>
+					</Popup>
+				</div>
             );
         }
     }

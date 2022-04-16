@@ -1,11 +1,13 @@
+const { partnershipDTOMapper } = require('../DTO/PartnershipDTO')
 var Partnership = require('../Models/Partnership')
 const Partnerships = module.exports
 
-Partnerships.createPartnership = partnership => {
-    return Partnership.create(partnership)
+Partnerships.createPartnership = (partnership) => {
+	const partnershipDTO = partnershipDTOMapper(partnership);
+    return Partnership.create(partnershipDTO);
 }
 
-Partnerships.deletePartnership = name => {
+Partnerships.deletePartnership = (name) => {
     return Partnership.findOneAndDelete({name: name})
                       .exec()
 }

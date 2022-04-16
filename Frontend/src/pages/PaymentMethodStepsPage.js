@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PaymentMethodStepsTable from '../components/tables/PaymentMethodStepsTable';
 import Popup from '../components/popup/Popup'
-import Navbar from '../components/navbar/Navbar'
 import { Redirect } from 'react-router-dom';
 import PaymentMethodStepForm from '../components/forms/PaymentMethodStepForm';
 
@@ -70,45 +69,42 @@ export default class PaymentMethodStepsPage extends Component {
         else
         {
             return(
-                <div className="home">
-                <Navbar isAdmin={true}/>
-                    <div className="page-container">
-                        <PaymentMethodStepsTable 
-                            rows={this.state.paymentMethodSteps}
-                            handleAddPaymentMethodStep={this.handleAddPaymentMethodStep}
-                            handleEditPaymentMethodStep={this.handleEditPaymentMethodStep}
-                            handleRemovePaymentMethodStep={this.handleRemovePaymentMethodStep}
-                            handleReturnToPaymentMethods={this.handleReturnToPaymentMethods}
-                        />
-                        <Popup
-                            title={"Adicionar Passo"}
-                            openPopup={this.state.popupAddOpen}
-                            setOpenPopup={this.setOpenAddPopup}>
-                            <PaymentMethodStepForm
-                                recordForEdit={null}
-                                addOrEdit={this.addPaymntMethodOnBackend}
-                            />
-                        </Popup>
-                        <Popup
-                            title={"Editar Passo"}
-                            openPopup={this.state.popupEditOpen}
-                            setOpenPopup={this.setOpenEditPopup}>
-                            <PaymentMethodStepForm
-                                recordForEdit={this.state.recordForEdit}
-                                addOrEdit={this.editPaymentMethodOnBackend}
-                            />
-                        </Popup>
-                        <Popup
-                            title={"Remover Passo"}
-                            openPopup={this.state.popupRemoveOpen}
-                            setOpenPopup={this.setOpenRemovePopup}>
-                            <PaymentMethodStepForm
-                                recordForEdit={this.state.recordForRemove}
-                                addOrEdit={this.removePaymentMethodOnBackend}
-                            />
-                        </Popup>
-                    </div>
-            </div>   
+				<div className="page-container">
+					<PaymentMethodStepsTable 
+						rows={this.state.paymentMethodSteps}
+						handleAddPaymentMethodStep={this.handleAddPaymentMethodStep}
+						handleEditPaymentMethodStep={this.handleEditPaymentMethodStep}
+						handleRemovePaymentMethodStep={this.handleRemovePaymentMethodStep}
+						handleReturnToPaymentMethods={this.handleReturnToPaymentMethods}
+					/>
+					<Popup
+						title={"Adicionar Passo"}
+						openPopup={this.state.popupAddOpen}
+						setOpenPopup={this.setOpenAddPopup}>
+						<PaymentMethodStepForm
+							recordForEdit={null}
+							addOrEdit={this.addPaymntMethodOnBackend}
+						/>
+					</Popup>
+					<Popup
+						title={"Editar Passo"}
+						openPopup={this.state.popupEditOpen}
+						setOpenPopup={this.setOpenEditPopup}>
+						<PaymentMethodStepForm
+							recordForEdit={this.state.recordForEdit}
+							addOrEdit={this.editPaymentMethodOnBackend}
+						/>
+					</Popup>
+					<Popup
+						title={"Remover Passo"}
+						openPopup={this.state.popupRemoveOpen}
+						setOpenPopup={this.setOpenRemovePopup}>
+						<PaymentMethodStepForm
+							recordForEdit={this.state.recordForRemove}
+							addOrEdit={this.removePaymentMethodOnBackend}
+						/>
+					</Popup>
+				</div>
             );
         }
     }

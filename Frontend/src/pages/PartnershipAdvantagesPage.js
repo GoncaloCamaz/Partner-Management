@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Navbar from '../components/navbar/Navbar'
 import { Redirect } from 'react-router-dom';
 import './Pages.css'
 import AdvantagesTable from '../components/tables/AdvantagesTable';
@@ -83,18 +82,15 @@ export default class PartnershipAdvantagesPage extends Component {
         else
         {
             return (
-                <div className="home">
-                    <Navbar isAdmin={true}/>
-                        <div className="page-container">
-                            <AdvantagesTable 
-                                records={this.state.advantagesList}
-                                handleAddAdvantage={this.handleAddAdvantage}
-                                handleEditAdvantage={this.handleEditAdvantage}
-                                handleRemoveAdvantage={this.handleRemoveAdvantage}
-                                handleReturnToPartnerships={this.handleReturnToPartnerships}
-                            />
-                        </div>
-                </div>   
+				<div className="page-container">
+					<AdvantagesTable 
+						records={this.state.advantagesList}
+						handleAddAdvantage={this.handleAddAdvantage}
+						handleEditAdvantage={this.handleEditAdvantage}
+						handleRemoveAdvantage={this.handleRemoveAdvantage}
+						handleReturnToPartnerships={this.handleReturnToPartnerships}
+					/>
+				</div>
             );
         }
     }    

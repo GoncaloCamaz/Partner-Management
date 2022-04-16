@@ -9,6 +9,7 @@ import PartnershipsStep from '../steps/PartnershipsStep';
 
 const useStyles = makeStyles({
   root: {
+	  maxHeight: '500px',
       height: '100%',
       width: '100%',
       backgroundColor: '#1a83ff',

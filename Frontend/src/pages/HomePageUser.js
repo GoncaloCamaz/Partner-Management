@@ -62,7 +62,7 @@ class HomePageUser extends Component {
             else
             {
                 return (
-                    <Grid container columnSpacing={3} style={{maxHeight: '100%'}}>
+                    <Grid container columnSpacing={3} >
                         <Grid item lg={6} md={6} sm={12} xs={12}> 
                             <Paper style={{marginBottom: '20px'}}>
                                 <ProfileCard associate={this.state.associate} handleSeeProfile={this.handleSeeProfile}/>

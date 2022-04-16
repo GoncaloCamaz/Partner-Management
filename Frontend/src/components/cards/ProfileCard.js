@@ -10,14 +10,15 @@ import { AppContext } from '../../context/AppContext'
 
 const useStyles = makeStyles({
   root: {
-    height: '100%',
-      width: '100%',
-      backgroundColor: '#1a83ff',
-      color: '#fff',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      textAlign: 'center'
+	  	maxHeight: '600px',
+		height: '100%',
+		width: '100%',
+		backgroundColor: '#1a83ff',
+		color: '#fff',
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
+		textAlign: 'center'
   },
   content: {
       display: 'flex',

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Table, Paper, makeStyles, TableBody, TableRow, TableCell, Toolbar, InputAdornment } from '@material-ui/core';
+import { Paper, makeStyles, TableBody, TableRow, TableCell, Toolbar, InputAdornment } from '@material-ui/core';
 import useTable from "./useTable";
 import { Search } from "@material-ui/icons";
 import Controls from "../controls/Controls";
@@ -53,8 +53,7 @@ export default function AssociatesTable(props) {
     const records = props.records
     const groups = props.groups
     const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
-    const [selectedGroup, setSelectedGroup] = useState('All')
-
+    const [selectedGroup, setSelectedGroup] = useState('Todos')
     const openEditPopup = (item) => {
         props.handleEditAssociate(item)
     }
@@ -77,8 +76,8 @@ export default function AssociatesTable(props) {
 
     const {
         TblContainer,
-        TblHead,
         TblPagination,
+		TblHead,
         recordsAfterPagingAndSorting
     } = useTable(records, headCells, filterFn);
 
@@ -94,10 +93,10 @@ export default function AssociatesTable(props) {
                         return (
                             value.associateNumber.toString().toLowerCase().includes(target.value.toLowerCase()) ||
                             value.name.toString().toLowerCase().includes(target.value.toLowerCase()) ||
-                            value.nickname.toString().toLowerCase().includes(target.value.toLowerCase()) ||
-                            value.paindUntilYear.toString().toLowerCase().includes(target.value.toLowerCase()) ||
+                            value.nickname?.toString().toLowerCase().includes(target.value.toLowerCase()) ||
+                            value.paindUntilYear?.toString().toLowerCase().includes(target.value.toLowerCase()) ||
                             value.email.toString().toLowerCase().includes(target.value.toLowerCase()) || 
-                            value.phoneNumber.toString().toLowerCase().includes(target.value.toLowerCase()) 
+                            value.phoneNumber?.toString().toLowerCase().includes(target.value.toLowerCase()) 
                         );
                     })
                     return filtered      
@@ -145,8 +144,7 @@ export default function AssociatesTable(props) {
                     />
                 </Toolbar>
                 <TblContainer className={classes.container}>
-                <Table stickyHeader>
-                    <TblHead />
+					<TblHead/>
                     <TableBody>
                         { 
                             recordsAfterPagingAndSorting().map((item, index) => {
@@ -204,7 +202,6 @@ export default function AssociatesTable(props) {
                             })
                         }
                     </TableBody>
-                    </Table>
                 </TblContainer>
                 <TblPagination />
             </Paper>

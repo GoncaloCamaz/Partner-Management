@@ -85,43 +85,43 @@ export default class PaymentMethodsPage extends Component {
         else
         {
             return(
-<>
-                        <PaymentMethodsTable 
-                            rows={this.state.paymentMethods}
-                            handleAddPaymentMethod={this.handleAddPaymentMethod}
-                            handleEditPaymentMethod={this.handleEditPaymentMethod}
-                            handleRemovePaymentMethod={this.handleRemovePaymentMethod}
-                            handleSeeStepsPage={this.handleSeeStepsPage}
-                            handleReturnToPayments={this.handleReturnToPayments}
-                        />
-                        <Popup
-                            title={"Adicionar Método de Pagamento"}
-                            openPopup={this.state.popupAddOpen}
-                            setOpenPopup={this.setOpenAddPopup}>
-                            <PaymentMethodForm
-                                recordForEdit={null}
-                                addOrEdit={this.addPaymntMethodOnBackend}
-                            />
-                        </Popup>
-                        <Popup
-                            title={"Editar Método de Pagamento"}
-                            openPopup={this.state.popupEditOpen}
-                            setOpenPopup={this.setOpenEditPopup}>
-                            <PaymentMethodForm
-                                recordForEdit={this.state.recordForEdit}
-                                addOrEdit={this.editPaymentMethodOnBackend}
-                            />
-                        </Popup>
-                        <Popup
-                            title={"Remover Método de Pagamento"}
-                            openPopup={this.state.popupRemoveOpen}
-                            setOpenPopup={this.setOpenRemovePopup}>
-                            <PaymentMethodForm
-                                recordForEdit={this.state.recordForRemove}
-                                addOrEdit={this.removePaymentMethodOnBackend}
-                            />
-                        </Popup>
-                        </>
+				<>
+					<PaymentMethodsTable 
+						rows={this.state.paymentMethods}
+						handleAddPaymentMethod={this.handleAddPaymentMethod}
+						handleEditPaymentMethod={this.handleEditPaymentMethod}
+						handleRemovePaymentMethod={this.handleRemovePaymentMethod}
+						handleSeeStepsPage={this.handleSeeStepsPage}
+						handleReturnToPayments={this.handleReturnToPayments}
+					/>
+					<Popup
+						title={"Adicionar Método de Pagamento"}
+						openPopup={this.state.popupAddOpen}
+						setOpenPopup={this.setOpenAddPopup}>
+						<PaymentMethodForm
+							recordForEdit={null}
+							addOrEdit={this.addPaymntMethodOnBackend}
+						/>
+					</Popup>
+					<Popup
+						title={"Editar Método de Pagamento"}
+						openPopup={this.state.popupEditOpen}
+						setOpenPopup={this.setOpenEditPopup}>
+						<PaymentMethodForm
+							recordForEdit={this.state.recordForEdit}
+							addOrEdit={this.editPaymentMethodOnBackend}
+						/>
+					</Popup>
+					<Popup
+						title={"Remover Método de Pagamento"}
+						openPopup={this.state.popupRemoveOpen}
+						setOpenPopup={this.setOpenRemovePopup}>
+						<PaymentMethodForm
+							recordForEdit={this.state.recordForRemove}
+							addOrEdit={this.removePaymentMethodOnBackend}
+						/>
+					</Popup>
+                </>
             );
         }
     }

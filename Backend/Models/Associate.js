@@ -5,7 +5,7 @@ const Schema = mongoose.Schema
 const AssociateSchema = new Schema({
     associateNumber: { type: Number, required: true, unique: true},
     name: {type: String, required: true,  max : [127, "Max Length is 127 characters"]},
-    phoneNumber: Number,
+    phoneNumber: String,
     address: String,
     city: String,
     postalCode: String,
@@ -16,7 +16,7 @@ const AssociateSchema = new Schema({
     userRole: {type: String, required: true},
     joinedIn: Date,
     groups: [String],
-    paidUntilYear: Number
+    currentFeeYear: { type: Number, required: true},
 });
 
 AssociateSchema.plugin(uniqueValidator)

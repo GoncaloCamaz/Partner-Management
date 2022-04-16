@@ -9,9 +9,11 @@ const initialFValues = {
     nickname: '',
     phoneNumber: '',
     email: '',
-    joinedIn: '',
+    joinedIn: '26-12-2020',
     paidUntilYear: '',
-    initialGroup: ''
+	city: '',
+    postalCode: '',
+    address: ''
 }
 
 const useStyles = makeStyles(({
@@ -61,9 +63,11 @@ export default function EditAssociateForm(props) {
 
     useEffect(() => {
         if (recordForEdit != null)
-            setValues({
-                ...recordForEdit
+		{
+			setValues({
+                ...recordForEdit,
             })
+		}
     // eslint-disable-next-line
     }, [recordForEdit])
 
@@ -72,21 +76,15 @@ export default function EditAssociateForm(props) {
         <Form onSubmit={handleSubmit}>
             <Grid container>
                 <Grid item lg={6} md={6} sm={12} xs={12}>
-                    <Controls.Input
+				<Controls.Input
                         name="name"
-                        label="Nome"
+                        label="Nome*"
                         value={values.name}
                         onChange={handleInputChange}
                         error={errors.name}
                     />
                     <Controls.Input
-                        label="Alcunha"
-                        name="nickname"
-                        value={values.nickname}
-                        onChange={handleInputChange}
-                    />
-                    <Controls.Input
-                        label="Email"
+                        label="Email*"
                         name="email"
                         value={values.email}
                         onChange={handleInputChange}
@@ -98,12 +96,38 @@ export default function EditAssociateForm(props) {
                         value={values.phoneNumber}
                         onChange={handleInputChange}
                     />
+					   <Controls.Input
+                        label="Morada"
+                        name="address"
+                        value={values.address}
+                        onChange={handleInputChange}
+                    />
+                    <Controls.Input
+                        name="city"
+                        label="Cidade"
+                        value={values.city}
+                        onChange={handleInputChange}
+                    />
+                    <Controls.Input
+                        label="Código Postal"
+                        name="postalCode"
+                        value={values.postalCode}
+                        onChange={handleInputChange}
+                        error={errors.postalCode}
+                    />
                 </Grid>
                 <Grid item lg={6} md={6} sm={12} xs={12}>
+					<Controls.Input
+                        label="Alcunha"
+                        name="nickname"
+                        value={values.nickname}
+                        onChange={handleInputChange}
+                    />
                     <Controls.Input 
                         name="joinedIn"
-                        label="Ano de Entrada"
-                        value={values.joinedIn}
+                        label="Ano de Entrada*"
+                        value={new Date(values.joinedIn)}
+						type="date"
                         onChange={handleInputChange}
                         error={errors.joinedIn}
                     />

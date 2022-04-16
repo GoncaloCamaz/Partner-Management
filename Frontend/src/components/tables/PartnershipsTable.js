@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Table, Paper, makeStyles, TableBody, TableRow, TableCell, Toolbar, InputAdornment } from '@material-ui/core';
+import { Paper, makeStyles, TableBody, TableRow, TableCell, Toolbar, InputAdornment } from '@material-ui/core';
 import useTable from "./useTable";
 import { Search } from "@material-ui/icons";
 import Controls from "../controls/Controls";
@@ -68,8 +68,8 @@ export default function PartnershipsTable(props) {
 
     const {
         TblContainer,
-        TblHead,
         TblPagination,
+		TblHead,
         recordsAfterPagingAndSorting
     } = useTable(records, headCells, filterFn);
 
@@ -115,8 +115,7 @@ export default function PartnershipsTable(props) {
                     />
                 </Toolbar>
                 <TblContainer className={classes.container}>
-                <Table stickyHeader>
-                    <TblHead />
+					<TblHead/>
                     <TableBody>
                         { 
                             recordsAfterPagingAndSorting().map((item, index) => {
@@ -160,7 +159,6 @@ export default function PartnershipsTable(props) {
                             })
                         }
                     </TableBody>
-                    </Table>
                 </TblContainer>
                 <TblPagination />
             </Paper>

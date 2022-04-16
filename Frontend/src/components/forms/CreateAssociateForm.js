@@ -9,9 +9,12 @@ const initialFValues = {
     nickname: '',
     phoneNumber: '',
     email: '',
-    joinedIn: '',
-    paidUntilYear: '',
-    initialGroup: ''
+    joinedIn: new Date(),
+    currentFeePaidYear: '',
+    initialGroup: '',
+	city: '',
+    postalCode: '',
+    address: ''
 }
 
 const useStyles = makeStyles(({
@@ -21,12 +24,16 @@ const useStyles = makeStyles(({
         '&:hover': {
             background: "#1888ff"
           }
-    }
+    },
+	item: {
+		display: 'flex',
+		justifyContent: 'center'
+	}
 }))
 
 export default function CreateAssociateForm(props) {
-    const { addOrEdit, recordForEdit } = props
-    const groups = props.groups
+    const { addOrEdit, recordForEdit, isCreate } = props
+    let groups = props.groups.filter(value => value.id !== 'Todos') || []
     const classes = useStyles()
 
     const validate = (fieldValues = values) => {
@@ -36,9 +43,11 @@ export default function CreateAssociateForm(props) {
         if('email' in fieldValues)
             temp.email = fieldValues.email ? "" : "Insere o email do elemento."
         if('joinedIn' in fieldValues)
-            temp.joinedIn = fieldValues.joinedIn ? "" : "Insere o ano (yyyy) de entrada do elemento."
+            temp.joinedIn = fieldValues.joinedIn ? "" : "Insere a data de entrada do elemento."
         if('initialGroup' in fieldValues)
             temp.initialGroup = fieldValues.initialGroup ? "" : "Seleciona o grupo de entrada do elemento."
+		if('currentFeePaidYear' in fieldValues)
+            temp.currentFeePaidYear = fieldValues.currentFeePaidYear ? "" : "Insere o ano (yyyy) de quotas do elemento."
         setErrors({
             ...temp
         })
@@ -77,19 +86,13 @@ export default function CreateAssociateForm(props) {
                 <Grid item lg={6} md={6} sm={12} xs={12}>
                     <Controls.Input
                         name="name"
-                        label="Nome"
+                        label="Nome *"
                         value={values.name}
                         onChange={handleInputChange}
                         error={errors.name}
                     />
                     <Controls.Input
-                        label="Alcunha"
-                        name="nickname"
-                        value={values.nickname}
-                        onChange={handleInputChange}
-                    />
-                    <Controls.Input
-                        label="Email"
+                        label="Email *"
                         name="email"
                         value={values.email}
                         onChange={handleInputChange}
@@ -101,31 +104,63 @@ export default function CreateAssociateForm(props) {
                         value={values.phoneNumber}
                         onChange={handleInputChange}
                     />
+					   <Controls.Input
+                        label="Morada"
+                        name="address"
+                        value={values.address}
+                        onChange={handleInputChange}
+                    />
+                    <Controls.Input
+                        name="city"
+                        label="Cidade"
+                        value={values.city}
+                        onChange={handleInputChange}
+                    />
+                    <Controls.Input
+                        label="Código Postal"
+                        name="postalCode"
+                        value={values.postalCode}
+                        onChange={handleInputChange}
+                        error={errors.postalCode}
+                    />
                 </Grid>
                 <Grid item lg={6} md={6} sm={12} xs={12}>
-                    <Controls.Select
-                        name="group"
-                        label="Grupo Inicial"
-                        value={values.group}
+					{
+						isCreate ? 
+							<Controls.Select
+								name="initialGroup"
+								label="Grupo Inicial *"
+								value={values.initialGroup}
+								onChange={handleInputChange}
+								options={groups}
+								error={errors.initialGroup}
+							/>
+						:
+							null
+					}
+					<Controls.Input
+                        label="Alcunha"
+                        name="nickname"
+                        value={values.nickname}
                         onChange={handleInputChange}
-                        options={groups}
-                        error={errors.initialGroup}
                     />
+					<h4>Data de Entrada:</h4>
                     <Controls.Input 
                         name="joinedIn"
-                        label="Ano de Entrada"
+						type="date"
                         value={values.joinedIn}
                         onChange={handleInputChange}
                         error={errors.joinedIn}
                     />
                     <Controls.Input
                         name="paidUntilYear"
-                        label="Ano de Quota"
-                        value={values.paidUntilYear}
+                        label="Ano de Quota *"
+                        value={values.currentFeePaidYear}
                         onChange={handleInputChange}
+						error={errors.currentFeePaidYear}
                     />
                 </Grid>
-                <Grid item lg={12} md={12} sm={12} xs={12}>
+                <Grid className={classes.item}item lg={12} md={12} sm={12} xs={12}>
                     <Controls.Button
                         className={classes.button}
                         type="submit"

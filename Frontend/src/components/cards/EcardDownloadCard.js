@@ -9,11 +9,16 @@ import arcum from '../../static/arcum.png';
 
 const useStyles = makeStyles({
   root: {
+	  maxHeight: '400px',
+	  height: '100%',
       width: '100%',
       backgroundColor: '#1a83ff',
       color: '#fff',
+	  display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
       textAlign: 'center'
-  },
+	},
   button: {
     color: '#fff'
   },

@@ -29,9 +29,9 @@ router.get('/', checkAdminAuthorization,async function (_req, res) {
 /**
  * Lists all payments from an associate
  */
-router.get('/:associate_number', checkAuthorization, async function(req, res) {
+router.get('/:associateNumber', checkAuthorization, async function(req, res) {
     try {
-        const data = await controller.listAllByAssociate(req.params.associate_number);
+        const data = await controller.listAllByAssociate(req.params.associateNumber);
         return res.jsonp(data);
     } catch (error) {
         return res.status(500).jsonp(error);

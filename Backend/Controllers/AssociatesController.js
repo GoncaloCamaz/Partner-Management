@@ -1,3 +1,6 @@
+import { associateCredentialsDTOMapper, AssociateDTO } from '../DTO/AssociateDTO'
+import { associateDTOMapper } from '../DTO/AssociateDTO'
+
 var Associate = require('../Models/Associate')
 const Associates = module.exports
 
@@ -5,40 +8,53 @@ const Associates = module.exports
  * Creates new associate
  */
 Associates.createAssociate = (associate) => {
-    return Associate.create(associate)
+	const associateDTO = associateDTOMapper(associate);
+	const newAssociateNumber = Associate.findOne().sort({associateNumber: -1}) + 1;
+	const password = "newpassword"
+	const associateValues = {
+		...associateDTO,
+		associateNumber: newAssociateNumber,
+		password: password
+	}
+	
+    return Associate.create(AssociateDTO(associateValues))
 }
 
 /**
  * Updates associate's information
  */
 Associates.updateAssociate = (associate) => {
-    const updated = {
-        name: associate.name,
-        phoneNumber: associate.phoneNumber,
-        nickname: associate.nickname,
-        city: associate.city,
-        address: associate.address,
-        postalCode: associate.postalCode,
-        email: associate.email,
-        joinedIn: associate.joinedIn,
-        groups: associate.groups,
+	const associateDTO = associateDTOMapper(associate);
+   
+	const updatedValues = {
+        name: associateDTO.name,
+        phoneNumber: associateDTO.phoneNumber,
+        nickname: associateDTO.nickname,
+        city: associateDTO.city,
+        address: associateDTO.address,
+        postalCode: associateDTO.postalCode,
+        email: associateDTO.email,
+        joinedIn: associateDTO.joinedIn,
+        groups: associateDTO.groups,
     }
 
     return Associate.findOneAndUpdate(
-        {associateNumber: associate.associateNumber},
-        updated,
-        {new: true}
-    ).exec()
+			{associateNumber: associateDTO.associateNumber},
+			updatedValues,
+			{new: true}
+    	).exec();
 }
 
 /**
  * Updates associate password
  */
-Associates.updateAssociateCredentials = (newCredentials) => {
+Associates.updateAssociateCredentials = (associate) => {
+	const associateCredentialsDTO = associateCredentialsDTOMapper(associate);
     //TODO CIPHER PASSWORD
     return Associate.findOneAndUpdate(
-        {email: newCredentials.email}, {password: newCredentials.password}
-    ).exec()
+						{email: associateCredentialsDTO.email}, 
+						{password: associateCredentialsDTO.newPassword}
+					).exec();
 }
 
 /**
@@ -47,8 +63,9 @@ Associates.updateAssociateCredentials = (newCredentials) => {
  */
 Associates.deleteAssociate = (associateNumber) => {
     return Associate.findOneAndUpdate(
-        {associateNumber: associateNumber}, {active: false}
-    ).exec()
+			{associateNumber: associateNumber},
+			{active: false}
+		).exec();
 }
 
 /**
@@ -57,7 +74,7 @@ Associates.deleteAssociate = (associateNumber) => {
 Associates.listAll = () => {
     return Associate.find({active: true})
                     .sort({associateNumber: 1})
-                    .exec()
+                    .exec();
 }
 
 /**
@@ -65,7 +82,7 @@ Associates.listAll = () => {
  */
 Associates.findAssociateByEmail = (email) => {
     return Associate.findOne({email: email})
-                    .exec()
+                    .exec();
 }
 
 /**
@@ -73,7 +90,7 @@ Associates.findAssociateByEmail = (email) => {
  */
 Associates.findAssociateByAssociateNumber = (number) => {
     return Associate.findOne({associateNumber: number})
-                    .exec()
+                    .exec();
 }
 
 /**
@@ -81,5 +98,5 @@ Associates.findAssociateByAssociateNumber = (number) => {
  */
 Associates.listAllWithPaidShares = (year) => {
     return Associate.find({paidUntilYear: {$gte: year}})
-                    .exec()
+                    .exec();
 }

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Navbar from '../components/navbar/Navbar'
 import PaymentsTable from '../components/tables/PaymentsTable';
 import { Redirect } from 'react-router-dom';
 import Popup from '../components/popup/Popup'
@@ -87,45 +86,42 @@ export default class PaymentsListAllPage extends Component {
         else
         {
             return(
-                <div className="home">
-                <Navbar isAdmin={true}/>
-                    <div className="page-container">
-                        <PaymentsTable 
-                            rows={this.state.payments}
-                            handleOpenAddPayment={this.handleOpenAddPayment}
-                            handleEditPayment={this.handleEditPayment}
-                            handleRemovePayment={this.handleRemovePayment}
-                            handleReturnToPayments={this.handleReturnToPayments}
-                        />
-                         <Popup 
-                            title={'Registar Pagamento'}
-                            openPopup={this.state.popupAddOpen}
-                            setOpenPopup={this.setOpenPopupAddPayment}>
-                            <PaymentForm 
-                                recordForEdit={null}
-                                addOrEdit={this.submitPayment}
-                            />
-                        </Popup>
-                        <Popup 
-                            title={'Editar Pagamento'}
-                            openPopup={this.state.popupEditOpen}
-                            setOpenPopup={this.setOpenPopupEditPayment}>
-                            <PaymentForm 
-                                recordForEdit={this.state.recordForEdit}
-                                addOrEdit={this.submitEditPayment}
-                            />
-                        </Popup>
-                        <Popup 
-                            title={'Remover Pagamento'}
-                            openPopup={this.state.popupRemoveOpen}
-                            setOpenPopup={this.setOpenPopupRemovePayment}>
-                            <MessagesDisplay 
-                                mainMessage={this.state.recordForRemove}
-                                handleOk={this.submitRemovePayment}
-                            />
-                        </Popup>
-                    </div>
-            </div>   
+				<div className="page-container">
+					<PaymentsTable 
+						rows={this.state.payments}
+						handleOpenAddPayment={this.handleOpenAddPayment}
+						handleEditPayment={this.handleEditPayment}
+						handleRemovePayment={this.handleRemovePayment}
+						handleReturnToPayments={this.handleReturnToPayments}
+					/>
+						<Popup 
+						title={'Registar Pagamento'}
+						openPopup={this.state.popupAddOpen}
+						setOpenPopup={this.setOpenPopupAddPayment}>
+						<PaymentForm 
+							recordForEdit={null}
+							addOrEdit={this.submitPayment}
+						/>
+					</Popup>
+					<Popup 
+						title={'Editar Pagamento'}
+						openPopup={this.state.popupEditOpen}
+						setOpenPopup={this.setOpenPopupEditPayment}>
+						<PaymentForm 
+							recordForEdit={this.state.recordForEdit}
+							addOrEdit={this.submitEditPayment}
+						/>
+					</Popup>
+					<Popup 
+						title={'Remover Pagamento'}
+						openPopup={this.state.popupRemoveOpen}
+						setOpenPopup={this.setOpenPopupRemovePayment}>
+						<MessagesDisplay 
+							mainMessage={this.state.recordForRemove}
+							handleOk={this.submitRemovePayment}
+						/>
+					</Popup>
+				</div>
             );
         }
     }
