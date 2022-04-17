@@ -1,4 +1,4 @@
-export function paymentDTOMapper(payment) {
+function paymentDTOMapper(payment) {
 	return {
 		associateNumber: payment.associateNumber,
 		associateName: payment.associateName,
@@ -6,4 +6,8 @@ export function paymentDTOMapper(payment) {
 		valueReceived: payment.valueReceived,
 		yearsPaid: payment.yearsPaid
 	}
+}
+
+module.exports = {
+	paymentDTOMapper
 }

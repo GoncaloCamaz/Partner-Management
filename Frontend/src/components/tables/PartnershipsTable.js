@@ -42,7 +42,7 @@ const headCells = [
 
 export default function PartnershipsTable(props) {
     const classes = useStyles();
-    const records = props.rows
+    const records = props.records
     
     const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
 

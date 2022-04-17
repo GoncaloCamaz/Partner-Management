@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Table, Paper, makeStyles, TableBody, TableRow, TableCell, Toolbar, InputAdornment } from '@material-ui/core';
+import { Paper, makeStyles, TableBody, TableRow, TableCell, Toolbar, InputAdornment } from '@material-ui/core';
 import useTable from "./useTable";
 import { Search } from "@material-ui/icons";
 import Controls from "../controls/Controls";
@@ -39,22 +39,14 @@ const headCells = [
 
 export default function GroupsTable(props) {
     const classes = useStyles();
-    const records = [
-        {
-            name: "Tuna Universitária do Minho",
-            initials: "TUM",
-            imageURL: "https://image.png"
-        }
-    ]//props.rows
+    const records = props.records;
     const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
 
     const openEditPopup = (item) => {
-        console.log(item)
         props.handleGroupEdit(item)
     }
 
     const openInPopupRemove = (item) => {
-        console.log(item)
         props.handleGroupRemove(item)
     }
 
@@ -110,7 +102,6 @@ export default function GroupsTable(props) {
                     />
                 </Toolbar>
                 <TblContainer className={classes.container}>
-                <Table stickyHeader>
                     <TblHead />
                     <TableBody>
                         { 
@@ -137,7 +128,6 @@ export default function GroupsTable(props) {
                             })
                         }
                     </TableBody>
-                    </Table>
                 </TblContainer>
                 <TblPagination />
             </Paper>

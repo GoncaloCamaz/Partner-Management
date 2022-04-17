@@ -1,4 +1,4 @@
-export function partnershipDTOMapper(partnership) {
+function partnershipDTOMapper(partnership) {
 	return {
 		name: partnership.name,
 		phoneNumber: partnership.phoneNumber,
@@ -9,4 +9,8 @@ export function partnershipDTOMapper(partnership) {
 		active: partnership.active,
 		advantages: partnership.advantages
 	}
+}
+
+module.exports = {
+	partnershipDTOMapper
 }

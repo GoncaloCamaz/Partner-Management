@@ -16,13 +16,15 @@ class GroupsPage extends Component {
             popupAddGroupOpen: false,
             popupEditGroupOpen: false,
             popupRemoveGroupOpen: false,
-            recordForEdit: null,
+			errorMessage: '',
+			errorPopupOpen: false,
+            recordForEdit: {},
             recordForRemove: null,
             isLoaded: false
         }
     }
 
-    componentDitMount() {
+    componentDidMount() {
 		const groups = this.props.context.state.groups;
         if(groups.length > 0)
         {
@@ -72,38 +74,71 @@ class GroupsPage extends Component {
         this.setState({popupRemoveGroupOpen: value})
     }
 
-    addGroupOnBackend(values) {
-        console.log("TODO - LINK TO BACKEND FUNCTION")
-    }
+    addGroup = async (values) => {
+		const result = await GroupsAPI.createNewGroup(values).then((result) => {
+            return result;
+        }, (error) => {
+            return error;
+        })
 
-    editGroupOnBackend(values) {
-        console.log("TODO - LINK TO BACKEND FUNCTION")
-    }
+		if(result.hasErrors)
+        {
+            this.setState({errorMessage: result.message}, () => {
+				//this.setOpenErrorPopup(true);
+				console.log(result.message)
+			});
+        }
+		else
+		{
+			this.setOpenPopupAddGroup(false);
+			this.groupsTableUpdate();
+		}
+	}
 
-    removeGroupOnBackend(values) {
-        console.log("TODO - LINK TO BACKEND FUNCTION")
+    editGroup = async (values) => {
+		const result = await GroupsAPI.updateGroup(values).then((result) => {
+            return result;
+        }, (error) => {
+            return error;
+        })
+
+		if(result.hasErrors)
+        {
+            this.setState({errorMessage: result.message}, () => {
+				this.setOpenErrorPopup(true);
+			});
+        }
+		else
+		{
+			this.setOpenPopupEditGroup(false);
+			this.groupsTableUpdate();
+		}    
+	}
+
+    removeGroup = async (values) => {
+        console.log("TODO - LINK TO BACKEND FUNCTION", values)
     }
 
     handleGroupEdit = (item) => {
-        this.setState({recordForEdit: item})
-        this.setOpenPopupEditGroup(true)
+        this.setState({recordForEdit: item});
+        this.setOpenPopupEditGroup(true);
     }
 
     handleGroupRemove = (item) => {
-        this.setState({recordForRemove: item.name})
-        this.setOpenPopupRemoveGroup(true)
+        this.setState({recordForRemove: item.name});
+        this.setOpenPopupRemoveGroup(true);
     }
 
     handleAddGroup = () => {
-        console.log("add")
-        this.setOpenPopupAddGroup(true)
+        this.setState({recordForEdit: {}});
+        this.setOpenPopupAddGroup(true);
     }
 
     render() {
         return(
             <div>
                 <GroupsTable 
-                    groups={this.state.groups}
+                    records={this.state.groups}
                     handleGroupEdit={this.handleGroupEdit}
                     handleGroupRemove={this.handleGroupRemove}
                     handleAddGroup={this.handleAddGroup}
@@ -114,8 +149,8 @@ class GroupsPage extends Component {
                     setOpenPopup={this.setOpenPopupAddGroup}>
                     <GroupForm 
                         recordForEdit ={null}
-                        addOrEdit={this.addGroupOnBackend}
-				/>
+                        addOrEdit={this.addGroup}
+					/>
 				</Popup>
 				<Popup 
 					title={'Editar Grupo'}
@@ -123,7 +158,7 @@ class GroupsPage extends Component {
 					setOpenPopup={this.setOpenPopupEditGroup}>
 					<GroupForm 
 						recordForEdit ={this.state.recordForEdit}
-						addOrEdit={this.editGroupOnBackend}
+						addOrEdit={this.editGroup}
 					/>
 				</Popup>
 				<Popup 
@@ -133,7 +168,7 @@ class GroupsPage extends Component {
 					<MessagesDisplay 
 						mainMessage={"Tens a certeza que queres apagar o grupo: " + this.state.recordForRemove + " ?"}
 						secundaryMessage={"Caso existam utilizadores atribuídos a este grupo, não será possível remover."}
-						handleOk={this.removeGroupOnBackend}
+						handleOk={this.removeGroup}
 					/>
 				</Popup>
 			</div>

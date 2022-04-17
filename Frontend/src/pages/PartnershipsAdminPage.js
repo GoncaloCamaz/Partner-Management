@@ -24,64 +24,12 @@ export default class PartnershipsAdminPage extends Component {
     }
 
     componentDidMount() {
-        
-        //this.partnershipsTableUpdate()
-        this.setState({partnerships: 
-            [
-            {
-                name: "Tasquinha Bracarense",
-                startDate: "26-12-1998",
-                active: "true",
-                advantages: ["Oferta da sopa","Sobremesa"],
-                addresses: [
-                    {
-                        address: "Rua dos bares nº 5",
-                        city: "braga",
-                        postalCode: "4482-123",
-                        latitude: "22828819",
-                        longitude: "1982912891"
-                    }
-                ],
-                phoneNumber: "123123123", 
-                email: "email@arc.pt"
-            },
-            {
-                name: "Video Norte",
-                startDate: "26/12/1998",
-                active: "true",
-                advantages: ["Desconto de 50 centimos por impressao"],
-                addresses: [
-                    {
-                        address: "Rua dos bares nº 115",
-                        city: "braga",
-                        postalCode: "44822-123",
-                        latitude: "22828819",
-                        longitude: "1982912891"
-                    }
-                ],
-                phoneNumber: "123123123", 
-                email: "email@arc.pt"
-            },
-            {
-                name: "Oculista",
-                startDate: "26/12/1998",
-                active: "true",
-                advantages: ["Oferta da sopa","Sobremesa"],
-                addresses: [
-                    {
-                        address: "Rua dos bares nº 5",
-                        city: "braga",
-                        postalCode: "4482-123",
-                        latitude: "22828819",
-                        longitude: "1982912891"
-                    }
-                ],
-                phoneNumber: "123123123", 
-                email: "email@arc.pt"
-            }
-            ]
-        })
+        this.partnershipsTableUpdate()
     }
+
+	partnershipsTableUpdate() {
+
+	}
 
     addPartnershipOnBackend = (item) => {
 

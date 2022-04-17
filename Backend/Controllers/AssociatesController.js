@@ -1,5 +1,4 @@
-import { associateCredentialsDTOMapper, AssociateDTO } from '../DTO/AssociateDTO'
-import { associateDTOMapper } from '../DTO/AssociateDTO'
+const { associateCredentialsDTOMapper, associateDTOMapper } = require('../DTO/AssociateDTO')
 
 var Associate = require('../Models/Associate')
 const Associates = module.exports

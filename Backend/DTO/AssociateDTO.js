@@ -1,4 +1,4 @@
-export function associateDTOMapper(associate) {
+function associateDTOMapper(associate) {
 	return {
 		associateNumber: parseInt(associate.associateNumber),
 		name: associate.name,
@@ -17,11 +17,16 @@ export function associateDTOMapper(associate) {
 	}
 }
 
-export function associateCredentialsDTOMapper(associate) {
+function associateCredentialsDTOMapper(associate) {
 	return {
 		associateNumber: parseInt(associate.associateNumber),
 		email: associate.email,
 		newPassword: associate.newPassword,
 		oldPassword: associate.oldPassword
 	}
+}
+
+module.exports = {
+	associateDTOMapper,
+	associateCredentialsDTOMapper
 }
