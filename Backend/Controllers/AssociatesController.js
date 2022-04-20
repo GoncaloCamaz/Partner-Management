@@ -35,11 +35,25 @@ Associates.updateAssociate = (associate) => {
         email: associateDTO.email,
         joinedIn: associateDTO.joinedIn,
         groups: associateDTO.groups,
+		currentFeeYear: associateDTO.currentFeeYear
     }
 
     return Associate.findOneAndUpdate(
 			{associateNumber: associateDTO.associateNumber},
 			updatedValues,
+			{new: true}
+    	).exec();
+}
+
+/**
+ * Updates all associate's information (Admin)
+ */
+ Associates.updateAssociateAdmin = (associate) => {
+	const associateDTO = associateDTOMapper(associate);
+   
+    return Associate.findOneAndUpdate(
+			{associateNumber: associateDTO.associateNumber},
+			associateDTO,
 			{new: true}
     	).exec();
 }

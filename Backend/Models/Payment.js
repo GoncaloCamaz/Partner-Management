@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 const PaymentSchema = new Schema({
     associateNumber: {type: Number, required: true},
     associateName: {type: String, required: true},
-    paymentDate: {type: Date, required: true},
+    paymentDate: {type: String, required: true},
     valueReceived: {type: Number, required: true},
     yearsPaid: {type: Number, required: true},
 });

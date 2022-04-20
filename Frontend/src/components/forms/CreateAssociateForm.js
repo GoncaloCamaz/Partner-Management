@@ -32,11 +32,11 @@ const useStyles = makeStyles(({
 }))
 
 export default function CreateAssociateForm(props) {
-    const { addOrEdit, recordForEdit, isCreate } = props
+    const { addOrEdit, recordForEdit, isCreate=false } = props
     let groups = props.groups.filter(value => value.id !== 'Todos') || []
     const classes = useStyles()
 
-    const validate = (fieldValues = values) => {
+	const validate = (fieldValues = values) => {
         let temp = { ...errors }
         if ('name' in fieldValues)
             temp.name = fieldValues.name ? "" : "Insere o nome do elemento."

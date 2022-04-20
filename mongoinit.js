@@ -37,7 +37,7 @@ db.associates.insert({
     email: "gcamaz@sapo.pt",
     password: "password",
     userRole: "USER",
-    joinedIn: new Date(2020,10,2),
+    joinedIn: "2020-04-21",
     groups: ["TUM"],
     currentFeeYear: 2021
 })
@@ -54,7 +54,7 @@ db.associates.insert({
     email: "tomanel@gmail.cpm",
     password: "password",
     userRole: "USER",
-    joinedIn: new Date(2018,10,2),
+    joinedIn: "2020-04-21",
     groups: ["TUM", "Bomboémia"],
     currentFeeYear: 2020
 })
@@ -71,7 +71,7 @@ db.associates.insert({
     email: "mariaalbertina@gmail.cpm",
     password: "password",
     userRole: "USER",
-    joinedIn: new Date(2018,10,2),
+    joinedIn: "2020-04-21",
     groups: ["Bomboémia"],
     currentFeeYear: 2022
 })
@@ -136,14 +136,14 @@ db.paymentmethods.insert({
 db.payments.insert({
     associateNumber: 1,
     associateName: "Gonçalo Dias Camaz Moreira",
-    paymentDate: new Date(2021,12,20),
+    paymentDate: "2020-04-21",
     valueReceived: 20,
     yearsPaid: 2
 })
 
 db.partnerships.insert({
     name: "VideoNorte",
-    phoneNumber: 253051420,
+    phoneNumber: "253051420",
     email: "geral@videonorte.pt",
     website: "www.videonorte.pt",
     addresses: [{
@@ -153,14 +153,14 @@ db.partnerships.insert({
         latitude: "41.557213163098396",
         longitude: "-8.399418413529137"
     }],
-    startDate: new Date(2020,10,2),
+    startDate: "2020-04-21",
     active: true,
     advantages: ["Desconto de 15% em impressões a Preto e Branco","Desconto de 10% em impressões a cores"]
 })
 
 db.partnerships.insert({
     name: "Restaurante do Alberto",
-    phoneNumber: 213456432,
+    phoneNumber: "213456432",
     email: "geral@restaurante.pt",
     website: "www.restaurantealberto.pt",
     addresses: [{
@@ -170,14 +170,14 @@ db.partnerships.insert({
         latitude: "41.556113163098396",
         longitude: "-8.399318413529137"
     }],
-    startDate: new Date(2020,10,2),
+    startDate: "2020-04-21",
     active: true,
     advantages: ["Oferta da Sopa","Pack Full Menu (Café, prato principal, sobremesa)"]
 })
 
 db.partnerships.insert({
     name: "Oculista Boa Vista",
-    phoneNumber: 3212321,
+    phoneNumber: "3212321",
     email: "geral@boavista.pt",
     website: "www.oculistaboavista.pt",
     addresses: [{
@@ -187,7 +187,7 @@ db.partnerships.insert({
         latitude: "41.566113163098396",
         longitude: "-8.499318413529137"
     }],
-    startDate: new Date(2020,10,2),
+    startDate: "2020-04-21",
     active: true,
     advantages: ["Oferta de óculos de sol na compra de óculos graduados","Lentes solares"]
 })

@@ -10,7 +10,7 @@ const initialFValues = {
     phoneNumber: '',
     email: '',
     joinedIn: '26-12-2020',
-    paidUntilYear: '',
+    currentFeeYear: '',
 	city: '',
     postalCode: '',
     address: ''
@@ -28,9 +28,8 @@ const useStyles = makeStyles(({
 
 export default function EditAssociateForm(props) {
     const { addOrEdit, recordForEdit } = props
-    const classes = useStyles()
-
-    const validate = (fieldValues = values) => {
+    const classes = useStyles();
+	const validate = (fieldValues = values) => {
         let temp = { ...errors }
         if ('name' in fieldValues)
             temp.name = fieldValues.name ? "" : "Insere o nome do elemento."
@@ -96,7 +95,7 @@ export default function EditAssociateForm(props) {
                         value={values.phoneNumber}
                         onChange={handleInputChange}
                     />
-					   <Controls.Input
+					<Controls.Input
                         label="Morada"
                         name="address"
                         value={values.address}
@@ -123,18 +122,18 @@ export default function EditAssociateForm(props) {
                         value={values.nickname}
                         onChange={handleInputChange}
                     />
-                    <Controls.Input 
+                    <Controls.Input
                         name="joinedIn"
                         label="Ano de Entrada*"
-                        value={new Date(values.joinedIn)}
-						type="date"
+						type='date'
+                        value={values.joinedIn}
                         onChange={handleInputChange}
                         error={errors.joinedIn}
                     />
                     <Controls.Input
-                        name="paidUntilYear"
+                        name="currentFeeYear"
                         label="Ano de Quota"
-                        value={values.paidUntilYear}
+                        value={values.currentFeeYear}
                         onChange={handleInputChange}
                     />
                 </Grid>

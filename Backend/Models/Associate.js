@@ -14,7 +14,7 @@ const AssociateSchema = new Schema({
     email: {type: String, required: true, unique: true, max : [127, "Max Length is 127 characters"]},
     password: {type: String, required: true},
     userRole: {type: String, required: true},
-    joinedIn: Date,
+    joinedIn: {type: String, required: true},
     groups: [String],
     currentFeeYear: { type: Number, required: true},
 });

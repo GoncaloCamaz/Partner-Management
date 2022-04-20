@@ -30,6 +30,18 @@ const { checkAdminAuthorization, checkAuthorization } = require('../AuthUtils');
 })
 
 /**
+ * Updates Associate's information (Admin)
+ */
+ router.post('/update/admin', checkAdminAuthorization, async function (req, res) {
+    try {
+        const data = await controller.updateAssociateAdmin(req.body);
+        return res.jsonp(data);
+    } catch (error) {
+        return res.status(500).jsonp(error);
+    }
+})
+
+/**
  * Updates Associate's credentials
  */
  router.post('/update/credentials', checkAuthorization, async (req, res) => {
